@@ -1,6 +1,6 @@
 # Benjamin Kamau — Portfolio
 
-Professional portfolio and services website for **Benjamin Kamau**, a Data Engineer & AI Workflow Automation Specialist based in Nairobi, Kenya.
+Professional portfolio and services website for **Benjamin Kamau**, focused on Data Engineering, Workflow Automation and Document Intelligence, based in Nairobi, Kenya.
 
 Built with Next.js 16, TypeScript, Tailwind CSS v4, Lucide React icons, and Framer Motion.
 
@@ -36,8 +36,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run build` | Production build |
 | `npm run start` | Start production server (local preview) |
 | `npm run lint` | Run ESLint |
+| `npm run cf:build` | Build the OpenNext Worker bundle |
+| `npm run cf:preview` | Rebuild and preview with the local Workers runtime |
+| `npm run cf:deploy` | Rebuild and deploy to Cloudflare Workers |
+| `npm run cf:upload` | Rebuild and upload a new Worker version without deploying it |
+| `npm run cf:typegen` | Regenerate Cloudflare binding/runtime types |
 
-Additional commands will be added after the Cloudflare Workers deployment adapter is installed (see `docs/DEPLOYMENT_CHECKLIST.md`).
+The Cloudflare commands use the checked-in `open-next.config.ts` and `wrangler.jsonc` configuration.
 
 ---
 
@@ -121,7 +126,18 @@ Replace `public/documents/Benjamin-Kamau-CV.pdf` with the updated file. The path
 
 ## Contact Form
 
-The contact page uses a client-side inquiry form that validates required fields, includes a honeypot, and compiles the inquiry into a structured `mailto:` link. It does not claim delivery and does not store data on a server. When no verified email exists in `src/data/social.ts`, the form is visibly disabled and explains why.
+The contact page uses a client-side inquiry form that validates required fields, includes a honeypot, and compiles the inquiry into a structured `mailto:` link targeting the centrally configured verified email in `src/data/social.ts`. It does not claim delivery and does not store data on a server.
+
+## Current Project Priorities
+
+- Intelligent Document Processing is the main current project; the read-only v0.22 Deterministic Purchase-Order Demonstration is complete and deployed to a synthetic-data UAT frontend and API.
+- Current work is a private real purchase-order accuracy baseline, with v0.22.1 as the immediate next milestone.
+- OCR, hosted uploads, human review and controlled AI-assisted extraction remain planned rather than implemented.
+- The newer Document Intelligence FlowSync frontend and API remain separate from FlowSync's original Competitor Price Intelligence implementation.
+- ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
+- Competitor Price Intelligence is paused as a separate preserved product.
+- Pair and Place has completed its safe WordPress-side maintenance phase; ETL Pipeline Foundation is completed earlier engineering work that later evolved toward Competitor Price Intelligence.
+- Verified project links are stored centrally in `src/data/projects.ts`; the ETL and Competitor Price Intelligence case studies intentionally share the evolution repository, while the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 
 To add server-side form processing in a future milestone, integrate a service like:
 
@@ -144,7 +160,9 @@ That future change would require replacing the current mailto behavior with an e
 
 ## Deployment
 
-This site is designed for deployment on **Cloudflare Workers** using the `@opennextjs/cloudflare` adapter.
+This site is deployed on **Cloudflare Workers** using the `@opennextjs/cloudflare` adapter.
+
+**Live site:** [benjamin-kamau-portfolio.benjamin-kamau.workers.dev](https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev)
 
 See `docs/DEPLOYMENT_CHECKLIST.md` for the full deployment procedure.
 
@@ -169,6 +187,15 @@ npm run dev
 npm run build
 npm run start
 ```
+
+### Cloudflare Preview and Deploy
+
+```bash
+npm run cf:preview
+npm run cf:deploy
+```
+
+`NEXT_PUBLIC_SITE_URL` is committed as a non-secret Worker variable in `wrangler.jsonc` so canonicals, sitemap entries, robots output, Open Graph URLs, and structured data use the live `workers.dev` origin during the build.
 
 ---
 

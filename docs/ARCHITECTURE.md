@@ -44,7 +44,7 @@ No other component requires `"use client"`. Server components remain the default
 - `manifest.ts`, `sitemap.ts`, and `robots.ts` use Next.js metadata routes.
 - `icon.tsx`, `apple-icon.tsx`, and `opengraph-image.tsx` generate source-controlled metadata images with `ImageResponse`.
 - The homepage injects Person JSON-LD and `/services` injects ProfessionalService JSON-LD.
-- Route metadata supplies a single route-correct canonical; no production domain is hardcoded.
+- Route metadata supplies a single route-correct canonical from `NEXT_PUBLIC_SITE_URL`; the production value is defined in deployment configuration and the Cloudflare build script.
 
 ---
 
@@ -97,9 +97,11 @@ Repository and live-demo buttons are only rendered when their respective URL fie
 ## Deployment Architecture
 
 - **Platform:** Cloudflare Workers through `@opennextjs/cloudflare`
+- **Production URL:** `https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev`
 - **Build process:** Standard Next.js build (`npm run build`), then transformed by OpenNext into a Worker-compatible bundle
 - **Runtime:** The OpenNext adapter runs within a Cloudflare Worker, handling request routing, headers, and any future dynamic behaviour
 - **Tooling:** OpenNext CLI handles preview and deployment; Wrangler provides the underlying Cloudflare configuration and tooling
+- **Configuration:** `open-next.config.ts` defines the adapter build and `wrangler.jsonc` defines the Worker entry, compatibility settings, static asset binding, observability, and canonical site URL
 - **Current state:** Fully static (all pages prerendered at build time). Any future dynamic features would run within the Worker runtime
 - **No database, no backend** — all content is static TypeScript data compiled at build time
 

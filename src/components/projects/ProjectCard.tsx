@@ -8,22 +8,19 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const technologies = project.cardTechnologies ?? project.technologies;
+  const visibleTechnologyCount = project.cardTechnologies ? 6 : 4;
+
   return (
     <Link href={`/projects/${project.slug}`} className="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
       <Card className="flex h-full flex-col">
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-emerald)]">
             {project.category}
           </span>
           <span className="text-[var(--color-text-muted)]">·</span>
           <Badge
-            variant={
-              project.status === "completed"
-                ? "emerald"
-                : project.status === "ongoing"
-                  ? "lime"
-                  : "default"
-            }
+            variant={project.statusVariant}
           >
             {project.status}
           </Badge>
@@ -35,11 +32,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.shortDescription}
         </p>
         <div className="mt-auto flex flex-wrap gap-1.5">
-          {project.technologies.slice(0, 4).map((tech) => (
+          {technologies.slice(0, visibleTechnologyCount).map((tech) => (
             <Badge key={tech}>{tech}</Badge>
           ))}
-          {project.technologies.length > 4 && (
-            <Badge>+{project.technologies.length - 4}</Badge>
+          {technologies.length > visibleTechnologyCount && (
+            <Badge>+{technologies.length - visibleTechnologyCount}</Badge>
           )}
         </div>
       </Card>

@@ -52,19 +52,13 @@ export default async function ProjectPage({ params }: Props) {
         </div>
 
         <header className="mb-12">
-          <div className="mb-3 flex items-center gap-3">
+          <div className="mb-3 flex flex-wrap items-center gap-3">
             <span className="text-sm font-medium uppercase tracking-wider text-[var(--color-emerald)]">
               {project.category}
             </span>
             <span className="text-[var(--color-text-muted)]">·</span>
             <Badge
-              variant={
-                project.status === "completed"
-                  ? "emerald"
-                  : project.status === "ongoing"
-                    ? "lime"
-                    : "default"
-              }
+              variant={project.statusVariant}
             >
               {project.status}
             </Badge>
@@ -77,18 +71,17 @@ export default async function ProjectPage({ params }: Props) {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            {project.repositoryUrl && (
-              <Button href={project.repositoryUrl} variant="outline" external>
-                <GitBranch size={16} />
-                Repository
+            {project.links?.map((link) => (
+              <Button
+                key={`${link.kind}-${link.url}`}
+                href={link.url}
+                variant={link.primary ? "primary" : "outline"}
+                external
+              >
+                {link.kind === "repository" ? <GitBranch size={16} /> : <ExternalLink size={16} />}
+                {link.label}
               </Button>
-            )}
-            {project.liveDemoUrl && (
-              <Button href={project.liveDemoUrl} variant="primary" external>
-                <ExternalLink size={16} />
-                Live Demo
-              </Button>
-            )}
+            ))}
           </div>
         </header>
 
@@ -112,6 +105,40 @@ export default async function ProjectPage({ params }: Props) {
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Solution</h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.solution}</p>
+                {project.solutionDetails && (
+                  <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
+                    {project.solutionDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
+
+            {project.architecture && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Architecture</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.architecture}</p>
+                {project.architectureDetails && (
+                  <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
+                    {project.architectureDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span className="min-w-0 break-words">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
+
+            {project.responsibilities && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Responsibilities</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.responsibilities}</p>
               </section>
             )}
 
@@ -124,8 +151,20 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.currentStatus && (
               <section>
-                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Current Status</h2>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
+                  {project.currentStatusHeading ?? "Current Status"}
+                </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.currentStatus}</p>
+                {project.currentStatusDetails && (
+                  <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
+                    {project.currentStatusDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </section>
             )}
 
@@ -165,6 +204,16 @@ export default async function ProjectPage({ params }: Props) {
               <Card hover={false}>
                 <h3 className="mb-3 font-semibold text-[var(--color-text)]">Future Roadmap</h3>
                 <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">{project.roadmap}</p>
+                {project.roadmapDetails && (
+                  <ul className="mt-3 space-y-2">
+                    {project.roadmapDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-muted)]">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </Card>
             )}
           </div>

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Benjamin Kamau — Data Engineer and AI Workflow Automation Specialist";
+export const alt = "Benjamin Kamau — Data Engineer, Workflow Automation and Document Intelligence";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default function OpenGraphImage() {
           Benjamin Kamau
         </div>
         <div style={{ color: "#a3e635", display: "flex", fontSize: 38, marginTop: 20 }}>
-          Data Engineer and AI Workflow Automation Specialist
+          Data Engineer | Workflow Automation | Document Intelligence
         </div>
         <div style={{ background: "#10b981", display: "flex", height: 8, marginTop: 48, width: 260 }} />
       </div>

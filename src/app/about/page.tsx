@@ -15,7 +15,7 @@ import { Download, GraduationCap, Award, Calendar } from "lucide-react";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn more about Benjamin Kamau — Data Engineer & AI Workflow Automation Specialist based in Nairobi, Kenya.",
+    "Learn more about Benjamin Kamau — Data Engineer focused on Workflow Automation and Document Intelligence in Nairobi, Kenya.",
   alternates: { canonical: "/about" },
 };
 

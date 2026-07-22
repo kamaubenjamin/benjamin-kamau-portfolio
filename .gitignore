@@ -9,3 +9,5 @@ dist/
 build/
 .open-next/
 .dev.vars
+.wrangler/
+*.tsbuildinfo

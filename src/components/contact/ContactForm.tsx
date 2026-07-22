@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 interface ContactFormProps {
   recipientEmail?: string;
@@ -93,23 +93,6 @@ ${formData.desiredOutcome || "N/A"}`;
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      {/* Configuration warning */}
-      {!isConfigured && (
-        <div className="flex gap-2.5 rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-4 text-sm text-yellow-400">
-          <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
-          <div>
-            <p className="font-semibold">Email recipient not configured</p>
-            <p className="mt-1 text-xs opacity-80">
-              Form submission is disabled. Please add a verified email address inside{" "}
-              <code className="rounded bg-yellow-500/20 px-1 font-mono">
-                src/data/social.ts
-              </code>{" "}
-              to enable this form.
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Honeypot */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="form-hp">Do not fill this</label>

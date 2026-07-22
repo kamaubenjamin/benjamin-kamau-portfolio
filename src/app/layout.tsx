@@ -22,15 +22,15 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Benjamin Kamau | Data Engineer & AI Workflow Automation Specialist",
+    default: "Benjamin Kamau | Data Engineer | Workflow Automation | Document Intelligence",
     template: "%s | Benjamin Kamau",
   },
   description:
-    "Data Engineer & AI Workflow Automation Specialist in Nairobi, Kenya. Building scalable data, automation and AI-powered systems.",
+    "Data Engineer focused on workflow automation and document intelligence in Nairobi, Kenya.",
   openGraph: {
-    title: "Benjamin Kamau | Data Engineer & AI Workflow Automation Specialist",
+    title: "Benjamin Kamau | Data Engineer | Workflow Automation | Document Intelligence",
     description:
-      "Building scalable data, automation and AI-powered systems.",
+      "Building practical data, workflow automation and document intelligence systems.",
     type: "website",
     locale: "en_KE",
     siteName: "Benjamin Kamau Portfolio",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benjamin Kamau | Data Engineer & AI Workflow Automation Specialist",
+    title: "Benjamin Kamau | Data Engineer | Workflow Automation | Document Intelligence",
     description:
-      "Building scalable data, automation and AI-powered systems.",
+      "Building practical data, workflow automation and document intelligence systems.",
     images: [absoluteUrl("/opengraph-image")],
   },
   robots: {

@@ -3,9 +3,9 @@
 ## Pre-Deployment Checks
 
 ### Code Quality
-- [ ] `npm run lint` — no errors or warnings
-- [ ] `npx tsc --noEmit` — no TypeScript errors
-- [ ] `npm run build` — production build succeeds
+- [x] `npm run lint` — no errors or warnings
+- [x] `npx tsc --noEmit` — no TypeScript errors
+- [x] `npm run build` — production build succeeds
 
 ### Responsive Layout
 - [ ] 375px width — no horizontal overflow, MobileMenu appears, single-column layout
@@ -29,69 +29,85 @@
 - [ ] No `#` placeholder URLs — optional fields are omitted, not set to `#`
 
 ### Route Verification
-- [ ] `/` — Homepage renders all 9 sections
-- [ ] `/projects` — All 6 projects listed
-- [ ] `/projects/intelligent-document-processing-platform` — Case study loads
-- [ ] `/projects/exploreafrica-travel-platform` — Case study loads
-- [ ] `/projects/competitor-price-intelligence-platform` — Case study loads
-- [ ] `/projects/flow-sync` — Case study loads
-- [ ] `/projects/pair-and-place-website-operations` — Case study loads
-- [ ] `/projects/etl-banking-pipeline` — Case study loads
-- [ ] `/services` — All 6 services displayed
-- [ ] `/about` — Bio, experience timeline, education, certifications, skills, CV download
-- [ ] `/contact` — Inquiry form; disabled safely when email is not configured
-- [ ] `/nonexistent` — Custom 404 page
-- [ ] `public/documents/Benjamin-Kamau-CV.pdf` — CV download prompt
+- [x] `/` — Homepage renders
+- [x] `/projects` — All 6 projects listed
+- [x] `/projects/intelligent-document-processing-platform` — Case study loads
+- [x] `/projects/exploreafrica-travel-platform` — Case study loads
+- [x] `/projects/competitor-price-intelligence-platform` — Case study loads
+- [x] `/projects/flow-sync` — Case study loads
+- [x] `/projects/pair-and-place-website-operations` — Case study loads
+- [x] `/projects/etl-banking-pipeline` — Case study loads
+- [x] `/services` — All 6 services displayed
+- [x] `/about` — Route loads with one `h1`
+- [x] `/contact` — Route loads with one `h1`
+- [x] `/nonexistent` — Custom 404 page returns status 404
+- [x] `public/documents/Benjamin-Kamau-CV.pdf` — CV is served as PDF
 
 ### Asset Verification
-- [ ] `public/documents/Benjamin-Kamau-CV.pdf` exists and is served correctly
-- [ ] `public/images/portfolio-reference.png` exists (reference only, not displayed)
-- [ ] `/manifest.webmanifest`, `/sitemap.xml`, and `/robots.txt` return successfully
-- [ ] `/icon`, `/apple-icon`, and `/opengraph-image` generated routes return images
+- [x] `public/documents/Benjamin-Kamau-CV.pdf` exists and is served correctly
+- [x] `public/images/portfolio-reference.png` exists (reference only, not displayed)
+- [x] `/manifest.webmanifest`, `/sitemap.xml`, and `/robots.txt` return successfully
+- [x] `/icon`, `/apple-icon`, and `/opengraph-image` generated routes return images
 
 ### SEO and Structured Data
-- [ ] `NEXT_PUBLIC_SITE_URL` resolves route-correct canonicals without duplicate slashes
-- [ ] Homepage includes verified Person JSON-LD
-- [ ] `/services` includes grounded ProfessionalService JSON-LD
-- [ ] Open Graph and Twitter metadata reference the generated preview image
+- [x] `NEXT_PUBLIC_SITE_URL` resolves route-correct canonicals without duplicate slashes
+- [x] Homepage includes verified Person JSON-LD
+- [x] `/services` includes grounded ProfessionalService JSON-LD
+- [x] Open Graph and Twitter metadata reference the generated preview image
 
 ---
 
 ## Cloudflare Workers Deployment
 
 ### Prerequisites
-- [ ] Cloudflare account created
-- [ ] `npx wrangler login` — authenticated with Cloudflare
-- [ ] Custom domain purchased (optional — Workers preview URL can be used initially)
+- [x] Cloudflare account created
+- [x] `npx wrangler login` — authenticated with Cloudflare
+- [x] `workers.dev` account subdomain registered as `benjamin-kamau`
+- [ ] Custom domain purchased (optional — current production URL uses Workers.dev)
 
 ### Install Adapter
-- [ ] `npm install --save-dev @opennextjs/cloudflare wrangler`
-- [ ] Run any scaffolding or init commands provided by the installed `@opennextjs/cloudflare` version
+- [x] `@opennextjs/cloudflare` installed as an application dependency
+- [x] Wrangler 4 installed as a development dependency
+- [x] `open-next.config.ts` created with the adapter's supported configuration helper
 
 ### Configuration
-- [ ] `wrangler.jsonc` generated or normalised — targets Cloudflare Workers (not Pages)
-- [ ] `main` points to the generated OpenNext Worker entry
-- [ ] Compatibility date set to a current date meeting the adapter's documented minimum
-- [ ] `nodejs_compat` included in `compatibility_flags`
-- [ ] Static-assets binding configured as required by the adapter version
-- [ ] `NEXT_PUBLIC_SITE_URL` configured (Cloudflare dashboard or `wrangler.jsonc`)
-- [ ] `.dev.vars` created for local development (added to `.gitignore`)
-- [ ] Adapter output directory (e.g., `.open-next/`) added to `.gitignore`
-- [ ] `package.json` scripts added: `preview`, `deploy`, `cf-typegen` (commands from installed adapter version)
+- [x] `wrangler.jsonc` targets Cloudflare Workers (not Pages)
+- [x] `main` points to `.open-next/worker.js`
+- [x] Compatibility date set to `2026-07-22`
+- [x] `nodejs_compat` included in `compatibility_flags`
+- [x] Static-assets binding targets `.open-next/assets`
+- [x] `NEXT_PUBLIC_SITE_URL` set to the exact production Workers.dev origin
+- [x] `.dev.vars`, `.open-next/`, `.wrangler/`, and TypeScript build info excluded from version control
+- [x] `package.json` includes `cf:build`, `cf:preview`, `cf:deploy`, `cf:upload`, and `cf:typegen`
+- [x] `cf:build` injects the public production origin cross-platform before Next.js prerenders metadata routes
+- [x] `cloudflare-env.d.ts` generated from `wrangler.jsonc`
 
 ### Build and Deploy
-- [ ] `npm run build` — standard Next.js build succeeds
-- [ ] Run adapter preview command — local preview works on all routes
-- [ ] Run adapter deploy command — deployment to Cloudflare Workers succeeds
+- [x] `npm run build` — standard Next.js build succeeds
+- [x] `npm run cf:build` — OpenNext Worker bundle succeeds
+- [x] Local Workers-runtime preview returns expected routes and assets
+- [x] `npm run cf:deploy` — deployment to Cloudflare Workers succeeds
 
 ### Post-Deployment Verification
-- [ ] All routes return 200 on the Workers preview URL
-- [ ] CV downloads correctly
-- [ ] Metadata renders correctly (title, description, Open Graph)
+- [x] All public routes and all six project slugs return 200 on the live URL
+- [x] Unknown routes return the custom 404 with status 404
+- [x] CV returns 200 with `application/pdf`
+- [x] Metadata renders with route-correct production canonicals and Open Graph URLs
+- [x] Manifest, robots, sitemap, favicon, Apple icon, and Open Graph image return expected content types
+- [x] Person JSON-LD on `/` and ProfessionalService JSON-LD on `/services` verified
 - [ ] Responsive layout verified at 375px, 768px, 1280px on live URL
 - [ ] No console errors
-- [ ] Custom domain connected (if applicable) — DNS records updated, HTTPS active
-- [ ] `NEXT_PUBLIC_SITE_URL` updated to final production domain
+- [ ] Custom domain connected (not applicable to the current Workers.dev launch)
+- [x] `NEXT_PUBLIC_SITE_URL` updated to `https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev`
+
+### Current Production Deployment
+
+- **Worker name:** `benjamin-kamau-portfolio`
+- **Live URL:** <https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev>
+- **Adapter:** `@opennextjs/cloudflare` 1.20.2
+- **Wrangler:** 4.113.0
+- **Observability:** enabled in `wrangler.jsonc`
+- **Custom domain:** not configured
 
 ---
 
