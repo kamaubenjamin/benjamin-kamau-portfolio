@@ -1,7 +1,7 @@
 export type ProjectStatus =
   | "Active development"
   | "Functional platform foundation"
-  | "Maintenance phase completed"
+  | "Maintenance milestone completed"
   | "Completed foundation"
   | "Existing platform foundation"
   | "Paused - separate product";
@@ -150,7 +150,7 @@ export const projects: Project[] = [
     status: "Existing platform foundation",
     statusVariant: "emerald",
     shortDescription:
-      "An evolving Next.js workflow-facing platform and user-interface foundation, currently preserving its existing Competitor Price Intelligence implementation while providing design and architecture patterns for future workflow products.",
+      "A hosted workflow-facing platform for competitor monitoring, dashboard analytics and reusable interface patterns, with further data-integration work still in progress.",
     overview:
       "FlowSync is an evolving Next.js workflow-facing platform and user-interface foundation with authentication, competitor-management, dashboard and API-first integration foundations.",
     problem:
@@ -184,7 +184,7 @@ export const projects: Project[] = [
     slug: "pair-and-place-website-operations",
     title: "Pair and Place Website Operations",
     category: "Web Operations & Support",
-    status: "Maintenance phase completed",
+    status: "Maintenance milestone completed",
     statusVariant: "emerald",
     shortDescription:
       "A live WordPress maintenance engagement improving recoverability, booking reliability, email delivery, security hygiene and analytics readiness without disrupting the existing brand.",
@@ -283,9 +283,9 @@ export const projects: Project[] = [
     status: "Paused - separate product",
     statusVariant: "default",
     shortDescription:
-      "A developed Python ETL and monitoring foundation for collecting, normalizing, matching and tracking competitor product pricing across multiple sources.",
+      "A Python-based monitoring system for collecting, normalizing, matching and tracking competitor product pricing across multiple sources.",
     overview:
-      "A separate developed product foundation for extracting product data from websites and other sources, cleaning and normalizing it, matching comparable products and monitoring price changes over time.",
+      "A separate developed product for extracting data from websites and other sources, cleaning and normalizing it, matching comparable products and monitoring price changes over time.",
     problem:
       "Product information from different websites and sources varies in structure and naming, making reliable comparison and price-change tracking difficult without validation, normalization and matching.",
     solution:
@@ -315,7 +315,7 @@ export const projects: Project[] = [
       "Streamlit",
     ],
     currentStatus:
-      "The platform remains a separate developed product foundation and is currently paused while the Intelligent Document Processing Platform is the primary development focus. The shared repository records the earlier ETL foundation’s evolution into this specialized competitor-price-monitoring product; no hosted Streamlit deployment is verified. Its existing FlowSync integration is being preserved for future product work.",
+      "The platform remains a separate developed product and is currently paused while the Intelligent Document Processing Platform is the primary development focus. The shared repository records the earlier ETL pipeline’s evolution into this specialized competitor-price-monitoring product; no hosted Streamlit deployment is verified. Its existing FlowSync integration is being preserved for future product work.",
     roadmap:
       "Future work may improve the product without merging its business logic, APIs, entities or workflows into Document Intelligence. The existing FlowSync integration remains untouched.",
     links: [
@@ -339,7 +339,7 @@ export const projects: Project[] = [
     overview:
       "This completed data-engineering project provides a reusable foundation for turning varied source data into validated, comparable and reportable records. Its end-to-end ETL workflow uses Python, Pandas, SQL, SQLite, RapidFuzz and Streamlit while separating extraction, transformation, validation, matching, loading, logging and reporting into reusable stages. The architecture later evolved into the Competitor Price Intelligence product, where the same patterns were applied to retailer data, fuzzy product matching, price comparisons and monitoring.",
     solution:
-      "Developed a portfolio pipeline to explore extraction, transformation, normalization, data matching and reporting concepts.",
+      "Built a reusable Python ETL pipeline that separates ingestion, transformation, validation, matching, storage, logging and reporting into maintainable processing stages.",
     architecture:
       "The project served as an earlier foundation whose pipeline and matching ideas contributed to the later development of the Competitor Price Intelligence project.",
     capabilities: [
