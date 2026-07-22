@@ -43,6 +43,28 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 ::selection {
   background: rgba(16, 185, 129, 0.3);
   color: var(--color-text);

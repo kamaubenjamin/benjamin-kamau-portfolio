@@ -32,12 +32,12 @@ export function DataFlowVisual() {
 
   const pathD = connections
     .map(([from, to]) => {
-      const x1 = `${nodes[from].x}%`;
-      const y1 = `${nodes[from].y}%`;
-      const x2 = `${nodes[to].x}%`;
-      const y2 = `${nodes[to].y}%`;
-      const cx1 = `${(nodes[from].x + nodes[to].x) / 2}%`;
-      const cy1 = `${(nodes[from].y + nodes[to].y) / 2 - 10}%`;
+      const x1 = nodes[from].x;
+      const y1 = nodes[from].y;
+      const x2 = nodes[to].x;
+      const y2 = nodes[to].y;
+      const cx1 = (x1 + x2) / 2;
+      const cy1 = (y1 + y2) / 2 - 10;
       return `M${x1},${y1} Q${cx1},${cy1} ${x2},${y2}`;
     })
     .join(" ");
@@ -48,6 +48,8 @@ export function DataFlowVisual() {
         viewBox="0 0 100 80"
         className="h-full w-full"
         preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        focusable="false"
       >
         <defs>
           <linearGradient id="pipeline-grad" x1="0%" y1="0%" x2="100%" y2="0%">

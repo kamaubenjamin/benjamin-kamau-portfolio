@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, AlertCircle, Send } from "lucide-react";
+import { AlertCircle, Send } from "lucide-react";
 
 interface ContactFormProps {
   recipientEmail?: string;
@@ -92,11 +92,11 @@ ${formData.desiredOutcome || "N/A"}`;
   const isConfigured = !!recipientEmail;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5">
       {/* Configuration warning */}
       {!isConfigured && (
         <div className="flex gap-2.5 rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-4 text-sm text-yellow-400">
-          <AlertCircle className="h-5 w-5 shrink-0" />
+          <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
           <div>
             <p className="font-semibold">Email recipient not configured</p>
             <p className="mt-1 text-xs opacity-80">
@@ -111,11 +111,14 @@ ${formData.desiredOutcome || "N/A"}`;
       )}
 
       {/* Honeypot */}
-      <div className="hidden">
+      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="form-hp">Do not fill this</label>
         <input
           id="form-hp"
+          name="website"
           type="text"
+          tabIndex={-1}
+          autoComplete="off"
           value={formData.honeypot}
           onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
         />
@@ -132,13 +135,15 @@ ${formData.desiredOutcome || "N/A"}`;
             type="text"
             required
             disabled={!isConfigured}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "form-name-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
               errors.name ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+          {errors.name && <p id="form-name-error" className="mt-1 text-xs text-red-500">{errors.name}</p>}
         </div>
 
         <div>
@@ -150,6 +155,8 @@ ${formData.desiredOutcome || "N/A"}`;
             type="text"
             required
             disabled={!isConfigured}
+            aria-invalid={!!errors.contactMethod}
+            aria-describedby={errors.contactMethod ? "form-contact-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
               errors.contactMethod ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
@@ -157,7 +164,7 @@ ${formData.desiredOutcome || "N/A"}`;
             onChange={(e) => setFormData({ ...formData, contactMethod: e.target.value })}
           />
           {errors.contactMethod && (
-            <p className="mt-1 text-xs text-red-500">{errors.contactMethod}</p>
+            <p id="form-contact-error" className="mt-1 text-xs text-red-500">{errors.contactMethod}</p>
           )}
         </div>
       </div>
@@ -185,6 +192,8 @@ ${formData.desiredOutcome || "N/A"}`;
             id="form-service"
             required
             disabled={!isConfigured}
+            aria-invalid={!!errors.serviceNeeded}
+            aria-describedby={errors.serviceNeeded ? "form-service-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
               errors.serviceNeeded ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
@@ -199,7 +208,7 @@ ${formData.desiredOutcome || "N/A"}`;
             ))}
           </select>
           {errors.serviceNeeded && (
-            <p className="mt-1 text-xs text-red-500">{errors.serviceNeeded}</p>
+            <p id="form-service-error" className="mt-1 text-xs text-red-500">{errors.serviceNeeded}</p>
           )}
         </div>
       </div>
@@ -213,6 +222,8 @@ ${formData.desiredOutcome || "N/A"}`;
           required
           rows={4}
           disabled={!isConfigured}
+          aria-invalid={!!errors.currentProcess}
+          aria-describedby={errors.currentProcess ? "form-process-error" : undefined}
           placeholder="Please describe the repetitive work, messy data or systems that do not communicate."
           className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black resize-y ${
             errors.currentProcess ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
@@ -221,7 +232,7 @@ ${formData.desiredOutcome || "N/A"}`;
           onChange={(e) => setFormData({ ...formData, currentProcess: e.target.value })}
         />
         {errors.currentProcess && (
-          <p className="mt-1 text-xs text-red-500">{errors.currentProcess}</p>
+          <p id="form-process-error" className="mt-1 text-xs text-red-500">{errors.currentProcess}</p>
         )}
       </div>
 
@@ -278,7 +289,7 @@ ${formData.desiredOutcome || "N/A"}`;
           disabled={!isConfigured}
           className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-emerald)] px-5 py-2.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--color-emerald)] shadow-[var(--shadow-glow)]"
         >
-          <Send className="h-4 w-4" />
+          <Send className="h-4 w-4" aria-hidden="true" />
           Send Project Inquiry
         </button>
       </div>

@@ -17,6 +17,9 @@
 - [ ] Skip link — appears on first Tab press
 - [ ] Reduced motion — enable `prefers-reduced-motion: reduce` in DevTools, animations disabled
 - [ ] Alt text — every image has non-empty descriptive alt text
+- [ ] Heading hierarchy — exactly one `h1` on each main and project page
+- [ ] Mobile menu — trigger state, Escape close, focus return, and 44px targets
+- [ ] Contact form — labels, `aria-invalid`, error associations, disabled unconfigured state
 
 ### Content Integrity
 - [ ] No fake links — all `href` values point to real routes or are omitted
@@ -36,13 +39,21 @@
 - [ ] `/projects/etl-banking-pipeline` — Case study loads
 - [ ] `/services` — All 6 services displayed
 - [ ] `/about` — Bio, experience timeline, education, certifications, skills, CV download
-- [ ] `/contact` — Contact info, email link (if configured)
+- [ ] `/contact` — Inquiry form; disabled safely when email is not configured
 - [ ] `/nonexistent` — Custom 404 page
 - [ ] `public/documents/Benjamin-Kamau-CV.pdf` — CV download prompt
 
 ### Asset Verification
 - [ ] `public/documents/Benjamin-Kamau-CV.pdf` exists and is served correctly
 - [ ] `public/images/portfolio-reference.png` exists (reference only, not displayed)
+- [ ] `/manifest.webmanifest`, `/sitemap.xml`, and `/robots.txt` return successfully
+- [ ] `/icon`, `/apple-icon`, and `/opengraph-image` generated routes return images
+
+### SEO and Structured Data
+- [ ] `NEXT_PUBLIC_SITE_URL` resolves route-correct canonicals without duplicate slashes
+- [ ] Homepage includes verified Person JSON-LD
+- [ ] `/services` includes grounded ProfessionalService JSON-LD
+- [ ] Open Graph and Twitter metadata reference the generated preview image
 
 ---
 

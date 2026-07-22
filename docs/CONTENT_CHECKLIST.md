@@ -32,7 +32,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Project | Status | Notes |
 |---|---|---|
-| All projects | Placeholder only | Uses inline SVG components with emerald/lime/dark palette. Real screenshots can be added to `public/images/projects/` and referenced via the `image` field in `src/data/projects.ts`. |
+| All projects | Not provided | No project screenshots are publicly rendered. Verified screenshots can later be added to `public/images/projects/` and referenced through the optional `image` field. |
 
 ---
 
@@ -40,12 +40,12 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Project | Problem | Architecture | Responsibilities | Solution | Capabilities | Challenges | Current Status | Roadmap | Lessons Learned |
 |---|---|---|---|---|---|---|---|---|---|
-| Intelligent Document Processing Platform | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
-| ExploreAfrica Travel Platform | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
-| Competitor Price Intelligence Platform | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
-| FlowSync | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
-| Pair and Place Website Operations | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
-| ETL Banking Pipeline | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified | Not specified |
+| Intelligent Document Processing Platform | Included | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| ExploreAfrica Travel Platform | Included | Included | Not specified | Included | Included | Not specified | Included | Included | Not specified |
+| Competitor Price Intelligence Platform | Included | Included | Not specified | Included | Included | Not specified | Not specified | Not specified | Not specified |
+| FlowSync | Included | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| Pair and Place Website Operations | Not specified | Not specified | Not specified | Included | Included | Not specified | Not specified | Not specified | Not specified |
+| ETL Banking Pipeline | Not specified | Included | Not specified | Included | Included | Not specified | Not specified | Not specified | Not specified |
 
 ---
 
@@ -72,3 +72,16 @@ This document tracks all unresolved content gaps that need to be filled before o
 | `@opennextjs/cloudflare` | Not yet installed |
 | `wrangler` | Not yet installed |
 | Custom domain | Not yet connected |
+
+---
+
+## Implemented Metadata
+
+| Item | Status |
+|---|---|
+| Web app manifest | Implemented |
+| Sitemap and robots routes | Implemented |
+| Generated favicon and Apple touch icon | Implemented |
+| Generated Open Graph image | Implemented |
+| Person and ProfessionalService JSON-LD | Implemented with verified-only values |
+| Canonical URLs | Implemented; production value awaits `NEXT_PUBLIC_SITE_URL` |

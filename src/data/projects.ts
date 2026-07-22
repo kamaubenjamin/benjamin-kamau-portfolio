@@ -28,53 +28,53 @@ export const projects: Project[] = [
     category: "Document Processing & Automation",
     status: "ongoing",
     shortDescription:
-      "Document processing platform that extracts, classifies and validates structured data from semi-structured documents using Python, regex patterns and validation rules.",
+      "Document processing platform for deterministic ingestion, normalization, structural parsing, validation, quality scoring and configurable workflows.",
     overview:
-      "An intelligent document processing platform designed to extract, classify and validate structured data from semi-structured business documents. The platform uses Python-based extraction pipelines, regex pattern matching, and multi-stage validation rules to process invoices, purchase orders, delivery notes and similar documents with high accuracy.",
+      "An intelligent document processing platform designed around deterministic ingestion, canonical normalization, structural parsing, structural validation, quality scoring and workflow execution.",
     problem:
-      "Manual data extraction from diverse, unstructured files (PDF, CSV, XLSX, email and TXT) is prone to errors and creates major processing bottlenecks in standard financial operations.",
+      "Documents and source files arrive in different formats and structures, creating a need for consistent ingestion, normalization, parsing and validation before downstream workflows can use them.",
     solution:
-      "Implemented a processing platform that ingests raw documents, applies canonical normalization, runs structural parsing across blocks, sections and tables, and executes custom DAG orchestration workflows to filter, fuzzy-match, compare, validate and report anomalies.",
+      "Built a processing foundation that ingests PDF, CSV, XLSX, email and TXT sources, applies canonical normalization, parses blocks, sections and tables, and runs workflow definitions through a DAG-based runtime.",
     architecture:
-      "Built with an audit-oriented architecture ensuring every extraction step is traceable. Currently uses Streamlit for an operator-facing console to track extraction parameters, error workflows and manual reviews.",
+      "The platform uses an audit-oriented architecture with structural validation, quality scoring and workflow operations for transform, filter, fuzzy-match, compare, alert and report steps.",
     capabilities: [
       "PDF, CSV, XLSX, email and TXT ingestion",
-      "Canonical normalization & structural validation",
+      "Canonical normalization and structural validation",
       "Block, section and table parsing",
-      "Quality scoring and DAG orchestration",
-      "Fuzzy-matching, comparison, alerts and reports",
+      "Quality scoring, workflow definitions and workflow runtime",
+      "DAG orchestration with transform, filter, fuzzy-match, compare, alert and report operations",
     ],
-    technologies: ["Python", "Regex", "Pandas", "Streamlit", "SQLite", "Data Validation"],
+    technologies: ["Python", "Streamlit"],
     currentStatus:
-      "Current development focus is on expanding the entity runtime, financial field extraction, document-reference matching, confidence scoring, and designing a future FlowSync-based production interface.",
+      "Entity-runtime work is ongoing, with current direction covering entity extraction, financial extraction, document-reference extraction and confidence scoring. Streamlit is intended as the operator console, with a separate FlowSync-based production interface possible later.",
     featured: true,
   },
   {
     slug: "exploreafrica-travel-platform",
     title: "ExploreAfrica Travel Platform",
-    category: "Web Platform & Booking",
+    category: "Travel Platform Architecture",
     status: "ongoing",
     shortDescription:
-      "A modern travel platform being built with Next.js, TypeScript and Tailwind CSS to showcase African destinations and facilitate travel inquiries.",
+      "A travel-platform architecture and interface foundation built with React, TypeScript, Tailwind CSS, PostgreSQL and Supabase.",
     overview:
-      "A modern travel platform built with Next.js, TypeScript and Tailwind CSS. The platform showcases African destinations, travel packages and provides an intuitive interface for users to explore and make travel inquiries.",
+      "A travel-platform foundation in development, covering a React and TypeScript interface, platform data architecture, identity foundations and authorization planning for a future booking platform.",
     problem:
-      "Establishing a robust, secure and highly multi-tenant infrastructure is critical before developing customer-facing booking and dynamic transaction logic.",
+      "A future booking platform requires clear data, identity, tenant, role, authorization and audit foundations before transactional features are developed.",
     solution:
-      "Engineered the platform foundation focusing on high-density architecture decision records, data models, identity provisioning flows, role-based authorization structures and clean PostgreSQL schema models.",
+      "Developed the platform ERD, PostgreSQL schema, Supabase architecture, authorization model, identity provisioning flow, tenant and role foundations, row-level security planning and architecture decision records.",
     architecture:
-      "Powered by Next.js and TypeScript on the frontend, using Tailwind CSS for a fully responsive visual layout. It integrates with a backend architectural model designed on Supabase and PostgreSQL, with row-level security (RLS) policies and unified tenant isolation schemas.",
+      "The architecture combines a React, TypeScript and Tailwind CSS interface foundation with PostgreSQL and Supabase planning, including row-level security and audit architecture.",
     capabilities: [
-      "Next.js, TypeScript and Tailwind CSS frontend",
-      "Supabase and PostgreSQL architectural schema",
-      "Multi-tenant data modeling and ERD planning",
-      "Row-level security (RLS) and authorization models",
-      "Identity provisioning flow designs",
+      "React, TypeScript and Tailwind CSS interface foundation",
+      "Platform ERD and PostgreSQL schema",
+      "Supabase architecture and authorization model",
+      "Identity provisioning, tenant and role foundations",
+      "Row-level security planning, audit architecture and architecture decision records",
     ],
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     currentStatus: "Architecture and platform foundation in development.",
     roadmap:
-      "Future milestones include implementing booking transactions, dynamic package-management tools, and payment system integrations.",
+      "The longer-term direction is a booking platform; booking functionality is not presented as complete.",
     featured: true,
   },
   {
@@ -83,21 +83,21 @@ export const projects: Project[] = [
     category: "Data Collection & Intelligence",
     status: "ongoing",
     shortDescription:
-      "A data collection and analysis platform that tracks competitor pricing using Playwright for web scraping and Python for data transformation.",
+      "A Python-based platform for source extraction, product-data normalization, fuzzy matching, price-history tracking, change detection and alerts.",
     overview:
-      "A data collection and analysis platform that tracks competitor pricing and market positioning. Uses Playwright for reliable web scraping, Python for data transformation and cleaning, and structured storage for trend analysis.",
+      "A competitor price intelligence platform that extracts product data from websites and other sources, normalizes it, matches comparable products and tracks price changes over time.",
     problem:
-      "Manual competitor pricing analysis is slow, irregular, and prone to formatting discrepancies when retrieving catalog details from dynamic websites.",
+      "Product information from different websites and sources can vary in structure and naming, making comparison and price-change tracking difficult without normalization and matching.",
     solution:
-      "Built automated data extraction routines to fetch raw product data, normalise catalog attributes, apply fuzzy matching for equivalent items, detect price fluctuations, and route immediate change notifications.",
+      "Built extraction, product-data normalization, fuzzy-matching, price-history, change-detection and alert workflows, supported by execution metrics and logging.",
     architecture:
-      "The system runs Python-based extraction scripts that store results in structured SQLite files. A Streamlit operator dashboard tracks pricing history, matching metrics and run logs.",
+      "Python extraction and processing tools use SQLite for storage, with a Streamlit dashboard for price history, execution metrics and logs.",
     capabilities: [
       "Website and source data extraction",
-      "Product-data normalization & catalog cleaning",
+      "Product-data normalization",
       "Fuzzy matching for non-identical products",
-      "Price-history tracking & change detection",
-      "Streamlit dashboard with execution metrics & logging",
+      "Price-history tracking, change detection and alerts",
+      "Streamlit dashboard, execution metrics and logging",
     ],
     technologies: [
       "Python",
@@ -119,24 +119,24 @@ export const projects: Project[] = [
     category: "Workflow Automation & Business Systems",
     status: "ongoing",
     shortDescription:
-      "An evolving workflow-facing interface and platform foundation built with Next.js, React, TypeScript and Supabase, designed for operations orchestration.",
+      "An evolving workflow-facing interface and platform foundation for future user and admin interfaces.",
     overview:
-      "FlowSync is a workflow automation and business systems brand focused on helping organisations streamline their operations. It encompasses a growing set of tools and methodologies for data pipeline orchestration, process automation, system integration and operational reporting.",
+      "FlowSync is an evolving workflow-facing interface and a platform foundation for future user and administrative interfaces.",
     problem:
-      "Internal tooling and data collection scripts often lack a unified, security-compliant user interface, requiring developers and operators to interact via CLI or raw databases.",
+      "Workflow-facing tools need clear authentication and interface foundations before broader user and administrative experiences can be developed.",
     solution:
-      "Created an evolving workflow-facing interface and platform foundation supporting user authentication, role assignments and structural layouts for administrative operations.",
+      "Built authentication and interface foundations using Next.js, React, TypeScript, Tailwind CSS and Supabase.",
     architecture:
-      "The platform foundation is engineered on Next.js, React, TypeScript and Tailwind CSS, integrating Supabase for authorization rules and identity management.",
+      "The platform foundation uses Next.js, React, TypeScript, Tailwind CSS and Supabase.",
     capabilities: [
       "Evolving workflow-facing interface layouts",
       "Next.js, React, TypeScript, and Supabase integration",
-      "Authentication and role-based interface boundaries",
-      "Administrative workflow foundation design",
+      "Authentication foundations",
+      "Future user and admin interface foundations",
     ],
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Git"],
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     currentStatus:
-      "FlowSync acts as a platform foundation. Note that its existing Competitor Price Intelligence integration remains completely separate, and it is not currently integrated with the Document Intelligence Platform. Streamlit remains the designated operators' console for Document Intelligence, while a separate FlowSync-based Document interface may be developed in a future phase.",
+      "FlowSync remains a platform foundation. Its existing Competitor Price Intelligence integration is separate, and it is not currently integrated with the Document Intelligence Platform. Streamlit remains the intended internal operator console for Document Intelligence, while a separate FlowSync-based Document Intelligence interface may be created later.",
     featured: true,
   },
   {
@@ -147,17 +147,18 @@ export const projects: Project[] = [
     shortDescription:
       "WordPress maintenance and operational review for an accommodation and travel platform, ensuring reliability, configuration checks, and usability testing.",
     overview:
-      "Website operations and technical support for Pair and Place, an accommodation and travel booking website. Engagements focused on routine system maintenance, configuration audits, security compliance reviews, and booking-form usability testing.",
+      "WordPress website maintenance and operational review for Pair and Place, a travel and accommodation website.",
     solution:
-      "Established a baseline WordPress maintenance routine, implemented comprehensive site backup routines, completed configuration and plugin audits, and resolved server timezone offsets to ensure consistent booking timestamps.",
+      "Established a maintenance baseline, completed a full backup and configuration review, corrected the website timezone, tested the booking form and configured email notifications.",
     capabilities: [
-      "WordPress maintenance baseline and full backup implementation",
-      "Configuration audits and timezone corrections",
+      "WordPress maintenance baseline and full backup",
+      "Configuration review and website timezone correction",
       "Booking-form testing and email notification configuration",
-      "Reliability, security and analytics preparation reviews",
-      "Identification of booking-form usability friction points",
+      "Reliability and security review",
+      "Analytics and conversion-tracking preparation",
+      "Identification of booking-form usability issues",
     ],
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Git", "Technical Support"],
+    technologies: ["WordPress"],
     featured: false,
   },
   {
@@ -166,20 +167,19 @@ export const projects: Project[] = [
     category: "Data Engineering",
     status: "completed",
     shortDescription:
-      "An earlier portfolio project that extracts, transforms and normalises financial data to demonstrate pipeline and reporting concepts.",
+      "An earlier portfolio project exploring extraction, transformation, normalization, data matching, pipeline concepts and reporting concepts.",
     overview:
-      "An early data engineering portfolio project focused on extraction, transformation, normalization, and matching concepts. The pipeline processes raw simulated transaction files, standardises attributes, and aggregates metrics for reporting concepts.",
+      "An earlier data engineering portfolio project focused on extraction, transformation, normalization, data matching, pipeline concepts and reporting concepts.",
     solution:
-      "Constructed a lightweight pipeline that takes transaction files, cleans null attributes, runs simple schema validation rules, matches corresponding ledger references, and structures transaction statistics.",
+      "Developed a portfolio pipeline to explore extraction, transformation, normalization, data matching and reporting concepts.",
     architecture:
-      "Built as a lightweight Python utility using SQL and Pandas to demonstrate data standardisation. The pipeline ideas and matching workflows directly contributed to the architectural evolution of the Competitor Price Intelligence project.",
+      "The project served as an earlier foundation whose pipeline and matching ideas contributed to the later development of the Competitor Price Intelligence project.",
     capabilities: [
-      "Raw transaction file ingestion & validation patterns",
-      "Data transformation, cleaning & normalization",
-      "Basic ledger matching logic & reporting concepts",
-      "Data engineering pipeline architecture exercises",
+      "Extraction and transformation concepts",
+      "Data normalization and matching concepts",
+      "Pipeline and reporting concepts",
     ],
-    technologies: ["Python", "SQL", "Pandas", "ETL", "Data Validation", "PostgreSQL"],
+    technologies: ["ETL"],
     featured: false,
   },
 ];

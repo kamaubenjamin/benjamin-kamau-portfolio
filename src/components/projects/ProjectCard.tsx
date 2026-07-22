@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Link href={`/projects/${project.slug}`} className="group block">
+    <Link href={`/projects/${project.slug}`} className="group block rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
       <Card className="flex h-full flex-col">
         <div className="mb-3 flex items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-emerald)]">

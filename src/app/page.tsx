@@ -6,7 +6,6 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { AnimatedWrapper } from "@/components/ui/AnimatedWrapper";
 import { HeroSection } from "@/components/hero/HeroSection";
-import { DataFlowVisual } from "@/components/hero/DataFlowVisual";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { ServiceCard } from "@/components/services/ServiceCard";
 import { ProcessSteps } from "@/components/process/ProcessSteps";
@@ -15,17 +14,15 @@ import { projects } from "@/data/projects";
 import { experiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
 import { personal } from "@/data/personal";
+import { personJsonLd, serializeJsonLd } from "@/lib/json-ld";
 import {
   ArrowRight,
   CheckCircle2,
   Database,
   Code2,
   Layers,
-  Workflow,
   Terminal,
-  BarChart3,
   Globe,
-  GitBranch,
   Blocks,
 } from "lucide-react";
 
@@ -119,10 +116,12 @@ function TechnologyGroups() {
 
 export default function HomePage() {
   const featuredProjects = projects.filter((p) => p.featured).slice(0, 4);
-  const firstThreeSkills = skillCategories.slice(0, 3);
-
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(personJsonLd()) }}
+      />
       {/* 1. Hero */}
       <AnimatedWrapper>
         <HeroSection />
@@ -252,7 +251,7 @@ export default function HomePage() {
                   Ready to turn your data into practical business impact?
                 </h2>
                 <p className="relative mb-8 mx-auto max-w-2xl text-lg text-[var(--color-text-muted)]">
-                  Have a repetitive process, messy data or systems that do not communicate with each other? Let's map the problem and build a practical solution.
+                  Have a repetitive process, messy data or systems that do not communicate with each other? Let&apos;s map the problem and build a practical solution.
                 </p>
                 <div className="relative flex flex-wrap justify-center gap-4">
                   <Button href="/contact" variant="primary" size="lg">

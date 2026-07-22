@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Benjamin Kamau for data engineering, workflow automation, and technical consulting projects.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
@@ -21,6 +22,7 @@ export default function ContactPage() {
         <SectionHeading
           title="Let's Work Together"
           subtitle="Have a project in mind? Let's discuss how I can help turn your data and processes into practical solutions."
+          level="h1"
         />
 
         <div className="mx-auto grid max-w-4xl gap-8 lg:grid-cols-12">
@@ -29,7 +31,7 @@ export default function ContactPage() {
             <Card hover={false}>
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] text-[var(--color-emerald)]">
-                  <MapPin size={18} />
+                  <MapPin size={18} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-[var(--color-text)]">Location</h3>
@@ -47,13 +49,13 @@ export default function ContactPage() {
               <Card hover={false}>
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] text-[var(--color-emerald)]">
-                    <Mail size={18} />
+                    <Mail size={18} aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-[var(--color-text)]">Email</h3>
                     <a
                       href={`mailto:${social.email}`}
-                      className="text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)]"
+                      className="rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
                     >
                       {social.email}
                     </a>

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Learn more about Benjamin Kamau — Data Engineer & AI Workflow Automation Specialist based in Nairobi, Kenya.",
+  alternates: { canonical: "/about" },
 };
 
 function Timeline() {
@@ -66,7 +67,7 @@ export default function AboutPage() {
     <>
       <SectionWrapper>
         <Container>
-          <SectionHeading title="About Me" subtitle={personal.shortBio} align="left" />
+          <SectionHeading title="About Me" subtitle={personal.shortBio} align="left" level="h1" />
 
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -172,7 +173,7 @@ export default function AboutPage() {
                             href={cert.credentialUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-1 inline-block text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)]"
+                            className="mt-1 inline-block rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
                           >
                             View credential →
                           </a>

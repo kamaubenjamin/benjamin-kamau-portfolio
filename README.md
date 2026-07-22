@@ -46,14 +46,20 @@ Additional commands will be added after the Cloudflare Workers deployment adapte
 ```
 src/
 ├── app/                    # Next.js App Router routes
-│   ├── layout.tsx          # Root layout (header, footer, metadata)
+│   ├── layout.tsx          # Root layout, metadata and canonical base
 │   ├── page.tsx            # Homepage (9 sections)
+│   ├── manifest.ts         # Web app manifest
+│   ├── sitemap.ts          # Generated sitemap
+│   ├── robots.ts           # Generated robots rules
+│   ├── icon.tsx            # Generated favicon
+│   ├── apple-icon.tsx      # Generated Apple touch icon
+│   ├── opengraph-image.tsx # Generated social preview image
 │   ├── not-found.tsx       # Custom 404
 │   ├── loading.tsx         # Loading indicator
 │   ├── projects/           # Project listing + [slug] case studies
 │   ├── services/           # All 6 services
 │   ├── about/              # Bio, experience, education, certifications, skills
-│   └── contact/            # Contact info with mailto link
+│   └── contact/            # Accessible mailto inquiry form
 ├── components/
 │   ├── layout/             # Header, Footer
 │   ├── navigation/         # DesktopNav, MobileMenu, SkipLink
@@ -61,10 +67,10 @@ src/
 │   ├── projects/           # ProjectCard
 │   ├── services/           # ServiceCard
 │   ├── process/            # ProcessSteps
-│   ├── contact/            # ContactInfo, DownloadCVButton
+│   ├── contact/            # ContactForm
 │   └── ui/                 # Container, Button, Card, Badge, etc.
 ├── data/                   # Typed static content (personal, projects, services, etc.)
-├── lib/                    # Utility functions
+├── lib/                    # Utilities, site URL and JSON-LD generators
 └── styles/                 # Theme tokens (theme.ts)
 public/
 ├── documents/              # CV PDF
@@ -115,13 +121,24 @@ Replace `public/documents/Benjamin-Kamau-CV.pdf` with the updated file. The path
 
 ## Contact Form
 
-The contact page uses a `mailto:` link. No data is stored on any server. To add server-side form processing, integrate a service like:
+The contact page uses a client-side inquiry form that validates required fields, includes a honeypot, and compiles the inquiry into a structured `mailto:` link. It does not claim delivery and does not store data on a server. When no verified email exists in `src/data/social.ts`, the form is visibly disabled and explains why.
+
+To add server-side form processing in a future milestone, integrate a service like:
 
 - [Formspree](https://formspree.io/)
 - [Web3Forms](https://web3forms.com/)
 - [Resend](https://resend.com/)
 
-Update the contact page component to POST to the chosen service endpoint and handle the response.
+That future change would require replacing the current mailto behavior with an explicitly documented endpoint and response state.
+
+---
+
+## SEO and Accessibility
+
+- Route-correct canonical URLs use `NEXT_PUBLIC_SITE_URL`, with `http://localhost:3000` as the local fallback.
+- The App Router generates `manifest.webmanifest`, `sitemap.xml`, `robots.txt`, favicon, Apple touch icon, and Open Graph image routes.
+- The homepage includes verified Person JSON-LD; `/services` includes grounded ProfessionalService JSON-LD.
+- Pages contain one `h1`, visible keyboard focus states, a skip link, reduced-motion handling, accessible mobile-menu controls, and labelled form errors.
 
 ---
 

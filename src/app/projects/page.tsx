@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Explore Benjamin Kamau's portfolio of data engineering, workflow automation, document processing and web platform projects.",
+  alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsPage() {
@@ -18,6 +19,7 @@ export default function ProjectsPage() {
         <SectionHeading
           title="All Projects"
           subtitle="A selection of work across data engineering, automation, document processing, web platforms and technical support."
+          level="h1"
         />
         <div className="grid gap-6 sm:grid-cols-2">
           {projects.map((project) => (

@@ -11,10 +11,10 @@ All routes are server-rendered static pages (SSG):
 | `/projects/[slug]` | SSG (`generateStaticParams`) | Dynamic case studies |
 | `/services` | Static | All 6 services |
 | `/about` | Static | Bio, experience, education, certifications, skills |
-| `/contact` | Static | Contact info with mailto link |
+| `/contact` | Static | Accessible client-side inquiry form that opens a mail client |
 | `/*` | Static | Custom 404 |
 
-All routes use `generateMetadata` for per-page SEO metadata.
+Static pages export route metadata, while dynamic project pages use `generateMetadata`. Canonicals resolve through the shared `NEXT_PUBLIC_SITE_URL` base.
 
 ---
 
@@ -25,15 +25,26 @@ All routes use `generateMetadata` for per-page SEO metadata.
 - Layout components: `Header`, `Footer`, `SkipLink`
 - Navigation: `DesktopNav`
 - Hero: `HeroSection` (all content server-rendered)
-- Domain components: `ProjectCard`, `ServiceCard`, `ProcessSteps`, `ExperienceTimeline`, `EducationBlock`, `CertificationList`, `SkillsMatrix`, `ContactInfo`, `DownloadCVButton`
+- Domain components: `ProjectCard`, `ServiceCard`, `ProcessSteps`
 - UI components: `Container`, `Button`, `Card`, `Badge`, `SectionHeading`, `GradientText`, `IconWrapper`, `SectionWrapper`
 
 **Client components** (exhaustive list):
 - `MobileMenu` — `useState` for toggle, Framer Motion for slide animation
 - `DataFlowVisual` — Framer Motion animated SVG pipeline
 - `AnimatedWrapper` — Framer Motion entrance animation wrapper
+- `ContactForm` — state, validation, honeypot and structured mailto construction
 
-No other component requires `"use client"`. This boundary is intentional — server components are the default.
+No other component requires `"use client"`. Server components remain the default.
+
+---
+
+## Metadata and Structured Data
+
+- `src/lib/json-ld.ts` owns the normalized site URL, absolute URL generation, safe JSON serialization, and verified Person/ProfessionalService generators.
+- `manifest.ts`, `sitemap.ts`, and `robots.ts` use Next.js metadata routes.
+- `icon.tsx`, `apple-icon.tsx`, and `opengraph-image.tsx` generate source-controlled metadata images with `ImageResponse`.
+- The homepage injects Person JSON-LD and `/services` injects ProfessionalService JSON-LD.
+- Route metadata supplies a single route-correct canonical; no production domain is hardcoded.
 
 ---
 
@@ -96,5 +107,5 @@ Repository and live-demo buttons are only rendered when their respective URL fie
 - All content is static and changes infrequently
 - TypeScript data files are version-controlled, type-checked, and immediately reviewable in pull requests
 - Eliminates hosting costs, security surface area, and maintenance overhead
-- The contact form uses a `mailto:` link — no server-side form processing needed
+- The contact form validates locally and opens a structured `mailto:` link; it is disabled when no verified destination email exists
 - A form backend (Formspree, Web3Forms, Resend) can be added later without changing the architecture
