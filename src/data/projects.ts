@@ -1,8 +1,11 @@
 export type ProjectStatus =
   | "Active development"
+  | "Early prototype"
   | "Functional platform foundation"
   | "Maintenance milestone completed"
   | "Completed foundation"
+  | "Completed learning project"
+  | "Incomplete learning exercise"
   | "Existing platform foundation"
   | "Paused - separate product";
 
@@ -44,7 +47,15 @@ export interface Project {
   links?: ProjectLink[];
 }
 
-export const projects: Project[] = [
+const projectDisplayOrder = new Map([
+  ["intelligent-document-processing-platform", 0],
+  ["exploreafrica-travel-platform", 1],
+  ["flow-sync", 2],
+  ["etl-banking-pipeline", 3],
+  ["pair-and-place-website-operations", 4],
+]);
+
+export const projects: Project[] = ([
   {
     slug: "intelligent-document-processing-platform",
     title: "Intelligent Document Processing Platform",
@@ -152,22 +163,32 @@ export const projects: Project[] = [
     shortDescription:
       "A hosted workflow-facing platform for competitor monitoring, dashboard analytics and reusable interface patterns, with further data-integration work still in progress.",
     overview:
-      "FlowSync is an evolving Next.js workflow-facing platform and user-interface foundation with authentication, competitor-management, dashboard and API-first integration foundations.",
+      "FlowSync is an evolving Next.js control-plane and user-interface foundation for competitor price intelligence and workflow monitoring, with Clerk authentication UI, Supabase-backed competitor records, dashboard views and an API-first boundary to a separately hosted execution and data plane.",
     problem:
       "Workflow products need reusable interface, authentication, analytics and integration patterns without coupling otherwise separate product domains.",
     solution:
-      "Built Next.js, React, TypeScript, Tailwind CSS and Supabase foundations covering authentication, competitor management interfaces, realtime analytics and dashboard work, API-first integrations and telemetry-monitoring integration.",
+      "Built Next.js, React, TypeScript and Tailwind CSS foundations covering Clerk sign-in and sign-up UI, Supabase-backed competitor records and CSV imports, dashboard and monitoring views, and typed API clients for external workflow and telemetry services.",
     architecture:
       "Shared design patterns may be reused, but business logic, APIs, entities, workflows and integrations remain separate between products. The existing FlowSync implementation remains linked to Competitor Price Intelligence and is being preserved untouched.",
     capabilities: [
       "Next.js, React, TypeScript and Tailwind CSS interface foundation",
-      "Supabase and authentication foundations",
-      "Competitor management interface foundations",
-      "Realtime analytics and dashboard work",
-      "API-first integration foundations",
-      "Telemetry-monitoring integration",
+      "Clerk authentication UI foundations",
+      "Supabase-backed competitor records and realtime refresh",
+      "CSV parsing and validation for competitor imports",
+      "Dashboard, monitoring, alert and report views",
+      "Typed API clients for external workflow controls and telemetry",
+      "Polling safeguards and response normalization",
     ],
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Clerk",
+      "Supabase",
+      "Recharts",
+      "Papa Parse",
+    ],
     currentStatus:
       "The original hosted FlowSync dashboard is a functional, publicly accessible technical preview associated with Competitor Price Intelligence and workflow monitoring. Some live data fetching still needs correction, so it is not production-ready or fully data-integrated and will be stabilized in a later milestone. It remains separate from the newer Document Intelligence FlowSync UAT interface.",
     links: [
@@ -176,6 +197,11 @@ export const projects: Project[] = [
         label: "View FlowSync Dashboard",
         kind: "preview",
         primary: true,
+      },
+      {
+        url: "https://github.com/kamaubenjamin/FlowSync",
+        label: "View Repository",
+        kind: "repository",
       },
     ],
     featured: true,
@@ -277,6 +303,56 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "gym-pro-management-system",
+    title: "Gym Pro Management System",
+    category: "Operations Dashboard & Business Platform",
+    status: "Early prototype",
+    statusVariant: "default",
+    shortDescription:
+      "A React and Supabase gym-operations prototype with authenticated admin and staff workflows, live dashboard metrics and a broad PostgreSQL schema for future management modules.",
+    overview:
+      "Gym Pro is an early gym-management prototype built as a React single-page application backed by Supabase. The implemented interface focuses on admin and staff workflows: authentication, role-filtered navigation, live dashboard aggregates, member records and read-only operational views for classes, trainers, attendance and payments. The repository also includes a 22-table PostgreSQL schema with row-level security, but several schema-backed modules remain partial or placeholder-only.",
+    problem:
+      "Gym and fitness-studio operations span member records, schedules, attendance, payments and other administrative data that are difficult to manage consistently across disconnected tools.",
+    solution:
+      "Built an authenticated operations-dashboard foundation with direct Supabase data access, role-filtered navigation, responsive application layout and initial management views across core gym domains.",
+    architecture:
+      "The Vite and React SPA communicates directly with Supabase Auth and PostgreSQL through the browser client. Row-level security is the primary data-authorization boundary. Navigation is currently state-based rather than URL-routed, and no separate server API or automated test suite is implemented.",
+    capabilities: [
+      "Supabase email and password authentication",
+      "Role-filtered admin and staff navigation",
+      "Live member, attendance and revenue aggregates",
+      "Member listing, search, edit and delete workflows",
+      "Read-only class, trainer, attendance and payment views",
+      "Responsive sidebar and mobile drawer",
+      "22-table PostgreSQL schema with row-level security",
+      "Seeded membership-plan, class and payment-method data",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Supabase Auth",
+      "RLS",
+    ],
+    currentStatus:
+      "The project is an early prototype, not a production-ready system. Authentication and several dashboard views are functional, but member creation and class scheduling are blocked or incomplete; inventory, announcements and settings are placeholders; payments are read-only; member and trainer self-service workflows are not implemented; and there are no automated tests.",
+    roadmap:
+      "The documented priorities are to complete core operational workflows before broader platform claims or deployment readiness.",
+    roadmapDetails: [
+      "Secure member provisioning and complete member CRUD",
+      "Class scheduling and trainer assignment",
+      "Subscription and membership-plan management",
+      "Announcements and inventory management",
+      "Member self-service portal",
+      "Automated tests, routing and error handling",
+    ],
+    featured: false,
+  },
+  {
     slug: "competitor-price-intelligence-platform",
     title: "Competitor Price Intelligence Platform",
     category: "Data Collection & Intelligence",
@@ -330,29 +406,28 @@ export const projects: Project[] = [
   },
   {
     slug: "etl-banking-pipeline",
-    title: "ETL Pipeline Foundation",
-    category: "Data Engineering",
+    title: "Data Automation & Intelligence Platform",
+    category: "Data Engineering & Intelligence Foundations",
     status: "Completed foundation",
     statusVariant: "emerald",
     shortDescription:
-      "A reusable Python ETL foundation for extracting, cleaning, validating, matching, storing and reporting structured data from files and web sources.",
+      "A reusable Python ETL foundation for extracting, cleaning, validating and loading structured data from web, file and dataframe sources.",
     overview:
-      "This completed data-engineering project provides a reusable foundation for turning varied source data into validated, comparable and reportable records. Its end-to-end ETL workflow uses Python, Pandas, SQL, SQLite, RapidFuzz and Streamlit while separating extraction, transformation, validation, matching, loading, logging and reporting into reusable stages. The architecture later evolved into the Competitor Price Intelligence product, where the same patterns were applied to retailer data, fuzzy product matching, price comparisons and monitoring.",
+      "The default branch of the umbrella Data Automation and Intelligence repository provides a reusable ETL foundation for extracting web, file and dataframe inputs, applying configurable Pandas transformations and validation, and loading results to CSV and SQLite. Its checked-in example still uses archived largest-bank data, but it is a learning and engineering foundation rather than a banking platform or live financial integration. Separate branches later developed competitor-price, workflow-runtime and Document Intelligence tracks.",
     solution:
-      "Built a reusable Python ETL pipeline that separates ingestion, transformation, validation, matching, storage, logging and reporting into maintainable processing stages.",
+      "Built a reusable Python ETL pipeline that separates extraction, dataframe transformation, validation, storage, state and logging into maintainable processing stages.",
     architecture:
       "The project served as an earlier foundation whose pipeline and matching ideas contributed to the later development of the Competitor Price Intelligence project.",
     capabilities: [
-      "Configurable source ingestion",
+      "Web, file, dataframe and connector extraction foundations",
       "Pandas-based cleaning and normalization",
       "Rule-based validation",
-      "Exact and fuzzy matching",
-      "SQL and SQLite loading",
-      "Execution logging and run metadata",
-      "Structured exports and reporting",
-      "Streamlit dashboard foundations",
+      "CSV and SQLite loading",
+      "Pipeline state, logging and orchestration",
+      "Basic extraction and orchestration tests",
+      "Streamlit control-surface foundation",
     ],
-    technologies: ["Python", "Pandas", "SQL", "SQLite", "RapidFuzz", "Streamlit"],
+    technologies: ["Python", "Pandas", "SQL", "SQLite", "Requests", "BeautifulSoup", "Pytest", "Streamlit"],
     currentStatus:
       "Completed as a reusable ETL foundation. The verified repository later evolved toward the separate Competitor Price Intelligence product.",
     links: [
@@ -363,6 +438,107 @@ export const projects: Project[] = [
         primary: true,
       },
     ],
+    featured: true,
+  },
+  {
+    slug: "python-etl-learning-exercises",
+    title: "Python ETL Learning Exercises",
+    category: "Data Engineering Learning Projects",
+    status: "Completed learning project",
+    statusVariant: "default",
+    shortDescription:
+      "Four independent Python exercises covering archived web extraction, tabular transformations, CSV output, SQLite loading, logging and basic SQL queries.",
+    overview:
+      "This repository collects four independent learning exercises rather than one integrated banking system: largest-bank market-capitalization ETL, countries-by-GDP ETL, ranked-film extraction, and CSV-to-SQLite instructor queries. The scripts demonstrate early Python data-engineering fundamentals using static inputs and archived web pages.",
+    solution:
+      "Implemented small script-level workflows for HTML extraction, Pandas and NumPy transformations, CSV exports, SQLite table replacement, execution logging and basic database queries.",
+    architecture:
+      "Each script runs independently and performs file, network or database side effects immediately. There is no unified entry point, automated test suite, CI workflow, dependency lock or production integration boundary.",
+    capabilities: [
+      "Archived HTML table extraction",
+      "Pandas and NumPy transformations",
+      "Static currency conversion exercises",
+      "CSV output and SQLite loading",
+      "Basic SQL queries",
+      "Timestamped ETL logging",
+    ],
+    technologies: ["Python", "Pandas", "NumPy", "Requests", "BeautifulSoup", "SQLite", "SQL"],
+    currentStatus:
+      "Completed as educational exercises with reproducibility limitations. The repository does not connect to financial institutions, process transactions or implement production banking workflows, and two scripts retain machine-specific file paths that must be changed before use elsewhere.",
+    links: [
+      {
+        url: "https://github.com/kamaubenjamin/EXTRACT-TRANSFORM-LOAD-PROJECT-BANKS",
+        label: "View Repository",
+        kind: "repository",
+        primary: true,
+      },
+    ],
     featured: false,
   },
-];
+  {
+    slug: "used-car-fuel-data-etl",
+    title: "Used-Car Fuel Data ETL Practice",
+    category: "Data Engineering Learning Project",
+    status: "Completed learning project",
+    statusVariant: "default",
+    shortDescription:
+      "A local Python ETL exercise that combines equivalent used-car records from CSV, JSON and XML, transforms price and fuel fields, and produces summary datasets and a chart.",
+    overview:
+      "This private learning repository demonstrates local multi-format extraction and transformation using equivalent sample used-car records stored as CSV, JSON and XML. The implemented script normalizes fuel names, converts numeric fields, applies a fixed practice exchange rate, calculates average prices by fuel type, exports combined and filtered datasets, creates a bar chart and appends progress logs.",
+    solution:
+      "Built a compact file-based ETL workflow that reads three structured formats, combines records with Pandas, derives normalized and aggregate values, exports CSV results and generates a Matplotlib visualization.",
+    architecture:
+      "A single Python script discovers inputs and writes outputs relative to its working directory. It has no automated tests, dependency manifest, packaging, CLI configuration or deployment setup, and broad CSV discovery can re-ingest generated outputs on later runs.",
+    capabilities: [
+      "CSV, JSON and XML extraction",
+      "Fuel-name and numeric normalization",
+      "Practice currency conversion",
+      "Grouped average-price calculations",
+      "Combined and fuel-specific CSV exports",
+      "Matplotlib summary chart",
+      "Timestamped progress logging",
+    ],
+    technologies: ["Python", "Pandas", "XML", "Matplotlib"],
+    currentStatus:
+      "Completed as a local learning project rather than a production pipeline. The repository is private, its fixed exchange rate is only a practice assumption, and its input-discovery behavior can duplicate generated records across reruns.",
+    featured: false,
+  },
+  {
+    slug: "movie-web-scraping-learning-project",
+    title: "Movie Web-Scraping Learning Project",
+    category: "Data Collection Learning Project",
+    status: "Incomplete learning exercise",
+    statusVariant: "default",
+    shortDescription:
+      "A small Python exercise that extracts ranked-film rows from an archived page and loads tabular snapshots into CSV and SQLite.",
+    overview:
+      "This early data-engineering exercise requests an archived ranked-films page, parses its first table with Beautiful Soup, builds a Pandas DataFrame and writes results to CSV and a local SQLite table. The repository also transparently retains unrelated historical GDP artifacts from a separate exercise.",
+    solution:
+      "Implemented a straightforward archived-page extraction and local loading example using Requests, Beautiful Soup, Pandas and SQLite.",
+    architecture:
+      "The single script performs network, CSV and database operations when run or imported. Parsing depends on fixed table positions, and the configured CSV path must be changed from the original machine-specific Windows path before use on another computer.",
+    capabilities: [
+      "Archived webpage requests",
+      "HTML table parsing",
+      "Pandas DataFrame creation",
+      "CSV snapshot output",
+      "SQLite table replacement",
+    ],
+    technologies: ["Python", "Requests", "BeautifulSoup", "Pandas", "SQLite"],
+    currentStatus:
+      "Incomplete as a reproducible learning exercise: historical output snapshots exist, but there are no automated tests, CI, dependency lock, command-line configuration, response validation, retry handling or portable end-to-end run settings.",
+    links: [
+      {
+        url: "https://github.com/kamaubenjamin/WEBSCRAPPING",
+        label: "View Repository",
+        kind: "repository",
+        primary: true,
+      },
+    ],
+    featured: false,
+  },
+] satisfies Project[]).sort(
+  (a, b) =>
+    (projectDisplayOrder.get(a.slug) ?? Number.MAX_SAFE_INTEGER) -
+    (projectDisplayOrder.get(b.slug) ?? Number.MAX_SAFE_INTEGER),
+);

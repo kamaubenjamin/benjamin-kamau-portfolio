@@ -8,7 +8,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Item | Status | Notes |
 |---|---|---|
-| GitHub URL | Not provided | Field is `undefined` in `src/data/social.ts` — no button renders |
+| GitHub URL | Resolved | Verified public profile `https://github.com/kamaubenjamin` is configured centrally in `src/data/social.ts` |
 | LinkedIn URL | Not provided | Field is `undefined` in `src/data/social.ts` — no button renders |
 | Email address | Resolved | Verified `benjaminkamauu@gmail.com` is configured centrally in `src/data/social.ts`; the direct link and contact form render |
 | WhatsApp number | Not provided | Field is `undefined` in `src/data/social.ts` — no button renders |
@@ -22,9 +22,13 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Intelligent Document Processing Platform | Not provided | Verified UAT frontend and API; authenticated, tenant-scoped, read-only synthetic-data technical previews, not production |
 | ExploreAfrica | Not provided | Verified earlier public showcase; newer Admin Portal capabilities remain locally validated and are not demonstrated by this link |
 | Competitor Price Intelligence Platform | Verified shared repository | No hosted Streamlit deployment verified |
-| FlowSync | Not provided | Verified original public dashboard technical preview; not production-ready or fully data-integrated |
+| FlowSync | Verified public repository | Verified original public dashboard technical preview; not production-ready or fully data-integrated |
 | Pair and Place Website Operations | Not provided | Verified live client website; no claim of original complete-site design or build |
-| ETL Pipeline Foundation | Verified shared repository | No live application; repository includes its later evolution toward Competitor Price Intelligence |
+| Data Automation & Intelligence Platform | Verified shared repository | Umbrella repository with a retained ETL foundation and separate later product tracks; no unified production application |
+| Gym Pro Management System | Private repository | No public repository or deployment link rendered; represented from audited repository evidence |
+| Python ETL Learning Exercises | Verified public repository | No live application; four independent learning exercises, not a banking system |
+| Used-Car Fuel Data ETL Practice | Private repository | No public repository or deployment link rendered |
+| Movie Web-Scraping Learning Project | Verified public repository | No live application; incomplete reproducibility setup |
 
 ---
 
@@ -45,7 +49,11 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Competitor Price Intelligence Platform | Included | Included | Not specified | Included | Included | Not specified | Included | Included | Not specified |
 | FlowSync | Included | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
 | Pair and Place Website Operations | Not specified | Not specified | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
-| ETL Pipeline Foundation | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| Data Automation & Intelligence Platform | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| Gym Pro Management System | Included | Included | Not specified | Included | Included | Not specified | Included | Included | Not specified |
+| Python ETL Learning Exercises | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| Used-Car Fuel Data ETL Practice | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| Movie Web-Scraping Learning Project | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
 
 ### Verified Project Priorities and Boundaries
 
@@ -57,11 +65,17 @@ This document tracks all unresolved content gaps that need to be filled before o
 - ExploreAfrica is at V4-M11 — Document Intelligence integration readiness. Core admin and private-document workflows are validated locally; production deployment remains unverified.
 - ExploreAfrica’s public link is the earlier travel showcase; it does not demonstrate the newer customer, booking, traveller, payment, private-document, tenancy, RLS or Supabase Admin Portal capabilities.
 - Competitor Price Intelligence is paused as a separate preserved product.
-- ETL Pipeline Foundation and Competitor Price Intelligence intentionally share one repository because it records the ETL foundation’s evolution into the specialized monitoring product; no hosted Streamlit demo is verified.
+- Data Automation & Intelligence Platform and Competitor Price Intelligence intentionally share one umbrella repository because it records the ETL foundation’s evolution into separate product tracks; no hosted Streamlit demo is verified.
 - The original hosted FlowSync dashboard belongs to Competitor Price Intelligence and workflow monitoring. It is a functional public technical preview with incomplete live-data integration, not the newer Document Intelligence interface.
 - Pair and Place has completed its safe WordPress-side maintenance phase; hosting-panel review, analytics, conversion tracking, Elementor work and booking improvements remain unresolved.
 - Pair and Place’s link is the live client website; Benjamin’s scope was maintenance and operations, not an original complete-site design or build claim.
-- ETL Banking has been renamed ETL Pipeline Foundation and is a completed foundation whose verified repository later evolved toward Competitor Price Intelligence.
+- The former ETL Pipeline Foundation case study is positioned as Data Automation & Intelligence Platform, an umbrella repository whose default branch retains the completed ETL foundation while separate branches contain later product tracks.
+- FlowSync uses Clerk authentication UI and Supabase-backed competitor records; its external execution/data-plane API remains separately hosted and incompletely integrated.
+- Gym Pro is an early prototype. Authentication, dashboard aggregates and several operational views exist, while member creation, scheduling and multiple modules remain incomplete or placeholder-only.
+- The public banks repository contains four independent completed learning exercises and must not be presented as a banking platform.
+- Used-Car Fuel Data ETL is a private completed learning project with known rerun and reproducibility limitations.
+- Movie Web-Scraping is an incomplete learning exercise with a machine-specific output path and unrelated retained GDP artifacts.
+- Historical Android repositories are audited learning prototypes and are intentionally not elevated into the selected portfolio case studies.
 - Project screenshots remain unresolved, and no unsupported production, deployment, analytics or measured-outcome claims should be published.
 
 ---

@@ -94,7 +94,7 @@ All portfolio content is stored as typed TypeScript data files in `src/data/`:
 | `personal.ts` | Name, title, tagline, bio, location, availability, CV path |
 | `social.ts` | GitHub, LinkedIn, email, WhatsApp (all optional) |
 | `nav.ts` | Navigation link items |
-| `projects.ts` | All 6 projects with full fields |
+| `projects.ts` | Audited project case studies with full fields |
 | `services.ts` | All 6 services |
 | `experience.ts` | Work history |
 | `education.ts` | Education entries |
@@ -136,8 +136,10 @@ The contact page uses a client-side inquiry form that validates required fields,
 - The newer Document Intelligence FlowSync frontend and API remain separate from FlowSync's original Competitor Price Intelligence implementation.
 - ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
 - Competitor Price Intelligence is paused as a separate preserved product.
-- Pair and Place has completed its safe WordPress-side maintenance phase; ETL Pipeline Foundation is completed earlier engineering work that later evolved toward Competitor Price Intelligence.
+- Pair and Place has completed its safe WordPress-side maintenance phase; Data Automation & Intelligence Platform retains the completed ETL foundation that later evolved into separate product tracks.
 - Verified project links are stored centrally in `src/data/projects.ts`; the ETL and Competitor Price Intelligence case studies intentionally share the evolution repository, while the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
+- Gym Pro is represented as an early prototype with implemented authentication and operational views alongside clearly documented incomplete and placeholder modules.
+- The standalone banks, used-car fuel and movie-scraping repositories are represented as learning exercises, not production systems; historical Android prototypes remain outside the selected case-study collection.
 
 To add server-side form processing in a future milestone, integrate a service like:
 
