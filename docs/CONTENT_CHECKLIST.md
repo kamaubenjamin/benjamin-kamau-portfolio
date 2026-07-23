@@ -10,7 +10,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 |---|---|---|
 | GitHub URL | Resolved | Verified public profile `https://github.com/kamaubenjamin` is configured centrally in `src/data/social.ts` |
 | LinkedIn URL | Not provided | Field is `undefined` in `src/data/social.ts` — no button renders |
-| Email address | Resolved | Verified `benjaminkamauu@gmail.com` is configured centrally in `src/data/social.ts`; the direct link and contact form render |
+| Email address | Resolved | Verified `benjaminkamauu@gmail.com` is configured centrally in `src/data/social.ts`; Web3Forms associates the public access key with this recipient, and the direct fallback link remains visible |
 | WhatsApp number | Not provided | Field is `undefined` in `src/data/social.ts` — no button renders |
 
 ---
@@ -99,6 +99,8 @@ This document tracks all unresolved content gaps that need to be filled before o
 |---|---|
 | Production URL | Configured as the existing `workers.dev` URL |
 | `NEXT_PUBLIC_SITE_URL` | Configured for the existing `workers.dev` URL in `wrangler.jsonc` and the Cloudflare build script |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Required at local and production build time; public identifier is stored only in ignored `.env.local`, never in documentation |
+| Contact delivery | Web3Forms browser-side HTTPS submission; portfolio stores no submissions in its own database |
 | Cloudflare Worker name | Configured; preserve the existing name |
 | `@opennextjs/cloudflare` | Installed |
 | `wrangler` | Installed |

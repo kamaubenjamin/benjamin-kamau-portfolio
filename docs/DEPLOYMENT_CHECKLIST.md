@@ -19,7 +19,7 @@
 - [ ] Alt text — every image has non-empty descriptive alt text
 - [ ] Heading hierarchy — exactly one `h1` on each main and project page
 - [ ] Mobile menu — trigger state, Escape close, focus return, and 44px targets
-- [ ] Contact form — labels, `aria-invalid`, error associations, disabled unconfigured state
+- [ ] Contact form — labels, `aria-invalid`, error associations, sending state, success/error announcements, fallback link
 
 ### Content Integrity
 - [ ] No fake links — all `href` values point to real routes or are omitted
@@ -77,6 +77,7 @@
 - [x] `nodejs_compat` included in `compatibility_flags`
 - [x] Static-assets binding targets `.open-next/assets`
 - [x] `NEXT_PUBLIC_SITE_URL` set to the exact production Workers.dev origin
+- [ ] `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` present in the build environment (public form identifier; not a Worker secret)
 - [x] `.dev.vars`, `.open-next/`, `.wrangler/`, and TypeScript build info excluded from version control
 - [x] `package.json` includes `cf:build`, `cf:preview`, `cf:deploy`, `cf:upload`, and `cf:typegen`
 - [x] `cf:build` injects the public production origin cross-platform before Next.js prerenders metadata routes
@@ -97,6 +98,8 @@
 - [x] Person JSON-LD on `/` and ProfessionalService JSON-LD on `/services` verified
 - [ ] Responsive layout verified at 375px, 768px, 1280px on live URL
 - [ ] No console errors
+- [ ] Controlled Web3Forms submission is accepted and received at `benjaminkamauu@gmail.com`
+- [ ] Web3Forms domain restriction reviewed for the production Workers.dev origin (allow localhost only when deliberately testing)
 - [ ] Custom domain connected (not applicable to the current Workers.dev launch)
 - [x] `NEXT_PUBLIC_SITE_URL` updated to `https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev`
 

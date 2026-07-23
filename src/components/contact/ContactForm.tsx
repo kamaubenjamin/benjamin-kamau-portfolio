@@ -1,104 +1,192 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Send } from "lucide-react";
 
 interface ContactFormProps {
   recipientEmail?: string;
 }
 
+type SubmissionStatus = "idle" | "sending" | "accepted" | "failed";
+
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+
+const servicesList = [
+  "Data Engineering & ETL",
+  "Workflow Automation",
+  "Intelligent Document Processing",
+  "Business Data Reconciliation",
+  "Dashboards & Internal Tools",
+  "Technical Consulting & System Audits",
+  "Other / Custom Project",
+] as const;
+
+const fieldLimits = {
+  name: 100,
+  contactMethod: 160,
+  company: 160,
+  currentProcess: 3000,
+  toolsUsed: 500,
+  desiredOutcome: 1500,
+  timeline: 160,
+} as const;
+
+const initialFormData = {
+  name: "",
+  contactMethod: "",
+  company: "",
+  serviceNeeded: "",
+  currentProcess: "",
+  toolsUsed: "",
+  desiredOutcome: "",
+  timeline: "",
+  honeypot: "",
+};
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const contactNumberPattern = /^\+?[\d\s().-]{7,24}$/;
+
 export function ContactForm({ recipientEmail }: ContactFormProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    contactMethod: "",
-    company: "",
-    serviceNeeded: "",
-    currentProcess: "",
-    toolsUsed: "",
-    desiredOutcome: "",
-    timeline: "",
-    honeypot: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const servicesList = [
-    "Data Engineering & ETL",
-    "Workflow Automation",
-    "Intelligent Document Processing",
-    "Business Data Reconciliation",
-    "Dashboards & Internal Tools",
-    "Technical Consulting & System Audits",
-    "Other / Custom Project",
-  ];
+  const [submissionStatus, setSubmissionStatus] = useState<SubmissionStatus>("idle");
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const submissionLockRef = useRef(false);
 
   const validate = () => {
+    const trimmed = {
+      ...formData,
+      name: formData.name.trim(),
+      contactMethod: formData.contactMethod.trim(),
+      company: formData.company.trim(),
+      serviceNeeded: formData.serviceNeeded.trim(),
+      currentProcess: formData.currentProcess.trim(),
+      toolsUsed: formData.toolsUsed.trim(),
+      desiredOutcome: formData.desiredOutcome.trim(),
+      timeline: formData.timeline.trim(),
+    };
     const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    if (!formData.contactMethod.trim()) {
+    if (!trimmed.name) newErrors.name = "Name is required";
+    else if (trimmed.name.length > fieldLimits.name) newErrors.name = "Name is too long";
+
+    if (!trimmed.contactMethod) {
       newErrors.contactMethod = "Email or WhatsApp is required";
+    } else if (trimmed.contactMethod.length > fieldLimits.contactMethod) {
+      newErrors.contactMethod = "Contact detail is too long";
+    } else if (
+      trimmed.contactMethod.includes("@")
+        ? !emailPattern.test(trimmed.contactMethod)
+        : !contactNumberPattern.test(trimmed.contactMethod)
+    ) {
+      newErrors.contactMethod = "Enter a valid email address or WhatsApp number";
     }
-    if (!formData.serviceNeeded) {
+
+    if (!servicesList.includes(trimmed.serviceNeeded as (typeof servicesList)[number])) {
       newErrors.serviceNeeded = "Please select a service";
     }
-    if (!formData.currentProcess.trim()) {
+
+    if (!trimmed.currentProcess) {
       newErrors.currentProcess = "Please describe your current process or problem";
+    } else if (trimmed.currentProcess.length > fieldLimits.currentProcess) {
+      newErrors.currentProcess = "Description is too long";
     }
+
+    if (trimmed.company.length > fieldLimits.company) newErrors.company = "Company name is too long";
+    if (trimmed.toolsUsed.length > fieldLimits.toolsUsed) newErrors.toolsUsed = "Tools description is too long";
+    if (trimmed.desiredOutcome.length > fieldLimits.desiredOutcome) newErrors.desiredOutcome = "Desired outcome is too long";
+    if (trimmed.timeline.length > fieldLimits.timeline) newErrors.timeline = "Timeline is too long";
+
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return { isValid: Object.keys(newErrors).length === 0, trimmed };
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Spam check
-    if (formData.honeypot) {
+    if (submissionLockRef.current || formData.honeypot) {
       return;
     }
 
-    if (!validate()) {
+    setSubmissionStatus("idle");
+    setSubmissionMessage("");
+
+    const { isValid, trimmed } = validate();
+    if (!isValid) {
       return;
     }
 
-    if (!recipientEmail) {
+    if (!WEB3FORMS_ACCESS_KEY) {
+      setSubmissionStatus("failed");
+      setSubmissionMessage(`The form is temporarily unavailable. Please email ${recipientEmail ?? "me"} directly.`);
       return;
     }
 
-    const subject = encodeURIComponent(`Project Inquiry from ${formData.name}`);
-    const emailBody = `Project Inquiry Details:
-----------------------------------
-Name: ${formData.name}
-Email/WhatsApp: ${formData.contactMethod}
-Company: ${formData.company || "N/A"}
-Service Needed: ${formData.serviceNeeded}
-Timeline: ${formData.timeline || "N/A"}
+    const isEmailContact = emailPattern.test(trimmed.contactMethod);
+    const payload: Record<string, string> = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: `Portfolio enquiry — ${trimmed.serviceNeeded} — ${trimmed.name}`,
+      from_name: "Benjamin Kamau Portfolio",
+      name: trimmed.name,
+      contact: trimmed.contactMethod,
+      company: trimmed.company || "Not provided",
+      service: trimmed.serviceNeeded,
+      current_process: trimmed.currentProcess,
+      tools_used: trimmed.toolsUsed || "Not provided",
+      desired_outcome: trimmed.desiredOutcome || "Not provided",
+      timeline: trimmed.timeline || "Not provided",
+      source: "Benjamin Kamau Portfolio",
+      botcheck: "",
+    };
 
-Current Process/Problem:
-${formData.currentProcess}
+    if (isEmailContact) payload.replyto = trimmed.contactMethod;
 
-Tools Currently Used:
-${formData.toolsUsed || "N/A"}
+    submissionLockRef.current = true;
+    setSubmissionStatus("sending");
+    setSubmissionMessage("Sending your enquiry…");
 
-Desired Outcome:
-${formData.desiredOutcome || "N/A"}`;
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result: unknown = await response.json();
+      const wasAccepted =
+        response.ok &&
+        typeof result === "object" &&
+        result !== null &&
+        "success" in result &&
+        result.success === true;
 
-    const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${encodeURIComponent(
-      emailBody
-    )}`;
+      if (!wasAccepted) throw new Error("Provider rejected submission");
 
-    window.location.href = mailtoUrl;
+      setFormData(initialFormData);
+      setErrors({});
+      setSubmissionStatus("accepted");
+      setSubmissionMessage("Your message has been sent. I’ll get back to you soon.");
+    } catch (error) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Web3Forms submission failed", error instanceof Error ? error.name : "UnknownError");
+      }
+      setSubmissionStatus("failed");
+      setSubmissionMessage("Unable to send your message right now. Please try again or use the email link below.");
+    } finally {
+      submissionLockRef.current = false;
+    }
   };
 
-  const isConfigured = !!recipientEmail;
+  const isSending = submissionStatus === "sending";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5" aria-busy={isSending}>
       {/* Honeypot */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="form-hp">Do not fill this</label>
         <input
           id="form-hp"
-          name="website"
+          name="botcheck"
           type="text"
           tabIndex={-1}
           autoComplete="off"
@@ -117,7 +205,8 @@ ${formData.desiredOutcome || "N/A"}`;
             id="form-name"
             type="text"
             required
-            disabled={!isConfigured}
+            disabled={isSending}
+            maxLength={fieldLimits.name}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "form-name-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
@@ -137,7 +226,8 @@ ${formData.desiredOutcome || "N/A"}`;
             id="form-contact"
             type="text"
             required
-            disabled={!isConfigured}
+            disabled={isSending}
+            maxLength={fieldLimits.contactMethod}
             aria-invalid={!!errors.contactMethod}
             aria-describedby={errors.contactMethod ? "form-contact-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
@@ -160,11 +250,15 @@ ${formData.desiredOutcome || "N/A"}`;
           <input
             id="form-company"
             type="text"
-            disabled={!isConfigured}
+            disabled={isSending}
+            maxLength={fieldLimits.company}
+            aria-invalid={!!errors.company}
+            aria-describedby={errors.company ? "form-company-error" : undefined}
             className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           />
+          {errors.company && <p id="form-company-error" className="mt-1 text-xs text-red-500">{errors.company}</p>}
         </div>
 
         <div>
@@ -174,7 +268,7 @@ ${formData.desiredOutcome || "N/A"}`;
           <select
             id="form-service"
             required
-            disabled={!isConfigured}
+            disabled={isSending}
             aria-invalid={!!errors.serviceNeeded}
             aria-describedby={errors.serviceNeeded ? "form-service-error" : undefined}
             className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
@@ -204,7 +298,8 @@ ${formData.desiredOutcome || "N/A"}`;
           id="form-process"
           required
           rows={4}
-          disabled={!isConfigured}
+          disabled={isSending}
+          maxLength={fieldLimits.currentProcess}
           aria-invalid={!!errors.currentProcess}
           aria-describedby={errors.currentProcess ? "form-process-error" : undefined}
           placeholder="Please describe the repetitive work, messy data or systems that do not communicate."
@@ -227,12 +322,16 @@ ${formData.desiredOutcome || "N/A"}`;
           <input
             id="form-tools"
             type="text"
-            disabled={!isConfigured}
+            disabled={isSending}
+            maxLength={fieldLimits.toolsUsed}
+            aria-invalid={!!errors.toolsUsed}
+            aria-describedby={errors.toolsUsed ? "form-tools-error" : undefined}
             placeholder="e.g. Excel, PostgreSQL, manual folders"
             className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             value={formData.toolsUsed}
             onChange={(e) => setFormData({ ...formData, toolsUsed: e.target.value })}
           />
+          {errors.toolsUsed && <p id="form-tools-error" className="mt-1 text-xs text-red-500">{errors.toolsUsed}</p>}
         </div>
 
         <div>
@@ -242,12 +341,16 @@ ${formData.desiredOutcome || "N/A"}`;
           <input
             id="form-timeline"
             type="text"
-            disabled={!isConfigured}
+            disabled={isSending}
+            maxLength={fieldLimits.timeline}
+            aria-invalid={!!errors.timeline}
+            aria-describedby={errors.timeline ? "form-timeline-error" : undefined}
             placeholder="e.g. 2-4 weeks, flexible"
             className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             value={formData.timeline}
             onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
           />
+          {errors.timeline && <p id="form-timeline-error" className="mt-1 text-xs text-red-500">{errors.timeline}</p>}
         </div>
       </div>
 
@@ -258,28 +361,49 @@ ${formData.desiredOutcome || "N/A"}`;
         <textarea
           id="form-outcome"
           rows={2}
-          disabled={!isConfigured}
+          disabled={isSending}
+          maxLength={fieldLimits.desiredOutcome}
+          aria-invalid={!!errors.desiredOutcome}
+          aria-describedby={errors.desiredOutcome ? "form-outcome-error" : undefined}
           placeholder="Describe what success looks like (e.g. synchronized records, daily automated report, readable dashboard)."
           className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black resize-y"
           value={formData.desiredOutcome}
           onChange={(e) => setFormData({ ...formData, desiredOutcome: e.target.value })}
         />
+        {errors.desiredOutcome && <p id="form-outcome-error" className="mt-1 text-xs text-red-500">{errors.desiredOutcome}</p>}
       </div>
 
       <div className="pt-2">
         <button
           type="submit"
-          disabled={!isConfigured}
+          disabled={isSending}
           className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-emerald)] px-5 py-2.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--color-emerald)] shadow-[var(--shadow-glow)]"
         >
           <Send className="h-4 w-4" aria-hidden="true" />
-          Send Project Inquiry
+          {isSending ? "Sending…" : "Send Project Inquiry"}
         </button>
       </div>
 
+      {submissionMessage && (
+        <p
+          className={`text-sm leading-relaxed ${submissionStatus === "failed" ? "text-red-400" : submissionStatus === "accepted" ? "text-[var(--color-emerald-light)]" : "text-[var(--color-text-muted)]"}`}
+          role={submissionStatus === "failed" ? "alert" : "status"}
+          aria-live="polite"
+        >
+          {submissionMessage}
+        </p>
+      )}
+
       <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
-        This form compiles your details and opens your local email application to send.
-        No personal data is stored on a server.
+        Submit the form to send your enquiry directly through Web3Forms. You can also email{" "}
+        {recipientEmail ? (
+          <a className="text-[var(--color-emerald)] hover:text-[var(--color-emerald-light)]" href={`mailto:${recipientEmail}`}>
+            {recipientEmail}
+          </a>
+        ) : (
+          "me directly"
+        )}
+        . The portfolio does not store form submissions in its own database.
       </p>
     </form>
   );

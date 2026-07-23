@@ -64,7 +64,7 @@ src/
 │   ├── projects/           # Project listing + [slug] case studies
 │   ├── services/           # All 6 services
 │   ├── about/              # Bio, experience, education, certifications, skills
-│   └── contact/            # Accessible mailto inquiry form
+│   └── contact/            # Accessible Web3Forms inquiry form
 ├── components/
 │   ├── layout/             # Header, Footer
 │   ├── navigation/         # DesktopNav, MobileMenu, SkipLink
@@ -126,7 +126,17 @@ Replace `public/documents/Benjamin-Kamau-CV.pdf` with the updated file. The path
 
 ## Contact Form
 
-The contact page uses a client-side inquiry form that validates required fields, includes a honeypot, and compiles the inquiry into a structured `mailto:` link targeting the centrally configured verified email in `src/data/social.ts`. It does not claim delivery and does not store data on a server.
+The contact page validates enquiries in the browser and submits them directly to the official Web3Forms HTTPS endpoint. The Web3Forms access key is a public form identifier associated with the verified recipient `benjaminkamauu@gmail.com`; the browser does not provide or override that recipient. The form includes bounded fields, a honeypot, duplicate-submit protection, accessible sending/success/error states, and a visible fallback email link.
+
+Web3Forms processes and forwards submitted data. The portfolio does not store form submissions in its own database.
+
+For local development, copy `.env.example` to `.env.local` and provide the public form identifier:
+
+```dotenv
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=
+```
+
+Do not commit `.env.local`. Production builds must receive this variable before `npm run cf:build` or `npm run cf:deploy` because Next.js embeds `NEXT_PUBLIC_*` values into the client bundle at build time. No Cloudflare Worker secret, API route, or additional binding is required.
 
 ## Current Project Priorities
 
@@ -140,16 +150,6 @@ The contact page uses a client-side inquiry form that validates required fields,
 - Verified project links are stored centrally in `src/data/projects.ts`; the ETL and Competitor Price Intelligence case studies intentionally share the evolution repository, while the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 - Gym Pro is represented as an early prototype with implemented authentication and operational views alongside clearly documented incomplete and placeholder modules.
 - The standalone banks, used-car fuel and movie-scraping repositories are represented as learning exercises, not production systems; historical Android prototypes remain outside the selected case-study collection.
-
-To add server-side form processing in a future milestone, integrate a service like:
-
-- [Formspree](https://formspree.io/)
-- [Web3Forms](https://web3forms.com/)
-- [Resend](https://resend.com/)
-
-That future change would require replacing the current mailto behavior with an explicitly documented endpoint and response state.
-
----
 
 ## SEO and Accessibility
 
@@ -173,8 +173,9 @@ See `docs/DEPLOYMENT_CHECKLIST.md` for the full deployment procedure.
 | Variable | Purpose | Required |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical site URL for metadata, sitemap, and Open Graph | Yes (for production) |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Public Web3Forms form identifier associated with `benjaminkamauu@gmail.com` | Yes (for direct contact delivery) |
 
-Local development falls back to `http://localhost:3000` when unset.
+The site URL falls back to `http://localhost:3000` when unset. Contact submission requires `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env.local` for local development and in the environment used for each production build.
 
 ### Quick Start (Local)
 

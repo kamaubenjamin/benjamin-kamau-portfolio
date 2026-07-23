@@ -11,7 +11,7 @@ All routes are server-rendered static pages (SSG):
 | `/projects/[slug]` | SSG (`generateStaticParams`) | Dynamic case studies |
 | `/services` | Static | All 6 services |
 | `/about` | Static | Bio, experience, education, certifications, skills |
-| `/contact` | Static | Accessible client-side inquiry form that opens a mail client |
+| `/contact` | Static | Accessible client-side inquiry form delivered through Web3Forms |
 | `/*` | Static | Custom 404 |
 
 Static pages export route metadata, while dynamic project pages use `generateMetadata`. Canonicals resolve through the shared `NEXT_PUBLIC_SITE_URL` base.
@@ -32,7 +32,7 @@ Static pages export route metadata, while dynamic project pages use `generateMet
 - `MobileMenu` — `useState` for toggle, Framer Motion for slide animation
 - `DataFlowVisual` — Framer Motion animated SVG pipeline
 - `AnimatedWrapper` — Framer Motion entrance animation wrapper
-- `ContactForm` — state, validation, honeypot and structured mailto construction
+- `ContactForm` — bounded validation, honeypot, submission states and Web3Forms HTTPS delivery
 
 No other component requires `"use client"`. Server components remain the default.
 
@@ -109,5 +109,5 @@ Repository and live-demo buttons are only rendered when their respective URL fie
 - All content is static and changes infrequently
 - TypeScript data files are version-controlled, type-checked, and immediately reviewable in pull requests
 - Eliminates hosting costs, security surface area, and maintenance overhead
-- The contact form validates locally and opens a structured `mailto:` link; it is disabled when no verified destination email exists
-- A form backend (Formspree, Web3Forms, Resend) can be added later without changing the architecture
+- The contact form validates locally and posts directly to Web3Forms using the build-time public `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`; Web3Forms forwards enquiries to the key's verified recipient
+- The portfolio retains no form-submission database or email backend; a visible `mailto:` link remains as a fallback
