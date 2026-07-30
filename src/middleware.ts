@@ -3,7 +3,7 @@ import { projects } from "@/data/projects";
 
 const projectSlugs = new Set(projects.map((project) => project.slug));
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const slug = request.nextUrl.pathname.slice("/projects/".length);
 
   if (projectSlugs.has(slug)) {
