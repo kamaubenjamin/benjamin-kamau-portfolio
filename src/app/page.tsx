@@ -162,7 +162,7 @@ export default function HomePage() {
         </Container>
       </SectionWrapper>
 
-      {/* 5. Four featured projects */}
+      {/* 5. Featured projects */}
       <SectionWrapper id="projects" divider>
         <Container>
           <AnimatedWrapper>
@@ -177,14 +177,14 @@ export default function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2">
             {featuredProjects.map((project, i) => (
               <AnimatedWrapper key={project.slug} delay={i * 0.1}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} featured />
               </AnimatedWrapper>
             ))}
           </div>
           <AnimatedWrapper delay={0.3}>
             <div className="mt-10 text-center">
               <Button href="/projects" variant="outline" size="lg">
-                View All Projects <ArrowRight size={16} />
+                View Selected Projects <ArrowRight size={16} />
               </Button>
             </div>
           </AnimatedWrapper>

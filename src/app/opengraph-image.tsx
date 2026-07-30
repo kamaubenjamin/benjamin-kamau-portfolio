@@ -27,7 +27,7 @@ export default function OpenGraphImage() {
           Benjamin Kamau
         </div>
         <div style={{ color: "#a3e635", display: "flex", fontSize: 38, marginTop: 20 }}>
-          Data Engineer | Workflow Automation | Document Intelligence
+          Data Engineer &amp; Workflow Automation Specialist
         </div>
         <div style={{ background: "#10b981", display: "flex", height: 8, marginTop: 48, width: 260 }} />
       </div>

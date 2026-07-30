@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Benjamin Kamau | Data Engineer | Workflow Automation | Document Intelligence",
+    name: "Benjamin Kamau | Data Engineer & Workflow Automation Specialist",
     short_name: "BK Portfolio",
     description: "Building practical data, workflow automation and document intelligence systems.",
     start_url: "/",

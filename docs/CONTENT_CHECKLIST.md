@@ -24,11 +24,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Competitor Price Intelligence Platform | Verified shared repository | No hosted Streamlit deployment verified |
 | FlowSync | Verified public repository | Verified original public dashboard technical preview; not production-ready or fully data-integrated |
 | Pair and Place Website Operations | Not provided | Verified live client website; no claim of original complete-site design or build |
-| Data Automation & Intelligence Platform | Verified shared repository | Umbrella repository with a retained ETL foundation and separate later product tracks; no unified production application |
-| Gym Pro Management System | Private repository | No public repository or deployment link rendered; represented from audited repository evidence |
-| Python ETL Learning Exercises | Verified public repository | No live application; four independent learning exercises, not a banking system |
-| Used-Car Fuel Data ETL Practice | Private repository | No public repository or deployment link rendered |
-| Movie Web-Scraping Learning Project | Verified public repository | No live application; incomplete reproducibility setup |
+| GymBolt Gym Management System | Private source repository | Cloudflare deployment pending; hosted Daraja sandbox verified, not production M-Pesa |
 
 ---
 
@@ -49,11 +45,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Competitor Price Intelligence Platform | Included | Included | Not specified | Included | Included | Not specified | Included | Included | Not specified |
 | FlowSync | Included | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
 | Pair and Place Website Operations | Not specified | Not specified | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
-| Data Automation & Intelligence Platform | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
-| Gym Pro Management System | Included | Included | Not specified | Included | Included | Not specified | Included | Included | Not specified |
-| Python ETL Learning Exercises | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
-| Used-Car Fuel Data ETL Practice | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
-| Movie Web-Scraping Learning Project | Not specified | Included | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
+| GymBolt Gym Management System | Included | Included | Included | Included | Included | Not specified | Included | Included | Not specified |
 
 ### Verified Project Priorities and Boundaries
 
@@ -65,16 +57,13 @@ This document tracks all unresolved content gaps that need to be filled before o
 - ExploreAfrica is at V4-M11 — Document Intelligence integration readiness. Core admin and private-document workflows are validated locally; production deployment remains unverified.
 - ExploreAfrica’s public link is the earlier travel showcase; it does not demonstrate the newer customer, booking, traveller, payment, private-document, tenancy, RLS or Supabase Admin Portal capabilities.
 - Competitor Price Intelligence is paused as a separate preserved product.
-- Data Automation & Intelligence Platform and Competitor Price Intelligence intentionally share one umbrella repository because it records the ETL foundation’s evolution into separate product tracks; no hosted Streamlit demo is verified.
+- Competitor Price Intelligence evolved from a reusable Python ETL foundation covering extraction, Pandas transformation, validation, CSV and SQLite loading, pipeline state, logging and orchestration. The ETL foundation is architecture history, not a separate production platform or public case study.
 - The original hosted FlowSync dashboard belongs to Competitor Price Intelligence and workflow monitoring. It is a functional public technical preview with incomplete live-data integration, not the newer Document Intelligence interface.
 - Pair and Place has completed its safe WordPress-side maintenance phase; hosting-panel review, analytics, conversion tracking, Elementor work and booking improvements remain unresolved.
 - Pair and Place’s link is the live client website; Benjamin’s scope was maintenance and operations, not an original complete-site design or build claim.
-- The former ETL Pipeline Foundation case study is positioned as Data Automation & Intelligence Platform, an umbrella repository whose default branch retains the completed ETL foundation while separate branches contain later product tracks.
 - FlowSync uses Clerk authentication UI and Supabase-backed competitor records; its external execution/data-plane API remains separately hosted and incompletely integrated.
-- Gym Pro is an early prototype. Authentication, dashboard aggregates and several operational views exist, while member creation, scheduling and multiple modules remain incomplete or placeholder-only.
-- The public banks repository contains four independent completed learning exercises and must not be presented as a banking platform.
-- Used-Car Fuel Data ETL is a private completed learning project with known rerun and reproducibility limitations.
-- Movie Web-Scraping is an incomplete learning exercise with a machine-specific output path and unrelated retained GDP artifacts.
+- GymBolt has a verified hosted Daraja sandbox success path, including private phone approval, ResultCode 0 callback, one authoritative completed payment and reconciled invoice, Billing and Dashboard totals. It is not production M-Pesa, its public Cloudflare deployment is pending, and no clients, production users or business revenue are claimed.
+- Exactly six selected public case studies are generated. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
 - Historical Android repositories are audited learning prototypes and are intentionally not elevated into the selected portfolio case studies.
 - Project screenshots remain unresolved, and no unsupported production, deployment, analytics or measured-outcome claims should be published.
 

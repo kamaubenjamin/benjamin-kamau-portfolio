@@ -1,5 +1,6 @@
 export type ProjectStatus =
   | "Active development"
+  | "Hosted sandbox verified"
   | "Early prototype"
   | "Functional platform foundation"
   | "Maintenance milestone completed"
@@ -25,6 +26,7 @@ export interface Project {
   status: ProjectStatus;
   statusVariant: ProjectStatusVariant;
   shortDescription: string;
+  featuredDescription?: string;
   overview: string;
   problem?: string;
   responsibilities?: string;
@@ -42,6 +44,21 @@ export interface Project {
   roadmap?: string;
   roadmapDetails?: string[];
   lessonsLearned?: string;
+  paymentWorkflow?: string;
+  paymentWorkflowDetails?: string[];
+  engineeringHighlights?: string[];
+  verifiedOutcomes?: string[];
+  role?: string;
+  roleDetails?: string[];
+  servicePositioning?: string;
+  callToAction?: string;
+  ctaLabels?: string[];
+  tags?: string[];
+  screenshotRecommendations?: string[];
+  demoVideoRecommendation?: string;
+  liveDemoStatus?: string;
+  repositoryStatus?: string;
+  claimsNotToMake?: string[];
   image?: string;
   featured: boolean;
   links?: ProjectLink[];
@@ -51,8 +68,9 @@ const projectDisplayOrder = new Map([
   ["intelligent-document-processing-platform", 0],
   ["exploreafrica-travel-platform", 1],
   ["flow-sync", 2],
-  ["etl-banking-pipeline", 3],
+  ["competitor-price-intelligence-platform", 3],
   ["pair-and-place-website-operations", 4],
+  ["gymbolt-gym-management-system", 5],
 ]);
 
 export const projects: Project[] = ([
@@ -241,7 +259,7 @@ export const projects: Project[] = ([
         primary: true,
       },
     ],
-    featured: true,
+    featured: false,
   },
   {
     slug: "exploreafrica-travel-platform",
@@ -303,30 +321,60 @@ export const projects: Project[] = ([
     featured: true,
   },
   {
-    slug: "gym-pro-management-system",
-    title: "Gym Pro Management System",
-    category: "Operations Dashboard & Business Platform",
-    status: "Early prototype",
-    statusVariant: "default",
+    slug: "gymbolt-gym-management-system",
+    title: "GymBolt Gym Management System",
+    category: "Gym Operations & Payment Reconciliation",
+    status: "Hosted sandbox verified",
+    statusVariant: "lime",
     shortDescription:
-      "A React and Supabase gym-operations prototype with authenticated admin and staff workflows, live dashboard metrics and a broad PostgreSQL schema for future management modules.",
+      "A gym-operations system with verified member, subscription, attendance, invoicing and hosted Daraja sandbox payment-reconciliation workflows.",
+    featuredDescription:
+      "Verified gym operations and hosted M-Pesa sandbox reconciliation—from STK Push initiation to one authoritative paid invoice.",
     overview:
-      "Gym Pro is an early gym-management prototype built as a React single-page application backed by Supabase. The implemented interface focuses on admin and staff workflows: authentication, role-filtered navigation, live dashboard aggregates, member records and read-only operational views for classes, trainers, attendance and payments. The repository also includes a 22-table PostgreSQL schema with row-level security, but several schema-backed modules remain partial or placeholder-only.",
+      "GymBolt is a React and Supabase gym-management system built to connect day-to-day administration with traceable billing. The verified scope covers authenticated administration, member and subscription management, attendance check-in, invoice creation, manual payment recording and a hosted Safaricom Daraja sandbox workflow. The payment success path has been verified end to end in the sandbox, including the private phone approval, successful callback, duplicate-safe settlement and matching Billing and Dashboard totals. It is not a production M-Pesa deployment and has no paying gym client, production users or claimed business revenue.",
     problem:
-      "Gym and fitness-studio operations span member records, schedules, attendance, payments and other administrative data that are difficult to manage consistently across disconnected tools.",
+      "Gym administrators need member activity, subscriptions, invoices and payments to remain consistent across operational views. When payment initiation, callbacks and invoice updates are handled separately, duplicate settlements and mismatched revenue or outstanding balances become material risks.",
     solution:
-      "Built an authenticated operations-dashboard foundation with direct Supabase data access, role-filtered navigation, responsive application layout and initial management views across core gym domains.",
+      "Built an authenticated operations platform that joins core gym workflows to auditable billing and payment reconciliation. GymBolt records both manual payments and M-Pesa sandbox attempts, retains payment references, reconciles one successful settlement to its invoice and presents aligned financial state in Billing and Dashboard views.",
+    solutionDetails: [
+      "Administrators can manage members and subscriptions, record attendance check-ins and create invoices.",
+      "Payments can be recorded manually or initiated through the hosted Daraja sandbox STK Push path.",
+      "Successful settlement updates the authoritative payment, invoice and aggregate billing state while preserving failed-attempt history.",
+    ],
     architecture:
-      "The Vite and React SPA communicates directly with Supabase Auth and PostgreSQL through the browser client. Row-level security is the primary data-authorization boundary. Navigation is currently state-based rather than URL-routed, and no separate server API or automated test suite is implemented.",
+      "The Vite, React and TypeScript interface uses Supabase Auth and a PostgreSQL data layer protected by row-level security. Supabase Edge Functions provide the server-side boundary for Daraja sandbox initiation and callback processing so private integration concerns are not placed in the browser. The project is prepared for Cloudflare Pages deployment, but that public deployment is still pending.",
+    architectureDetails: [
+      "Row-Level Security supports database authorization boundaries alongside authenticated admin access.",
+      "Daraja initiation and callback handling run through Supabase Edge Functions rather than exposing private payment credentials in client code.",
+      "Settlement logic protects an invoice from being completed more than once while retaining failed attempts for an auditable history.",
+      "Verified source state: branch feature/mpesa-sandbox-foundation, Cloudflare-readiness commit 4ff642a2, clean synchronized working tree.",
+    ],
     capabilities: [
-      "Supabase email and password authentication",
-      "Role-filtered admin and staff navigation",
-      "Live member, attendance and revenue aggregates",
-      "Member listing, search, edit and delete workflows",
-      "Read-only class, trainer, attendance and payment views",
-      "Responsive sidebar and mobile drawer",
-      "22-table PostgreSQL schema with row-level security",
-      "Seeded membership-plan, class and payment-method data",
+      "Admin authentication",
+      "Member and subscription management",
+      "Attendance check-in workflow",
+      "Invoice creation and manual payment recording",
+      "M-Pesa STK Push sandbox initiation",
+      "Daraja callback and receipt retention",
+      "Invoice and dashboard reconciliation",
+      "Failed-attempt history and duplicate-settlement protection",
+    ],
+    paymentWorkflow:
+      "An administrator initiates an STK Push against an invoice through a Supabase Edge Function. Safaricom’s hosted Daraja sandbox sends a real prompt to the test phone, where approval remains private. Daraja then returns the callback to the server-side handler. A ResultCode 0 callback is validated and reconciled into one authoritative completed payment, retaining the receipt or reference, marking the invoice paid and updating Billing and Dashboard totals. Failed attempts remain in history, and duplicate-settlement protection prevents the same invoice from being completed twice.",
+    paymentWorkflowDetails: [
+      "Hosted sandbox only: the integration reached Safaricom’s hosted Daraja test environment and produced a real test-phone prompt.",
+      "Verified success milestone: M3.2B_PHASE_3_SUCCESS_PATH=PASS.",
+      "Verified reconciliation: KSh 1 paid, KSh 0 outstanding and KSh 1 recorded revenue.",
+      "This evidence does not represent production M-Pesa processing or customer revenue.",
+    ],
+    engineeringHighlights: [
+      "Server-side M-Pesa integration boundary through Supabase Edge Functions",
+      "Supabase Auth with PostgreSQL Row-Level Security",
+      "Authoritative settlement model rather than treating initiation as payment success",
+      "Idempotent duplicate-settlement protection",
+      "Receipt/reference retention and failed-attempt history",
+      "Cross-view Billing and Dashboard reconciliation",
+      "Cloudflare Pages deployment preparation at commit 4ff642a2",
     ],
     technologies: [
       "React",
@@ -336,19 +384,85 @@ export const projects: Project[] = ([
       "Supabase",
       "PostgreSQL",
       "Supabase Auth",
-      "RLS",
+      "Row-Level Security",
+      "Supabase Edge Functions",
+      "Safaricom Daraja API",
+      "GitHub",
+      "Cloudflare Pages",
+    ],
+    cardTechnologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "Daraja API", "Cloudflare Pages"],
+    verifiedOutcomes: [
+      "M3.2B_PHASE_3_SUCCESS_PATH=PASS",
+      "A real sandbox phone prompt was privately approved and returned Daraja ResultCode 0",
+      "Exactly one authoritative completed payment was retained with its receipt/reference",
+      "The linked invoice was marked paid",
+      "Billing state reconciled to KSh 1 paid and KSh 0 outstanding",
+      "Dashboard state reconciled to KSh 1 recorded revenue",
+      "Failed attempts remained available without creating duplicate settlement",
     ],
     currentStatus:
-      "The project is an early prototype, not a production-ready system. Authentication and several dashboard views are functional, but member creation and class scheduling are blocked or incomplete; inventory, announcements and settings are placeholders; payments are read-only; member and trainer self-service workflows are not implemented; and there are no automated tests.",
+      "The hosted Daraja sandbox success path is verified on branch feature/mpesa-sandbox-foundation at Cloudflare-readiness commit 4ff642a2. The working tree was clean, and the branch was pushed and synchronized. Public Cloudflare deployment is pending because setup paused during Cloudflare maintenance. The older Bolt-hosted site is not linked because it points to the wrong Supabase backend and is not authoritative. No official live project URL is currently available.",
+    currentStatusDetails: [
+      "Hosted sandbox verified; public deployment pending; production M-Pesa not implemented.",
+      "No paying gym client, production users or production revenue are claimed.",
+      "Secondary unfinished modules are outside the verified case-study scope.",
+    ],
     roadmap:
-      "The documented priorities are to complete core operational workflows before broader platform claims or deployment readiness.",
+      "The next milestone is to establish an authoritative public preview and then complete the operational and assurance work required before any production claim.",
     roadmapDetails: [
-      "Secure member provisioning and complete member CRUD",
-      "Class scheduling and trainer assignment",
-      "Subscription and membership-plan management",
-      "Announcements and inventory management",
-      "Member self-service portal",
-      "Automated tests, routing and error handling",
+      "Complete and verify the Cloudflare Pages deployment",
+      "Connect the public build only to the authoritative Supabase backend",
+      "Add broader automated tests, observability and deployment verification",
+      "Complete and verify secondary modules before presenting them publicly",
+      "Perform production security, operational and Daraja go-live work before any production M-Pesa use",
+    ],
+    role:
+      "I designed and implemented the verified GymBolt foundation across the React interface, Supabase data model, authentication and authorization boundaries, gym administration workflows, server-side Daraja sandbox integration and payment reconciliation path.",
+    roleDetails: [
+      "Implemented admin, member, subscription, attendance, invoice and manual-payment workflows.",
+      "Integrated STK Push initiation and Daraja callback handling through Supabase Edge Functions.",
+      "Implemented receipt retention, failed-attempt history, duplicate-safe settlement and invoice reconciliation.",
+      "Prepared and synchronized the Cloudflare-ready source milestone while keeping deployment status explicit.",
+    ],
+    servicePositioning:
+      "Suitable evidence for custom internal business systems, membership and subscription administration, billing dashboards, Supabase-backed operations tools and sandbox payment-integration prototyping. Production payment deployment would require a separately scoped security and go-live phase.",
+    callToAction:
+      "Need an internal operations system that connects records, billing and auditable payment workflows? Let’s discuss a focused build based on your real process and integration requirements.",
+    ctaLabels: [
+      "View GymBolt Case Study",
+      "Discuss a Similar Project",
+      "Ask About Payment Integration",
+      "Cloudflare Deployment Pending",
+    ],
+    tags: [
+      "Gym Management",
+      "Internal Business System",
+      "Membership Management",
+      "Subscription Billing",
+      "Payment Reconciliation",
+      "M-Pesa Sandbox",
+      "Supabase",
+      "React & TypeScript",
+    ],
+    screenshotRecommendations: [
+      "Admin dashboard showing reconciled KSh 1 revenue, with test data clearly labelled",
+      "Member and subscription management views using non-identifying sample records",
+      "Attendance check-in workflow",
+      "Invoice before payment and the same invoice marked paid after reconciliation",
+      "Payment history showing one completed settlement and retained failed attempts, with phone numbers and references redacted",
+      "Private Daraja sandbox evidence showing STK prompt and ResultCode 0 callback, with all secrets and personal data removed",
+    ],
+    demoVideoRecommendation:
+      "Record a 60–90 second narrated walkthrough using test data: sign in, open a member and subscription, check in attendance, create a KSh 1 invoice, initiate the hosted sandbox STK Push, show private approval only in a redacted insert, then show the paid invoice and reconciled Billing and Dashboard totals. Add an opening and closing caption stating: ‘Hosted Daraja sandbox verification — not production M-Pesa. Public Cloudflare deployment pending.’",
+    liveDemoStatus: "Cloudflare deployment pending",
+    repositoryStatus: "Private source repository",
+    claimsNotToMake: [
+      "Do not describe GymBolt as production-ready or the M-Pesa integration as production.",
+      "Do not claim paying gyms, customers, production users, revenue, conversion gains, testimonials or partnerships.",
+      "Do not present KSh 1 sandbox reconciliation as business revenue.",
+      "Do not use the old Bolt-hosted site as the authoritative live project; it points to the wrong Supabase backend.",
+      "Do not imply that Cloudflare deployment is live before it is completed and verified.",
+      "Do not present unfinished secondary modules as complete.",
     ],
     featured: false,
   },
@@ -367,7 +481,7 @@ export const projects: Project[] = ([
     solution:
       "Developed separated extraction, transformation and loading concerns with source extraction, product-data cleaning and normalization, validation, fuzzy matching, price-history tracking, change detection, alerts, execution metrics and execution logging.",
     architecture:
-      "Python extraction and processing uses SQLite-backed storage, Playwright extraction, Selenium support and reusable ETL lifecycle concepts, with Streamlit dashboard and monitoring foundations. Its existing FlowSync integration remains untouched and separate from Document Intelligence.",
+      "This product evolved from a reusable Python ETL foundation covering extraction, Pandas transformation, validation, CSV and SQLite loading, pipeline state, logging and orchestration. Python extraction and processing now uses SQLite-backed storage, Playwright extraction, Selenium support and reusable ETL lifecycle concepts, with Streamlit dashboard and monitoring foundations. Its existing FlowSync integration remains untouched and separate from Document Intelligence.",
     capabilities: [
       "Website and source extraction",
       "Separated extraction, transformation and loading concerns",
@@ -397,139 +511,6 @@ export const projects: Project[] = ([
     links: [
       {
         url: "https://github.com/kamaubenjamin/ETL-COMPETITOR-PRICE-MONITOR-pipeline",
-        label: "View Repository",
-        kind: "repository",
-        primary: true,
-      },
-    ],
-    featured: false,
-  },
-  {
-    slug: "etl-banking-pipeline",
-    title: "Data Automation & Intelligence Platform",
-    category: "Data Engineering & Intelligence Foundations",
-    status: "Completed foundation",
-    statusVariant: "emerald",
-    shortDescription:
-      "A reusable Python ETL foundation for extracting, cleaning, validating and loading structured data from web, file and dataframe sources.",
-    overview:
-      "The default branch of the umbrella Data Automation and Intelligence repository provides a reusable ETL foundation for extracting web, file and dataframe inputs, applying configurable Pandas transformations and validation, and loading results to CSV and SQLite. Its checked-in example still uses archived largest-bank data, but it is a learning and engineering foundation rather than a banking platform or live financial integration. Separate branches later developed competitor-price, workflow-runtime and Document Intelligence tracks.",
-    solution:
-      "Built a reusable Python ETL pipeline that separates extraction, dataframe transformation, validation, storage, state and logging into maintainable processing stages.",
-    architecture:
-      "The project served as an earlier foundation whose pipeline and matching ideas contributed to the later development of the Competitor Price Intelligence project.",
-    capabilities: [
-      "Web, file, dataframe and connector extraction foundations",
-      "Pandas-based cleaning and normalization",
-      "Rule-based validation",
-      "CSV and SQLite loading",
-      "Pipeline state, logging and orchestration",
-      "Basic extraction and orchestration tests",
-      "Streamlit control-surface foundation",
-    ],
-    technologies: ["Python", "Pandas", "SQL", "SQLite", "Requests", "BeautifulSoup", "Pytest", "Streamlit"],
-    currentStatus:
-      "Completed as a reusable ETL foundation. The verified repository later evolved toward the separate Competitor Price Intelligence product.",
-    links: [
-      {
-        url: "https://github.com/kamaubenjamin/ETL-COMPETITOR-PRICE-MONITOR-pipeline",
-        label: "View Repository",
-        kind: "repository",
-        primary: true,
-      },
-    ],
-    featured: true,
-  },
-  {
-    slug: "python-etl-learning-exercises",
-    title: "Python ETL Learning Exercises",
-    category: "Data Engineering Learning Projects",
-    status: "Completed learning project",
-    statusVariant: "default",
-    shortDescription:
-      "Four independent Python exercises covering archived web extraction, tabular transformations, CSV output, SQLite loading, logging and basic SQL queries.",
-    overview:
-      "This repository collects four independent learning exercises rather than one integrated banking system: largest-bank market-capitalization ETL, countries-by-GDP ETL, ranked-film extraction, and CSV-to-SQLite instructor queries. The scripts demonstrate early Python data-engineering fundamentals using static inputs and archived web pages.",
-    solution:
-      "Implemented small script-level workflows for HTML extraction, Pandas and NumPy transformations, CSV exports, SQLite table replacement, execution logging and basic database queries.",
-    architecture:
-      "Each script runs independently and performs file, network or database side effects immediately. There is no unified entry point, automated test suite, CI workflow, dependency lock or production integration boundary.",
-    capabilities: [
-      "Archived HTML table extraction",
-      "Pandas and NumPy transformations",
-      "Static currency conversion exercises",
-      "CSV output and SQLite loading",
-      "Basic SQL queries",
-      "Timestamped ETL logging",
-    ],
-    technologies: ["Python", "Pandas", "NumPy", "Requests", "BeautifulSoup", "SQLite", "SQL"],
-    currentStatus:
-      "Completed as educational exercises with reproducibility limitations. The repository does not connect to financial institutions, process transactions or implement production banking workflows, and two scripts retain machine-specific file paths that must be changed before use elsewhere.",
-    links: [
-      {
-        url: "https://github.com/kamaubenjamin/EXTRACT-TRANSFORM-LOAD-PROJECT-BANKS",
-        label: "View Repository",
-        kind: "repository",
-        primary: true,
-      },
-    ],
-    featured: false,
-  },
-  {
-    slug: "used-car-fuel-data-etl",
-    title: "Used-Car Fuel Data ETL Practice",
-    category: "Data Engineering Learning Project",
-    status: "Completed learning project",
-    statusVariant: "default",
-    shortDescription:
-      "A local Python ETL exercise that combines equivalent used-car records from CSV, JSON and XML, transforms price and fuel fields, and produces summary datasets and a chart.",
-    overview:
-      "This private learning repository demonstrates local multi-format extraction and transformation using equivalent sample used-car records stored as CSV, JSON and XML. The implemented script normalizes fuel names, converts numeric fields, applies a fixed practice exchange rate, calculates average prices by fuel type, exports combined and filtered datasets, creates a bar chart and appends progress logs.",
-    solution:
-      "Built a compact file-based ETL workflow that reads three structured formats, combines records with Pandas, derives normalized and aggregate values, exports CSV results and generates a Matplotlib visualization.",
-    architecture:
-      "A single Python script discovers inputs and writes outputs relative to its working directory. It has no automated tests, dependency manifest, packaging, CLI configuration or deployment setup, and broad CSV discovery can re-ingest generated outputs on later runs.",
-    capabilities: [
-      "CSV, JSON and XML extraction",
-      "Fuel-name and numeric normalization",
-      "Practice currency conversion",
-      "Grouped average-price calculations",
-      "Combined and fuel-specific CSV exports",
-      "Matplotlib summary chart",
-      "Timestamped progress logging",
-    ],
-    technologies: ["Python", "Pandas", "XML", "Matplotlib"],
-    currentStatus:
-      "Completed as a local learning project rather than a production pipeline. The repository is private, its fixed exchange rate is only a practice assumption, and its input-discovery behavior can duplicate generated records across reruns.",
-    featured: false,
-  },
-  {
-    slug: "movie-web-scraping-learning-project",
-    title: "Movie Web-Scraping Learning Project",
-    category: "Data Collection Learning Project",
-    status: "Incomplete learning exercise",
-    statusVariant: "default",
-    shortDescription:
-      "A small Python exercise that extracts ranked-film rows from an archived page and loads tabular snapshots into CSV and SQLite.",
-    overview:
-      "This early data-engineering exercise requests an archived ranked-films page, parses its first table with Beautiful Soup, builds a Pandas DataFrame and writes results to CSV and a local SQLite table. The repository also transparently retains unrelated historical GDP artifacts from a separate exercise.",
-    solution:
-      "Implemented a straightforward archived-page extraction and local loading example using Requests, Beautiful Soup, Pandas and SQLite.",
-    architecture:
-      "The single script performs network, CSV and database operations when run or imported. Parsing depends on fixed table positions, and the configured CSV path must be changed from the original machine-specific Windows path before use on another computer.",
-    capabilities: [
-      "Archived webpage requests",
-      "HTML table parsing",
-      "Pandas DataFrame creation",
-      "CSV snapshot output",
-      "SQLite table replacement",
-    ],
-    technologies: ["Python", "Requests", "BeautifulSoup", "Pandas", "SQLite"],
-    currentStatus:
-      "Incomplete as a reproducible learning exercise: historical output snapshots exist, but there are no automated tests, CI, dependency lock, command-line configuration, response validation, retry handling or portable end-to-end run settings.",
-    links: [
-      {
-        url: "https://github.com/kamaubenjamin/WEBSCRAPPING",
         label: "View Repository",
         kind: "repository",
         primary: true,

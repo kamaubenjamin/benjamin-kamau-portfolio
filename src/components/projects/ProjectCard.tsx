@@ -5,9 +5,10 @@ import type { Project } from "@/data/projects";
 
 interface ProjectCardProps {
   project: Project;
+  featured?: boolean;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const technologies = project.cardTechnologies ?? project.technologies;
   const visibleTechnologyCount = project.cardTechnologies ? 6 : 4;
 
@@ -29,7 +30,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.title}
         </h3>
         <p className="mb-4 flex-1 text-sm leading-relaxed text-[var(--color-text-muted)]">
-          {project.shortDescription}
+          {featured && project.featuredDescription
+            ? project.featuredDescription
+            : project.shortDescription}
         </p>
         <div className="mt-auto flex flex-wrap gap-1.5">
           {technologies.slice(0, visibleTechnologyCount).map((tech) => (

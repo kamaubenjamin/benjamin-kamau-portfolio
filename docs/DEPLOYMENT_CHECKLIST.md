@@ -36,7 +36,8 @@
 - [x] `/projects/competitor-price-intelligence-platform` — Case study loads
 - [x] `/projects/flow-sync` — Case study loads
 - [x] `/projects/pair-and-place-website-operations` — Case study loads
-- [x] `/projects/etl-banking-pipeline` — Case study loads
+- [x] `/projects/gymbolt-gym-management-system` — Case study loads
+- [x] Removed project slugs return the custom 404 with status 404
 - [x] `/services` — All 6 services displayed
 - [x] `/about` — Route loads with one `h1`
 - [x] `/contact` — Route loads with one `h1`

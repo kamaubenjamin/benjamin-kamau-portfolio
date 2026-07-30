@@ -145,11 +145,11 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - OCR, hosted uploads, human review and controlled AI-assisted extraction remain planned rather than implemented.
 - The newer Document Intelligence FlowSync frontend and API remain separate from FlowSync's original Competitor Price Intelligence implementation.
 - ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
-- Competitor Price Intelligence is paused as a separate preserved product.
-- Pair and Place has completed its safe WordPress-side maintenance phase; Data Automation & Intelligence Platform retains the completed ETL foundation that later evolved into separate product tracks.
-- Verified project links are stored centrally in `src/data/projects.ts`; the ETL and Competitor Price Intelligence case studies intentionally share the evolution repository, while the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
-- Gym Pro is represented as an early prototype with implemented authentication and operational views alongside clearly documented incomplete and placeholder modules.
-- The standalone banks, used-car fuel and movie-scraping repositories are represented as learning exercises, not production systems; historical Android prototypes remain outside the selected case-study collection.
+- Competitor Price Intelligence is paused as a separate preserved product. Its architecture history records the reusable Python ETL foundation from which it evolved; that foundation is not presented as a separate production platform.
+- Pair and Place has completed its safe WordPress-side maintenance phase.
+- GymBolt preserves a verified hosted Daraja sandbox payment milestone while clearly distinguishing sandbox verification, pending public Cloudflare deployment and unimplemented production M-Pesa.
+- Exactly six selected public case studies are generated: three Featured Projects and three Additional Work entries. Standalone learning exercises and the earlier ETL foundation are not presented as separate public projects.
+- Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 
 ## SEO and Accessibility
 

@@ -21,7 +21,7 @@ export function personJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: personal.name,
-    jobTitle: "Data Engineer | Workflow Automation | Document Intelligence",
+    jobTitle: "Data Engineer & Workflow Automation Specialist",
     url: absoluteUrl("/"),
     address: {
       "@type": "PostalAddress",

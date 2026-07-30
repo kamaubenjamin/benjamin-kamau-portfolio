@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    return { title: "Project Not Found" };
+    notFound();
   }
 
   return {
@@ -135,10 +135,79 @@ export default async function ProjectPage({ params }: Props) {
               </section>
             )}
 
+            {project.paymentWorkflow && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">M-Pesa Payment Workflow</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.paymentWorkflow}</p>
+                {project.paymentWorkflowDetails && (
+                  <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
+                    {project.paymentWorkflowDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
+
+            {project.engineeringHighlights && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Engineering & Security Highlights</h2>
+                <ul className="space-y-2 text-[var(--color-text-muted)]">
+                  {project.engineeringHighlights.map((detail) => (
+                    <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {project.verifiedOutcomes && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Verified Outcomes</h2>
+                <ul className="space-y-2 text-[var(--color-text-muted)]">
+                  {project.verifiedOutcomes.map((outcome) => (
+                    <li key={outcome} className="flex items-start gap-3 leading-relaxed">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-lime)]" />
+                      <span>{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             {project.responsibilities && (
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Responsibilities</h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.responsibilities}</p>
+              </section>
+            )}
+
+            {project.role && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">My Role & Contribution</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.role}</p>
+                {project.roleDetails && (
+                  <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
+                    {project.roleDetails.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
+
+            {project.servicePositioning && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Suitable Service Positioning</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.servicePositioning}</p>
               </section>
             )}
 
@@ -174,6 +243,49 @@ export default async function ProjectPage({ params }: Props) {
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.lessonsLearned}</p>
               </section>
             )}
+
+            {project.screenshotRecommendations && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Recommended Case-Study Screenshots</h2>
+                <ul className="space-y-2 text-[var(--color-text-muted)]">
+                  {project.screenshotRecommendations.map((recommendation) => (
+                    <li key={recommendation} className="flex items-start gap-3 leading-relaxed">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                      <span>{recommendation}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {project.demoVideoRecommendation && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Short Demo-Video Recommendation</h2>
+                <p className="leading-relaxed text-[var(--color-text-muted)]">{project.demoVideoRecommendation}</p>
+              </section>
+            )}
+
+            {project.claimsNotToMake && (
+              <section>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Public Claim Boundaries</h2>
+                <ul className="space-y-2 text-[var(--color-text-muted)]">
+                  {project.claimsNotToMake.map((claim) => (
+                    <li key={claim} className="flex items-start gap-3 leading-relaxed">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                      <span>{claim}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {project.callToAction && (
+              <Card hover={false} className="border-[var(--color-emerald)]/20">
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Let’s Build a Practical Operations System</h2>
+                <p className="mb-5 leading-relaxed text-[var(--color-text-muted)]">{project.callToAction}</p>
+                <Button href="/contact" variant="primary">Discuss a Similar Project</Button>
+              </Card>
+            )}
           </div>
 
           <div className="space-y-6">
@@ -185,6 +297,48 @@ export default async function ProjectPage({ params }: Props) {
                 ))}
               </div>
             </Card>
+
+            {(project.liveDemoStatus || project.repositoryStatus) && (
+              <Card hover={false}>
+                <h3 className="mb-3 font-semibold text-[var(--color-text)]">Project Access</h3>
+                <dl className="space-y-3 text-sm">
+                  {project.liveDemoStatus && (
+                    <div>
+                      <dt className="font-medium text-[var(--color-text)]">Live demo</dt>
+                      <dd className="text-[var(--color-text-muted)]">{project.liveDemoStatus}</dd>
+                    </div>
+                  )}
+                  {project.repositoryStatus && (
+                    <div>
+                      <dt className="font-medium text-[var(--color-text)]">Repository</dt>
+                      <dd className="text-[var(--color-text-muted)]">{project.repositoryStatus}</dd>
+                    </div>
+                  )}
+                </dl>
+              </Card>
+            )}
+
+            {project.tags && (
+              <Card hover={false}>
+                <h3 className="mb-3 font-semibold text-[var(--color-text)]">Project Tags</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag}>{tag}</Badge>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {project.ctaLabels && (
+              <Card hover={false}>
+                <h3 className="mb-3 font-semibold text-[var(--color-text)]">Recommended CTA Labels</h3>
+                <ul className="space-y-1.5">
+                  {project.ctaLabels.map((label) => (
+                    <li key={label} className="text-sm text-[var(--color-text-muted)]">{label}</li>
+                  ))}
+                </ul>
+              </Card>
+            )}
 
             {project.capabilities && project.capabilities.length > 0 && (
               <Card hover={false}>
@@ -202,7 +356,9 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.roadmap && (
               <Card hover={false}>
-                <h3 className="mb-3 font-semibold text-[var(--color-text)]">Future Roadmap</h3>
+                <h3 className="mb-3 font-semibold text-[var(--color-text)]">
+                  {project.slug === "gymbolt-gym-management-system" ? "Remaining Work" : "Future Roadmap"}
+                </h3>
                 <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">{project.roadmap}</p>
                 {project.roadmapDetails && (
                   <ul className="mt-3 space-y-2">
