@@ -96,7 +96,9 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.problem && (
               <section>
-                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Problem</h2>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
+                  {project.slug === "gymbolt-gym-management-system" ? "Business Problem" : "Problem"}
+                </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.problem}</p>
               </section>
             )}
@@ -137,7 +139,11 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.paymentWorkflow && (
               <section>
-                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">M-Pesa Payment Workflow</h2>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
+                  {project.slug === "gymbolt-gym-management-system"
+                    ? "M-Pesa Payment & Reconciliation Workflow"
+                    : "M-Pesa Payment Workflow"}
+                </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.paymentWorkflow}</p>
                 {project.paymentWorkflowDetails && (
                   <ul className="mt-4 space-y-2 text-[var(--color-text-muted)]">
@@ -281,7 +287,11 @@ export default async function ProjectPage({ params }: Props) {
 
             {project.callToAction && (
               <Card hover={false} className="border-[var(--color-emerald)]/20">
-                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Let’s Build a Practical Operations System</h2>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
+                  {project.slug === "gymbolt-gym-management-system"
+                    ? "Build a More Connected Operations System"
+                    : "Let’s Build a Practical Operations System"}
+                </h2>
                 <p className="mb-5 leading-relaxed text-[var(--color-text-muted)]">{project.callToAction}</p>
                 <Button href="/contact" variant="primary">Discuss a Similar Project</Button>
               </Card>
