@@ -314,13 +314,17 @@ export default async function ProjectPage({ params }: Props) {
                 <dl className="space-y-3 text-sm">
                   {project.liveDemoStatus && (
                     <div>
-                      <dt className="font-medium text-[var(--color-text)]">Live demo</dt>
+                      <dt className="font-medium text-[var(--color-text)]">
+                        {project.slug === "gymbolt-gym-management-system" ? "Live Demo" : "Live demo"}
+                      </dt>
                       <dd className="text-[var(--color-text-muted)]">{project.liveDemoStatus}</dd>
                     </div>
                   )}
                   {project.repositoryStatus && (
                     <div>
-                      <dt className="font-medium text-[var(--color-text)]">Repository</dt>
+                      <dt className="font-medium text-[var(--color-text)]">
+                        {project.slug === "gymbolt-gym-management-system" ? "Source Code" : "Repository"}
+                      </dt>
                       <dd className="text-[var(--color-text-muted)]">{project.repositoryStatus}</dd>
                     </div>
                   )}

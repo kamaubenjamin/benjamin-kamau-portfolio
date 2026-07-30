@@ -1,5 +1,6 @@
 export type ProjectStatus =
   | "Active development"
+  | "Public demo verified"
   | "Hosted sandbox verified"
   | "Early prototype"
   | "Functional platform foundation"
@@ -324,22 +325,22 @@ export const projects: Project[] = ([
     slug: "gymbolt-gym-management-system",
     title: "GymBolt Gym Management System",
     category: "Gym Operations & Payment Reconciliation",
-    status: "Hosted sandbox verified",
+    status: "Public demo verified",
     statusVariant: "lime",
     shortDescription:
-      "A gym-operations system with verified member, subscription, attendance, invoicing and hosted Daraja sandbox payment-reconciliation workflows.",
+      "Publicly accessible early MVP for gym operations, member management, attendance, billing, and verified hosted M-Pesa sandbox settlement workflows.",
     featuredDescription:
-      "Verified gym operations and hosted M-Pesa sandbox reconciliation—from STK Push initiation to one authoritative paid invoice.",
+      "Publicly accessible early MVP for gym operations, member management, attendance, billing, and verified hosted M-Pesa sandbox settlement workflows.",
     overview:
-      "GymBolt is a gym-management system that connects member administration, attendance, subscriptions and invoicing with traceable payment reconciliation. Its verified scope includes the complete hosted Daraja sandbox payment success path, from STK Push initiation through callback processing and consistent Billing and Dashboard updates.",
+      "A publicly accessible early MVP for gym operations, member management, attendance, billing, and verified hosted M-Pesa sandbox settlement workflows. The global Cloudflare Pages demo uses a hosted Supabase backend and demonstrates the verified Daraja sandbox settlement path without representing a pilot, a production-ready service or live M-Pesa use.",
     problem:
       "Gym administrators need member activity, subscriptions, invoices and payments to remain consistent across operational views. When payment initiation, callbacks and invoice updates are handled separately, duplicate settlements and mismatched revenue or outstanding balances become material risks.",
     solution:
-      "Built an authenticated operations platform that joins core gym workflows to auditable billing. GymBolt records manual payments and M-Pesa sandbox attempts, reconciles a successful settlement to its invoice and presents aligned financial state across Billing and Dashboard views.",
+      "Built an authenticated early MVP that joins core gym workflows to auditable billing. GymBolt records manual payments and hosted M-Pesa sandbox attempts, reconciles a successful callback-based settlement to its invoice and presents aligned financial state across Billing and Dashboard views.",
     solutionDetails: [
-      "Centralized member, subscription, attendance and invoice administration",
-      "Manual payment recording alongside the M-Pesa sandbox path",
-      "Authoritative settlement updates across payments, invoices and dashboard totals",
+      "Centralized member registration, subscription state, attendance and invoice administration",
+      "Manual partial and final payment recording alongside the hosted M-Pesa sandbox path",
+      "Authoritative callback-based settlement updates across payments, invoices and dashboard totals",
     ],
     architecture:
       "The Vite, React and TypeScript interface uses Supabase Auth with a PostgreSQL data layer protected by Row-Level Security. Supabase Edge Functions provide the server-side boundary for Daraja initiation and callback processing so private integration concerns remain outside the browser.",
@@ -350,12 +351,18 @@ export const projects: Project[] = ([
       "Receipt/reference retention and failed-attempt history for an auditable payment record",
     ],
     capabilities: [
-      "Admin authentication",
-      "Member and subscription management",
-      "Attendance check-in workflow",
-      "Invoice creation and manual payment recording",
-      "M-Pesa STK Push sandbox initiation",
-      "Payment, invoice and dashboard reconciliation",
+      "Email/password authentication",
+      "Member registration and management",
+      "Initial subscription assignment and current subscription state",
+      "Attendance search and eligibility checks",
+      "Protected manual check-in with duplicate check-in prevention",
+      "Billing and invoices",
+      "Manual partial and final payment recording",
+      "Financial dashboard updates",
+      "Hosted Daraja sandbox STK workflow and callback-based settlement",
+      "Receipt/reference retention and invoice reconciliation",
+      "Failed-attempt history and duplicate-settlement protection",
+      "Cloudflare Pages public deployment",
     ],
     paymentWorkflow:
       "The complete hosted Daraja sandbox payment success path was verified. A successful callback becomes one authoritative completed payment rather than treating the initial request as proof of payment.",
@@ -382,20 +389,44 @@ export const projects: Project[] = ([
     ],
     cardTechnologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "Daraja API", "Cloudflare Pages"],
     verifiedOutcomes: [
-      "Successful hosted sandbox handset approval and callback processing",
+      "Public login works",
+      "Dashboard loads and the hosted member count appears",
+      "Billing loads",
+      "Attendance loads",
+      "Public Cloudflare Pages deployment verified",
+      "Hosted Daraja sandbox settlement verified",
       "One authoritative completed payment retained with its receipt/reference",
-      "Linked invoice marked paid",
-      "Billing and Dashboard totals reconciled",
-      "Failed attempts retained without creating a duplicate settlement",
+      "Linked invoice reconciled with KES 0 outstanding in the verified sandbox case",
+      "Failed attempts retained without duplicate settlement",
+      "Public Sandbox STK action hidden",
+      "No old Bolt backend or localhost target observed",
     ],
     currentStatusHeading: "Current Status & Next Step",
     currentStatus:
-      "The next step is to publish an authoritative preview connected to the correct backend and complete the security and go-live work required before any live payment use.",
+      "GymBolt is a globally accessible early MVP with a verified public Cloudflare Pages demo, an active hosted Supabase backend and verified hosted Daraja sandbox settlement. The completed payment is controlled sandbox evidence only, not customer revenue. Security, subscription and production-payment work remains before any live operational use.",
     currentStatusDetails: [
-      "Hosted Daraja sandbox verified",
-      "Public Cloudflare deployment pending",
+      "Public Cloudflare Pages demo verified",
+      "Hosted Supabase backend active",
+      "Hosted Daraja sandbox settlement verified",
+      "Public login verified",
+      "Dashboard, Billing and Attendance verified",
+      "Public STK initiation disabled",
       "Production M-Pesa not enabled",
-      "No paying gym client or production revenue verified",
+      "Not production-ready",
+      "No paying pilot or gym client",
+      "No customer revenue",
+    ],
+    roadmap:
+      "The verified public demo remains intentionally bounded while production payment, security and incomplete product modules are addressed.",
+    roadmapDetails: [
+      "Production M-Pesa onboarding pending",
+      "Public STK initiation disabled",
+      "Daraja callback-origin authentication not production-hardened",
+      "Subscription renewal incomplete",
+      "Full subscription-history management incomplete",
+      "Secondary modules partial or placeholder, including class scheduling, inventory, announcements, settings, portals and notifications",
+      "Dependency-audit findings unresolved",
+      "No paying client or verified pilot",
     ],
     role:
       "I designed and implemented the verified GymBolt foundation across the React interface, Supabase data model, access controls, gym administration workflows and server-side Daraja sandbox integration.",
@@ -406,8 +437,16 @@ export const projects: Project[] = ([
     ],
     callToAction:
       "Need an internal operations system that connects records, billing and auditable payment workflows? Let’s discuss a focused build based on your real process and integration requirements.",
-    liveDemoStatus: "Cloudflare deployment pending",
-    repositoryStatus: "Private source repository",
+    liveDemoStatus: "https://gymbolt.pages.dev",
+    repositoryStatus: "Private Repository",
+    links: [
+      {
+        url: "https://gymbolt.pages.dev",
+        label: "Live Demo",
+        kind: "preview",
+        primary: true,
+      },
+    ],
     featured: false,
   },
   {
