@@ -147,7 +147,7 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
 - Competitor Price Intelligence is paused as a separate preserved product. Its architecture history records the reusable Python ETL foundation from which it evolved; that foundation is not presented as a separate production platform.
 - Pair and Place has completed its safe WordPress-side maintenance phase.
-- GymBolt preserves a verified hosted Daraja sandbox payment milestone while clearly distinguishing sandbox verification, pending public Cloudflare deployment and unimplemented production M-Pesa.
+- GymBolt is a globally accessible early MVP with a verified Cloudflare Pages demo at <https://gymbolt.pages.dev> and protected admin login. Access is intended for portfolio review and guided demonstrations, not unrestricted audience testing; only hosted Daraja sandbox payments are verified, production M-Pesa is disabled, and the source repository is private. There is no paying client or customer revenue, and functional V1 implementation remains planned.
 - Exactly six selected public case studies are generated: three Featured Projects and three Additional Work entries. Standalone learning exercises and the earlier ETL foundation are not presented as separate public projects.
 - Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 
@@ -207,3 +207,6 @@ npm run cf:deploy
 - `docs/ARCHITECTURE.md` — Route architecture, server/client boundaries, data architecture, deployment architecture
 - `docs/CONTENT_CHECKLIST.md` — All unresolved content gaps (social links, URLs, screenshots, etc.)
 - `docs/DEPLOYMENT_CHECKLIST.md` — Full deployment procedure and validation steps
+- `PROJECT_STATUS.md` — Verified portfolio project status and next-phase boundaries
+- `CHANGELOG.md` — Portfolio documentation milestones
+- `GYMBOLT_PORTFOLIO_CASE_STUDY.md` — Detailed verified GymBolt positioning and claim boundaries
