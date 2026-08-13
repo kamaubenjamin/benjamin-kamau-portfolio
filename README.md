@@ -143,7 +143,8 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - Competitor Price Intelligence is paused as a separate preserved product. Its architecture history records the reusable Python ETL foundation from which it evolved; that foundation is not presented as a separate production platform.
 - Pair and Place has completed its safe WordPress-side maintenance phase.
 - GymBolt is a deployed pre-production / pilot-oriented release candidate at <https://gymbolt.pages.dev>, using isolated single-gym deployments and verified Daraja sandbox architecture. Production M-Pesa remains disabled, final real receipt-email delivery acceptance is pending, and there is no completed pilot, paying gym client or customer revenue.
-- Exactly six selected public case studies are generated. Featured order: GymBolt, Intelligent Document Processing Platform, ExploreAfrica. Additional Work order: FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations.
+- Spice Harvest Ops is a deployed mobile-first V1 for The Spice Harvest Market at <https://spice-harvest-ops.pages.dev>. It complements the owner’s existing WhatsApp Business sales channel with private order, payment, fulfilment and sales tracking and is currently at client handover and early-use stage.
+- Exactly seven selected public case studies are generated. Featured order: GymBolt, Spice Harvest Ops, Intelligent Document Processing Platform. Additional Work order: ExploreAfrica, FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations.
 - Public CV links, calls to action and the public PDF asset have been removed; current CVs are shared directly on request.
 - Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 
@@ -206,3 +207,4 @@ npm run cf:deploy
 - `PROJECT_STATUS.md` — Verified portfolio project status and next-phase boundaries
 - `CHANGELOG.md` — Portfolio documentation milestones
 - `GYMBOLT_PORTFOLIO_CASE_STUDY.md` — Detailed verified GymBolt positioning and claim boundaries
+- `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md` — Detailed verified Spice Harvest Ops positioning and claim boundaries

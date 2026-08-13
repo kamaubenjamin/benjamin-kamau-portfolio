@@ -5,16 +5,38 @@
 ### Featured Projects
 
 1. GymBolt Management System
-2. Intelligent Document Processing Platform
-3. ExploreAfrica
+2. Spice Harvest Ops
+3. Intelligent Document Processing Platform
 
 ### Additional Work
 
-1. FlowSync
-2. Competitor Price Intelligence Platform
-3. Pair and Place Website Operations
+1. ExploreAfrica
+2. FlowSync
+3. Competitor Price Intelligence Platform
+4. Pair and Place Website Operations
 
-Exactly six public project case studies remain. The factual content of the five non-GymBolt case studies is unchanged; only grouping and order changed.
+Exactly seven public project case studies are published. The factual content of the six projects that preceded Spice Harvest Ops is unchanged; ExploreAfrica moved from Featured Projects to the first Additional Work position.
+
+## Spice Harvest Ops
+
+### Current Status
+
+**Deployed V1 / Client Handover Completed**
+
+Spice Harvest Ops is a mobile-first private operations application for The Spice Harvest Market. WhatsApp Business remains the customer-facing catalogue and ordering channel; the application gives the owner the missing operational layer for recording orders, tracking payment and fulfilment, and reviewing daily and historical sales activity.
+
+### Verified Deployment and Scope
+
+- Live Demo: <https://spice-harvest-ops.pages.dev>
+- Source Code: Private Repository
+- Cloudflare Pages frontend with Supabase/PostgreSQL persistence
+- Real 25-product catalogue with catalogue-controlled pricing and historical order-item snapshots
+- Transactional RPC-backed order creation and authenticated status/payment updates
+- Mobile-first responsive operation validated across phone, tablet and desktop sizes
+- Authentication and Row Level Security boundaries validated
+- Client received the production URL, login guidance and operating guidance
+
+The owner is beginning to review and use the deployed system. Long-term adoption, measured efficiency and business impact are not yet established. Detailed evidence and claim boundaries are maintained in `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md`.
 
 ## GymBolt
 

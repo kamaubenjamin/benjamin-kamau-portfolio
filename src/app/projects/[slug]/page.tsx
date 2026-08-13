@@ -352,7 +352,7 @@ export default async function ProjectPage({ params }: Props) {
                   {project.repositoryStatus && (
                     <div>
                       <dt className="font-medium text-[var(--color-text)]">
-                        {project.slug === "gymbolt-gym-management-system" ? "Source Code" : "Repository"}
+                        {project.repositoryStatus === "Private Repository" ? "Source Code" : "Repository"}
                       </dt>
                       <dd className="text-[var(--color-text-muted)]">{project.repositoryStatus}</dd>
                     </div>

@@ -2,6 +2,15 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-08-13 — Spice Harvest Ops Case Study Added
+
+- Added Spice Harvest Ops as a verified deployed V1 case study for The Spice Harvest Market.
+- Documented the product decision to complement the existing WhatsApp Business sales channel rather than duplicate its customer catalogue and ordering workflow.
+- Added verified mobile-first order, catalogue, payment, fulfilment, dashboard, Supabase architecture, security, deployment and client-handover evidence.
+- Promoted Spice Harvest Ops to Featured Project #2, retained GymBolt at #1 and IDP at #3, and moved ExploreAfrica to the first Additional Work position.
+- Increased the selected portfolio from six to seven projects without changing the factual content of existing project case studies.
+- Preserved evidence boundaries: early-use stage only, with no measured business impact, long-term adoption or unsupported integration claims.
+
 ## 2026-08-13 — GymBolt Promotion and Public CV Removal
 
 - Updated GymBolt to its deployed pre-production / pilot-oriented release-candidate status and synchronized its detailed case study.

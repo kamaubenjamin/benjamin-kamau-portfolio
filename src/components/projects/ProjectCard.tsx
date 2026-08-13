@@ -11,9 +11,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const technologies = project.cardTechnologies ?? project.technologies;
   const visibleTechnologyCount = project.cardTechnologies ? 6 : 4;
-  const liveDemo = project.slug === "gymbolt-gym-management-system"
-    ? project.links?.find((link) => link.label === "Live Demo")
-    : undefined;
+  const liveDemo = project.links?.find((link) => link.label === "Live Demo");
 
   return (
     <Card className="flex h-full flex-col">

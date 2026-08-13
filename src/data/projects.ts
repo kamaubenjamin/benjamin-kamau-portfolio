@@ -10,6 +10,7 @@ export type ProjectStatus =
   | "Incomplete learning exercise"
   | "Existing platform foundation"
   | "Pilot-oriented release candidate"
+  | "Deployed V1"
   | "Paused - separate product";
 
 export type ProjectStatusVariant = "default" | "emerald" | "lime";
@@ -76,11 +77,12 @@ export interface Project {
 
 const projectDisplayOrder = new Map([
   ["gymbolt-gym-management-system", 0],
-  ["intelligent-document-processing-platform", 1],
-  ["exploreafrica-travel-platform", 2],
-  ["flow-sync", 3],
-  ["competitor-price-intelligence-platform", 4],
-  ["pair-and-place-website-operations", 5],
+  ["spice-harvest-ops", 1],
+  ["intelligent-document-processing-platform", 2],
+  ["exploreafrica-travel-platform", 3],
+  ["flow-sync", 4],
+  ["competitor-price-intelligence-platform", 5],
+  ["pair-and-place-website-operations", 6],
 ]);
 
 export const projects: Project[] = ([
@@ -328,7 +330,7 @@ export const projects: Project[] = ([
         primary: true,
       },
     ],
-    featured: true,
+    featured: false,
   },
   {
     slug: "gymbolt-gym-management-system",
@@ -534,6 +536,177 @@ export const projects: Project[] = ([
     links: [
       {
         url: "https://gymbolt.pages.dev",
+        label: "Live Demo",
+        kind: "preview",
+        primary: true,
+      },
+    ],
+    featured: true,
+  },
+  {
+    slug: "spice-harvest-ops",
+    title: "Spice Harvest Ops",
+    category: "Mobile-First Business Operations",
+    status: "Deployed V1",
+    statusVariant: "lime",
+    shortDescription:
+      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales without duplicating the customer-facing sales channel.",
+    cardDescription:
+      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales.",
+    featuredDescription:
+      "Mobile-first operations system built for a real small business, complementing WhatsApp Business with private order, payment, fulfilment and sales tracking.",
+    positioning:
+      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales without duplicating the customer-facing sales channel.",
+    valueProposition:
+      "A deployed V1 business operations system created for a real small-business workflow, currently at client handover and early-use stage.",
+    overview:
+      "Spice Harvest Ops is the private back-office operations application for The Spice Harvest Market. Customers continue browsing and ordering through WhatsApp Business, while the owner securely records incoming orders, tracks payment and fulfilment, and reviews current and historical sales activity in one mobile-first system.",
+    problem:
+      "WhatsApp Business already handled the customer-facing catalogue and ordering flow, but incoming orders and business activity were tracked through chats and notes. The owner needed a clearer view of new and pending orders, payment state, delivered orders, customer records, daily sales and historical orders.",
+    solution:
+      "I reviewed the existing workflow and built the missing operational layer instead of duplicating a customer experience that already worked. The owner can sign in, record catalogue-based orders, track status and payment, mark orders Delivered, filter current and historical orders, review daily activity and log out securely.",
+    solutionDetails: [
+      "WhatsApp Business remains the customer-facing sales and ordering channel",
+      "Spice Harvest Ops provides the owner’s private order, payment, fulfilment and sales workspace",
+      "The scope stays focused on the operational gap after an order arrives",
+    ],
+    caseStudySections: [
+      {
+        title: "Product Decision / Why I Did Not Replace WhatsApp",
+        description:
+          "I reviewed an existing WhatsApp Business sales workflow, identified that the customer-facing catalogue and ordering flow were already adequately handled, and built the missing operational layer for the business owner instead of duplicating existing functionality.",
+        details: [
+          "The early catalogue-site idea was changed after requirements discovery and workflow analysis",
+          "WhatsApp already supported product browsing, quantities and customer-facing order placement",
+          "The final scope worked around the business’s established tool rather than replacing it",
+        ],
+      },
+      {
+        title: "Key Capabilities",
+        details: [
+          "Secure owner sign-in, protected dashboard, orders and settings, plus secure logout",
+          "Catalogue-based order entry, quantity adjustment and automatic total calculation",
+          "Order and payment status tracking with Delivered as the V1 fulfilment state",
+          "Recent and historical orders with status and date filtering",
+          "Today’s sales, current order activity, recent orders and a seven-day sales overview derived from live Supabase records",
+          "Cancelled orders are excluded from normal completed-sales treatment",
+        ],
+      },
+      {
+        title: "Order & Catalogue Data Design",
+        description:
+          "The application uses The Spice Harvest Market’s real 25-product catalogue across Daily Cooking & Aromatics and Wellness & Herbal Solutions. Products have stable IDs, names, categories, 100g pack size, supplied retail prices and active status.",
+        details: [
+          "Order creation uses catalogue-controlled prices rather than manually typed prices",
+          "Historical order items preserve product name, pack size and the unit price charged at the time of sale",
+          "A PostgreSQL RPC validates input, reads authoritative product data, calculates line and order totals, stores historical snapshots and creates each order transactionally",
+          "Authenticated RPCs apply order-status and payment-status updates",
+          "Date filters include Today, Yesterday, This Week, This Month and All; Today is the default and combines with status filtering",
+          "Previous orders remain stored and their status does not reset when a new day begins",
+        ],
+      },
+      {
+        title: "Mobile UX Improvements",
+        description:
+          "Real-phone testing showed that native number-input arrows were awkward, so quantity selection was refined to a minus button, editable quantity and plus button with automatic total recalculation.",
+        details: [
+          "44×44 touch controls, direct quantity editing, minimum-value protection and mobile numeric keyboard support",
+          "Mobile-first design centered on a 375 × 812 operating viewport and also validated on larger phones, tablet and desktop",
+          "Bottom navigation on mobile, sidebar on desktop, responsive cards, forms and sales chart, long-text safety and no page-level horizontal overflow",
+        ],
+      },
+      {
+        title: "Architecture & Security",
+        description:
+          "The React, TypeScript, Vite and Tailwind CSS frontend uses Lucide icons and a Supabase backend with PostgreSQL, Auth, Row Level Security and RPC-backed order workflows.",
+        details: [
+          "Tables cover products, orders and historical order items",
+          "Email/password authentication persists the owner session while public signup is disabled",
+          "RLS protects all business tables and anonymous table access is blocked",
+          "Anonymous order-management RPC execution is blocked; order operations require authentication",
+          "No service-role credential is exposed to the frontend and local environment configuration is excluded from source and deployment tracking",
+        ],
+      },
+      {
+        title: "Deployment & Verification",
+        description:
+          "The V1 frontend is deployed on Cloudflare Pages at spice-harvest-ops.pages.dev, with Supabase and PostgreSQL providing persistent data. SPA routing supports the dashboard, orders and settings routes.",
+        details: [
+          "ESLint, TypeScript and Vite production builds passed",
+          "Supabase migration validation, live persistence, refresh persistence and separate browser-context persistence passed",
+          "The 25-product catalogue, order calculations, authenticated creation and payment/status persistence were verified",
+          "Anonymous-access denial, responsive viewport audits and Cloudflare deployment checks passed",
+          "The final audit found no launch-blocking runtime or security defects; stale authentication documentation was corrected, while a separate legacy database field remains outside the V1 interface",
+        ],
+      },
+      {
+        title: "Client Handover",
+        description:
+          "The system has been introduced to the business owner, who received the production URL, login guidance and operating guidance and is beginning to review and use the deployed system.",
+        details: [
+          "Customers continue ordering through WhatsApp Business",
+          "The owner records each incoming order in Spice Harvest Ops",
+          "Payment and fulfilment are tracked through the owner workspace",
+          "The dashboard provides an organized view of orders and sales",
+        ],
+      },
+      {
+        title: "Current Boundaries",
+        description:
+          "This is a focused single-business V1 at client handover and early-use stage. Long-term adoption and business impact have not yet been established.",
+        details: [
+          "No payment-provider integration or WhatsApp API automation is claimed",
+          "No customer portal, multi-business platform or advanced analytics is claimed",
+          "No measured revenue, efficiency, productivity or conversion improvement is claimed",
+        ],
+      },
+    ],
+    capabilities: [
+      "Private owner operations workspace",
+      "Catalogue-controlled transactional order creation",
+      "Order, payment and Delivered-status tracking",
+      "Combined status and date filtering",
+      "Live daily and seven-day sales views",
+      "Mobile-first responsive operation",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Lucide",
+      "Supabase",
+      "PostgreSQL",
+      "Supabase Auth",
+      "Row Level Security",
+      "PostgreSQL RPC",
+      "Cloudflare Pages",
+    ],
+    cardTechnologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "RLS", "Cloudflare Pages"],
+    role:
+      "I led requirements discovery, workflow analysis and product scoping, changing direction after reviewing the existing WhatsApp Business workflow and then delivering the focused owner operations system.",
+    roleDetails: [
+      "Designed the mobile-first frontend and refined the quantity experience through real-device testing",
+      "Implemented the React/TypeScript application, Supabase/PostgreSQL model and RPC-backed order workflows",
+      "Implemented authentication, Row Level Security, deployment and validation",
+      "Provided client login and operating guidance for handover",
+    ],
+    currentStatusHeading: "Current Status",
+    currentStatus:
+      "Deployed V1 / Client Handover Completed. The owner has received access and guidance and is beginning to review and use the system; no long-term adoption or measured business impact is claimed.",
+    currentStatusDetails: [
+      "Production frontend deployed on Cloudflare Pages",
+      "Live Supabase persistence verified",
+      "Client handover guidance completed",
+      "Early-use stage",
+    ],
+    callToAction:
+      "Need a focused operations system that complements the tools your business already uses? Let’s discuss the workflow before deciding what software to build.",
+    liveDemoStatus: "https://spice-harvest-ops.pages.dev",
+    repositoryStatus: "Private Repository",
+    links: [
+      {
+        url: "https://spice-harvest-ops.pages.dev",
         label: "Live Demo",
         kind: "preview",
         primary: true,
