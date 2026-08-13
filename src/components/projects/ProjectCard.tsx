@@ -11,7 +11,9 @@ interface ProjectCardProps {
 export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const technologies = project.cardTechnologies ?? project.technologies;
   const visibleTechnologyCount = project.cardTechnologies ? 6 : 4;
-  const liveDemo = project.links?.find((link) => link.label === "Live Demo");
+  const liveDemo = project.links?.find(
+    (link) => link.label === "Live Demo" || link.label === "Live Pilot",
+  );
 
   return (
     <Card className="flex h-full flex-col">
@@ -51,7 +53,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
           rel="noopener noreferrer"
           className="mt-4 w-fit rounded text-sm font-medium text-[var(--color-emerald)] hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
         >
-          Live Demo →
+          {liveDemo.label} →
         </a>
       )}
     </Card>

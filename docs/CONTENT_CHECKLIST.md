@@ -26,6 +26,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Pair and Place Website Operations | Not provided | Verified live client website; no claim of original complete-site design or build |
 | GymBolt Management System | Private source repository | Functional hosted frontend at `https://gymbolt.pages.dev`; pilot-oriented release candidate with verified Daraja sandbox architecture, not production M-Pesa |
 | Spice Harvest Ops | Private source repository | Deployed V1 at `https://spice-harvest-ops.pages.dev`; client handover completed and early-use stage, with no long-term adoption or measured-impact claim |
+| Essiedo Catalogue Pilot | Not publicly linked | Live pilot at `https://essiedo-catalogue-pilot.pages.dev`; seller review and initial link sharing observed, with no measured commercial-outcome claim |
 
 ---
 
@@ -48,6 +49,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Pair and Place Website Operations | Not specified | Not specified | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
 | GymBolt Gym Management System | Included | Included | Included | Included | Included | Not specified | Included | Included | Not specified |
 | Spice Harvest Ops | Included | Included | Included | Included | Included | Not specified | Included | Not specified | Not specified |
+| Essiedo Catalogue Pilot | Included | Not specified | Not specified | Included | Included | Not specified | Included | Not specified | Not specified |
 
 ### Verified Project Priorities and Boundaries
 
@@ -64,10 +66,11 @@ This document tracks all unresolved content gaps that need to be filled before o
 - Pair and Place has completed its safe WordPress-side maintenance phase; hosting-panel review, analytics, conversion tracking, Elementor work and booking improvements remain unresolved.
 - Pair and Place’s link is the live client website; Benjamin’s scope was maintenance and operations, not an original complete-site design or build claim.
 - FlowSync uses Clerk authentication UI and Supabase-backed competitor records; its external execution/data-plane API remains separately hosted and incompletely integrated.
-- Featured order is GymBolt, Spice Harvest Ops and Intelligent Document Processing. Additional Work order is ExploreAfrica, FlowSync, Competitor Price Intelligence and Pair and Place.
+- Featured order is GymBolt, Spice Harvest Ops and Intelligent Document Processing. Additional Work order is ExploreAfrica, FlowSync, Competitor Price Intelligence, Pair and Place and Essiedo Catalogue Pilot.
 - GymBolt is a deployed pre-production / pilot-oriented release candidate using isolated single-gym deployments. Its functional Cloudflare Pages frontend and Daraja sandbox architecture are verified; production M-Pesa is disabled, final real receipt-email delivery acceptance is pending, and no pilot, paying client, production user or customer revenue is claimed.
 - Spice Harvest Ops is a deployed mobile-first owner operations V1 for The Spice Harvest Market. WhatsApp Business remains customer-facing; the app provides private order, payment, fulfilment and sales tracking. Client handover is complete and early use has begun, but long-term adoption and measured business impact are not claimed.
-- Exactly seven selected public case studies are generated. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
+- Essiedo Catalogue Pilot is live and validating whether structured browsing improves the handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries. Seller review and link sharing are observed activity, not evidence of sales, conversion, revenue or adoption outcomes. Proposed V2 seller-management and size-guidance features are not implemented.
+- Exactly eight selected public case studies are generated. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
 - Public CV UI references and the public PDF asset have been removed. A current CV is shared directly on request.
 - Historical Android repositories are audited learning prototypes and are intentionally not elevated into the selected portfolio case studies.
 - Project screenshots remain unresolved, and no unsupported production, deployment, analytics or measured-outcome claims should be published.

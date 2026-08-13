@@ -11,6 +11,7 @@ export type ProjectStatus =
   | "Existing platform foundation"
   | "Pilot-oriented release candidate"
   | "Deployed V1"
+  | "Live Pilot"
   | "Paused - separate product";
 
 export type ProjectStatusVariant = "default" | "emerald" | "lime";
@@ -83,6 +84,7 @@ const projectDisplayOrder = new Map([
   ["flow-sync", 4],
   ["competitor-price-intelligence-platform", 5],
   ["pair-and-place-website-operations", 6],
+  ["essiedo-catalogue-pilot", 7],
 ]);
 
 export const projects: Project[] = ([
@@ -713,6 +715,105 @@ export const projects: Project[] = ([
       },
     ],
     featured: true,
+  },
+  {
+    slug: "essiedo-catalogue-pilot",
+    title: "Essiedo Catalogue Pilot",
+    category: "SME Social-Commerce Pilot",
+    status: "Live Pilot",
+    statusVariant: "lime",
+    shortDescription:
+      "Live SME commerce pilot connecting social-media product discovery with structured catalogue browsing and product-specific WhatsApp enquiries.",
+    positioning:
+      "A client pilot exploring whether a structured web catalogue can improve the handoff between Instagram/WhatsApp product discovery and product-specific WhatsApp enquiries without replacing the seller's existing social-selling workflow.",
+    overview:
+      "Essiedo already sells through WhatsApp and Instagram. Social posting remains useful for product discovery and marketing, while the live catalogue adds a structured browsing layer where customers can filter available pieces, identify an exact product and carry that selection into a product-specific WhatsApp enquiry.",
+    problem:
+      "Social feeds and chat remain central to Essiedo’s selling workflow, but they do not provide the same structured way to browse available pieces and refer to one exact product during an enquiry. The pilot tests whether a lightweight catalogue improves that handoff without replacing the channels the seller already uses.",
+    solution:
+      "The pilot provides a focused catalogue experience that complements Instagram and WhatsApp. Customers browse and filter available pieces, choose a specific product and continue the enquiry through WhatsApp with the selected item identified.",
+    solutionDetails: [
+      "Instagram and WhatsApp remain the seller’s discovery, marketing and conversation channels",
+      "The catalogue supplies structured product browsing rather than a replacement sales channel",
+      "The selected product is retained in the handoff to a WhatsApp enquiry",
+    ],
+    caseStudySections: [
+      {
+        title: "Product Decision / Working With Social Selling",
+        description:
+          "The goal was not to build a conventional clothing ecommerce website. The pilot explores whether a structured catalogue can add useful product context between social discovery and a WhatsApp conversation while preserving Essiedo’s established selling workflow.",
+        details: [
+          "Social posting continues to support discovery and marketing",
+          "Customers can filter available pieces and identify an exact product",
+          "The selected product is carried into the product-specific WhatsApp enquiry",
+          "Pilot evidence will inform whether a deeper seller-management V2 is justified",
+        ],
+      },
+      {
+        title: "Observed Pilot Activity",
+        description:
+          "Observed activity is reported separately from business outcomes. The pilot has generated workflow feedback, but it has not established sales, conversion, revenue or adoption results.",
+        details: [
+          "Essiedo has opened and reviewed the live catalogue",
+          "The seller has started sharing the catalogue link through existing social channels",
+          "Seller questions and feedback surfaced possible V2 requirements",
+          "A separate user suggestion surfaced possible size-guidance functionality",
+        ],
+      },
+      {
+        title: "Potential V2 / Not Yet Implemented",
+        description:
+          "Possible next-stage features are discovery inputs only and are not part of the current pilot.",
+        details: [
+          "Seller-managed product uploads",
+          "Marking one-off items sold",
+          "New-arrival publishing",
+          "Offer pricing",
+          "Size guidance or a size chart",
+        ],
+      },
+      {
+        title: "Pilot Boundaries",
+        description:
+          "The catalogue is in live validation. Current evidence does not establish commercial success or justify claims about customer adoption volume or business impact.",
+        details: [
+          "No sales increase, conversion improvement or revenue claim",
+          "No workload or productivity improvement claim",
+          "No claim that the catalogue replaces WhatsApp or Instagram",
+          "No V2 seller-management or size-guidance capability is described as implemented",
+        ],
+      },
+    ],
+    capabilities: [
+      "Structured product catalogue browsing",
+      "Available-piece filtering",
+      "Exact product identification",
+      "Product-specific WhatsApp enquiry handoff",
+      "Responsive live pilot experience",
+    ],
+    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Cloudflare Pages"],
+    cardTechnologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Cloudflare Pages"],
+    currentStatusHeading: "Current Status",
+    currentStatus:
+      "Live Pilot / Validation Stage. Essiedo has reviewed the catalogue and begun sharing its link through existing social channels. Feedback is informing possible V2 scope, but no measured commercial outcome is claimed.",
+    currentStatusDetails: [
+      "Live catalogue deployed",
+      "Seller review observed",
+      "Initial social-channel sharing observed",
+      "V2 ideas remain unimplemented",
+    ],
+    callToAction:
+      "Exploring a lightweight digital layer around an existing sales workflow? Let’s discuss what should be validated before building a deeper platform.",
+    liveDemoStatus: "https://essiedo-catalogue-pilot.pages.dev",
+    links: [
+      {
+        url: "https://essiedo-catalogue-pilot.pages.dev",
+        label: "Live Pilot",
+        kind: "preview",
+        primary: true,
+      },
+    ],
+    featured: false,
   },
   {
     slug: "competitor-price-intelligence-platform",

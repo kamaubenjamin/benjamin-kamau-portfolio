@@ -14,8 +14,28 @@
 2. FlowSync
 3. Competitor Price Intelligence Platform
 4. Pair and Place Website Operations
+5. Essiedo Catalogue Pilot
 
-Exactly seven public project case studies are published. The factual content of the six projects that preceded Spice Harvest Ops is unchanged; ExploreAfrica moved from Featured Projects to the first Additional Work position.
+Exactly eight public project case studies are published. The factual content and grouping of the seven projects that preceded Essiedo Catalogue Pilot are unchanged.
+
+## Essiedo Catalogue Pilot
+
+### Current Status
+
+**Live Pilot / Validation Stage**
+
+Essiedo already sells through WhatsApp and Instagram. The live catalogue adds structured browsing and a product-specific WhatsApp enquiry handoff without replacing those existing discovery, marketing and conversation channels.
+
+### Observed Evidence
+
+- Essiedo has opened and reviewed the live catalogue
+- The seller has started sharing the catalogue link through existing social channels
+- Seller feedback surfaced possible V2 requirements
+- A separate user suggestion surfaced possible size guidance
+
+Seller-managed uploads, sold-item marking, new-arrival publishing, offer pricing and size guidance remain possible V2 work and are not implemented. No sales, conversion, revenue, workload, productivity or customer-adoption outcome is claimed.
+
+Live Pilot: <https://essiedo-catalogue-pilot.pages.dev>
 
 ## Spice Harvest Ops
 

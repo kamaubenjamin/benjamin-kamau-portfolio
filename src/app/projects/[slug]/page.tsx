@@ -344,7 +344,11 @@ export default async function ProjectPage({ params }: Props) {
                   {project.liveDemoStatus && (
                     <div>
                       <dt className="font-medium text-[var(--color-text)]">
-                        {project.slug === "gymbolt-gym-management-system" ? "Live Demo" : "Live demo"}
+                        {project.slug === "gymbolt-gym-management-system"
+                          ? "Live Demo"
+                          : project.slug === "essiedo-catalogue-pilot"
+                            ? "Live Pilot"
+                            : "Live demo"}
                       </dt>
                       <dd className="text-[var(--color-text-muted)]">{project.liveDemoStatus}</dd>
                     </div>
