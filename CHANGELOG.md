@@ -2,6 +2,15 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-08-14 — Spice Harvest Ops Production Migration and Cutover
+
+- Updated Spice Harvest Ops to **Production Deployed** following verified production acceptance.
+- Recorded the completed migration from Supabase PostgreSQL/Auth/browser Data API-RPC to Neon PostgreSQL, Neon Auth and an authenticated Cloudflare Pages Functions API boundary.
+- Documented schema and data migration, order-sequence preservation, authentication replacement, staging validation, production cutover and removal of Supabase from the live runtime.
+- Preserved Supabase as a rollback snapshot/backup rather than describing it as deleted.
+- Added production security, responsive and workflow acceptance evidence while keeping order counts as engineering verification only—not traction or customer revenue.
+- Retained Featured Project #2 and left all other project facts and ordering unchanged.
+
 ## 2026-08-13 — Spice Harvest Ops Case Study Added
 
 - Added Spice Harvest Ops as a verified deployed V1 case study for The Spice Harvest Market.

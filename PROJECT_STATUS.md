@@ -41,22 +41,22 @@ Live Pilot: <https://essiedo-catalogue-pilot.pages.dev>
 
 ### Current Status
 
-**Deployed V1 / Client Handover Completed**
+**Production Deployed**
 
-Spice Harvest Ops is a mobile-first private operations application for The Spice Harvest Market. WhatsApp Business remains the customer-facing catalogue and ordering channel; the application gives the owner the missing operational layer for recording orders, tracking payment and fulfilment, and reviewing daily and historical sales activity.
+Spice Harvest Ops is a production-deployed mobile-first business operations system for The Spice Harvest Market and owner Mama Wangai. WhatsApp Business remains the customer-facing ordering channel; Spice Harvest Ops is the private management layer for owner authentication, orders, payments, fulfilment and sales history.
 
 ### Verified Deployment and Scope
 
 - Live Demo: <https://spice-harvest-ops.pages.dev>
 - Source Code: Private Repository
-- Cloudflare Pages frontend with Supabase/PostgreSQL persistence
-- Real 25-product catalogue with catalogue-controlled pricing and historical order-item snapshots
-- Transactional RPC-backed order creation and authenticated status/payment updates
-- Mobile-first responsive operation validated across phone, tablet and desktop sizes
-- Authentication and Row Level Security boundaries validated
-- Client received the production URL, login guidance and operating guidance
+- Production architecture: React 19/Vite → Neon Auth → authenticated Cloudflare Pages Functions API → Neon PostgreSQL
+- Real 25-product catalogue with catalogue-controlled pricing, integrity validation and historical order-item snapshots
+- Transactional order creation, generated order numbers and authenticated payment/fulfilment updates
+- Owner-only JWT/JWKS authorization; unauthorized requests return 401 and authenticated non-owner requests return 403
+- Supabase → Neon schema, data, authentication and frontend API migration complete; Supabase is retained only as a rollback snapshot/backup
+- Mobile-first operation accepted at 375 × 812 and validated across larger mobile, tablet and desktop layouts
 
-The owner is beginning to review and use the deployed system. Long-term adoption, measured efficiency and business impact are not yet established. Detailed evidence and claim boundaries are maintained in `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md`.
+Production acceptance preserved 25 products, 5 migrated orders and 9 migrated order items, then verified one additional test order (`SH-1058`) and sequence continuity (`SH-1059`). These counts are engineering evidence, not traction or revenue. The system is available for owner use; long-term adoption, measured efficiency and business impact are not claimed. Detailed evidence and boundaries are maintained in `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md`.
 
 ## GymBolt
 
@@ -108,4 +108,4 @@ Public CV navigation, calls to action, source references and the public PDF asse
 
 ## Last Updated
 
-2026-08-13
+2026-08-14

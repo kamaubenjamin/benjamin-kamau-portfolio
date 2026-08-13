@@ -10,7 +10,7 @@ export type ProjectStatus =
   | "Incomplete learning exercise"
   | "Existing platform foundation"
   | "Pilot-oriented release candidate"
-  | "Deployed V1"
+  | "Production Deployed"
   | "Live Pilot"
   | "Paused - separate product";
 
@@ -549,158 +549,183 @@ export const projects: Project[] = ([
     slug: "spice-harvest-ops",
     title: "Spice Harvest Ops",
     category: "Mobile-First Business Operations",
-    status: "Deployed V1",
+    status: "Production Deployed",
     statusVariant: "lime",
     shortDescription:
-      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales without duplicating the customer-facing sales channel.",
+      "A production-deployed mobile-first business operations system built for a real small-business workflow, covering owner authentication, order management, payment and fulfilment tracking, secure API architecture, PostgreSQL data modelling and cloud deployment.",
     cardDescription:
-      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales.",
+      "Production-deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales through a secure Neon/PostgreSQL backend.",
     featuredDescription:
-      "Mobile-first operations system built for a real small business, complementing WhatsApp Business with private order, payment, fulfilment and sales tracking.",
+      "Production-deployed mobile-first operations system for a real small business, combining order, payment and fulfilment tracking with a secure Neon/PostgreSQL backend.",
     positioning:
-      "A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales without duplicating the customer-facing sales channel.",
+      "Production-deployed for a real small-business workflow and available for owner use.",
     valueProposition:
-      "A deployed V1 business operations system created for a real small-business workflow, currently at client handover and early-use stage.",
+      "WhatsApp Business remains the customer-facing ordering channel; Spice Harvest Ops is the private business-management layer for owner authentication, orders, payments, fulfilment and sales history.",
     overview:
-      "Spice Harvest Ops is the private back-office operations application for The Spice Harvest Market. Customers continue browsing and ordering through WhatsApp Business, while the owner securely records incoming orders, tracks payment and fulfilment, and reviews current and historical sales activity in one mobile-first system.",
+      "Spice Harvest Ops is the production back-office operations system for The Spice Harvest Market and its owner, Mama Wangai. Customers continue to browse and place orders through WhatsApp Business, while the authenticated owner workspace manages the operational workflow after an order arrives.",
     problem:
-      "WhatsApp Business already handled the customer-facing catalogue and ordering flow, but incoming orders and business activity were tracked through chats and notes. The owner needed a clearer view of new and pending orders, payment state, delivered orders, customer records, daily sales and historical orders.",
+      "Mama Wangai was mainly using WhatsApp chats and manual notes to track incoming orders, payment status, fulfilment, delivery progress, sales history and order notes. The missing capability was not another catalogue; it was a reliable private operations layer after an order arrived.",
     solution:
-      "I reviewed the existing workflow and built the missing operational layer instead of duplicating a customer experience that already worked. The owner can sign in, record catalogue-based orders, track status and payment, mark orders Delivered, filter current and historical orders, review daily activity and log out securely.",
+      "I built a secure mobile-first owner workspace that complements the established customer channel. It provides authenticated order management, catalogue-controlled totals, payment and fulfilment tracking, historical records, dashboard views and combined date/status filters.",
     solutionDetails: [
-      "WhatsApp Business remains the customer-facing sales and ordering channel",
-      "Spice Harvest Ops provides the owner’s private order, payment, fulfilment and sales workspace",
-      "The scope stays focused on the operational gap after an order arrives",
+      "WhatsApp Business = customer-facing ordering channel",
+      "Spice Harvest Ops = private business-management layer",
+      "The system does not replace WhatsApp Business or duplicate its catalogue, cart, estimated-total and place-order workflow",
     ],
     caseStudySections: [
       {
-        title: "Product Decision / Why I Did Not Replace WhatsApp",
+        title: "Why I Did Not Replace WhatsApp Business",
         description:
-          "I reviewed an existing WhatsApp Business sales workflow, identified that the customer-facing catalogue and ordering flow were already adequately handled, and built the missing operational layer for the business owner instead of duplicating existing functionality.",
+          "The original concept was a separate customer-facing catalogue. Reviewing the existing workflow showed that WhatsApp Business already handled the catalogue, customer browsing, quantities/cart, estimated totals and place-order flow, so that idea was rejected as duplicate functionality.",
         details: [
-          "The early catalogue-site idea was changed after requirements discovery and workflow analysis",
-          "WhatsApp already supported product browsing, quantities and customer-facing order placement",
-          "The final scope worked around the business’s established tool rather than replacing it",
+          "Preserved the channel customers and the business already used",
+          "Focused scope on incoming orders, payment, fulfilment, delivery progress and history",
+          "Applied requirements discovery, product pivoting and scope control",
         ],
       },
       {
-        title: "Key Capabilities",
+        title: "Production Workflow",
+        description:
+          "Customers order through WhatsApp Business. Mama Wangai records each incoming order in Spice Harvest Ops, tracks payment and fulfilment through Paid and Delivered states, and reviews current or historical activity.",
         details: [
-          "Secure owner sign-in, protected dashboard, orders and settings, plus secure logout",
-          "Catalogue-based order entry, quantity adjustment and automatic total calculation",
-          "Order and payment status tracking with Delivered as the V1 fulfilment state",
-          "Recent and historical orders with status and date filtering",
-          "Today’s sales, current order activity, recent orders and a seven-day sales overview derived from live Supabase records",
-          "Cancelled orders are excluded from normal completed-sales treatment",
+          "Secure owner login, password recovery, session persistence/restoration, protected routes and logout",
+          "Dashboard with live order/sales information, recent orders, activity metrics and a seven-day sales view",
+          "Order creation with customer details, delivery location, product selection, quantity controls and automatic totals",
+          "Payment and order status updates, including Paid and Delivered workflows",
+          "Today, Yesterday, This Week, This Month and All filters combined with status filters",
         ],
       },
       {
-        title: "Order & Catalogue Data Design",
+        title: "Product & Order Data Integrity",
         description:
-          "The application uses The Spice Harvest Market’s real 25-product catalogue across Daily Cooking & Aromatics and Wellness & Herbal Solutions. Products have stable IDs, names, categories, 100g pack size, supplied retail prices and active status.",
+          "The active catalogue contains 25 real Spice Harvest products with current prices, 100g pack sizes, categories and active status. Orders use catalogue-controlled data and preserve historical sale facts when the catalogue changes.",
         details: [
-          "Order creation uses catalogue-controlled prices rather than manually typed prices",
-          "Historical order items preserve product name, pack size and the unit price charged at the time of sale",
-          "A PostgreSQL RPC validates input, reads authoritative product data, calculates line and order totals, stores historical snapshots and creates each order transactionally",
-          "Authenticated RPCs apply order-status and payment-status updates",
-          "Date filters include Today, Yesterday, This Week, This Month and All; Today is the default and combines with status filtering",
-          "Previous orders remain stored and their status does not reset when a new day begins",
+          "Historical product-name, pack-size and price snapshots",
+          "Quantity and line-total validation",
+          "Transactional order creation with generated order numbers",
+          "PostgreSQL functions, triggers, constraints, indexes and order-number sequence",
         ],
       },
       {
-        title: "Mobile UX Improvements",
+        title: "Production Architecture",
         description:
-          "Real-phone testing showed that native number-input arrows were awkward, so quantity selection was refined to a minus button, editable quantity and plus button with automatic total recalculation.",
+          "React 19/Vite browser → Neon Auth → authenticated Cloudflare Pages Functions API → Neon PostgreSQL. A provider-neutral frontend API adapter calls authenticated endpoints, while a centralized server-side repository owns database access.",
         details: [
-          "44×44 touch controls, direct quantity editing, minimum-value protection and mobile numeric keyboard support",
-          "Mobile-first design centered on a 375 × 812 operating viewport and also validated on larger phones, tablet and desktop",
-          "Bottom navigation on mobile, sidebar on desktop, responsive cards, forms and sales chart, long-text safety and no page-level horizontal overflow",
+          "React 19, TypeScript, Vite, Tailwind CSS and Lucide frontend",
+          "Cloudflare Pages Functions API boundary with no direct browser database access",
+          "Neon PostgreSQL schema with transactional functions and integrity controls",
+          "Cloudflare Pages production hosting",
         ],
       },
       {
-        title: "Architecture & Security",
+        title: "Authentication & Security",
         description:
-          "The React, TypeScript, Vite and Tailwind CSS frontend uses Lucide icons and a Supabase backend with PostgreSQL, Auth, Row Level Security and RPC-backed order workflows.",
+          "Neon Auth provides email/password owner access, session persistence/restoration, logout and password recovery. Cloudflare Pages Functions verify JWTs against JWKS and enforce the immutable owner identity before business data is accessed.",
         details: [
-          "Tables cover products, orders and historical order items",
-          "Email/password authentication persists the owner session while public signup is disabled",
-          "RLS protects all business tables and anonymous table access is blocked",
-          "Anonymous order-management RPC execution is blocked; order operations require authentication",
-          "No service-role credential is exposed to the frontend and local environment configuration is excluded from source and deployment tracking",
+          "DATABASE_URL and immutable owner identity remain server-side only",
+          "No database credentials or owner identifier in the browser bundle",
+          "Unauthenticated requests return 401; authenticated non-owner requests return 403",
+          "No public signup UI, direct browser database access or runtime Supabase dependency",
         ],
       },
       {
-        title: "Deployment & Verification",
+        title: "Supabase → Neon Migration",
         description:
-          "The V1 frontend is deployed on Cloudflare Pages at spice-harvest-ops.pages.dev, with Supabase and PostgreSQL providing persistent data. SPA routing supports the dashboard, orders and settings routes.",
+          "The original Supabase PostgreSQL, Supabase Auth and browser Data API/RPC runtime was fully migrated to Neon PostgreSQL, Neon Auth and a trusted Cloudflare Pages Functions API boundary.",
         details: [
-          "ESLint, TypeScript and Vite production builds passed",
-          "Supabase migration validation, live persistence, refresh persistence and separate browser-context persistence passed",
-          "The 25-product catalogue, order calculations, authenticated creation and payment/status persistence were verified",
-          "Anonymous-access denial, responsive viewport audits and Cloudflare deployment checks passed",
-          "The final audit found no launch-blocking runtime or security defects; stale authentication documentation was corrected, while a separate legacy database field remains outside the V1 interface",
+          "Recreated the schema and migrated products, orders and order items",
+          "Preserved the order-number sequence and replaced authentication while retaining the existing owner password",
+          "Cut the frontend over to the provider-neutral API after staging validation",
+          "Removed Supabase from production runtime while preserving it as a rollback snapshot/backup",
         ],
       },
       {
-        title: "Client Handover",
+        title: "Production Cutover & Data Preservation",
         description:
-          "The system has been introduced to the business owner, who received the production URL, login guidance and operating guidance and is beginning to review and use the deployed system.",
+          "Pre-cutover migration preserved 25 products, 5 orders and 9 order items. Production acceptance then created one additional test order successfully, bringing verification totals to 25 products, 6 orders and 10 order items.",
         details: [
-          "Customers continue ordering through WhatsApp Business",
-          "The owner records each incoming order in Spice Harvest Ops",
-          "Payment and fulfilment are tracked through the owner workspace",
-          "The dashboard provides an organized view of orders and sales",
+          "Verified production order number SH-1058 and next sequence value SH-1059",
+          "Historical snapshots, totals and sequence continuity were preserved",
+          "Counts are engineering acceptance evidence, not adoption or traction metrics",
+          "The production test order is not presented as customer revenue",
         ],
       },
       {
-        title: "Current Boundaries",
+        title: "Mobile UX",
         description:
-          "This is a focused single-business V1 at client handover and early-use stage. Long-term adoption and business impact have not yet been established.",
+          "The primary validated target is 375 × 812, approximately an iPhone 13 mini-sized viewport, with larger mobile, tablet and desktop layouts also checked.",
         details: [
-          "No payment-provider integration or WhatsApp API automation is claimed",
-          "No customer portal, multi-business platform or advanced analytics is claimed",
-          "No measured revenue, efficiency, productivity or conversion improvement is claimed",
+          "Touch-friendly quantity controls refined through real-device testing",
+          "Desktop sidebar, mobile navigation and responsive forms/cards",
+          "Safe long-text handling and responsive sales chart",
+          "No page-level horizontal overflow",
+        ],
+      },
+      {
+        title: "Production Validation",
+        description:
+          "Final acceptance verified owner login with the existing password, session restoration, dashboard and catalogue data, migrated records, order creation, Paid and Delivered updates, refresh persistence, combined filters, logout and subsequent login.",
+        details: [
+          "375 × 812 responsive acceptance passed",
+          "API authorization returned 401 unauthenticated, 403 for authenticated non-owner access and success for owner access",
+          "Application lint, build, Cloudflare Functions checks/compilation and frontend secret scan passed",
+          "The application repository working tree was clean at final acceptance",
+        ],
+      },
+      {
+        title: "Current Scope / Claim Boundaries",
+        description:
+          "This is a production-deployed, client-ready implementation for one real small-business workflow. Deployment and acceptance evidence do not establish scale, long-term impact or broad commercial traction.",
+        details: [
+          "No revenue-growth, efficiency-percentage, adoption-scale or customer-revenue claim",
+          "No M-Pesa, WhatsApp API, inventory, multi-tenancy or customer-portal claim",
+          "No advanced analytics, production-scale SaaS or multiple-client claim",
+          "Supabase is a preserved rollback snapshot/backup, not the active runtime",
         ],
       },
     ],
     capabilities: [
-      "Private owner operations workspace",
-      "Catalogue-controlled transactional order creation",
-      "Order, payment and Delivered-status tracking",
-      "Combined status and date filtering",
-      "Live daily and seven-day sales views",
-      "Mobile-first responsive operation",
+      "Owner authentication and protected operations workspace",
+      "Transactional catalogue-controlled order creation",
+      "Payment, fulfilment and historical order tracking",
+      "Combined date and status filtering",
+      "Live dashboard and seven-day sales view",
+      "Secure Cloudflare Functions API and Neon PostgreSQL backend",
     ],
     technologies: [
-      "React",
+      "React 19",
       "TypeScript",
       "Vite",
       "Tailwind CSS",
       "Lucide",
-      "Supabase",
+      "Neon PostgreSQL",
+      "Neon Auth",
       "PostgreSQL",
-      "Supabase Auth",
-      "Row Level Security",
-      "PostgreSQL RPC",
+      "Cloudflare Pages Functions",
+      "JWT/JWKS authorization",
       "Cloudflare Pages",
+      "Git",
+      "GitHub",
     ],
-    cardTechnologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "RLS", "Cloudflare Pages"],
+    cardTechnologies: ["React 19", "TypeScript", "Neon", "PostgreSQL", "Pages Functions", "Cloudflare Pages"],
     role:
-      "I led requirements discovery, workflow analysis and product scoping, changing direction after reviewing the existing WhatsApp Business workflow and then delivering the focused owner operations system.",
+      "I led the project from workflow discovery and product pivot through secure architecture, migration, production cutover, deployment and client implementation.",
     roleDetails: [
-      "Designed the mobile-first frontend and refined the quantity experience through real-device testing",
-      "Implemented the React/TypeScript application, Supabase/PostgreSQL model and RPC-backed order workflows",
-      "Implemented authentication, Row Level Security, deployment and validation",
-      "Provided client login and operating guidance for handover",
+      "Requirements discovery, workflow analysis, product pivoting, scope control and mobile-first UX",
+      "React/TypeScript frontend engineering, API design and Cloudflare Pages Functions",
+      "PostgreSQL modelling, functions, triggers, constraints, indexes and transactional workflows",
+      "Neon Auth architecture, JWT authorization and secure server-side secret handling",
+      "Supabase → Neon data migration, sequence preservation, rollback planning and production cutover",
+      "Real-device testing, deployment and client implementation",
     ],
     currentStatusHeading: "Current Status",
     currentStatus:
-      "Deployed V1 / Client Handover Completed. The owner has received access and guidance and is beginning to review and use the system; no long-term adoption or measured business impact is claimed.",
+      "Production Deployed. Production-deployed for a real small-business workflow and available for owner use.",
     currentStatusDetails: [
-      "Production frontend deployed on Cloudflare Pages",
-      "Live Supabase persistence verified",
-      "Client handover guidance completed",
-      "Early-use stage",
+      "Neon Auth and Neon PostgreSQL are the active production services",
+      "Authenticated Cloudflare Pages Functions form the API boundary",
+      "Supabase → Neon migration and production cutover complete",
+      "Client-ready implementation without unsupported scale or impact claims",
     ],
     callToAction:
       "Need a focused operations system that complements the tools your business already uses? Let’s discuss the workflow before deciding what software to build.",

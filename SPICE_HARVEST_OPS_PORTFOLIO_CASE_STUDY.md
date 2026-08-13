@@ -1,102 +1,174 @@
 # Spice Harvest Ops — Portfolio Case Study
 
-## Project Positioning
+## Production Status
 
-**A deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales without duplicating the customer-facing sales channel.**
+**A production-deployed mobile-first business operations system built for a real small-business workflow, covering owner authentication, order management, payment and fulfilment tracking, secure API architecture, PostgreSQL data modelling and cloud deployment.**
 
-**Business:** The Spice Harvest Market
+- **Business:** The Spice Harvest Market
+- **Owner:** Mama Wangai
+- **Status:** Production Deployed
+- **Migration:** Supabase → Neon complete
+- **Commercial stage:** Client-ready / real small-business implementation
+- **Production app:** <https://spice-harvest-ops.pages.dev>
 
-**Status:** Deployed V1 / Client Handover Completed
-
-**Live Demo:** <https://spice-harvest-ops.pages.dev>
+Production-deployed for a real small-business workflow and available for owner use.
 
 ## Overview
 
-Spice Harvest Ops is the owner’s private back-office application. Customers continue using WhatsApp Business to browse products and place orders, while the owner records incoming orders, tracks payment and fulfilment, and reviews current and historical business activity.
+Spice Harvest Ops is Mama Wangai’s private back-office operations system. Customers continue to browse products and place orders through WhatsApp Business; the authenticated owner workspace manages what happens after an order arrives.
 
-The deployed system is currently at client handover and early-use stage. Long-term adoption and measured business impact have not yet been established.
+It is not simply a spice website. It is a focused operations implementation covering secure owner access, order entry, payment and fulfilment state, historical records, data integrity, a trusted API boundary and cloud deployment.
 
 ## Business Problem
 
-WhatsApp chats and notes did not provide one clear operational view of new and pending orders, payment state, delivered orders, customer order records, daily sales and historical orders.
+The Spice Harvest Market already used WhatsApp Business for its product catalogue, customer browsing, quantities/cart, estimated totals and place-order workflow. The operational gap appeared after an order arrived.
 
-The gap was not customer-facing ordering. It was the workflow after an order arrived.
+Mama Wangai was mainly using WhatsApp chats and manual notes to track:
 
-## Product Decision: Complement WhatsApp, Do Not Replace It
+- incoming orders
+- payment status
+- fulfilment and delivery progress
+- sales history
+- order history and notes
 
-An early concept was a separate customer catalogue and ordering website. Requirements discovery showed that WhatsApp Business already handled the product catalogue, customer browsing, quantities and customer-facing order placement adequately.
+Those tools did not provide one reliable operational view of current and historical activity.
 
-> I reviewed an existing WhatsApp Business sales workflow, identified that the customer-facing catalogue and ordering flow were already adequately handled, and built the missing operational layer for the business owner instead of duplicating existing functionality.
+## Why I Did Not Replace WhatsApp Business
 
-This change demonstrated workflow analysis, product scoping and restraint: the useful solution was an owner operations layer built around an established tool, not unnecessary replacement software.
+The original idea was a separate customer-facing catalogue. Requirements discovery showed that this would duplicate a workflow the business already had, so I rejected that direction and focused scope on the missing post-order layer.
 
-## Implemented V1 Scope
+**WhatsApp Business = customer-facing ordering channel**
 
-The owner can securely sign in, view a dashboard, record customer orders, select real catalogue products, adjust quantities, calculate totals, track order and payment status, mark orders Delivered, review recent and historical orders, combine status and date filters, and log out securely.
+**Spice Harvest Ops = private business-management layer**
 
-Date filters include Today, Yesterday, This Week, This Month and All. Today is the default. Previous orders remain stored, and their status does not reset when the date changes.
+Spice Harvest Ops complements WhatsApp Business; it does not replace it.
 
-Dashboard views derive from live Supabase records and cover today’s sales, current order activity, recent orders and a seven-day sales overview. Cancelled orders are not treated as normal completed sales.
+## Solution
 
-## Catalogue and Historical Order Design
+The product became a secure, mobile-first owner workspace. Mama Wangai can sign in, record an order against the real product catalogue, update payment and fulfilment, review historical records, filter activity and use the dashboard without exposing database access to the browser.
 
-The application uses The Spice Harvest Market’s real 25-product catalogue across Daily Cooking & Aromatics and Wellness & Herbal Solutions. Catalogue records include stable IDs, names, categories, 100g pack size, supplied retail prices and active status.
+## Production Workflow
 
-> Order creation uses catalogue-controlled prices rather than manually typed prices.
+1. Customers browse and place orders through WhatsApp Business.
+2. Mama Wangai records each incoming order in Spice Harvest Ops.
+3. The system calculates catalogue-controlled totals and creates the order transactionally.
+4. Payment is tracked through the Paid workflow.
+5. Fulfilment is tracked through the Delivered workflow.
+6. Dashboard, order history and combined date/status filters support ongoing review.
 
-Historical order items preserve the product name, pack size and unit price charged at the time of sale. This keeps past orders understandable even when the current catalogue changes.
+## Key Capabilities
 
-## Mobile-First UX
+- Secure owner login, forgot-password/password recovery, protected routes and logout
+- Session persistence after refresh and session restoration
+- Dashboard with live order/sales information, recent orders, activity metrics and seven-day sales view
+- Order creation with customer name, phone, delivery location, product selection, quantity controls and automatic totals
+- Payment-status and order-status updates, including Paid and Delivered workflows
+- Historical order records
+- Today, Yesterday, This Week, This Month and All date filters
+- Status filters that work together with date filters
+- Catalogue of 25 real products with current prices, 100g pack sizes, categories and active status
 
-The primary operating target is a 375 × 812 phone viewport, with validation across larger phones, tablet and desktop. The interface uses mobile bottom navigation, a desktop sidebar, responsive order cards and forms, 44px+ touch targets, long-text protection and a responsive sales chart without page-level horizontal overflow.
+## Product & Order Data Integrity
 
-Real-device testing showed native number-input arrows were awkward on mobile. The quantity interaction was refined to minus button → editable quantity → plus button, with touch-sized controls, direct editing, minimum-value protection, numeric keyboard support and automatic total recalculation.
+Orders use catalogue-controlled data rather than manually entered prices. Historical items preserve product-name, pack-size and price snapshots so earlier orders remain understandable after catalogue changes.
 
-## Architecture
+The PostgreSQL design includes quantity and line-total validation, transactional order creation, generated order numbers, functions, triggers, constraints, indexes and an order-number sequence.
 
-The frontend uses React, TypeScript, Vite, Tailwind CSS and Lucide icons and is deployed on Cloudflare Pages. Supabase provides PostgreSQL, Auth and Row Level Security.
+## Production Architecture
 
-The database uses `products`, `orders` and `order_items`. A PostgreSQL RPC validates order input, reads authoritative catalogue data, applies current prices, calculates line and complete totals, stores historical product/price snapshots and creates the order transactionally. Additional authenticated RPCs update order and payment status.
+**React 19/Vite browser → Neon Auth → authenticated Cloudflare Pages Functions API → Neon PostgreSQL**
 
-## Security
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS and Lucide
+- **Backend/API:** provider-neutral frontend adapter, authenticated Cloudflare Pages Functions endpoints and centralized server-side database repository
+- **Database:** Neon PostgreSQL with transactional functions and integrity controls
+- **Hosting:** Cloudflare Pages at <https://spice-harvest-ops.pages.dev>
 
-Verified controls include email/password owner authentication, session persistence, protected Dashboard, Orders and Settings routes, secure logout, disabled public signup, RLS on all business tables, anonymous data-access denial and authenticated-only order operations.
+## Authentication & Security
 
-Anonymous order-management RPC execution is blocked. No service-role credential is exposed to the frontend, and local environment configuration is excluded from source and deployment tracking.
+Neon Auth provides email/password owner login, password recovery, session persistence/restoration and logout. The existing owner password was preserved during migration.
 
-## Deployment and Verification
+Cloudflare Pages Functions perform server-side JWT/JWKS verification and immutable owner identity validation before allowing business-data access.
 
-The production frontend is deployed at <https://spice-harvest-ops.pages.dev>, with Supabase/PostgreSQL persistence. SPA routing supports `/`, `/orders` and `/settings`.
+Validated controls include:
 
-Verification covered ESLint, TypeScript, Vite production builds, migrations, live and cross-refresh persistence, separate browser contexts, all 25 catalogue products, order calculations, authenticated order creation and updates, anonymous-access denial, responsive viewport audits and Cloudflare deployment.
+- `DATABASE_URL` remains server-side only
+- no database credentials or immutable owner ID are exposed in the browser bundle
+- unauthenticated API requests return 401
+- authenticated non-owner requests return 403
+- owner-authorized access succeeds
+- no public signup UI
+- no direct browser database access
+- no runtime Supabase dependency
 
-The final audit found no launch-blocking runtime or security defects. A stale authentication statement in project documentation was corrected. A separate legacy `delivery_status` database field is not used by the V1 interface; current fulfilment uses the main order status **Delivered**.
+No secrets, tokens or configuration identifiers are included in this case study.
 
-## Client Handover
+## Supabase → Neon Migration
 
-The owner received the production URL, login guidance and operating guidance. The intended workflow is:
+The original architecture used Supabase PostgreSQL, Supabase Auth and Supabase browser Data API/RPC access. The final production architecture fully migrated those responsibilities to Neon PostgreSQL, Neon Auth and a trusted Cloudflare Pages Functions API boundary.
 
-1. Customers continue ordering through WhatsApp Business.
-2. The owner records each incoming order in Spice Harvest Ops.
-3. Payment and fulfilment are tracked in the owner workspace.
-4. The dashboard provides an organized view of orders and sales.
+The migration included schema recreation, product catalogue migration, order and order-item migration, order-number sequence preservation, authentication replacement while retaining the owner’s existing password, frontend API cutover, staging validation, production cutover and removal of Supabase from the live runtime.
 
-The owner is beginning to review and use the deployed system. This is not presented as proven long-term adoption.
+Supabase was not deleted. It remains preserved as a rollback snapshot/backup and is not part of the active production runtime.
+
+## Production Cutover & Data Preservation
+
+Pre-cutover migration moved 25 products, 5 orders and 9 order items. After the Neon cutover, one additional production acceptance test order was created successfully.
+
+Final acceptance evidence:
+
+- Products: 25
+- Orders: 6
+- Order items: 10
+- Verified production order: `SH-1058`
+- Next sequence value: `SH-1059`
+- Historical snapshots and totals preserved
+
+These counts verify migration and order creation. They are not adoption or traction metrics, and the acceptance test order is not presented as customer revenue.
+
+## Mobile UX
+
+The primary validated target is **375 × 812**, approximately an iPhone 13 mini-sized viewport. Larger mobile, tablet and desktop layouts were also validated.
+
+Implemented responsive behaviour includes touch-friendly quantity controls, desktop sidebar, mobile navigation, responsive forms/cards, safe long-text handling, a responsive sales chart and no page-level horizontal overflow.
+
+Real-device testing showed native number-input arrows were awkward on mobile. The interaction was refined to touch-sized minus, editable quantity and plus controls while retaining direct editing, minimum-value protection, numeric keyboard support and automatic recalculation.
+
+## Production Validation
+
+Final production acceptance verified owner login with the existing password, session restoration, dashboard, all 25 products, migrated orders, order creation, Paid and Delivered updates, refresh persistence, combined filters, logout, subsequent login and 375 × 812 responsive behaviour.
+
+API acceptance verified 401 for unauthenticated access, 403 for authenticated non-owner access and successful owner-authorized access.
+
+Technical acceptance in the application repository recorded passing ESLint, TypeScript/Vite build, `check:functions`, Cloudflare Functions compilation and frontend secret scanning, with a clean final Git working tree.
 
 ## My Role & Contribution
 
-Benjamin handled requirements discovery, workflow analysis, product scoping and the change in direction after reviewing the existing WhatsApp workflow. He designed and implemented the mobile-first React/TypeScript frontend, Supabase/PostgreSQL model, RPC-backed order workflows, authentication, RLS, deployment, validation, real-device UX refinement and client handover guidance.
+- Requirements discovery, workflow analysis, product pivoting and scope control
+- Mobile-first UX and real-device refinement
+- React/TypeScript frontend engineering and provider-neutral API design
+- PostgreSQL data modelling, functions, triggers, constraints and indexes
+- Neon Auth architecture, JWT authorization and secure server-side secret handling
+- Cloudflare Pages Functions API and centralized repository design
+- Supabase → Neon schema/data/auth migration and sequence preservation
+- Staging validation, rollback planning, production cutover and deployment
+- Client implementation
 
-## Claim Boundaries
+## Current Scope / Claim Boundaries
 
-The case study does not claim measured revenue, efficiency, productivity, conversion or long-term business impact. It does not present Spice Harvest Ops as ecommerce, a WhatsApp replacement, a SaaS or multi-tenant platform, or claim payment-provider integration, WhatsApp API automation, stock management, advanced analytics, a customer portal or testimonials.
+This is a production-deployed, client-ready implementation for one real small-business workflow. Production acceptance does not establish long-term impact, scale or broad commercial traction.
+
+The case study does not claim proven revenue growth, percentage efficiency improvement, large-scale adoption, a large user base, multiple paying clients, production-scale SaaS, multi-tenancy, M-Pesa integration, WhatsApp API integration, inventory management, advanced analytics, a customer portal, testimonials or long-term business impact.
+
+Production order counts are engineering evidence only, and test activity is not customer revenue.
 
 ## Technologies
 
-React, TypeScript, Vite, Tailwind CSS, Lucide, Supabase, PostgreSQL, Supabase Auth, Row Level Security, PostgreSQL RPC functions and Cloudflare Pages.
+React 19, TypeScript, Vite, Tailwind CSS, Lucide, Neon PostgreSQL, Neon Auth, PostgreSQL, Cloudflare Pages Functions, JWT/JWKS authorization, Cloudflare Pages, Git and GitHub.
 
-## Project Access
+Supabase appears only in the migration history and rollback plan; it is not a current production technology.
 
-- **Live Demo:** <https://spice-harvest-ops.pages.dev>
-- **Source Code:** Private Repository
+## Production App / Contact
+
+- **Production app:** <https://spice-harvest-ops.pages.dev>
+- **Source code:** Private repository (no public source URL)
 - **Contact CTA:** Discuss a Similar Project
