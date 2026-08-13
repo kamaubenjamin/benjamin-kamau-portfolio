@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { personal } from "@/data/personal";
@@ -10,7 +9,7 @@ import { experiences } from "@/data/experience";
 import { education } from "@/data/education";
 import { certifications } from "@/data/certifications";
 import { skillCategories } from "@/data/skills";
-import { Download, GraduationCap, Award, Calendar } from "lucide-react";
+import { GraduationCap, Award, Calendar } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About",
@@ -79,12 +78,6 @@ export default function AboutPage() {
                 ))}
               </div>
 
-              <div className="mt-8">
-                <Button href={personal.cvFile} variant="primary" download>
-                  <Download size={16} />
-                  Download CV
-                </Button>
-              </div>
             </div>
 
             <div className="space-y-4">

@@ -24,7 +24,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 | Competitor Price Intelligence Platform | Verified shared repository | No hosted Streamlit deployment verified |
 | FlowSync | Verified public repository | Verified original public dashboard technical preview; not production-ready or fully data-integrated |
 | Pair and Place Website Operations | Not provided | Verified live client website; no claim of original complete-site design or build |
-| GymBolt Gym Management System | Private source repository | Verified protected public demo at `https://gymbolt.pages.dev`; guided access only; hosted Daraja sandbox verified, not production M-Pesa |
+| GymBolt Management System | Private source repository | Functional hosted frontend at `https://gymbolt.pages.dev`; pilot-oriented release candidate with verified Daraja sandbox architecture, not production M-Pesa |
 
 ---
 
@@ -62,8 +62,10 @@ This document tracks all unresolved content gaps that need to be filled before o
 - Pair and Place has completed its safe WordPress-side maintenance phase; hosting-panel review, analytics, conversion tracking, Elementor work and booking improvements remain unresolved.
 - Pair and Place’s link is the live client website; Benjamin’s scope was maintenance and operations, not an original complete-site design or build claim.
 - FlowSync uses Clerk authentication UI and Supabase-backed competitor records; its external execution/data-plane API remains separately hosted and incompletely integrated.
-- GymBolt has a verified protected Cloudflare Pages demo and hosted Daraja sandbox success path, including private phone approval, ResultCode 0 callback, one authoritative completed payment and reconciled invoice, Billing and Dashboard totals. Access is for portfolio review and guided demonstrations rather than unrestricted testing. It is not production M-Pesa, and no pilot, paying client, production user or customer revenue is claimed.
+- GymBolt is the first Featured Project, followed by Intelligent Document Processing and ExploreAfrica. FlowSync leads Additional Work, followed by Competitor Price Intelligence and Pair and Place.
+- GymBolt is a deployed pre-production / pilot-oriented release candidate using isolated single-gym deployments. Its functional Cloudflare Pages frontend and Daraja sandbox architecture are verified; production M-Pesa is disabled, final real receipt-email delivery acceptance is pending, and no pilot, paying client, production user or customer revenue is claimed.
 - Exactly six selected public case studies are generated. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
+- Public CV UI references and the public PDF asset have been removed. A current CV is shared directly on request.
 - Historical Android repositories are audited learning prototypes and are intentionally not elevated into the selected portfolio case studies.
 - Project screenshots remain unresolved, and no unsupported production, deployment, analytics or measured-outcome claims should be published.
 

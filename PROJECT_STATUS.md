@@ -1,77 +1,69 @@
 # Portfolio Project Status
 
+## Authoritative Project Order
+
+### Featured Projects
+
+1. GymBolt Management System
+2. Intelligent Document Processing Platform
+3. ExploreAfrica
+
+### Additional Work
+
+1. FlowSync
+2. Competitor Price Intelligence Platform
+3. Pair and Place Website Operations
+
+Exactly six public project case studies remain. The factual content of the five non-GymBolt case studies is unchanged; only grouping and order changed.
+
 ## GymBolt
 
 ### Current Status
 
-GymBolt is a globally accessible public early MVP preparing for controlled pilot validation. It is not production-ready, has no pilot or paying gym client, and has generated no customer revenue. The KES 1 recorded revenue is controlled sandbox evidence only.
+**Deployed pre-production / pilot-oriented release candidate**
 
-### Verified Public Deployment
+GymBolt is a configurable gym operations platform built for controlled deployment and customization for individual gyms. It is suitable for portfolio review, demonstrations and controlled pilot discussions, but is not yet production-proven. The next major business milestone is **controlled pilot adoption**.
 
-- Cloudflare Pages deployment: verified
-- Live URL: <https://gymbolt.pages.dev>
-- Public login, Dashboard, hosted member count, Billing and Attendance: verified
-- Verification markers: `M3.2B_PHASE_3_SUCCESS_PATH=PASS` and `GYMBOLT_CLOUDFLARE_DEPLOYMENT=PASS`
+### Verified Deployment and Access
 
-### Verified Capabilities
+- Live Demo: <https://gymbolt.pages.dev>
+- Source Code: Private Repository
+- Cloudflare Pages direct-upload deployment validated; no automatic Git-based deployment integration is claimed
+- HTTPS and HTTP 200 passed
+- Immutable deployed artifact matched local build hashes
+- Zero application fatal errors and zero browser loopback requests observed in verified hosted checks
 
-- Email/password admin authentication
-- Member administration
-- Initial subscription assignment and current subscription display
-- Attendance workflows
-- Billing and invoices
-- Manual partial and final payment recording
-- Financial Dashboard reconciliation
-- Hosted Daraja sandbox STK workflow with callback-based settlement
-- Receipt/reference retention, failed-attempt history and duplicate-settlement protection
-- KES 0 outstanding in the verified sandbox case
-- Cloudflare Pages public deployment
+### Deployment Model
 
-### Current Access Model
+GymBolt currently uses an isolated single-gym deployment model rather than a shared multi-tenant SaaS database. Each gym receives separate frontend, Supabase, PostgreSQL, authentication, settings, M-Pesa and email configuration. A new installation should normally require configuration rather than source-code edits.
 
-GymBolt uses protected admin login and is available for portfolio review and guided demonstrations. It is not an unrestricted self-service demo. Public payment initiation and the public Sandbox STK action are disabled.
+### Verified Scope
+
+Implemented scope includes member onboarding and approval, membership lifecycle and renewals, invoices, authoritative payment reconciliation, persistent receipts, staff/admin attendance, classes, trainers and assignments, inventory, announcements, profiles, settings, responsive admin/member experiences, Daraja sandbox architecture and Resend receipt-email infrastructure.
+
+**Hosted receipt-email infrastructure configured; final real delivery acceptance pending.** Production M-Pesa is deliberately disabled.
+
+Recent maintained test gates passed with no known application or security defects in the verified release scope. The hosted migration ledger has 19 / 19 migrations applied; this is engineering evidence, not a production-readiness claim.
 
 ### Current Limitations
 
-- Member self-registration, member login and a member portal are not implemented.
-- Role/status-based portal routing, admin approval and the complete subscription lifecycle remain incomplete.
-- Settings and Announcements are incomplete.
-- Classes, Trainers, Inventory, notifications and portals remain partial or placeholder.
-- Public payment initiation is disabled; only the hosted Daraja sandbox integration is verified.
-- Production M-Pesa is not enabled, and callback-origin authentication requires production hardening.
-- There is no pilot, paying client, customer revenue, testimonial, partnership or traction claim.
+- Production M-Pesa disabled
+- Final real receipt-email delivery acceptance pending
+- Dedicated trainer portal not implemented
+- Member self-service QR attendance and access-control hardware integration not implemented
+- No controlled gym pilot completed, paying gym client, customer revenue or production customer telemetry
+- Not a shared multi-tenant SaaS deployment
 
-### Marketing Position
+### Progression
 
-GymBolt is presented as a verified, publicly deployed early MVP for guided portfolio review. Claims remain limited to demonstrated admin, attendance, billing, reconciliation and hosted Daraja sandbox capabilities. It is not represented as production-ready or as an unrestricted public testing environment.
+Development → local hardening complete → hosted release candidate → provider configuration → controlled pilot → real gym feedback → production hardening
 
-### Next Product Phase
+Detailed, claim-bounded GymBolt documentation is maintained in `GYMBOLT_PORTFOLIO_CASE_STUDY.md`.
 
-**GymBolt V1 Functional Completion**
+## Public CV Status
 
-Planned work, not current capability:
+Public CV navigation, calls to action, source references and the public PDF asset have been removed. Benjamin provides a current CV directly when requested by a recruiter or client.
 
-- Member self-registration
-- Member authentication
-- Member portal
-- Role/status-based routing
-- Admin approval
-- Subscription lifecycle completion
-- Settings
-- Announcements
-- Classes
-- Trainers
-- Inventory
-- Notifications
-- Operational reporting
-- Production hardening
-- Production M-Pesa remains the final major integration phase
+## Last Updated
 
-### Live Links
-
-- Live demo: <https://gymbolt.pages.dev>
-- Source code: Private Repository
-
-### Last Updated
-
-2026-07-31
+2026-08-13

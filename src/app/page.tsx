@@ -13,7 +13,6 @@ import { services } from "@/data/services";
 import { projects } from "@/data/projects";
 import { experiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
-import { personal } from "@/data/personal";
 import { personJsonLd, serializeJsonLd } from "@/lib/json-ld";
 import {
   ArrowRight,
@@ -259,9 +258,6 @@ export default function HomePage() {
                 <div className="relative flex flex-wrap justify-center gap-4">
                   <Button href="/contact" variant="primary" size="lg">
                     Discuss a Project <ArrowRight size={18} />
-                  </Button>
-                  <Button href={personal.cvFile} variant="outline" size="lg" download>
-                    Download CV
                   </Button>
                 </div>
               </div>

@@ -7,7 +7,6 @@ export interface PersonalInfo {
   location: string;
   remoteAvailable: boolean;
   availability: string;
-  cvFile: string;
 }
 
 export const personal: PersonalInfo = {
@@ -24,5 +23,4 @@ I combine strong analytical thinking with hands-on engineering to deliver practi
   location: "Nairobi, Kenya",
   remoteAvailable: true,
   availability: "Selected projects and contract opportunities",
-  cvFile: "/documents/Benjamin-Kamau-CV.pdf",
 };

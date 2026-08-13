@@ -78,7 +78,6 @@ src/
 ├── lib/                    # Utilities, site URL and JSON-LD generators
 └── styles/                 # Theme tokens (theme.ts)
 public/
-├── documents/              # CV PDF
 └── images/                 # Reference image, project screenshots
 docs/                       # Architecture, content checklist, deployment checklist
 ```
@@ -91,7 +90,7 @@ All portfolio content is stored as typed TypeScript data files in `src/data/`:
 
 | File | Content |
 |---|---|
-| `personal.ts` | Name, title, tagline, bio, location, availability, CV path |
+| `personal.ts` | Name, title, tagline, bio, location and availability |
 | `social.ts` | GitHub, LinkedIn, email, WhatsApp (all optional) |
 | `nav.ts` | Navigation link items |
 | `projects.ts` | Audited project case studies with full fields |
@@ -106,10 +105,6 @@ To update content, edit the relevant file. The site rebuilds automatically in de
 ### Updating Social Links
 
 Edit `src/data/social.ts`. When a URL is set, the corresponding icon appears in the hero section and footer. When a field is omitted or `undefined`, no button renders.
-
-### Replacing the CV
-
-Replace `public/documents/Benjamin-Kamau-CV.pdf` with the updated file. The path is referenced in `src/data/personal.ts` — no code changes needed if the filename stays the same.
 
 ### Adding Screenshots
 
@@ -147,8 +142,9 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
 - Competitor Price Intelligence is paused as a separate preserved product. Its architecture history records the reusable Python ETL foundation from which it evolved; that foundation is not presented as a separate production platform.
 - Pair and Place has completed its safe WordPress-side maintenance phase.
-- GymBolt is a globally accessible early MVP with a verified Cloudflare Pages demo at <https://gymbolt.pages.dev> and protected admin login. Access is intended for portfolio review and guided demonstrations, not unrestricted audience testing; only hosted Daraja sandbox payments are verified, production M-Pesa is disabled, and the source repository is private. There is no paying client or customer revenue, and functional V1 implementation remains planned.
-- Exactly six selected public case studies are generated: three Featured Projects and three Additional Work entries. Standalone learning exercises and the earlier ETL foundation are not presented as separate public projects.
+- GymBolt is a deployed pre-production / pilot-oriented release candidate at <https://gymbolt.pages.dev>, using isolated single-gym deployments and verified Daraja sandbox architecture. Production M-Pesa remains disabled, final real receipt-email delivery acceptance is pending, and there is no completed pilot, paying gym client or customer revenue.
+- Exactly six selected public case studies are generated. Featured order: GymBolt, Intelligent Document Processing Platform, ExploreAfrica. Additional Work order: FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations.
+- Public CV links, calls to action and the public PDF asset have been removed; current CVs are shared directly on request.
 - Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 
 ## SEO and Accessibility

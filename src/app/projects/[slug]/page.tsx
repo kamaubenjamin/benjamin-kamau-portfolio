@@ -66,8 +66,13 @@ export default async function ProjectPage({ params }: Props) {
           <h1 className="mb-4 text-3xl font-bold tracking-tight text-[var(--color-text)] sm:text-4xl">
             {project.title}
           </h1>
+          {project.positioning && (
+            <p className="mb-3 max-w-3xl text-xl font-medium text-[var(--color-text)]">
+              {project.positioning}
+            </p>
+          )}
           <p className="max-w-2xl text-lg text-[var(--color-text-muted)]">
-            {project.shortDescription}
+            {project.valueProposition ?? project.shortDescription}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -120,6 +125,25 @@ export default async function ProjectPage({ params }: Props) {
               </section>
             )}
 
+            {project.caseStudySections?.map((section) => (
+              <section key={section.title}>
+                <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">{section.title}</h2>
+                {section.description && (
+                  <p className="leading-relaxed text-[var(--color-text-muted)]">{section.description}</p>
+                )}
+                {section.details && (
+                  <ul className={`${section.description ? "mt-4" : ""} space-y-2 text-[var(--color-text-muted)]`}>
+                    {section.details.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3 leading-relaxed">
+                        <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-emerald)]" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+
             {project.architecture && (
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">Architecture</h2>
@@ -141,7 +165,7 @@ export default async function ProjectPage({ params }: Props) {
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
                   {project.slug === "gymbolt-gym-management-system"
-                    ? "M-Pesa Payment & Reconciliation Workflow"
+                    ? "Payment Reconciliation Principle"
                     : "M-Pesa Payment Workflow"}
                 </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.paymentWorkflow}</p>
@@ -293,7 +317,12 @@ export default async function ProjectPage({ params }: Props) {
                     : "Let’s Build a Practical Operations System"}
                 </h2>
                 <p className="mb-5 leading-relaxed text-[var(--color-text-muted)]">{project.callToAction}</p>
-                <Button href="/contact" variant="primary">Discuss a Similar Project</Button>
+                <div className="flex flex-wrap gap-3">
+                  <Button href="/contact" variant="primary">Discuss a Similar Project</Button>
+                  {project.slug === "gymbolt-gym-management-system" && (
+                    <Button href="/contact" variant="outline">Request a Guided Demo</Button>
+                  )}
+                </div>
               </Card>
             )}
           </div>

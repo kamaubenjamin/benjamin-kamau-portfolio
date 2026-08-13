@@ -42,10 +42,9 @@
 - [x] `/about` — Route loads with one `h1`
 - [x] `/contact` — Route loads with one `h1`
 - [x] `/nonexistent` — Custom 404 page returns status 404
-- [x] `public/documents/Benjamin-Kamau-CV.pdf` — CV is served as PDF
 
 ### Asset Verification
-- [x] `public/documents/Benjamin-Kamau-CV.pdf` exists and is served correctly
+- [x] Public CV links and public PDF asset are absent
 - [x] `public/images/portfolio-reference.png` exists (reference only, not displayed)
 - [x] `/manifest.webmanifest`, `/sitemap.xml`, and `/robots.txt` return successfully
 - [x] `/icon`, `/apple-icon`, and `/opengraph-image` generated routes return images
@@ -93,7 +92,7 @@
 ### Post-Deployment Verification
 - [x] All public routes and all six project slugs return 200 on the live URL
 - [x] Unknown routes return the custom 404 with status 404
-- [x] CV returns 200 with `application/pdf`
+- [x] No CV link is exposed through navigation, homepage, About page, footer, metadata or structured data
 - [x] Metadata renders with route-correct production canonicals and Open Graph URLs
 - [x] Manifest, robots, sitemap, favicon, Apple icon, and Open Graph image return expected content types
 - [x] Person JSON-LD on `/` and ProfessionalService JSON-LD on `/services` verified

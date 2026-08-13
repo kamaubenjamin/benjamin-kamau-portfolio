@@ -4,7 +4,7 @@ import { GradientText } from "@/components/ui/GradientText";
 import { personal } from "@/data/personal";
 import { social } from "@/data/social";
 import { DataFlowVisual } from "./DataFlowVisual";
-import { MapPin, Briefcase, Download, Eye, MessageSquare } from "lucide-react";
+import { MapPin, Briefcase, Eye, MessageSquare } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -42,15 +42,6 @@ export function HeroSection() {
               <Button href="/contact" variant="outline" size="lg">
                 <MessageSquare size={18} />
                 Discuss a Project
-              </Button>
-              <Button
-                href={personal.cvFile}
-                variant="ghost"
-                size="lg"
-                download
-              >
-                <Download size={18} />
-                Download CV
               </Button>
             </div>
 

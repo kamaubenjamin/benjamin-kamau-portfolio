@@ -52,7 +52,7 @@ No other component requires `"use client"`. Server components remain the default
 
 All portfolio content lives in typed TypeScript data files under `src/data/`:
 
-- `personal.ts` — name, title, tagline, bio, location, availability, CV path
+- `personal.ts` — name, title, tagline, bio, location and availability
 - `nav.ts` — navigation link items
 - `social.ts` — GitHub, LinkedIn, email, WhatsApp (all optional)
 - `projects.ts` — 6 projects with full field support (slug, title, category, status, descriptions, technologies, optional case-study fields)

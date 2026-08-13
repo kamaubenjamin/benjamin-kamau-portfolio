@@ -1,143 +1,141 @@
-# GymBolt Portfolio Case Study
+# GymBolt Management System — Portfolio Case Study
 
-## Project Summary
+## 1. Header / Positioning
 
-GymBolt is a globally accessible public early MVP for gym administration, member records, attendance, subscriptions, billing and auditable payment reconciliation. Its protected Cloudflare Pages deployment supports portfolio review and guided demonstrations while development continues toward a functional V1.
+**A configurable gym operations platform built for controlled deployment and customization for individual gyms.**
 
-## Business Problem
+> A deployed pre-production gym operations platform covering membership lifecycle, attendance, billing, receipts, classes, inventory and configurable client deployment, with verified Daraja sandbox payment architecture.
 
-Gym administrators need member activity, subscription state, invoices and payments to remain consistent across operational views. When payment requests, callbacks and invoice updates are handled separately, duplicate settlements, incomplete histories and mismatched revenue or outstanding balances become material risks.
+**Current stage:** Deployed pre-production / pilot-oriented release candidate
 
-## Solution
+**Next commercial milestone:** Controlled pilot adoption
 
-GymBolt connects protected admin workflows for member administration, subscriptions, attendance, invoices and payments. Manual payment recording and a hosted Daraja sandbox workflow reconcile settlement state to Billing and the financial Dashboard while retaining references, failed attempts and duplicate-settlement safeguards.
+## 2. Overview
 
-## Current Product Status
+GymBolt is designed for independent gym deployments. It combines member administration, membership lifecycle, subscriptions, billing, payment reconciliation, receipts, attendance, classes, trainers, inventory, announcements, profiles and gym settings across responsive admin and member experiences.
 
-GymBolt is a verified public early MVP preparing for controlled pilot validation. It is not production-ready, not an unrestricted self-service demo and not in use by a pilot or paying gym client. There is no customer revenue, testimonial, partnership or traction claim.
+## 3. Business Problem
 
-## Verified Capabilities
+Gym operators need membership, attendance, billing, payments, receipts, classes and operational records to remain consistent. Disconnected tools and manual workflows can cause unclear membership state, billing inconsistencies, duplicate payment handling, weak attendance controls, missing transaction history, operational fragmentation and difficult client-specific deployment.
 
-- Email/password admin authentication
-- Member administration
-- Initial subscription assignment and current subscription display
-- Attendance workflows
-- Billing and invoices
-- Manual partial and final payment recording
-- Financial Dashboard reconciliation
-- Hosted Daraja sandbox STK workflow
-- Callback-based settlement
-- Receipt/reference retention
-- Failed-attempt history
-- Duplicate-settlement protection
-- Cloudflare Pages public deployment
+## 4. Solution
 
-## Technical Architecture
+GymBolt centralizes authenticated administration and member-facing workflows while keeping payment and membership state authoritative. Isolated deployments, role-aware security, payment reconciliation and reusable configuration support operational consistency for each gym.
 
-- Vite, React and TypeScript frontend
-- Tailwind CSS interface styling
-- Supabase Auth for protected email/password admin access
-- Supabase PostgreSQL data layer with Row-Level Security
-- Supabase Edge Functions as the server-side Daraja initiation and callback boundary
-- Cloudflare Pages public hosting
+## 5. Key Capabilities
 
-## Authentication and Access Model
+- Member onboarding and approval, plans, activation and renewals
+- Billing, invoices, payments and persistent receipts
+- Staff/admin attendance, member attendance history and privacy boundaries
+- Classes, trainers and capacity-safe booking
+- Inventory, announcements, profiles and gym settings
+- Responsive admin and member experiences
 
-The public deployment presents a protected admin login. Access is intended for guided demonstrations and portfolio review, not unrestricted audience testing. Member authentication, member self-registration and a member portal are not yet implemented, and role/status-based portal routing remains incomplete.
+## 6. Membership & Billing Lifecycle
 
-## Attendance and Billing Workflows
+GymBolt implements onboarding and approval, membership plans, activation, renewal billing, invoice lifecycle, authoritative reconciliation, current-period preservation, automatic future membership transition after settlement, duplicate-transition protection, manual payment fallback and member billing visibility.
 
-Verified workflows include member administration, initial subscription assignment, current subscription display, attendance operations, invoices, and manual partial or final payment recording. Billing and Dashboard financial state reconcile to the verified payment outcome.
+> An invoice represents payment intent. Membership state changes only after authoritative settlement.
 
-## Daraja Sandbox Integration
+This rule prevents a payment request from prematurely changing a member’s access or billing state.
 
-The hosted Daraja integration is sandbox-only. The verified success path covers STK initiation, handset approval, callback processing, one authoritative completed settlement, invoice reconciliation, KES 0 outstanding, receipt/reference retention, failed-attempt history and duplicate-settlement protection. The recorded KES 1 revenue is controlled sandbox evidence only, not customer revenue. Public payment initiation and the public Sandbox STK action are disabled. Production M-Pesa is not enabled.
+## 7. Payments & Receipt Architecture
 
-## Cloudflare Deployment
+GymBolt includes an implemented and tested Safaricom Daraja sandbox payment architecture: STK Push, callback handling, payment reconciliation, duplicate callback protection, amount/member/invoice validation, failure and retry handling, exactly-once application and persistent receipt creation.
 
-The public Cloudflare Pages deployment is verified at <https://gymbolt.pages.dev>. Public login, Dashboard, hosted member count, Billing and Attendance were verified. Deployment evidence records `GYMBOLT_CLOUDFLARE_DEPLOYMENT=PASS`.
+Production M-Pesa remains deliberately disabled. Sandbox transactions are engineering evidence, never customer revenue.
 
-## Verified Outcomes
+Receipts use customer-safe references and support view, print, reprint, admin access and member access. They persist across navigation and logout/login. Internal UUIDs and provider metadata are not exposed to members.
 
-- `M3.2B_PHASE_3_SUCCESS_PATH=PASS`
-- `GYMBOLT_CLOUDFLARE_DEPLOYMENT=PASS`
-- Public login verified
-- Dashboard verified
-- Hosted member count visible
-- Billing verified
-- Attendance verified
-- KES 1 recorded revenue retained as controlled sandbox evidence only
-- KES 0 outstanding in the verified sandbox case
-- Public Sandbox STK action hidden
+### Receipt Email
 
-## Security and Reliability Boundaries
+**Hosted receipt-email infrastructure configured; final real delivery acceptance pending.**
 
-- Admin access is protected by email/password authentication and database authorization boundaries.
-- Private Daraja integration concerns remain behind server-side Edge Functions.
-- Callback-based settlement, reference retention, failed-attempt history and duplicate-settlement protection are verified.
-- Callback-origin authentication still requires production hardening.
-- Public payment initiation is disabled.
-- The deployment does not represent production-ready security or production payment processing.
+Resend is configured server-side with automatic delivery intent, durable pending/sent/failed audit states, exactly-once intent per payment, duplicate callback protection and authorized manual resend. Payment success remains independent from email failure. The sender and provider are configured, secrets remain server-side, and final hosted delivery acceptance is pending.
 
-## Current Limitations
+## 8. Member Experience
 
-- Member self-registration is not implemented.
-- Member login and member portal are not implemented.
-- Role/status-based portal routing and admin approval are incomplete.
-- Subscription renewal and full subscription-history management are incomplete.
-- Settings and Announcements are incomplete.
-- Classes, Trainers, Inventory, notifications and portals remain partial or placeholder.
-- Public payment initiation is disabled.
-- Production M-Pesa is not enabled.
-- Callback-origin authentication requires production hardening.
-- No pilot or paying client exists.
+Members can use a responsive dashboard to view membership status, billing, receipts, attendance history, classes and announcements, and maintain their profile and avatar.
 
-## Next Product Phase
+> Staff/admin performs the authoritative member check-in. Members can view their own attendance history but do not currently self-check-in.
 
-**GymBolt V1 Functional Completion** will continue development toward a functional V1 with member self-registration, member authentication, member portal capabilities, role/status-based routing, admin approval, subscription lifecycle completion, Settings, Announcements, Classes, Trainers, Inventory, notifications, operational reporting and production hardening. Production M-Pesa remains the final major integration phase. These items are planned and are not described as implemented.
+Private avatars accept validated JPEG, PNG and WebP files up to 5 MiB.
 
-## My Role
+## 9. Admin / Staff Operations
 
-I designed and implemented the verified GymBolt foundation across the React interface, Supabase data model, access controls, gym administration workflows and server-side Daraja sandbox integration. This included member, subscription, attendance, invoice and manual-payment workflows, plus callback settlement, reference retention, failed-attempt history, duplicate protection and reconciliation.
+Implemented operations include member management and approval, billing, payment recording, attendance check-in, trainer/class/attendance management, inventory, announcements, installation settings and receipt operations.
 
-## Technologies Used
+Trainer roles, entities, assignments and class operations are implemented. **A dedicated trainer-specific portal/workspace is not yet implemented.** This does not block the current admin/member-focused market version.
 
-React, TypeScript, Vite, Tailwind CSS, Supabase, PostgreSQL, Supabase Auth, Row-Level Security, Supabase Edge Functions, Safaricom Daraja API sandbox, GitHub and Cloudflare Pages.
+## 10. Classes, Attendance, Inventory & Announcements
 
-## Service Positioning
+- **Classes:** create, update, reschedule, cancel, archive and book, with capacity, duplicate-booking and overbooking protection
+- **Attendance:** staff/admin check-in, eligibility validation, duplicate protection, member history and privacy boundaries
+- **Inventory:** records, authoritative stock adjustments, immutable history and low-stock visibility
+- **Announcements:** draft, publish, archive and audience targeting; members see relevant published announcements
 
-GymBolt demonstrates how a focused internal operations system can connect records, attendance, billing and auditable payment workflows. Engagement discussions should begin with the client’s real process, access model, reporting requirements and integration boundaries rather than treating this early MVP as an off-the-shelf production product.
+QR check-in, kiosk mode and access-control hardware integrations remain future work.
 
-## Live Demo
+## 11. Architecture & Security
 
-- Live Demo: <https://gymbolt.pages.dev>
-- Access: Protected login for portfolio review and guided demonstrations
-- Source Code: Private Repository
+The frontend uses React, TypeScript, Vite and Tailwind CSS. Supabase provides PostgreSQL, Auth, Storage and Edge Functions. The hosted frontend runs on Cloudflare Pages.
 
-## Call to Action
+Implemented and tested boundaries include Supabase authentication, Row-Level Security across public tables, private storage, role-aware access, cross-member exposure denial and server-only secrets. The browser does not receive the Supabase service-role key, Resend API key or Daraja secrets. Private storage includes profile avatars and installation assets.
 
-- Primary CTA: **Discuss a Similar Project**
-- Secondary CTA: **Request a Guided Demo**
+**Current hosted migration ledger: 19 / 19 migrations applied.**
 
-## Public Claims Allowed
+## 12. Deployment & Portability
 
-- Globally accessible public early MVP
-- Verified protected Cloudflare Pages demo at <https://gymbolt.pages.dev>
-- Protected email/password admin login
-- Guided-demo and portfolio-review access model
-- Verified member administration, subscription display, attendance, billing, invoices, manual payments and Dashboard reconciliation
-- Verified hosted Daraja sandbox callback settlement, reference retention, failed-attempt history and duplicate protection
-- Controlled KES 1 sandbox evidence and KES 0 outstanding in the verified sandbox case
-- Preparing for controlled pilot validation and continued V1 implementation
-- Private source repository
+GymBolt currently uses an isolated single-gym deployment model rather than a shared multi-tenant SaaS database. Each gym receives its own frontend deployment, Supabase project, PostgreSQL database, authentication, gym settings, M-Pesa configuration and email configuration.
 
-## Public Claims Prohibited
+> A new gym installation should normally require configuration rather than source-code edits.
 
-- Production-ready product or production-ready payment processing
-- Production M-Pesa implementation
-- Unrestricted self-service or audience testing
-- Implemented member self-registration, member login or member portal
-- Completed role/status routing, full subscription lifecycle or incomplete operational modules
-- Pilot, paying gym client, customer revenue or production users
-- Testimonials, partnerships, traction or unsupported measured outcomes
-- Open-source or public source repository
+Implemented portability includes an installation bootstrap flow, environment templates, deployment validation command, configurable gym identity and providers, client installation documentation, unpredictable bootstrap credentials, no copied client secrets, isolated deployments and a second-gym configuration simulation.
+
+The hosted frontend is a real functional frontend deployed by validated direct upload to Cloudflare Pages at <https://gymbolt.pages.dev>. HTTPS and HTTP 200 passed, deployed artifact hashes matched the local build, zero application fatal errors were observed and no browser loopback requests were detected. Automatic Git-based Cloudflare deployment integration is not enabled or claimed.
+
+Gym settings cover identity, logo, contact information, address, timezone, currency, receipt/business display name and support contacts. Installation logos are validated up to 2 MiB.
+
+## 13. Engineering Quality
+
+Verified work covers authentication, onboarding, membership races, payment concurrency, duplicate/delayed callbacks, wrong-payment validation, exactly-once settlement, receipt persistence, email-intent protections, class and inventory concurrency, attendance constraints, storage/settings security, responsive UI validation and repository/browser-bundle secret scanning.
+
+> Recent maintained test gates passed with no known application or security defects in the verified release scope.
+
+This evidence does not imply complete production readiness.
+
+## 14. My Role & Contribution
+
+Benjamin designed and implemented the application architecture, data model, authentication and authorization, membership lifecycle, billing, payment reconciliation, receipts, receipt-email architecture, attendance, classes, trainers, inventory, announcements, profiles, settings, responsive design, portability, Cloudflare deployment, Supabase security, testing and documentation.
+
+## 15. Current Status & Limitations
+
+**Deployed pre-production / pilot-oriented release candidate**
+
+Suitable for portfolio review, demonstrations and controlled pilot discussions; not production-proven.
+
+- Production M-Pesa disabled
+- Final real receipt-email delivery acceptance pending
+- Dedicated trainer portal not implemented
+- Member QR self-check-in and access-control hardware integration not implemented
+- No controlled gym pilot, paying gym client, customer revenue or production customer telemetry
+- Isolated single-gym deployments, not shared multi-tenant SaaS
+
+## 16. Next Stage
+
+**Controlled pilot adoption**
+
+Development → local hardening complete → hosted release candidate → provider configuration → controlled pilot → real gym feedback → production hardening
+
+Future opportunities include production M-Pesa, a trainer workspace, QR attendance, kiosk/access-control integrations, AI analytics, an AI member assistant, churn prediction, shared multi-tenant SaaS architecture and production customer telemetry. None are presented as implemented.
+
+## 17. Technologies
+
+React, TypeScript, Vite, Tailwind CSS, Supabase Auth, PostgreSQL, Row-Level Security, Supabase Storage, Supabase Edge Functions, Safaricom Daraja Sandbox, Resend, Cloudflare Pages, Git and GitHub.
+
+## 18. CTA / Project Access
+
+- **Live Demo:** <https://gymbolt.pages.dev>
+- **Source Code:** Private Repository
+- **Primary CTA:** Discuss a Similar Project
+- **Secondary CTA:** Request a Guided Demo
