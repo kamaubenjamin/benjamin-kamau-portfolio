@@ -2,6 +2,8 @@
 
 Professional portfolio and services website for **Benjamin Kamau**, focused on Data Engineering, Workflow Automation and Document Intelligence, based in Nairobi, Kenya.
 
+This portfolio is the primary public presentation layer for selected work. Serious product source repositories are intentionally private and proprietary; public case studies focus on purpose, implemented capabilities, safe architecture summaries, verified maturity, live previews and honest limitations rather than source access.
+
 Built with Next.js 16, TypeScript, Tailwind CSS v4, Lucide React icons, and Framer Motion.
 
 ---
@@ -135,17 +137,19 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 
 ## Current Project Priorities
 
-- Intelligent Document Processing is the main current project; the read-only v0.22 Deterministic Purchase-Order Demonstration is complete and deployed to a synthetic-data UAT frontend and API.
-- Current work is a private real purchase-order accuracy baseline, with v0.22.1 as the immediate next milestone.
+- Intelligent Document Processing is the main current project. The current verified milestone is v0.23 — Purchase-Order Accuracy Corpus Foundation: six fictional deterministic layouts, exact field/line-item/financial/finding metrics, bounded supplier/ship-to recovery, repeatability/state isolation and 22 focused tests passing.
+- The read-only v0.22 UAT technical-preview frontend and API remain relevant hosted context; IDP is active development and is not production-ready.
 - OCR, hosted uploads, human review and controlled AI-assisted extraction remain planned rather than implemented.
 - The newer Document Intelligence FlowSync frontend and API remain separate from FlowSync's original Competitor Price Intelligence implementation.
 - ExploreAfrica is locally validated at V4-M11, with production deployment and later public, payment, CRM, reporting and Document Intelligence workflows still unverified or incomplete.
-- Competitor Price Intelligence is paused as a separate preserved product. Its architecture history records the reusable Python ETL foundation from which it evolved; that foundation is not presented as a separate production platform.
+- FlowSync and the Competitor Price Intelligence Engine have private proprietary source. The hosted FlowSync dashboard remains a public technical preview, while scraping/execution stays external and full live Engine integration is not verified.
+- Competitor Price Intelligence has a verified Playwright-first Jumia MVP foundation with 29 passed and 1 skipped, stabilized matching/comparison, stage telemetry and local-only runtime state; it is not presented as production-ready or as a completed multi-source/Kafka/Airflow platform.
 - Pair and Place has completed its safe WordPress-side maintenance phase.
 - GymBolt is a deployed pre-production / pilot-oriented release candidate at <https://gymbolt.pages.dev>, using isolated single-gym deployments and verified Daraja sandbox architecture. Production M-Pesa remains disabled, final real receipt-email delivery acceptance is pending, and there is no completed pilot, paying gym client or customer revenue.
 - Spice Harvest Ops is Production Deployed at <https://spice-harvest-ops.pages.dev> for The Spice Harvest Market. It complements the owner’s existing WhatsApp Business ordering channel with private order, payment, fulfilment and sales tracking through Neon Auth, an authenticated Cloudflare Pages Functions API and Neon PostgreSQL. The completed Supabase → Neon migration retains Supabase only as a rollback snapshot/backup; no scale, traction or measured-impact claim is made.
 - Essiedo Catalogue Pilot is a live validation-stage catalogue at <https://essiedo-catalogue-pilot.pages.dev>, testing a structured handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries without replacing the seller’s social-selling workflow.
 - Exactly eight selected public case studies are generated. Featured order: GymBolt, Spice Harvest Ops, Intelligent Document Processing Platform. Additional Work order: ExploreAfrica, FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations, Essiedo Catalogue Pilot.
+- Archived learning, Android and practice repositories are intentionally excluded from the selected project set.
 - Public CV links, calls to action and the public PDF asset have been removed; current CVs are shared directly on request.
 - Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
 

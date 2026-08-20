@@ -2,6 +2,13 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-08-20 — Public Portfolio Governance Refresh
+
+- Updated IDP to the verified v0.23 Purchase-Order Accuracy Corpus Foundation with six fictional layouts, exact metrics, bounded header recovery, repeatability/state isolation and 22 focused tests passing.
+- Clarified FlowSync as the separate Competitor Price Intelligence control-plane frontend, retained its hosted technical preview and removed its now-private source-repository CTA.
+- Updated the Competitor Price Intelligence Engine foundation and removed its now-private source-repository CTA without adding unsupported production, multi-source, Kafka/Airflow or integration claims.
+- Established the portfolio as the public presentation layer for serious private/proprietary source projects while preserving exactly eight selected case studies and excluding archived learning/practice repositories.
+
 ## 2026-08-14 — Spice Harvest Ops Production Migration and Cutover
 
 - Updated Spice Harvest Ops to **Production Deployed** following verified production acceptance.

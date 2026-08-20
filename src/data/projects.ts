@@ -95,9 +95,9 @@ export const projects: Project[] = ([
     status: "Active development",
     statusVariant: "lime",
     shortDescription:
-      "A modular document-intelligence platform for deterministic ingestion, structural parsing, workflow orchestration, tenant-scoped APIs and authenticated purchase-order result presentation.",
+      "A governed document-processing platform with deterministic ingestion, structural parsing, workflow orchestration, tenant-scoped APIs and a six-layout purchase-order accuracy corpus.",
     overview:
-      "Benjamin’s flagship project is a modular document-intelligence platform combining deterministic ingestion, structural parsing, configurable workflow execution, tenant-scoped FastAPI endpoints and a separate authenticated FlowSync interface. The completed v0.22 UAT milestone demonstrates a fictional purchase order through a read-only, tenant-isolated workflow with canonical line items, exact financial validation and lifecycle presentation. Current work is focused on establishing a private field-by-field and product-by-product accuracy baseline before broader layout support.",
+      "Benjamin’s flagship project is a governed document-processing platform combining deterministic ingestion, structural parsing, configurable workflow execution, tenant-scoped FastAPI endpoints and a separate authenticated Document Intelligence frontend. The current v0.23 milestone adds a governed six-layout fictional purchase-order corpus with strict field and line-item accuracy evaluation, exact metrics and repeatable state-isolated execution. The v0.22 read-only, tenant-isolated UAT technical preview remains the hosted demonstration foundation.",
     problem:
       "Business documents arrive in varied formats and structures, requiring consistent ingestion, normalization, parsing, validation and human review before downstream workflows can use them safely.",
     solution:
@@ -113,6 +113,8 @@ export const projects: Project[] = ([
     architectureDetails: [
       "The read-only Document Intelligence API provides tenant-scoped document queries plus document-detail, validation, matching, processing-history and purchase-order endpoints.",
       "The canonical purchase-order model uses a deterministic extraction contract and exact monetary validation with Decimal, including arithmetic reconciliation for line totals, subtotal, tax and grand total.",
+      "Corpus v1 measures exact classification, header, party, date, line-item, financial-reconciliation and warning/finding outcomes across six fictional deterministic layouts.",
+      "Bounded supplier and ship-to recovery supports serialized standalone labels and machine-readable PDF visual headers without introducing OCR or probabilistic extraction.",
       "Supabase authentication is paired with authenticated backend session validation, active-membership resolution, role and membership-status validation, tenant UUID-based authorization and tenant-scoped API requests.",
       "The tenant UUID remains the authorization authority. The authoritative tenant slug only selects the controlled fictional UAT fixture namespace; it does not replace authorization or grant access. Mapping is restricted between the UAT tenant and that fixture namespace.",
       "Tenant isolation conceals unauthorized records with safe 404 behavior, while session projection avoids exposing sensitive authentication details.",
@@ -127,6 +129,9 @@ export const projects: Project[] = ([
       "Supabase authentication and tenant isolation",
       "Canonical purchase-order modelling",
       "Decimal-based financial validation",
+      "Six-layout fictional purchase-order accuracy corpus",
+      "Exact field, line-item, financial and finding metrics",
+      "Deterministic repeatability and state isolation",
       "Read-only React and TypeScript FlowSync UAT interface",
     ],
     technologies: [
@@ -153,17 +158,19 @@ export const projects: Project[] = ([
       "Document Parsing",
     ],
     currentStatusHeading:
-      "Current milestone: v0.22 — Deterministic Purchase-Order Demonstration",
+      "Current milestone: v0.23 — Purchase-Order Accuracy Corpus Foundation",
     currentStatus:
-      "The v0.22 milestone is complete and deployed to UAT. It demonstrates a controlled purchase-order workflow from deterministic extraction and canonical modelling through exact financial validation, tenant-scoped APIs and authenticated FlowSync presentation. The hosted demonstration uses synthetic, non-confidential data and is a technical preview rather than a production system.",
+      "The v0.23 foundation is implemented and locally verified. Six fictional layouts exercise deterministic classification, canonical extraction, strict comparison and expected-valid or expected-invalid outcomes. The hosted v0.22 demonstration remains a synthetic, authenticated, read-only UAT technical preview; IDP is in active development and is not production-ready.",
     currentStatusDetails: [
-      "Current active work: v0.22.1 — Real Purchase-Order Accuracy Baseline.",
-      "The private baseline compares expected and extracted values field by field and product by product to identify deterministic parsing defects and establish transparent support boundaries before broader layout support.",
+      "Six unique fictional layouts cover conventional, vertical, wrapped-description, reordered-column, missing-optional-field and malformed-validation cases.",
+      "Exact classification, header, party, date, line-item count/field, financial-reconciliation, warning/finding and overall metrics are reported.",
+      "Deterministic repeatability and cross-fixture state isolation are verified.",
+      "22 focused purchase-order and corpus tests pass.",
     ],
     roadmap:
-      "Development will proceed through governed accuracy, persistence, upload, review and bounded extraction milestones before production hardening.",
+      "Future expansion remains governed and claim-bounded. OCR, human review/correction and controlled AI-assisted extraction require separate architecture, privacy, security and evaluation gates.",
     roadmapDetails: [
-      "Multi-layout PO accuracy corpus",
+      "Additional governed fictional layouts and supported-pattern coverage",
       "Persistent document lifecycle",
       "Private upload and object storage",
       "Human review and correction",
@@ -179,7 +186,7 @@ export const projects: Project[] = ([
         primary: true,
       },
       {
-        url: "https://flowsync-document-intelligence-api.vercel.app",
+        url: "https://flowsync-document-intelligence-api.vercel.app/docs",
         label: "UAT API",
         kind: "api",
       },
@@ -188,20 +195,20 @@ export const projects: Project[] = ([
   },
   {
     slug: "flow-sync",
-    title: "FlowSync",
-    category: "Workflow Platform & Interface Foundation",
+    title: "FlowSync — Competitor & Workflow Intelligence",
+    category: "Competitor Intelligence Control Plane",
     status: "Existing platform foundation",
     statusVariant: "emerald",
     shortDescription:
-      "A hosted workflow-facing platform for competitor monitoring, dashboard analytics and reusable interface patterns, with further data-integration work still in progress.",
+      "A hosted operator and control-plane frontend for competitor monitoring, workflow visibility and analytics, with execution and scraping owned by an external Engine.",
     overview:
-      "FlowSync is an evolving Next.js control-plane and user-interface foundation for competitor price intelligence and workflow monitoring, with Clerk authentication UI, Supabase-backed competitor records, dashboard views and an API-first boundary to a separately hosted execution and data plane.",
+      "FlowSync is a Next.js operator and control-plane frontend for Competitor Price Intelligence, with Clerk authentication UI, Supabase-backed competitor records, dashboard views and an API-first boundary to a separately hosted execution and data plane. Its source repository is private and proprietary.",
     problem:
       "Workflow products need reusable interface, authentication, analytics and integration patterns without coupling otherwise separate product domains.",
     solution:
       "Built Next.js, React, TypeScript and Tailwind CSS foundations covering Clerk sign-in and sign-up UI, Supabase-backed competitor records and CSV imports, dashboard and monitoring views, and typed API clients for external workflow and telemetry services.",
     architecture:
-      "Shared design patterns may be reused, but business logic, APIs, entities, workflows and integrations remain separate between products. The existing FlowSync implementation remains linked to Competitor Price Intelligence and is being preserved untouched.",
+      "FlowSync does not own scraping or execution; those responsibilities remain in the external Competitor Price Intelligence Engine. Live Engine integration is not fully verified. FlowSync is also separate from IDP’s internal apps/flowsync-document-intelligence frontend: the products do not share domain state, routes, backend contracts or security assumptions.",
     capabilities: [
       "Next.js, React, TypeScript and Tailwind CSS interface foundation",
       "Clerk authentication UI foundations",
@@ -222,18 +229,14 @@ export const projects: Project[] = ([
       "Papa Parse",
     ],
     currentStatus:
-      "The original hosted FlowSync dashboard is a functional, publicly accessible technical preview associated with Competitor Price Intelligence and workflow monitoring. Some live data fetching still needs correction, so it is not production-ready or fully data-integrated and will be stabilized in a later milestone. It remains separate from the newer Document Intelligence FlowSync UAT interface.",
+      "The hosted FlowSync dashboard remains a public technical preview for Competitor Price Intelligence and workflow monitoring. Some live data fetching still needs correction, and end-to-end Engine integration is not fully verified, so it is not production-ready or fully data-integrated. Source is private and proprietary.",
+    repositoryStatus: "Private Repository",
     links: [
       {
         url: "https://flow-sync-beta.vercel.app/dashboard",
         label: "View FlowSync Dashboard",
         kind: "preview",
         primary: true,
-      },
-      {
-        url: "https://github.com/kamaubenjamin/FlowSync",
-        label: "View Repository",
-        kind: "repository",
       },
     ],
     featured: false,
@@ -847,24 +850,25 @@ export const projects: Project[] = ([
     status: "Paused - separate product",
     statusVariant: "default",
     shortDescription:
-      "A Python-based monitoring system for collecting, normalizing, matching and tracking competitor product pricing across multiple sources.",
+      "A Playwright-first Python execution and data plane for deterministic Jumia Electronics extraction, normalization, product matching, price comparison and local runtime history.",
     overview:
-      "A separate developed product for extracting data from websites and other sources, cleaning and normalizing it, matching comparable products and monitoring price changes over time.",
+      "A private, proprietary execution and data plane for competitor-price monitoring. Its verified current foundation is a focused Jumia Electronics MVP that extracts public listings, normalizes product and price observations, stabilizes product matching and comparisons, and records local runtime state for later operational use.",
     problem:
       "Product information from different websites and sources varies in structure and naming, making reliable comparison and price-change tracking difficult without validation, normalization and matching.",
     solution:
-      "Developed separated extraction, transformation and loading concerns with source extraction, product-data cleaning and normalization, validation, fuzzy matching, price-history tracking, change detection, alerts, execution metrics and execution logging.",
+      "Built separated extraction, transformation and comparison concerns with Playwright-first collection, canonical previous_price/current_price handling, compatibility support for older price fields, deterministic matching, stage-count telemetry and local runtime-state boundaries.",
     architecture:
-      "This product evolved from a reusable Python ETL foundation covering extraction, Pandas transformation, validation, CSV and SQLite loading, pipeline state, logging and orchestration. Python extraction and processing now uses SQLite-backed storage, Playwright extraction, Selenium support and reusable ETL lifecycle concepts, with Streamlit dashboard and monitoring foundations. Its existing FlowSync integration remains untouched and separate from Document Intelligence.",
+      "The Engine owns extraction and processing. Playwright is the primary browser path for the focused Jumia MVP; matching and comparison operate on normalized observations, while price history, scheduler state and the canonical registry remain ignored local runtime files initialized from tracked defaults where applicable. FlowSync is a separate control-plane frontend, and live end-to-end integration is not fully verified.",
     capabilities: [
-      "Website and source extraction",
+      "Playwright-first Jumia Electronics extraction",
       "Separated extraction, transformation and loading concerns",
       "Product-data cleaning, normalization and validation",
-      "Fuzzy product matching",
-      "Price-history tracking, price-change detection and alerts",
-      "Execution metrics and execution logging",
-      "SQLite-backed processing and Streamlit monitoring foundations",
-      "Playwright extraction and Selenium extraction support",
+      "Stabilized comparison and product matching",
+      "Canonical previous_price/current_price contract with compatibility support",
+      "Stage-count telemetry and execution logging",
+      "Optional canonical product-specification handling",
+      "Scheduler bootstrap from tracked defaults",
+      "Local-only price history, scheduler state and canonical registry",
     ],
     technologies: [
       "Python",
@@ -879,17 +883,10 @@ export const projects: Project[] = ([
       "Streamlit",
     ],
     currentStatus:
-      "The platform remains a separate developed product and is currently paused while the Intelligent Document Processing Platform is the primary development focus. The shared repository records the earlier ETL pipeline’s evolution into this specialized competitor-price-monitoring product; no hosted Streamlit deployment is verified. Its existing FlowSync integration is being preserved for future product work.",
+      "The focused Engine foundation is validated by a deterministic MVP suite with 29 passed and 1 skipped. Comparison matching, stage telemetry, optional product specifications and runtime-state hygiene are implemented. Source is private and proprietary. The Engine is not production-ready; multi-source production operation, Kafka/Airflow and fully verified FlowSync integration remain unimplemented or unverified.",
     roadmap:
-      "Future work may improve the product without merging its business logic, APIs, entities or workflows into Document Intelligence. The existing FlowSync integration remains untouched.",
-    links: [
-      {
-        url: "https://github.com/kamaubenjamin/ETL-COMPETITOR-PRICE-MONITOR-pipeline",
-        label: "View Repository",
-        kind: "repository",
-        primary: true,
-      },
-    ],
+      "Future work may improve the Engine and its governed FlowSync integration without merging competitor-price business logic, APIs, entities or workflows into Document Intelligence.",
+    repositoryStatus: "Private Repository",
     featured: false,
   },
 ] satisfies Project[]).sort(

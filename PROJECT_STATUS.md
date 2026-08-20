@@ -16,7 +16,40 @@
 4. Pair and Place Website Operations
 5. Essiedo Catalogue Pilot
 
-Exactly eight public project case studies are published. The factual content and grouping of the seven projects that preceded Essiedo Catalogue Pilot are unchanged.
+Exactly eight public project case studies are published. This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
+
+## Intelligent Document Processing Platform
+
+### Current Status
+
+**Active development — v0.23 Purchase-Order Accuracy Corpus Foundation**
+
+- Six fictional deterministic purchase-order layouts
+- Exact classification, header, party, date, line-item, financial-reconciliation and warning/finding metrics
+- Bounded supplier/ship-to recovery for supported serialized and visual-header patterns
+- Repeatable, state-isolated corpus evaluation
+- 22 focused purchase-order and corpus tests passing
+- v0.22 read-only synthetic UAT remains the hosted technical-preview foundation
+
+IDP is not production-ready. OCR, human review/correction and controlled AI-assisted extraction remain future governed work.
+
+## FlowSync — Competitor & Workflow Intelligence
+
+### Current Status
+
+**Public technical preview / private proprietary source**
+
+FlowSync is the operator/control-plane frontend for Competitor Price Intelligence. Scraping and execution remain external to FlowSync, and full live Engine integration is not verified. It remains separate from IDP’s internal `apps/flowsync-document-intelligence` frontend.
+
+Technical Preview: <https://flow-sync-beta.vercel.app/dashboard>
+
+## Competitor Price Intelligence Platform
+
+### Current Status
+
+**Focused Engine foundation / private proprietary source**
+
+The Engine has a Playwright-first Jumia Electronics MVP, canonical `previous_price`/`current_price` handling with compatibility support, stabilized matching/comparison, stage-count telemetry, optional product-specification handling, scheduler defaults and local-only runtime state. Its deterministic MVP suite reports 29 passed and 1 skipped. Production readiness, production multi-source support, Kafka/Airflow and fully verified FlowSync integration are not claimed.
 
 ## Essiedo Catalogue Pilot
 
@@ -108,4 +141,4 @@ Public CV navigation, calls to action, source references and the public PDF asse
 
 ## Last Updated
 
-2026-08-14
+2026-08-20
