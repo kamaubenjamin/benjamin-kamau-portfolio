@@ -214,3 +214,12 @@ npm run cf:deploy
 - `GYMBOLT_PORTFOLIO_CASE_STUDY.md` — Detailed verified GymBolt positioning and claim boundaries
 - `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md` — Detailed verified Spice Harvest Ops positioning and claim boundaries
 - `ESSIEDO_CATALOGUE_PILOT_PORTFOLIO_CASE_STUDY.md` — Detailed Essiedo live-pilot evidence and claim boundaries
+
+## License
+
+Copyright © 2026 Benjamin W. Kamau. All rights reserved.
+
+This project is proprietary software. No public-use or open-source license is
+granted for the current version. Public visibility of this repository and the
+deployed website does not grant permission to copy, modify, distribute, or
+create derivative works from the source. See [`LICENSE`](LICENSE).
