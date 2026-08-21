@@ -12,7 +12,10 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const technologies = project.cardTechnologies ?? project.technologies;
   const visibleTechnologyCount = project.cardTechnologies ? 6 : 4;
   const liveDemo = project.links?.find(
-    (link) => link.label === "Live Demo" || link.label === "Live Pilot",
+    (link) =>
+      link.label === "Live Demo" ||
+      link.label === "View Live Demo" ||
+      link.label === "Live Pilot",
   );
 
   return (

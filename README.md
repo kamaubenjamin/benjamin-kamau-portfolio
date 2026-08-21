@@ -147,8 +147,9 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - Pair and Place has completed its safe WordPress-side maintenance phase.
 - GymBolt is a deployed pre-production / pilot-oriented release candidate at <https://gymbolt.pages.dev>, using isolated single-gym deployments and verified Daraja sandbox architecture. Production M-Pesa remains disabled, final real receipt-email delivery acceptance is pending, and there is no completed pilot, paying gym client or customer revenue.
 - Spice Harvest Ops is Production Deployed at <https://spice-harvest-ops.pages.dev> for The Spice Harvest Market. It complements the owner’s existing WhatsApp Business ordering channel with private order, payment, fulfilment and sales tracking through Neon Auth, an authenticated Cloudflare Pages Functions API and Neon PostgreSQL. The completed Supabase → Neon migration retains Supabase only as a rollback snapshot/backup; no scale, traction or measured-impact claim is made.
+- Home Health Operations Demo is a client-validation prototype at <https://richard-home-health-demo.pages.dev>, translating real prospective-client discovery into an interactive responsive workflow using fictional sample data and local React state. It has no production backend, database, authentication, real patient data, production healthcare deployment or compliance claim.
 - Essiedo Catalogue Pilot is a live validation-stage catalogue at <https://essiedo-catalogue-pilot.pages.dev>, testing a structured handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries without replacing the seller’s social-selling workflow.
-- Exactly eight selected public case studies are generated. Featured order: GymBolt, Spice Harvest Ops, Intelligent Document Processing Platform. Additional Work order: ExploreAfrica, FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations, Essiedo Catalogue Pilot.
+- Exactly nine selected public case studies are generated. Featured order: GymBolt, Spice Harvest Ops, Intelligent Document Processing Platform. Additional Work order: Home Health Operations Demo, ExploreAfrica, FlowSync, Competitor Price Intelligence Platform, Pair and Place Website Operations, Essiedo Catalogue Pilot.
 - Archived learning, Android and practice repositories are intentionally excluded from the selected project set.
 - Public CV links, calls to action and the public PDF asset have been removed; current CVs are shared directly on request.
 - Verified project links are stored centrally in `src/data/projects.ts`; the original FlowSync dashboard remains separate from the Document Intelligence UAT interface.
@@ -213,6 +214,7 @@ npm run cf:deploy
 - `CHANGELOG.md` — Portfolio documentation milestones
 - `GYMBOLT_PORTFOLIO_CASE_STUDY.md` — Detailed verified GymBolt positioning and claim boundaries
 - `SPICE_HARVEST_OPS_PORTFOLIO_CASE_STUDY.md` — Detailed verified Spice Harvest Ops positioning and claim boundaries
+- `HOME_HEALTH_OPERATIONS_DEMO_PORTFOLIO_CASE_STUDY.md` — Detailed Home Health client-validation evidence and prototype boundaries
 - `ESSIEDO_CATALOGUE_PILOT_PORTFOLIO_CASE_STUDY.md` — Detailed Essiedo live-pilot evidence and claim boundaries
 
 ## License

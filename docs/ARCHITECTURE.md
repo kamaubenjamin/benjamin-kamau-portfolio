@@ -7,7 +7,7 @@ All routes are server-rendered static pages (SSG):
 | Route | Type | Purpose |
 |---|---|---|
 | `/` | Static | Homepage with 9 sections |
-| `/projects` | Static | Project listing (8 published case studies) |
+| `/projects` | Static | Project listing (9 published case studies) |
 | `/projects/[slug]` | SSG (`generateStaticParams`) | Dynamic case studies |
 | `/services` | Static | All 6 services |
 | `/about` | Static | Bio, experience, education, certifications, skills |
@@ -55,7 +55,7 @@ All portfolio content lives in typed TypeScript data files under `src/data/`:
 - `personal.ts` — name, title, tagline, bio, location and availability
 - `nav.ts` — navigation link items
 - `social.ts` — GitHub, LinkedIn, email, WhatsApp (all optional)
-- `projects.ts` — 8 published project case studies with full field support (slug, title, category, status, descriptions, technologies, optional case-study fields)
+- `projects.ts` — 9 published project case studies with full field support (slug, title, category, status, descriptions, technologies, optional case-study fields)
 - `services.ts` — 6 services with icon mapping, descriptions, features
 - `experience.ts` — work history with company, role, period, highlights
 - `education.ts` — degree entries
@@ -64,7 +64,7 @@ All portfolio content lives in typed TypeScript data files under `src/data/`:
 
 No database, no API routes, no CMS. Content changes are made by editing these TypeScript files.
 
-`src/data/projects.ts` controls the canonical project data and display order: 3 Featured projects followed by 5 Additional Work projects.
+`src/data/projects.ts` controls the canonical project data and display order: 3 Featured projects followed by 6 Additional Work projects.
 
 ---
 

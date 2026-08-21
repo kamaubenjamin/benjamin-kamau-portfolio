@@ -10,13 +10,34 @@
 
 ### Additional Work
 
-1. ExploreAfrica
-2. FlowSync
-3. Competitor Price Intelligence Platform
-4. Pair and Place Website Operations
-5. Essiedo Catalogue Pilot
+1. Home Health Operations Demo
+2. ExploreAfrica
+3. FlowSync — Competitor & Workflow Intelligence
+4. Competitor Price Intelligence Platform
+5. Pair and Place Website Operations
+6. Essiedo Catalogue Pilot
 
-Exactly eight public project case studies are published. This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
+Exactly nine public project case studies are published. This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
+
+## Home Health Operations Demo
+
+### Current Status
+
+**Client Validation Prototype**
+
+Home Health Operations Demo, formally Richard Home Health — Operations Demo, translates requirements gathered from a prospective home-health client into a working responsive workflow prototype. The discovery baseline covered two patients and three caregivers, with patient notes, vital signs, caregiver tasks, task status, operational alerts, invoicing and accessible UX.
+
+### Verified Scope and Boundaries
+
+- Live Demo: <https://richard-home-health-demo.pages.dev>
+- Source Code: Private Repository; no public repository CTA
+- Interactive patient, caregiver, vital-sign, note, task, alert and KES invoice workflows
+- Local React application state only; no server persistence
+- Fictional sample patient data only; no real patient information
+- Responsive validation across mobile, tablet, laptop and large-desktop widths
+- TypeScript, production build, hosted HTTP/assets, navigation, patient-detail and responsive checks passed
+
+The prototype is frontend-only and is not production healthcare software. It has no production backend, database, authentication, Neon, Supabase, operational healthcare deployment, diagnosis, treatment recommendation, autonomous clinical AI or compliance certification. Future production infrastructure, security and regulatory review remain unimplemented work. Detailed evidence and claim boundaries are maintained in `HOME_HEALTH_OPERATIONS_DEMO_PORTFOLIO_CASE_STUDY.md`.
 
 ## Intelligent Document Processing Platform
 
@@ -141,4 +162,4 @@ Public CV navigation, calls to action, source references and the public PDF asse
 
 ## Last Updated
 
-2026-08-20
+2026-08-21

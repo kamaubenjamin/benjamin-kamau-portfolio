@@ -9,6 +9,7 @@ export type ProjectStatus =
   | "Completed learning project"
   | "Incomplete learning exercise"
   | "Existing platform foundation"
+  | "Client Validation Prototype"
   | "Pilot-oriented release candidate"
   | "Production Deployed"
   | "Live Pilot"
@@ -80,11 +81,12 @@ const projectDisplayOrder = new Map([
   ["gymbolt-gym-management-system", 0],
   ["spice-harvest-ops", 1],
   ["intelligent-document-processing-platform", 2],
-  ["exploreafrica-travel-platform", 3],
-  ["flow-sync", 4],
-  ["competitor-price-intelligence-platform", 5],
-  ["pair-and-place-website-operations", 6],
-  ["essiedo-catalogue-pilot", 7],
+  ["home-health-operations-demo", 3],
+  ["exploreafrica-travel-platform", 4],
+  ["flow-sync", 5],
+  ["competitor-price-intelligence-platform", 6],
+  ["pair-and-place-website-operations", 7],
+  ["essiedo-catalogue-pilot", 8],
 ]);
 
 export const projects: Project[] = ([
@@ -192,6 +194,179 @@ export const projects: Project[] = ([
       },
     ],
     featured: true,
+  },
+  {
+    slug: "home-health-operations-demo",
+    title: "Home Health Operations Demo",
+    category: "Responsive Home-Health Operations Prototype",
+    status: "Client Validation Prototype",
+    statusVariant: "lime",
+    shortDescription:
+      "A responsive home-health operations prototype built from real client discovery, bringing patient records, caregiver updates, vital signs, care tasks, operational alerts and invoicing into one simple workflow.",
+    cardDescription:
+      "Responsive home-health operations prototype built from real client discovery, combining patient records, caregiver updates, vital signs, care tasks, operational alerts and invoicing in one workflow.",
+    positioning:
+      "Turning real operational requirements into a working client-validation system.",
+    valueProposition:
+      "I gathered real operational requirements and translated them into a working interactive prototype so the workflow could be validated before investing in backend, authentication and production security infrastructure.",
+    overview:
+      "After gathering requirements from a prospective home-health client, Benjamin translated the operator’s current needs into a working responsive client-validation prototype. The application demonstrates patient and caregiver management, vital-sign recording, timestamped care notes, task tracking, operational alerts and KES invoicing across mobile and desktop interfaces. The current version intentionally uses fictional sample data and local React application state while the workflow is validated before any backend or production security implementation.",
+    problem:
+      "The prospective operator needed a simple operational system rather than a complex hospital ERP. At the discovery stage, the workflow covered two patients and three caregivers, with patient notes, vital-sign recording, caregiver tasks, completed and pending care work, operational alerts, invoicing and an accessible interface requiring clearer coordination in one place.",
+    solution:
+      "Built an interactive frontend application that models the requested day-to-day workflow and allows the prospective client to review how patient information, caregiver updates, tasks, alerts and invoices fit together before production infrastructure is selected or implemented.",
+    solutionDetails: [
+      "Dashboard views for active patients, caregiver count, today’s tasks, active alerts, outstanding invoices and recent activity",
+      "Patient records with assigned caregivers, care status, latest activity and detailed vital-sign, note, task and activity views",
+      "Caregiver workflows for assigned patients, today’s tasks, vital-sign entry, patient notes, task completion and task reopening",
+      "Operational task alerts, review flags, follow-up reminders and invoice-related alerts",
+      "KES invoice list, service periods, amounts, Draft/Sent/Paid/Overdue states and draft invoice creation",
+      "Interactive changes update local React application state without claiming server persistence",
+    ],
+    caseStudySections: [
+      {
+        title: "Business Discovery",
+        description:
+          "The prototype originated from requirements discovery with a prospective client operating primarily in home health. The goal was to make a small current workflow visible and testable without prematurely committing to hospital-scale software or production healthcare infrastructure.",
+        details: [
+          "Discovery baseline: two patients and three caregivers",
+          "Requirements covered notes, vital signs, caregiver tasks, task status, alerts, invoicing and accessible UX",
+          "The prospective client is not presented as a paying production client or as an organization currently running the prototype in production",
+        ],
+      },
+      {
+        title: "Key Workflows",
+        details: [
+          "Dashboard: active patients, caregivers, today’s tasks, alerts, outstanding invoices and recent activity",
+          "Patients: fictional records, assigned caregivers, care status and latest activity",
+          "Patient detail: blood pressure, pulse, temperature, SpO2, timestamped notes, care tasks and activity history",
+          "Caregiver workflow: assigned patients, task review, vital-sign recording, note entry, completion and reopening",
+          "Alerts and invoicing: operational follow-ups plus KES invoice creation and status tracking",
+        ],
+      },
+      {
+        title: "Patient & Caregiver Experience",
+        description:
+          "The interface connects patient context with caregiver action. Users can inspect a fictional patient’s summary and assigned caregiver, review vital-sign history and timestamped notes, and work through completed or pending care tasks in the same prototype flow.",
+      },
+      {
+        title: "Alerts & Invoicing",
+        description:
+          "Operational alerts cover task issues, review flags, follow-up reminders and invoice-related attention. The invoice workflow presents service period, KES amount and Draft, Sent, Paid or Overdue state, and supports creating a draft invoice in local state.",
+      },
+      {
+        title: "Responsive Engineering",
+        description:
+          "Responsive behavior was deliberately validated across mobile, tablet, laptop and large-desktop widths rather than treated as a desktop-only dashboard adaptation.",
+        details: [
+          "Mobile validation at 360px, 390px and 430px",
+          "Tablet validation at 768px and 1024px",
+          "Laptop validation at 1280px and 1440px",
+          "Large-desktop validation at 1600px and 1920px",
+          "Mobile bottom navigation and desktop sidebar navigation",
+          "Touch-friendly controls, responsive records/forms/dialogs, safe mobile viewport behavior, no page-level horizontal overflow and bounded large-screen content width",
+        ],
+      },
+      {
+        title: "Validation",
+        description:
+          "The current prototype passed implementation and hosted-preview checks. These are prototype engineering checks, not evidence of production healthcare readiness.",
+        details: [
+          "TypeScript typecheck and production build passed",
+          "Cloudflare-hosted root, JavaScript/CSS assets and favicon returned HTTP 200",
+          "Root refresh, major navigation and patient-detail workflow passed",
+          "Hosted checks passed at 390px mobile and 1440px desktop",
+          "No browser runtime errors or page-level horizontal overflow were observed during the recorded validation",
+        ],
+      },
+      {
+        title: "Current Prototype Boundaries",
+        description:
+          "This is a frontend-only client-validation prototype using fictional sample patient data and local React application state. It is designed to validate workflow before backend, authentication, persistence and production security work.",
+        details: [
+          "No real patient information is processed",
+          "No production backend, database, authentication, server persistence, Neon or Supabase implementation",
+          "Not production healthcare software and not operationally deployed at a healthcare business",
+          "No diagnosis, treatment recommendation or autonomous clinical AI capability",
+          "No HIPAA, GDPR healthcare, medical certification, regulatory approval or other compliance claim",
+        ],
+      },
+    ],
+    architecture:
+      "The implemented architecture is a React and TypeScript single-page frontend built with Vite and responsive CSS, hosted on Cloudflare Pages. Interactive workflow changes are held only in local React application state; there is no production backend, database, authentication layer or server persistence.",
+    architectureDetails: [
+      "Fictional sample data supports safe workflow demonstration without real healthcare records",
+      "Local state powers patient, caregiver, task, alert and invoice interactions for validation",
+      "The private source repository is not exposed as a public portfolio CTA",
+    ],
+    capabilities: [
+      "Patient and caregiver workflow modelling",
+      "Vital-sign history and entry",
+      "Timestamped caregiver notes",
+      "Care-task completion and reopening",
+      "Operational alerts and follow-up flags",
+      "KES invoice creation and status tracking",
+      "Responsive mobile and desktop navigation",
+      "Interactive local-state workflow validation",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Responsive CSS",
+      "Local React State",
+      "Git",
+      "GitHub",
+      "Cloudflare Pages",
+    ],
+    cardTechnologies: ["React", "TypeScript", "Vite", "Responsive UI", "Workflow Design"],
+    role:
+      "Benjamin led the work from business discovery and workflow modelling through product scoping, frontend implementation, deployment, responsive validation and claim-bounded project governance.",
+    roleDetails: [
+      "Business discovery, requirements analysis, workflow modelling and scope control",
+      "Application architecture and React/TypeScript implementation",
+      "Patient, caregiver task, operational alert and invoice workflow design",
+      "Interactive local-state implementation and responsive UX engineering",
+      "Cloudflare Pages deployment, responsive validation and project documentation",
+    ],
+    currentStatusHeading: "Current Status & Prototype Boundaries",
+    currentStatus:
+      "Client Validation Prototype. The responsive interactive frontend is deployed for workflow review using fictional sample data and local application state. It is not a production healthcare system and is not operating at the prospective client’s business.",
+    currentStatusDetails: [
+      "Working hosted prototype for iterative client validation",
+      "Frontend-only implementation with no server persistence",
+      "No real patient information, production backend, database or authentication",
+      "No paying-client, production-use, healthcare-compliance or clinical capability claim",
+    ],
+    roadmap:
+      "Any progression beyond client validation requires separately designed and verified production infrastructure, security, operational and compliance work.",
+    roadmapDetails: [
+      "Production backend and database",
+      "Authentication and role-based access",
+      "Secure persistence and production patient-data security",
+      "Audit logging, backup/recovery and production monitoring",
+      "Regulatory/compliance review and production deployment controls",
+    ],
+    callToAction:
+      "Need to turn an operational process into a testable workflow before committing to production infrastructure? Let’s map and validate the work first.",
+    liveDemoStatus: "https://richard-home-health-demo.pages.dev",
+    repositoryStatus: "Private Repository",
+    claimsNotToMake: [
+      "No claim of a paying production client or operational healthcare deployment",
+      "No claim that real patient information is processed or persisted",
+      "No production backend, database, authentication, Neon or Supabase claim",
+      "No production healthcare readiness, diagnosis, treatment recommendation or autonomous clinical AI claim",
+      "No HIPAA, GDPR healthcare, medical certification, regulatory approval or compliance-certification claim",
+    ],
+    links: [
+      {
+        url: "https://richard-home-health-demo.pages.dev",
+        label: "View Live Demo",
+        kind: "preview",
+        primary: true,
+      },
+    ],
+    featured: false,
   },
   {
     slug: "flow-sync",

@@ -2,6 +2,14 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-08-21 — Home Health Operations Demo Case Study Added
+
+- Added Home Health Operations Demo as a **Client Validation Prototype** based on real discovery with a prospective home-health client.
+- Documented the interactive patient, caregiver, vital-sign, care-note, task, alert and KES invoice workflows implemented with fictional sample data and local React state.
+- Recorded responsive and hosted validation evidence without implying production healthcare readiness.
+- Added the project as the first Additional Work item, preserved the Featured order and increased the selected portfolio from eight to nine case studies.
+- Preserved strict boundaries: no paying-client or production-use claim; no real patient data, backend, database, authentication, persistence, clinical AI or compliance claim.
+
 ## 2026-08-20 — Public Portfolio Governance Refresh
 
 - Updated IDP to the verified v0.23 Purchase-Order Accuracy Corpus Foundation with six fictional layouts, exact metrics, bounded header recovery, repeatability/state isolation and 22 focused tests passing.
