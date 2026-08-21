@@ -30,13 +30,15 @@
 
 ### Route Verification
 - [x] `/` — Homepage renders
-- [x] `/projects` — All 6 projects listed
+- [x] `/projects` — All 8 projects listed
+- [x] `/projects/gymbolt-gym-management-system` — Case study loads
+- [x] `/projects/spice-harvest-ops` — Case study loads
 - [x] `/projects/intelligent-document-processing-platform` — Case study loads
 - [x] `/projects/exploreafrica-travel-platform` — Case study loads
-- [x] `/projects/competitor-price-intelligence-platform` — Case study loads
 - [x] `/projects/flow-sync` — Case study loads
+- [x] `/projects/competitor-price-intelligence-platform` — Case study loads
 - [x] `/projects/pair-and-place-website-operations` — Case study loads
-- [x] `/projects/gymbolt-gym-management-system` — Case study loads
+- [x] `/projects/essiedo-catalogue-pilot` — Case study loads
 - [x] Removed project slugs return the custom 404 with status 404
 - [x] `/services` — All 6 services displayed
 - [x] `/about` — Route loads with one `h1`
@@ -90,7 +92,7 @@
 - [x] `npm run cf:deploy` — deployment to Cloudflare Workers succeeds
 
 ### Post-Deployment Verification
-- [x] All public routes and all six project slugs return 200 on the live URL
+- [x] All public routes and all eight project slugs return 200 on the live URL
 - [x] Unknown routes return the custom 404 with status 404
 - [x] No CV link is exposed through navigation, homepage, About page, footer, metadata or structured data
 - [x] Metadata renders with route-correct production canonicals and Open Graph URLs
