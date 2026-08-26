@@ -2,6 +2,12 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-08-26 - GymBolt Live-Pilot Portfolio Synchronization
+
+- Updated GymBolt from deployed pre-production / pilot-oriented release candidate to **Live Pilot** for the active Lock & Load Gym pilot.
+- Refreshed public portfolio and case-study copy around role-based Admin/Staff/Member workflows, governed membership/payment transitions, attendance/session entitlements, lockers, cashbook workflows, Member Portal, Brevo-backed Supabase Auth recovery, isolated QA data and pilot-safe migration/backup discipline.
+- Replaced the retired public demo CTA with `https://gymbolt-lock-load-gym.pages.dev` while preserving private source status and excluding production M-Pesa, commercial-scale, adoption and measured-impact claims.
+
 ## 2026-08-21 — Home Health Operations Demo Case Study Added
 
 - Added Home Health Operations Demo as a **Client Validation Prototype** based on real discovery with a prospective home-health client.

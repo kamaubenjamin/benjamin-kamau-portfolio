@@ -116,43 +116,31 @@ Production acceptance preserved 25 products, 5 migrated orders and 9 migrated or
 
 ### Current Status
 
-**Deployed pre-production / pilot-oriented release candidate**
+**Live Pilot**
 
-GymBolt is a configurable gym operations platform built for controlled deployment and customization for individual gyms. It is suitable for portfolio review, demonstrations and controlled pilot discussions, but is not yet production-proven. The next major business milestone is **controlled pilot adoption**.
+GymBolt is a functional full-stack gym operations and member-management platform currently being piloted with Lock & Load Gym. It covers memberships, attendance, billing, session packages, lockers, cashbook workflows and secure member self-service across role-based Admin, Staff and Member experiences.
 
 ### Verified Deployment and Access
 
-- Live Demo: <https://gymbolt.pages.dev>
+- Live Pilot: <https://gymbolt-lock-load-gym.pages.dev>
 - Source Code: Private Repository
-- Cloudflare Pages direct-upload deployment validated; no automatic Git-based deployment integration is claimed
-- HTTPS and HTTP 200 passed
-- Immutable deployed artifact matched local build hashes
-- Zero application fatal errors and zero browser loopback requests observed in verified hosted checks
-
-### Deployment Model
-
-GymBolt currently uses an isolated single-gym deployment model rather than a shared multi-tenant SaaS database. Each gym receives separate frontend, Supabase, PostgreSQL, authentication, settings, M-Pesa and email configuration. A new installation should normally require configuration rather than source-code edits.
+- Public CTA uses the active pilot URL; the retired public demo URL is not used
+- No public repository/source CTA is exposed
 
 ### Verified Scope
 
-Implemented scope includes member onboarding and approval, membership lifecycle and renewals, invoices, authoritative payment reconciliation, persistent receipts, staff/admin attendance, classes, trainers and assignments, inventory, announcements, profiles, settings, responsive admin/member experiences, Daraja sandbox architecture and Resend receipt-email infrastructure.
+Implemented scope includes Admin / Staff / Member role separation, RLS/privacy boundaries, member registration with optional plan or No Plan, Start Membership, Member Applications, membership plans, session packages, governed invoice-to-exact-payment membership transitions, Time In/Time Out attendance, session consumption, locker workflows, invoices, payments, receipts, cashbook, expenses, income/net tracking, classes, trainers, inventory, announcements, responsive theming and a secure Member Portal.
 
-**Hosted receipt-email infrastructure configured; final real delivery acceptance pending.** Production M-Pesa is deliberately disabled.
+Password recovery is integrated through Supabase Auth with Brevo-backed authentication email delivery. Production M-Pesa is not active; older Daraja sandbox work is historical technical context only.
 
-Recent maintained test gates passed with no known application or security defects in the verified release scope. The hosted migration ledger has 19 / 19 migrations applied; this is engineering evidence, not a production-readiness claim.
+A permanently isolated QA member/test-data path, live-data backup procedures, migration replay/validation and data-integrity checks support production-safe iteration during the active pilot.
 
 ### Current Limitations
 
-- Production M-Pesa disabled
-- Final real receipt-email delivery acceptance pending
-- Dedicated trainer portal not implemented
-- Member self-service QR attendance and access-control hardware integration not implemented
-- No controlled gym pilot completed, paying gym client, customer revenue or production customer telemetry
-- Not a shared multi-tenant SaaS deployment
-
-### Progression
-
-Development → local hardening complete → hosted release candidate → provider configuration → controlled pilot → real gym feedback → production hardening
+- Production M-Pesa is not active
+- Member self-service QR attendance and access-control hardware integration are not claimed
+- No multiple paying gyms, broad public rollout, customer revenue, adoption metrics or measured business impact is claimed
+- Not presented as a completed commercial product or production-scale SaaS
 
 Detailed, claim-bounded GymBolt documentation is maintained in `GYMBOLT_PORTFOLIO_CASE_STUDY.md`.
 
