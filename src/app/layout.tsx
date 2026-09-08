@@ -22,11 +22,19 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
+    default: "Benkai Systems | Systems. Automation. Data.",
     template: "%s | Benkai Systems",
   },
   description:
     "Benkai Systems builds practical business systems, workflow automation, internal tools and data engineering solutions, founded and engineered by Benjamin Kamau.",
+  icons: {
+    icon: [
+      { url: "/brand/benkai-mark-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/brand/benkai-mark-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/benkai-mark-64.png", sizes: "64x64", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/benkai-mark.png", sizes: "512x512", type: "image/png" }],
+  },
   openGraph: {
     title: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
     description:

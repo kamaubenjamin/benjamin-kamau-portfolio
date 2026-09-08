@@ -16,35 +16,38 @@ import { skillCategories } from "@/data/skills";
 import { personJsonLd, serializeJsonLd } from "@/lib/json-ld";
 import {
   ArrowRight,
-  CheckCircle2,
   Database,
   Code2,
   Layers,
   Terminal,
   Globe,
   Blocks,
+  Cloud,
+  Braces,
+  ServerCog,
 } from "lucide-react";
 
-function CapabilityStrip() {
+function TechnologyStrip() {
   const items = [
-    { value: "2+", label: "Years of technical and workflow experience", icon: CheckCircle2 },
-    { value: "7+", label: "Workflows supported", icon: Layers },
-    { value: "Python, SQL, ETL", label: "Core technical stack", icon: Code2 },
-    { value: "BSc IT", label: "Information Technology", icon: Database },
+    { label: "React", icon: Code2 },
+    { label: "TypeScript", icon: Braces },
+    { label: "Python", icon: Terminal },
+    { label: "PostgreSQL", icon: Database },
+    { label: "Supabase", icon: ServerCog },
+    { label: "Cloudflare", icon: Cloud },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-      {items.map((item) => {
-        const Icon = item.icon;
-        return (
-          <Card key={item.label} hover={false} className="text-center">
-            <Icon className="mx-auto mb-2 h-6 w-6 text-[var(--color-emerald)]" />
-            <p className="text-lg font-bold text-[var(--color-text)]">{item.value}</p>
-            <p className="mt-1 text-xs text-[var(--color-text-muted)]">{item.label}</p>
-          </Card>
-        );
-      })}
+    <div className="rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-card)] px-5 py-5 sm:px-7">
+      <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-text-subtle)] sm:text-left">
+        Built with modern technologies
+      </p>
+      <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
+        {items.map((item) => {
+          const Icon = item.icon;
+          return <div key={item.label} className="flex items-center gap-2.5 text-sm font-medium text-[var(--color-text-muted)]"><Icon size={17} className="text-[var(--color-mint-muted)]" aria-hidden="true" /><span>{item.label}</span></div>;
+        })}
+      </div>
     </div>
   );
 }
@@ -126,11 +129,11 @@ export default function HomePage() {
         <HeroSection />
       </AnimatedWrapper>
 
-      {/* 3. Capability strip */}
-      <SectionWrapper divider={false}>
+      {/* Evidenced technology strip */}
+      <SectionWrapper divider={false} className="py-8 sm:py-10 lg:py-10">
         <Container>
           <AnimatedWrapper delay={0.1}>
-            <CapabilityStrip />
+            <TechnologyStrip />
           </AnimatedWrapper>
         </Container>
       </SectionWrapper>

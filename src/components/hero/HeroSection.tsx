@@ -8,33 +8,29 @@ import { MapPin, Briefcase, Eye, MessageSquare } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-16 sm:pt-24 lg:pt-32">
-      {/* Background gradient glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-[var(--color-emerald)]/5 blur-[120px]" />
-      </div>
+    <section className="hero-environment relative overflow-hidden pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-28 lg:pt-28">
 
       <Container className="relative">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-12 xl:grid-cols-12 xl:items-center xl:gap-16">
           {/* Left column: content */}
-          <div className="lg:col-span-7">
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--color-emerald)]">
+          <div className="xl:col-span-6">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-mint-muted)]">
               Systems. Automation. Data.
             </p>
-            <h1 className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-5xl lg:text-6xl">
+            <h1 className="mb-5 text-5xl font-semibold tracking-[-0.055em] text-[var(--color-text)] sm:text-6xl lg:text-7xl">
               Benkai Systems
             </h1>
-            <p className="mb-3 text-xl font-medium text-[var(--color-text)] sm:text-2xl">
+            <p className="mb-5 text-xl font-medium tracking-tight text-[var(--color-text)] sm:text-2xl">
               <GradientText>{personal.tagline}</GradientText>
             </p>
-            <p className="mb-6 text-lg leading-relaxed text-[var(--color-text-muted)]">
+            <p className="mb-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
               Benkai Systems builds internal business systems, workflow automation, document-processing platforms and data infrastructure around how businesses actually operate.
             </p>
-            <p className="mb-8 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)]">
+            <p className="mb-8 max-w-2xl text-sm leading-relaxed text-[var(--color-text-subtle)]">
               Founded and engineered by Benjamin Kamau.
             </p>
 
-            <div className="mb-8 flex flex-wrap gap-4">
+            <div className="mb-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button href="/projects" variant="primary" size="lg">
                 <Eye size={18} />
                 View Our Work
@@ -95,7 +91,7 @@ export function HeroSection() {
           </div>
 
           {/* Right column: animated data visual */}
-          <div className="lg:col-span-5 w-full">
+          <div className="min-w-0 w-full xl:col-span-6">
             <DataFlowVisual />
           </div>
         </div>

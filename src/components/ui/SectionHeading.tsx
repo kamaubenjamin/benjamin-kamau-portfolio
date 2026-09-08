@@ -20,16 +20,16 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-12 max-w-3xl",
+        "mb-12 max-w-3xl sm:mb-14",
         align === "center" && "mx-auto text-center",
         className
       )}
     >
-      <Heading className="text-3xl font-bold tracking-tight text-[var(--color-text)] sm:text-4xl">
+      <Heading className="text-3xl font-semibold tracking-[-0.035em] text-[var(--color-text)] sm:text-4xl">
         {title}
       </Heading>
       {subtitle && (
-        <p className="mt-4 text-lg text-[var(--color-text-muted)]">{subtitle}</p>
+        <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">{subtitle}</p>
       )}
     </div>
   );

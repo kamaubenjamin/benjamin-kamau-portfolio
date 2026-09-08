@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { social } from "@/data/social";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 
 function GithubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -22,18 +23,21 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-card)]">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
       <Container>
-        <div className="flex flex-col items-center gap-6 py-12 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-8 py-14 sm:flex-row sm:justify-between">
           <div className="flex flex-col items-center gap-2 sm:items-start">
             <Link
               href="/"
-              className="rounded-[var(--radius-button)] text-lg font-bold tracking-tight text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+              className="rounded-[var(--radius-button)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
             >
-              <span className="text-[var(--color-emerald)]">Benkai Systems</span>
+              <BrandLockup />
             </Link>
+            <p className="mt-2 text-xs font-medium uppercase tracking-[0.24em] text-[var(--color-mint-muted)]">
+              Systems. Automation. Data.
+            </p>
             <p className="text-sm text-[var(--color-text-muted)]">
-              Founded and engineered by Benjamin Kamau.
+              Benjamin Kamau · Founder &amp; Technical Builder
             </p>
           </div>
 

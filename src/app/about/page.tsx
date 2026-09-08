@@ -81,6 +81,11 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-4">
+              <Card hover={false} className="border-[var(--color-border-hover)] bg-[var(--color-mint-surface)]">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-mint-muted)]">Founder</p>
+                <h2 className="text-xl font-semibold tracking-tight text-[var(--color-text)]">Benjamin Kamau</h2>
+                <p className="mt-1 text-sm text-[var(--color-text-muted)]">Founder &amp; Technical Builder</p>
+              </Card>
               <Card hover={false}>
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wider text-[var(--color-emerald)]">
                   Location

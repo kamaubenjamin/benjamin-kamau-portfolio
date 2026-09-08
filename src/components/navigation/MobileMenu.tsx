@@ -8,6 +8,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems } from "@/data/nav";
 import { personal } from "@/data/personal";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 
 export function MobileMenu() {
   const [openPathname, setOpenPathname] = useState<string | null>(null);
@@ -74,9 +75,9 @@ export function MobileMenu() {
                   <Link
                     href="/"
                     onClick={() => closeMenu()}
-                    className="rounded-[var(--radius-button)] text-lg font-bold tracking-tight text-[var(--color-text)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                    className="rounded-[var(--radius-button)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
                   >
-                    <span className="text-[var(--color-emerald)]">BK</span>
+                    <BrandLockup compact />
                     <span className="sr-only">{personal.name}</span>
                   </Link>
                   <button
