@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { personal } from "@/data/personal";
 import { social } from "@/data/social";
 
 function GithubIcon({ size = 20 }: { size?: number }) {
@@ -31,10 +30,10 @@ export function Footer() {
               href="/"
               className="rounded-[var(--radius-button)] text-lg font-bold tracking-tight text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
             >
-              <span className="text-[var(--color-emerald)]">BK</span>
+              <span className="text-[var(--color-emerald)]">Benkai Systems</span>
             </Link>
             <p className="text-sm text-[var(--color-text-muted)]">
-              {personal.title}
+              Founded and engineered by Benjamin Kamau.
             </p>
           </div>
 
@@ -77,7 +76,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-[var(--color-border)] py-6 text-center text-sm text-[var(--color-text-muted)]">
-          <p>&copy; {currentYear} {personal.name}. All rights reserved.</p>
+          <p>&copy; {currentYear} Benkai Systems. Benjamin Kamau — Founder &amp; Technical Builder.</p>
         </div>
       </Container>
     </footer>

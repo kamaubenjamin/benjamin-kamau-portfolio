@@ -3,7 +3,7 @@
 // Runtime types generated with workerd@1.20260721.1 2026-07-22 nodejs_compat
 interface __BaseEnv_CloudflareEnv {
 	ASSETS: Fetcher;
-	NEXT_PUBLIC_SITE_URL: "https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev";
+	NEXT_PUBLIC_SITE_URL: "https://benkai-systems.benjamin-kamau.workers.dev";
 }
 declare namespace Cloudflare {
 	interface GlobalProps {

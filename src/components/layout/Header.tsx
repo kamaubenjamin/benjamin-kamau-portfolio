@@ -13,8 +13,8 @@ export function Header() {
             href="/"
             className="rounded-[var(--radius-button)] text-lg font-bold tracking-tight text-[var(--color-text)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
           >
-            <span className="text-[var(--color-emerald)]">BK</span>
-            <span className="sr-only">{personal.name}</span>
+            <span className="text-[var(--color-emerald)]">Benkai Systems</span>
+            <span className="sr-only"> — founded by {personal.name}</span>
           </Link>
           <DesktopNav />
           <MobileMenu />

@@ -11,7 +11,7 @@ import { Mail, MapPin } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Benjamin Kamau for data engineering, workflow automation, and technical consulting projects.",
+    "Discuss a business workflow, automation or data systems problem with Benkai Systems.",
   alternates: { canonical: "/contact" },
 };
 
@@ -20,8 +20,8 @@ export default function ContactPage() {
     <SectionWrapper>
       <Container>
         <SectionHeading
-          title="Let's Work Together"
-          subtitle="Have a project in mind? Let's discuss how I can help turn your data and processes into practical solutions."
+          title="Tell us what is slowing your business down."
+          subtitle="If important work is being managed through spreadsheets, WhatsApp, paper records or disconnected tools, describe the workflow and Benkai Systems can assess whether a focused system or automation would help."
           level="h1"
         />
 

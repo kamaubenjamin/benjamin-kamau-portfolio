@@ -2,6 +2,12 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-09-08 — GymBolt Pilot Synchronization, Benkai Systems Brand Transition and Worker Preparation
+
+- Synchronized GymBolt to its current live controlled Lock & Load Gym receptionist pilot, including governed membership/payment flow, standalone services, Member Portal, mobile continuity, migration/validation evidence and intentionally disabled production M-Pesa and receipt-email delivery.
+- Transitioned the portfolio to company-first **Benkai Systems** positioning while retaining Benjamin Kamau as Founder & Technical Builder and preserving all nine project facts, routes and ordering.
+- Prepared the Cloudflare Worker name and canonical URL for `benkai-systems.benjamin-kamau.workers.dev`; no deployment occurred and the existing `benjamin-kamau-portfolio` Worker was not deleted or disabled.
+
 ## 2026-08-26 - GymBolt Live-Pilot Portfolio Synchronization
 
 - Updated GymBolt from deployed pre-production / pilot-oriented release candidate to **Live Pilot** for the active Lock & Load Gym pilot.

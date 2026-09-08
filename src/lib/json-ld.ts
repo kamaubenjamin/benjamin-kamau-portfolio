@@ -36,10 +36,10 @@ export function professionalServiceJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: `${personal.name} — Data Engineering, Workflow Automation and Document Intelligence`,
+    name: "Benkai Systems",
     url: absoluteUrl("/services"),
     description:
-      "Data engineering, workflow automation, intelligent document processing, data reconciliation, dashboards and technical consulting services.",
+      "Practical business systems, workflow automation, internal tools, document intelligence and data engineering services, founded and engineered by Benjamin Kamau.",
     areaServed: {
       "@type": "City",
       name: "Nairobi",

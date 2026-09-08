@@ -6,7 +6,7 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Selected Projects",
+  title: "Selected Work",
   description:
     "Selected work across data engineering, workflow automation, document intelligence and operational platforms.",
   alternates: { canonical: "/projects" },
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
     <SectionWrapper>
       <Container>
         <SectionHeading
-          title="Selected Projects"
+          title="Selected Work"
           subtitle="Selected work across data engineering, workflow automation, document intelligence and operational platforms."
           level="h1"
         />

@@ -9,7 +9,7 @@ import { professionalServiceJsonLd, serializeJsonLd } from "@/lib/json-ld";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Data engineering, workflow automation, intelligent document processing, business data reconciliation, dashboards and technical consulting services.",
+    "Business operations systems, workflow automation, data engineering, document intelligence, internal tools and controlled modernization.",
   alternates: { canonical: "/services" },
 };
 
@@ -26,7 +26,7 @@ export default function ServicesPage() {
       <Container>
         <SectionHeading
           title="Services"
-          subtitle="Practical data, automation and business systems — from ETL pipelines to internal tools."
+          subtitle="Systems, automation and data services grounded in real operational workflows."
           level="h1"
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,4 +1,4 @@
-# Deployment Checklist — Benjamin Kamau Portfolio
+# Deployment Checklist — Benkai Systems Portfolio
 
 ## Pre-Deployment Checks
 
@@ -104,16 +104,19 @@
 - [ ] Controlled Web3Forms submission is accepted and received at `benjaminkamauu@gmail.com`
 - [ ] Web3Forms domain restriction reviewed for the production Workers.dev origin (allow localhost only when deliberately testing)
 - [ ] Custom domain connected (not applicable to the current Workers.dev launch)
-- [x] `NEXT_PUBLIC_SITE_URL` updated to `https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev`
+- [ ] Deploy and verify `NEXT_PUBLIC_SITE_URL` at `https://benkai-systems.benjamin-kamau.workers.dev`
 
-### Current Production Deployment
+### Prepared Benkai Systems Migration
 
-- **Worker name:** `benjamin-kamau-portfolio`
-- **Live URL:** <https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev>
+- **Existing Worker (do not delete yet):** `benjamin-kamau-portfolio`
+- **Prepared Worker name:** `benkai-systems`
+- **Intended URL (not live until deployed and verified):** <https://benkai-systems.benjamin-kamau.workers.dev>
 - **Adapter:** `@opennextjs/cloudflare` 1.20.2
 - **Wrangler:** 4.113.0
 - **Observability:** enabled in `wrangler.jsonc`
 - **Custom domain:** not configured
+
+Deploy the new Worker, verify HTTP 200, homepage, project listing and routes, contact form, assets, navigation and runtime, then separately decide whether the old Worker may be retired. Do not delete or disable it automatically.
 
 ---
 

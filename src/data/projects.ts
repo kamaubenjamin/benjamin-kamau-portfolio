@@ -519,21 +519,21 @@ export const projects: Project[] = ([
     status: "Live Pilot",
     statusVariant: "lime",
     shortDescription:
-      "A functional full-stack gym operations and member-management platform covering memberships, attendance, billing, session packages, lockers, cashbook workflows and secure member self-service.",
+      "A configurable gym operations platform shaped through live receptionist feedback, with governed membership, billing, attendance, sessions, lockers, services, cashbook and member-portal workflows.",
     cardDescription:
-      "A full-stack gym operations platform for memberships, attendance, billing, lockers, cashbook workflows and secure member self-service, currently being piloted with Lock & Load Gym.",
+      "A configurable operations platform shaped through live receptionist feedback, currently in controlled operational testing at Lock & Load Gym.",
     featuredDescription:
-      "Functional live-pilot SaaS platform for Lock & Load Gym, combining Admin, Staff and Member experiences with governed membership, billing, attendance, lockers and cashbook workflows.",
+      "Live controlled receptionist pilot at Lock & Load Gym, combining governed membership, billing, attendance, services, lockers and secure member self-service.",
     positioning:
-      "A full-stack gym operations and member-management platform currently being piloted with Lock & Load Gym.",
+      "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym.",
     valueProposition:
       "Role-based Admin, Staff and Member experiences backed by Supabase Auth, PostgreSQL/RLS and a responsive SaaS interface for real gym workflow validation.",
     overview:
-      "GymBolt is a full-stack gym operations and member-management platform covering memberships, attendance, billing, session packages, lockers, cashbook workflows and secure member self-service. It is currently being piloted with Lock & Load Gym, with role-based Admin, Staff and Member experiences backed by Supabase Auth, PostgreSQL/RLS and a responsive SaaS interface.",
+      "GymBolt is a configurable gym operations platform shaped through live receptionist feedback, with governed membership, billing, attendance, session, locker, service, cashbook, member-portal and mobile-continuity workflows. Benjamin iterated the system around receptionist pain points and hardened registration, billing, attendance, service access, mobile continuity and historical data so operational mistakes do not corrupt the workflow.",
     problem:
       "Gym operators need membership, attendance, billing, sessions, lockers and operational finance records to remain consistent while protecting member privacy. Disconnected tools and manual workflows can create unclear entitlement state, billing inconsistencies, weak attendance controls and fragmented member service.",
     solution:
-      "GymBolt centralizes Admin, Staff and Member workflows while keeping payment, membership, attendance and session entitlement state authoritative. Strict RLS/privacy boundaries, controlled migrations, backups and isolated QA data support production-safe iteration during the active pilot.",
+      "GymBolt centralizes Admin, Staff and Member workflows while keeping billing/payment as the source of truth for membership and service access. Strict RLS/privacy boundaries, controlled hosted migrations, backups, integrity checks and isolated QA data support safe iteration during active pilot use.",
     solutionDetails: [
       "Admin / Staff / Member role separation with role-aware navigation and access",
       "Governed invoice to exact payment to membership transition lifecycle",
@@ -544,9 +544,9 @@ export const projects: Project[] = ([
         title: "Key Capabilities",
         details: [
           "Admin / Staff / Member role separation with role-aware navigation and strict RLS/privacy boundaries",
-          "Member registration with optional plan or No Plan, Member Applications, membership plans and session packages",
-          "Time In / Time Out attendance, attendance history, session consumption and remaining-session tracking",
-          "Billing, invoices, payments, receipts, lockers, cashbook, expenses, income and net tracking",
+          "Member registration with optional No Package / Not Started state, intentional Start Membership, Member Applications and Weekly, Monthly, 12 Sessions/month, Half Year and Yearly packages",
+          "Time In / Time Out attendance, duplicate check-in protection, session consumption, remaining-session tracking and Nairobi/local-date behavior",
+          "Billing, invoices, partial payments, receipts, lockers, standalone services, cashbook, expenses, trainer payments, daily/monthly income and net visibility",
           "Classes, trainers, inventory, announcements and responsive light/dark/system-theme SaaS UX",
         ],
       },
@@ -555,29 +555,46 @@ export const projects: Project[] = ([
         description:
           "GymBolt uses a governed invoice to exact payment to subscription/membership transition lifecycle. Invoice creation alone never changes entitlement state; activation, renewal and future membership transitions happen only after authoritative settlement.",
         details: [
-          "Authoritative invoice/payment state with exact settlement requirement",
-          "Start Membership workflow for members registered with No Plan",
-          "Governed subscription activation, renewal and future membership transition handling",
+          "Partial or multiple payments are supported; access starts only when the invoice balance is exactly settled",
+          "Duplicate membership requests are blocked server-side and an existing open request is reused through Continue Payment",
+          "Cancelled historical memberships never appear as the current package, preserving history without corrupting current state",
         ],
       },
       {
         title: "Billing, Finance & Receipts",
         description:
-          "Billing and finance workflows use authoritative records for invoices, payments, receipts and cashbook visibility. Production M-Pesa is not active; older Daraja sandbox work remains historical technical context only.",
+          "Billing and finance workflows use authoritative records for invoices, payments, receipts and cashbook visibility. Production M-Pesa and receipt-email delivery are intentionally disabled.",
         details: [
           "Invoices, payments and receipts with member-visible history",
           "Cashbook workflows covering expenses, income and net tracking",
-          "Password recovery is integrated through Supabase Auth with Brevo-backed authentication email delivery",
+          "Standalone Day Session / 1 Day service shows the configured KSh 250 price while allowing a negotiated lower recorded amount without changing the catalogue price",
+          "Steam Bath and Steam Towel are available as standalone services",
         ],
       },
       {
-        title: "Premium Member Portal",
+        title: "Member Portal",
         description:
           "Members securely access only their own records through a responsive desktop/mobile portal for self-service visibility.",
         details: [
           "Membership status, current plan, session balances and visit/attendance history",
           "Invoices, payments, receipts, profile, supported classes/bookings and announcements",
           "Member-specific privacy enforced through role boundaries and RLS",
+        ],
+      },
+      {
+        title: "Reception Workflows",
+        details: [
+          "Membership: Find/Open Member → No Package / Not Started → select package → Create Payment Request → Continue Payment when open → settle invoice → Attendance / Check In → optional locker → Check Out",
+          "Day Session: Find/Open Member → Sell Day Session → confirm or adjust KSh 250 amount → record payment → one-use service available → Attendance / Check In",
+        ],
+      },
+      {
+        title: "Mobile Workflow Continuity",
+        description:
+          "Safe UI context persists for approximately two hours when reception switches to WhatsApp, calls or other apps; authoritative data refreshes after inactivity without redirecting to the Dashboard.",
+        details: [
+          "Current page, member search/opened member, Attendance date/search, Billing filter/search, Cashbook month and practical scroll position can be restored",
+          "Sensitive payment forms and mutations are never auto-restored, replayed or presented as offline operation",
         ],
       },
       {
@@ -596,13 +613,15 @@ export const projects: Project[] = ([
         details: [
           "A permanently isolated QA member and test-data path support regression testing in the hosted environment without mixing test activity with pilot member records",
           "Role/privacy boundaries are preserved for QA and pilot data",
-          "Schema migration replay/validation, backup procedures and controlled hosted changes support production-safe iteration",
+          "31/31 hosted migrations applied through 20260902160000_reception_membership_duplicate_and_day_session_amount.sql",
+          "Runtime suites cover membership start, Day Session/Steam, Billing, Attendance, session packages and continuity/access; mobile browser and responsive 390×844 smoke checks passed",
+          "Typecheck, production build and hosted artifact provenance checks passed; lint has 0 errors and one existing non-blocking Fast Refresh warning",
         ],
       },
       {
         title: "Deployment & Access Model",
         description:
-          "GymBolt is currently a functional live-pilot SaaS platform undergoing real gym operational validation at Lock & Load Gym. It is not presented as a broad commercial rollout or production-scale SaaS.",
+          "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym. It is not presented as full adoption, a commercial rollout or production-scale SaaS.",
         details: [
           "Active hosted pilot URL: https://gymbolt-lock-load-gym.pages.dev",
           "Source repository remains private and no public repository CTA is exposed",
@@ -619,12 +638,12 @@ export const projects: Project[] = ([
     ],
     capabilities: [
       "Admin / Staff / Member role separation with RLS privacy boundaries",
-      "Member registration, Member Applications, No Plan registration and Start Membership workflow",
+      "Member registration, Member Applications, No Package / Not Started registration and Start Membership workflow",
       "Membership plans, session packages and governed subscription transitions",
       "Invoice to exact payment to membership activation/renewal lifecycle",
       "Time In / Time Out attendance, attendance history and session consumption tracking",
       "Locker assignment/release with occupied and available states",
-      "Invoices, payments, receipts, cashbook, expenses, income and net tracking",
+      "Invoices, partial payments, receipts, standalone services, cashbook, expenses, trainer payments, income and net tracking",
       "Secure responsive Member Portal for memberships, sessions, visits, billing, profile, classes/bookings and announcements",
       "Classes, trainers, inventory and announcements",
       "Light, dark and system themes across responsive admin/staff/member experiences",
@@ -657,9 +676,10 @@ export const projects: Project[] = ([
     ],
     currentStatusHeading: "Current Status & Limitations",
     currentStatus:
-      "Live Pilot. GymBolt is currently being piloted with Lock & Load Gym as a functional live-pilot SaaS platform undergoing real gym operational validation.",
+      "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym.",
     currentStatusDetails: [
       "Production M-Pesa is not active",
+      "Receipt-email delivery is intentionally disabled",
       "Source repository remains private; no public repository CTA is exposed",
       "Member self-service QR attendance and access-control hardware integration are not claimed",
       "No multiple paying gyms, broad rollout, customer revenue, adoption metrics or measured business impact is claimed",

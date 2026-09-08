@@ -19,29 +19,29 @@ export function HeroSection() {
           {/* Left column: content */}
           <div className="lg:col-span-7">
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-[var(--color-emerald)]">
-              {personal.location}
+              Systems. Automation. Data.
             </p>
             <h1 className="mb-4 text-4xl font-bold tracking-tight text-[var(--color-text)] sm:text-5xl lg:text-6xl">
-              {personal.name}
+              Benkai Systems
             </h1>
             <p className="mb-3 text-xl font-medium text-[var(--color-text)] sm:text-2xl">
-              <GradientText>{personal.title}</GradientText>
+              <GradientText>{personal.tagline}</GradientText>
             </p>
             <p className="mb-6 text-lg leading-relaxed text-[var(--color-text-muted)]">
-              {personal.tagline}
+              Benkai Systems builds internal business systems, workflow automation, document-processing platforms and data infrastructure around how businesses actually operate.
             </p>
             <p className="mb-8 max-w-2xl text-base leading-relaxed text-[var(--color-text-muted)]">
-              {personal.shortBio}
+              Founded and engineered by Benjamin Kamau.
             </p>
 
             <div className="mb-8 flex flex-wrap gap-4">
               <Button href="/projects" variant="primary" size="lg">
                 <Eye size={18} />
-                View My Work
+                View Our Work
               </Button>
               <Button href="/contact" variant="outline" size="lg">
                 <MessageSquare size={18} />
-                Discuss a Project
+                Discuss a Business Problem
               </Button>
             </div>
 

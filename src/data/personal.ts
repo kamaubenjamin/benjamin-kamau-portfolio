@@ -11,11 +11,13 @@ export interface PersonalInfo {
 
 export const personal: PersonalInfo = {
   name: "Benjamin Kamau",
-  title: "Data Engineer & Workflow Automation Specialist",
-  tagline: "Data Engineer building ETL pipelines, workflow automation, data platforms and document-processing systems.",
+  title: "Benjamin Kamau — Founder & Technical Builder",
+  tagline: "Practical software, workflow automation and data systems for real business operations.",
   shortBio:
-    "I build scalable data pipelines, workflow automations and intelligent document systems, with modern web interfaces that make those systems practical to use.",
-  bio: `I am a Data Engineer focused on Workflow Automation and Document Intelligence, based in Nairobi, Kenya. I design and build practical data solutions — ETL pipelines, intelligent document-processing systems, workflow automations, dashboards and business platforms.
+    "Benkai Systems is an independent software and data systems studio focused on practical business operations, workflow automation and data engineering.",
+  bio: `Benkai Systems is an independent software and data systems studio focused on practical business operations, workflow automation and data engineering. We do not start with software. We start with the workflow.
+
+Benjamin Kamau designs and builds the systems behind Benkai Systems, working across business discovery, architecture, data modelling, implementation, deployment and iteration.
 
 With over two years of technical experience spanning workflow automation, data engineering, and technical support, I help organisations turn repetitive processes, fragmented data and disconnected systems into streamlined, automated, data-driven operations.
 

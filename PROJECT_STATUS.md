@@ -1,4 +1,6 @@
-# Portfolio Project Status
+# Benkai Systems Portfolio Project Status
+
+Primary public identity: **Benkai Systems — Founded and engineered by Benjamin Kamau.** Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
 
 ## Authoritative Project Order
 
@@ -118,7 +120,7 @@ Production acceptance preserved 25 products, 5 migrated orders and 9 migrated or
 
 **Live Pilot**
 
-GymBolt is a functional full-stack gym operations and member-management platform currently being piloted with Lock & Load Gym. It covers memberships, attendance, billing, session packages, lockers, cashbook workflows and secure member self-service across role-based Admin, Staff and Member experiences.
+Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym. GymBolt is a configurable operations platform shaped through receptionist feedback across membership, billing, attendance, services, lockers, cashbook, member self-service and mobile continuity.
 
 ### Verified Deployment and Access
 
@@ -129,15 +131,16 @@ GymBolt is a functional full-stack gym operations and member-management platform
 
 ### Verified Scope
 
-Implemented scope includes Admin / Staff / Member role separation, RLS/privacy boundaries, member registration with optional plan or No Plan, Start Membership, Member Applications, membership plans, session packages, governed invoice-to-exact-payment membership transitions, Time In/Time Out attendance, session consumption, locker workflows, invoices, payments, receipts, cashbook, expenses, income/net tracking, classes, trainers, inventory, announcements, responsive theming and a secure Member Portal.
+Implemented scope includes Admin / Staff / Member role separation, strict RLS/privacy boundaries, optional No Package / Not Started registration, intentional Start Membership, Member Applications, five membership packages, governed exact-settlement activation with partial payments, duplicate-request prevention and Continue Payment, Time In/Time Out attendance, session consumption, locker workflows, standalone Day Session at configured KSh 250 with negotiated amount recording, Steam services, finance operations and a secure Member Portal.
 
-Password recovery is integrated through Supabase Auth with Brevo-backed authentication email delivery. Production M-Pesa is not active; older Daraja sandbox work is historical technical context only.
+Safe UI context persists for approximately two hours across reception app switching; sensitive payment forms and mutations are never restored or replayed. Production M-Pesa and receipt-email delivery are intentionally disabled.
 
-A permanently isolated QA member/test-data path, live-data backup procedures, migration replay/validation and data-integrity checks support production-safe iteration during the active pilot.
+A permanently isolated QA path, backups and integrity procedures support pilot-safe iteration. Hosted migrations are 31/31 through `20260902160000_reception_membership_duplicate_and_day_session_amount.sql`; recent runtime, mobile continuity, responsive smoke, typecheck and build validation passed.
 
 ### Current Limitations
 
 - Production M-Pesa is not active
+- Receipt-email delivery is intentionally disabled
 - Member self-service QR attendance and access-control hardware integration are not claimed
 - No multiple paying gyms, broad public rollout, customer revenue, adoption metrics or measured business impact is claimed
 - Not presented as a completed commercial product or production-scale SaaS
@@ -150,4 +153,4 @@ Public CV navigation, calls to action, source references and the public PDF asse
 
 ## Last Updated
 
-2026-08-21
+2026-09-08

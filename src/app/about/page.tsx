@@ -14,7 +14,7 @@ import { GraduationCap, Award, Calendar } from "lucide-react";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Learn more about Benjamin Kamau — Data Engineer focused on Workflow Automation and Document Intelligence in Nairobi, Kenya.",
+    "About Benkai Systems and Benjamin Kamau, Founder & Technical Builder.",
   alternates: { canonical: "/about" },
 };
 
@@ -66,7 +66,7 @@ export default function AboutPage() {
     <>
       <SectionWrapper>
         <Container>
-          <SectionHeading title="About Me" subtitle={personal.shortBio} align="left" level="h1" />
+          <SectionHeading title="About Benkai Systems" subtitle={personal.shortBio} align="left" level="h1" />
 
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">

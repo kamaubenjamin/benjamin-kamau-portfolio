@@ -140,8 +140,8 @@ export default function HomePage() {
         <Container>
           <AnimatedWrapper>
             <SectionHeading
-              title="What I Build"
-              subtitle="Practical data, automation and business systems — from ETL pipelines to internal tools."
+              title="What We Build"
+              subtitle="Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs."
             />
           </AnimatedWrapper>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -166,8 +166,8 @@ export default function HomePage() {
         <Container>
           <AnimatedWrapper>
             <SectionHeading
-              title="Featured Projects"
-              subtitle="Selected work spanning data engineering, automation, document processing and web platforms."
+              title="Selected Work"
+              subtitle="Systems and case studies demonstrating practical operations, automation, document processing and data engineering."
             />
           </AnimatedWrapper>
           <p className="mb-6 text-sm text-[var(--color-text-muted)]">
@@ -195,8 +195,8 @@ export default function HomePage() {
         <Container>
           <AnimatedWrapper>
             <SectionHeading
-              title="How I Work"
-              subtitle="A structured approach to understanding your problem, building the right solution and ensuring it delivers real results."
+              title="How We Work"
+              subtitle="We do not start with software. We start with the workflow."
             />
           </AnimatedWrapper>
           <AnimatedWrapper delay={0.1}>
@@ -232,7 +232,7 @@ export default function HomePage() {
         <Container>
           <AnimatedWrapper>
             <SectionHeading
-              title="Technologies I Work With"
+              title="Technologies We Work With"
               subtitle="Core tools and expanding capabilities across data engineering, automation and web platforms."
             />
           </AnimatedWrapper>

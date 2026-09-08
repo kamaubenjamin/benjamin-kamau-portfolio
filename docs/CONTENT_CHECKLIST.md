@@ -1,4 +1,4 @@
-# Content Checklist — Benjamin Kamau Portfolio
+# Content Checklist — Benkai Systems Portfolio
 
 This document tracks all unresolved content gaps that need to be filled before or after launch.
 
@@ -69,7 +69,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 - Pair and Place’s link is the live client website; Benjamin’s scope was maintenance and operations, not an original complete-site design or build claim.
 - FlowSync uses Clerk authentication UI and Supabase-backed competitor records; execution and scraping remain external, and live Engine integration is not fully verified.
 - Featured order is GymBolt, Spice Harvest Ops and Intelligent Document Processing. Additional Work order is Home Health Operations Demo, ExploreAfrica, FlowSync, Competitor Price Intelligence, Pair and Place and Essiedo Catalogue Pilot.
-- GymBolt is a functional live-pilot SaaS platform currently being piloted with Lock & Load Gym. It covers role-based Admin/Staff/Member operations, governed membership/billing/attendance/session/locker workflows, cashbook records and secure member self-service; production M-Pesa, commercial scale, adoption metrics and measured impact are not claimed.
+- GymBolt is a live controlled receptionist pilot at Lock & Load Gym, with governed membership/billing/attendance/service/locker workflows, secure Member Portal and safe mobile continuity. Production M-Pesa and receipt-email delivery are intentionally disabled; commercial scale, adoption metrics and measured impact are not claimed.
 - Spice Harvest Ops is Production Deployed for The Spice Harvest Market. WhatsApp Business remains the customer-facing ordering channel; the app is the private owner layer for authentication, orders, payment, fulfilment and sales history. The Supabase → Neon migration is complete, with Neon Auth, an authenticated Cloudflare Pages Functions API and Neon PostgreSQL active in production. Supabase remains only as a rollback snapshot/backup. Acceptance counts are engineering evidence, not traction or revenue; long-term adoption and measured impact are not claimed.
 - Home Health Operations Demo is a working responsive client-validation prototype based on real prospective-client discovery. It uses fictional sample data and local React state only; it has no real patient information, backend, database, authentication, server persistence, production healthcare deployment, clinical capability or compliance claim.
 - Essiedo Catalogue Pilot is live and validating whether structured browsing improves the handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries. Seller review and link sharing are observed activity, not evidence of sales, conversion, revenue or adoption outcomes. Proposed V2 seller-management and size-guidance features are not implemented.
@@ -98,11 +98,11 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Item | Status |
 |---|---|
-| Production URL | Configured as the existing `workers.dev` URL |
-| `NEXT_PUBLIC_SITE_URL` | Configured for the existing `workers.dev` URL in `wrangler.jsonc` and the Cloudflare build script |
+| Production URL | Benkai Systems URL prepared; deployment and verification still required |
+| `NEXT_PUBLIC_SITE_URL` | Prepared as `https://benkai-systems.benjamin-kamau.workers.dev` in `wrangler.jsonc` and the Cloudflare build script |
 | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Required at local and production build time; public identifier is stored only in ignored `.env.local`, never in documentation |
 | Contact delivery | Web3Forms browser-side HTTPS submission; portfolio stores no submissions in its own database |
-| Cloudflare Worker name | Configured; preserve the existing name |
+| Cloudflare Worker name | Prepared as `benkai-systems`; do not delete the existing Worker before migration verification |
 | `@opennextjs/cloudflare` | Installed |
 | `wrangler` | Installed |
 | Custom domain | Not yet connected |

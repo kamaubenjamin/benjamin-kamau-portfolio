@@ -22,26 +22,26 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   title: {
-    default: "Benjamin Kamau | Data Engineer & Workflow Automation Specialist",
-    template: "%s | Benjamin Kamau",
+    default: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
+    template: "%s | Benkai Systems",
   },
   description:
-    "Data Engineer focused on workflow automation and document intelligence in Nairobi, Kenya.",
+    "Benkai Systems builds practical business systems, workflow automation, internal tools and data engineering solutions, founded and engineered by Benjamin Kamau.",
   openGraph: {
-    title: "Benjamin Kamau | Data Engineer & Workflow Automation Specialist",
+    title: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
     description:
-      "Building practical data, workflow automation and document intelligence systems.",
+      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin Kamau.",
     type: "website",
     locale: "en_KE",
-    siteName: "Benjamin Kamau Portfolio",
+    siteName: "Benkai Systems",
     url: "/",
     images: [absoluteUrl("/opengraph-image")],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benjamin Kamau | Data Engineer & Workflow Automation Specialist",
+    title: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
     description:
-      "Building practical data, workflow automation and document intelligence systems.",
+      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin Kamau.",
     images: [absoluteUrl("/opengraph-image")],
   },
   robots: {

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Benjamin Kamau — Data Engineer, Workflow Automation and Document Intelligence";
+export const alt = "Benkai Systems — Business Systems, Workflow Automation and Data Engineering";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,13 +21,13 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ color: "#10b981", display: "flex", fontSize: 30, fontWeight: 700 }}>
-          BK PORTFOLIO
+          SYSTEMS. AUTOMATION. DATA.
         </div>
         <div style={{ display: "flex", fontSize: 72, fontWeight: 800, marginTop: 28 }}>
-          Benjamin Kamau
+          Benkai Systems
         </div>
         <div style={{ color: "#a3e635", display: "flex", fontSize: 38, marginTop: 20 }}>
-          Data Engineer &amp; Workflow Automation Specialist
+          Founded and engineered by Benjamin Kamau
         </div>
         <div style={{ background: "#10b981", display: "flex", height: 8, marginTop: 48, width: 260 }} />
       </div>

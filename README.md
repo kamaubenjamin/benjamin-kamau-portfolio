@@ -1,6 +1,6 @@
-# Benjamin Kamau — Portfolio
+# Benkai Systems — Portfolio
 
-Professional portfolio and services website for **Benjamin Kamau**, focused on Data Engineering, Workflow Automation and Document Intelligence, based in Nairobi, Kenya.
+Portfolio and services website for **Benkai Systems**, an independent software and data systems studio founded and engineered by **Benjamin Kamau**. Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
 
 This portfolio is the primary public presentation layer for selected work. Serious product source repositories are intentionally private and proprietary; public case studies focus on purpose, implemented capabilities, safe architecture summaries, verified maturity, live previews and honest limitations rather than source access.
 
@@ -145,7 +145,7 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 - FlowSync and the Competitor Price Intelligence Engine have private proprietary source. The hosted FlowSync dashboard remains a public technical preview, while scraping/execution stays external and full live Engine integration is not verified.
 - Competitor Price Intelligence has a verified Playwright-first Jumia MVP foundation with 29 passed and 1 skipped, stabilized matching/comparison, stage telemetry and local-only runtime state; it is not presented as production-ready or as a completed multi-source/Kafka/Airflow platform.
 - Pair and Place has completed its safe WordPress-side maintenance phase.
-- GymBolt is a functional full-stack gym operations and member-management platform in live pilot with Lock & Load Gym at <https://gymbolt-lock-load-gym.pages.dev>, covering memberships, attendance, billing, lockers, cashbook workflows and secure member self-service without claiming commercial scale, production M-Pesa or measured business impact.
+- GymBolt is in a live controlled receptionist pilot at Lock & Load Gym at <https://gymbolt-lock-load-gym.pages.dev>. Live feedback has shaped governed No Package registration, exact-settlement membership activation, partial payments, duplicate-request prevention, standalone Day Session pricing, secure member self-service and mobile workflow continuity. Production M-Pesa and receipt-email delivery are intentionally disabled.
 - Spice Harvest Ops is Production Deployed at <https://spice-harvest-ops.pages.dev> for The Spice Harvest Market. It complements the owner’s existing WhatsApp Business ordering channel with private order, payment, fulfilment and sales tracking through Neon Auth, an authenticated Cloudflare Pages Functions API and Neon PostgreSQL. The completed Supabase → Neon migration retains Supabase only as a rollback snapshot/backup; no scale, traction or measured-impact claim is made.
 - Home Health Operations Demo is a client-validation prototype at <https://richard-home-health-demo.pages.dev>, translating real prospective-client discovery into an interactive responsive workflow using fictional sample data and local React state. It has no production backend, database, authentication, real patient data, production healthcare deployment or compliance claim.
 - Essiedo Catalogue Pilot is a live validation-stage catalogue at <https://essiedo-catalogue-pilot.pages.dev>, testing a structured handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries without replacing the seller’s social-selling workflow.
@@ -167,7 +167,9 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 
 This site is deployed on **Cloudflare Workers** using the `@opennextjs/cloudflare` adapter.
 
-**Live site:** [benjamin-kamau-portfolio.benjamin-kamau.workers.dev](https://benjamin-kamau-portfolio.benjamin-kamau.workers.dev)
+**Intended Benkai Systems URL (requires deployment):** [benkai-systems.benjamin-kamau.workers.dev](https://benkai-systems.benjamin-kamau.workers.dev)
+
+The existing `benjamin-kamau-portfolio` Worker remains deployed until the new Worker is built, deployed and verified; this preparation does not make the intended URL live.
 
 See `docs/DEPLOYMENT_CHECKLIST.md` for the full deployment procedure.
 

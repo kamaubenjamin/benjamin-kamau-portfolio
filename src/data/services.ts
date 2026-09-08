@@ -7,9 +7,9 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    title: "Data Engineering & ETL",
+    title: "Business Operations Systems",
     description:
-      "Design and build robust ETL pipelines that extract, transform and load data from multiple sources. Focused on improving data consistency, reducing duplicate entry, and structuring data for clearer operational visibility.",
+      "Build focused systems around day-to-day operational workflows, governed records and role-aware access.",
     icon: "Database",
     features: [
       "reducing repetitive manual work",
@@ -31,9 +31,9 @@ export const services: Service[] = [
     ],
   },
   {
-    title: "Intelligent Document Processing",
+    title: "Data Engineering & ETL",
     description:
-      "Extract, standardise and validate structured data from semi-structured documents (PDFs, CSVs, XLSX, email). Reduces repetitive manual entry and makes layout exceptions easier to identify.",
+      "Design reliable pipelines that extract, transform and load data from multiple sources for consistent operational use.",
     icon: "FileText",
     features: [
       "reducing repetitive manual work",
@@ -43,9 +43,9 @@ export const services: Service[] = [
     ],
   },
   {
-    title: "Business Data Reconciliation",
+    title: "Document Intelligence",
     description:
-      "Align transactions and datasets across multiple software programs. Designed to improve data consistency, reduce manual lookups, and make reporting discrepancies easier to identify.",
+      "Extract, standardise and validate structured data from PDFs, CSVs, spreadsheets and email with governed exception handling.",
     icon: "Scale",
     features: [
       "improving data consistency",
@@ -66,9 +66,9 @@ export const services: Service[] = [
     ],
   },
   {
-    title: "Technical Consulting & System Audits",
+    title: "System Modernization & Migration",
     description:
-      "Review current technical systems, document workflow bottlenecks, and offer practical, actionable recommendations to improve standard data operations.",
+      "Assess existing workflows and move data or applications between platforms with controlled validation and rollback boundaries.",
     icon: "SearchCheck",
     features: [
       "improving data consistency",
