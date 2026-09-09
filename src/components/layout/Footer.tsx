@@ -25,7 +25,7 @@ export function Footer() {
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
       <Container>
-        <div className="flex flex-col items-center gap-5 py-8 sm:flex-row sm:justify-between sm:py-9">
+        <div className="flex flex-col items-center gap-4 py-6 sm:flex-row sm:justify-between sm:py-9">
           <div className="flex flex-col items-center gap-1.5 sm:items-start">
             <Link
               href="/"
@@ -79,7 +79,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[var(--color-border)] py-4 text-center text-xs text-[var(--color-text-muted)] sm:text-sm">
+        <div className="border-t border-[var(--color-border)] py-3 text-center text-xs text-[var(--color-text-muted)] sm:py-4 sm:text-sm">
           <p>&copy; {currentYear} Benkai Systems.</p>
         </div>
       </Container>

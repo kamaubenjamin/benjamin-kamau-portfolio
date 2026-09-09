@@ -35,9 +35,9 @@ export function Button({
 
   const variantStyles = {
     primary:
-      "border border-[var(--color-emerald)] bg-[var(--color-emerald)] text-[#06100b] hover:border-[var(--color-emerald-light)] hover:bg-[var(--color-emerald-light)] shadow-[var(--shadow-glow)]",
+      "border border-[var(--color-emerald-light)] bg-[image:var(--gradient-action)] text-[#06100b] shadow-[var(--shadow-glow)] hover:border-[var(--color-lime-bright)] hover:brightness-[1.05]",
     outline:
-      "border border-[var(--color-border)] text-[var(--color-emerald)] hover:border-[var(--color-emerald)] hover:bg-[var(--color-bg-elevated)]",
+      "border border-[var(--color-border-hover)] text-[var(--color-emerald)] hover:border-[var(--color-emerald)] hover:bg-[var(--color-mint-surface)]",
     ghost:
       "text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-bg-elevated)]",
   };

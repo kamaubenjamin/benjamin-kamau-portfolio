@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Braces, CheckCircle2, Database, FileText, Gauge, Inbox, Workflow, type LucideIcon } from "lucide-react";
+import { Braces, CheckCircle2, Database, FileText, Gauge, Inbox, Workflow, type LucideIcon } from "lucide-react";
 
 const stages: { label: string; detail: string; icon: LucideIcon }[] = [
   { label: "Input", detail: "Data · Documents", icon: Inbox },
@@ -28,21 +28,23 @@ export function DataFlowVisual() {
           {stages.map((stage, index) => {
             const Icon = stage.icon;
             return (
-              <div className="contents" key={stage.label}>
-                <div className="architecture-node">
-                  <div className="architecture-node-head"><Icon size={16} /><span>{String(index + 1).padStart(2, "0")}</span></div>
-                  <strong>{stage.label}</strong><small>{stage.detail}</small>
-                </div>
-                {index < stages.length - 1 && (
-                  <div className="architecture-connector">
-                    <span className="architecture-line" />
-                    {!shouldReduceMotion && <motion.span className="architecture-packet" animate={{ left: ["0%", "calc(100% - 4px)"] }} transition={{ duration: 2.4, delay: index * 0.35, repeat: Infinity, ease: "linear" }} />}
-                    <ArrowRight size={13} />
-                  </div>
-                )}
+              <div className="architecture-node" key={stage.label}>
+                <div className="architecture-node-head"><Icon size={17} /><span>{String(index + 1).padStart(2, "0")}</span></div>
+                <strong>{stage.label}</strong><small>{stage.detail}</small>
               </div>
             );
           })}
+          <div className="architecture-route architecture-route-input" />
+          <div className="architecture-route architecture-route-process" />
+          <div className="architecture-route architecture-route-turn" />
+          <div className="architecture-route architecture-route-operate" />
+          {!shouldReduceMotion && (
+            <motion.span
+              className="architecture-packet"
+              animate={{ offsetDistance: ["0%", "100%"] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "linear" }}
+            />
+          )}
         </div>
         <div className="architecture-routing" aria-hidden="true">
           <div><FileText size={14} /><span>Documents</span></div>

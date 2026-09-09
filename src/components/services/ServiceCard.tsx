@@ -29,7 +29,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const Icon = iconMap[service.icon] || Database;
 
   return (
-    <Card className="flex min-h-full flex-col p-6">
+    <Card className="flex min-h-full flex-col p-6 hover:shadow-[0_16px_38px_rgba(0,0,0,.25),inset_0_1px_rgba(163,255,199,.04)]">
       <IconWrapper className="mb-4" size="md">
         <Icon size={19} />
       </IconWrapper>

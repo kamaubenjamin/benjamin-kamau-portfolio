@@ -8,7 +8,12 @@ import type { ChatErrorResponse, ChatMessage, ChatSuccessResponse } from "@/lib/
 import { MAX_CONVERSATION_MESSAGES, MAX_MESSAGE_LENGTH } from "@/lib/chat/validation";
 
 const STORAGE_KEY = "benkai-assistant-conversation";
+const SESSION_ID_KEY = "benkai-assistant-session-id";
+const GEMINI_TURNS_KEY = "benkai-assistant-gemini-turns";
+const LOCAL_CACHE_KEY = "benkai-assistant-local-cache";
+const MAX_GEMINI_TURNS = 4;
 const SUBMIT_COOLDOWN_MS = 900;
+const MAX_CONTEXT_BYTES = 46_000;
 const starterPrompts = [
   "What does Benkai build?",
   "Tell me about GymBolt",
@@ -16,30 +21,111 @@ const starterPrompts = [
   "What technologies do you use?",
 ];
 
+function boundConversation(history: ChatMessage[]): ChatMessage[] {
+  const bounded = history.slice(-MAX_CONVERSATION_MESSAGES);
+  if (bounded[0]?.role === "assistant") bounded.shift();
+
+  while (bounded.length > 1 && new TextEncoder().encode(JSON.stringify({ messages: bounded })).byteLength > MAX_CONTEXT_BYTES) {
+    bounded.splice(0, bounded[1]?.role === "assistant" ? 2 : 1);
+  }
+
+  return bounded;
+}
+
 function readSessionMessages(): ChatMessage[] {
   try {
     const stored = sessionStorage.getItem(STORAGE_KEY);
     if (!stored) return [];
     const parsed: unknown = JSON.parse(stored);
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
+    return boundConversation(parsed.filter(
       (item): item is ChatMessage =>
         Boolean(item) &&
         typeof item === "object" &&
         (item.role === "user" || item.role === "assistant") &&
         typeof item.content === "string",
-    ).slice(-MAX_CONVERSATION_MESSAGES);
+    ));
   } catch {
     return [];
   }
 }
 
+function getViewportClass(): "mobile" | "tablet" | "desktop" {
+  const width = typeof window !== "undefined" ? window.innerWidth : 0;
+  return width < 768 ? "mobile" : width < 1024 ? "tablet" : "desktop";
+}
+
+function getOrCreateSessionId(): string | null {
+  try {
+    let id = sessionStorage.getItem(SESSION_ID_KEY);
+    if (!id) {
+      id = typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : `fallback-${Math.random().toString(16).slice(2)}-${Date.now().toString(16)}`;
+      sessionStorage.setItem(SESSION_ID_KEY, id);
+    }
+    return id;
+  } catch {
+    return null;
+  }
+}
+
+function readGeminiTurns(): number {
+  try {
+    const value = Number(sessionStorage.getItem(GEMINI_TURNS_KEY) ?? 0);
+    return Number.isInteger(value) && value >= 0 ? value : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function writeGeminiTurns(count: number): void {
+  try {
+    sessionStorage.setItem(GEMINI_TURNS_KEY, String(count));
+  } catch {
+    // Session storage is optional.
+  }
+}
+
+function readLocalCache(): Record<string, { text: string }> {
+  try {
+    const parsed: unknown = JSON.parse(sessionStorage.getItem(LOCAL_CACHE_KEY) ?? "{}");
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed as Record<string, { text: string }> : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeLocalCache(cache: Record<string, { text: string }>): void {
+  try {
+    sessionStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(cache));
+  } catch {
+    // Session storage is optional.
+  }
+}
+
+function postAnalytics(event: string): void {
+  const sessionId = getOrCreateSessionId();
+  if (!sessionId) return;
+  void fetch("/api/chat/analytics", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ event, sessionId, viewport: getViewportClass() }),
+  }).catch(() => {
+    // Analytics are best effort and never block the Assistant.
+  });
+}
+
 export function BenkaiAssistant() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(readSessionMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [sessionReady, setSessionReady] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [failedContext, setFailedContext] = useState<ChatMessage[] | null>(null);
+  const [geminiTurns, setGeminiTurns] = useState<number>(readGeminiTurns);
+  const [localCache, setLocalCache] = useState<Record<string, { text: string }>>(readLocalCache);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -48,12 +134,21 @@ export function BenkaiAssistant() {
   const cooldownRef = useRef(false);
 
   useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setMessages(boundConversation(readSessionMessages()));
+      setSessionReady(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (!sessionReady) return;
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
     } catch {
       // Session storage is optional; conversation still works in component memory.
     }
-  }, [messages]);
+  }, [messages, sessionReady]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -95,36 +190,68 @@ export function BenkaiAssistant() {
     requestAnimationFrame(() => launcherRef.current?.focus());
   };
 
-  const submitMessage = async (messageText: string) => {
+  const submitMessage = async (messageText: string, retryContext?: ChatMessage[]) => {
     const content = messageText.trim();
-    if (!content || isLoading || cooldownRef.current) return;
+    if (!content || isLoading || (!retryContext && cooldownRef.current)) return;
 
     cooldownRef.current = true;
     window.setTimeout(() => {
       cooldownRef.current = false;
     }, SUBMIT_COOLDOWN_MS);
     setError("");
+    setFailedContext(null);
     setInput("");
     setIsLoading(true);
 
+    // Reuse a previously answered local factual question within this session (0 Gemini calls).
+    if (!retryContext && localCache[content]) {
+      const assistantMessage: ChatMessage = { role: "assistant", content: localCache[content].text };
+      setMessages((current) => boundConversation([...current, assistantMessage]));
+      setIsLoading(false);
+      requestAnimationFrame(() => inputRef.current?.focus());
+      return;
+    }
+
     const userMessage: ChatMessage = { role: "user", content };
-    const context = [...messages, userMessage].slice(-MAX_CONVERSATION_MESSAGES);
-    setMessages(context);
+    const context = retryContext ?? boundConversation([...messages, userMessage]);
+    if (!retryContext) setMessages(context);
+
+    const metadata = {
+      sessionId: getOrCreateSessionId(),
+      geminiTurns,
+      viewport: getViewportClass(),
+    };
 
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: context }),
+        body: JSON.stringify({ messages: context, metadata }),
       });
       const payload: ChatSuccessResponse | ChatErrorResponse = await response.json();
       if (!response.ok || "error" in payload) {
+        const code = "error" in payload ? payload.code : undefined;
+        if (code === "SESSION_LIMIT") {
+          setError("error" in payload ? payload.error : "You've reached this session's AI conversation limit.");
+          setFailedContext(null);
+          return;
+        }
         throw new Error("error" in payload ? payload.error : "Benkai Assistant could not respond.");
       }
       const assistantMessage: ChatMessage = { role: "assistant", content: payload.message };
-      setMessages((current) => [...current, assistantMessage].slice(-MAX_CONVERSATION_MESSAGES));
+      setMessages((current) => boundConversation([...current, assistantMessage]));
+      if (payload.source === "local_grounded") {
+        const next = { ...localCache, [content]: { text: payload.message } };
+        setLocalCache(next);
+        writeLocalCache(next);
+      } else if (payload.source === "gemini") {
+        const next = Math.min(geminiTurns + 1, MAX_GEMINI_TURNS);
+        setGeminiTurns(next);
+        writeGeminiTurns(next);
+      }
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : "Benkai Assistant could not respond just now.");
+      setFailedContext(context);
     } finally {
       setIsLoading(false);
       requestAnimationFrame(() => inputRef.current?.focus());
@@ -176,7 +303,7 @@ export function BenkaiAssistant() {
                 </p>
                 <div className="mt-4 grid gap-2">
                   {starterPrompts.map((prompt) => (
-                    <button key={prompt} type="button" onClick={() => void submitMessage(prompt)} className="assistant-prompt">
+                    <button key={prompt} type="button" onClick={() => { postAnalytics("starter_prompt_click"); void submitMessage(prompt); }} className="assistant-prompt">
                       {prompt}
                     </button>
                   ))}
@@ -193,7 +320,14 @@ export function BenkaiAssistant() {
             {error && (
               <div className="assistant-error" role="alert">
                 <p>{error}</p>
-                <Link href="/contact" onClick={close}>Discuss a Business Problem →</Link>
+                <div className="assistant-error-actions">
+                  {failedContext && (
+                    <button type="button" onClick={() => { postAnalytics("chat_retry"); void submitMessage(failedContext.at(-1)?.content ?? "", failedContext); }} disabled={isLoading}>
+                      Try again
+                    </button>
+                  )}
+                  <Link href="/contact" onClick={() => { postAnalytics("chat_contact_click"); close(); }}>Discuss a Business Problem →</Link>
+                </div>
               </div>
             )}
           </div>
@@ -215,12 +349,12 @@ export function BenkaiAssistant() {
               <ArrowUp size={17} aria-hidden="true" />
             </button>
           </form>
-          <p className="assistant-disclosure">Session-only conversation. Do not share sensitive information.</p>
+          <p className="assistant-disclosure">Chat history stays in this browser session. Benkai may count anonymous Assistant usage, but message content is not stored for analytics.</p>
         </div>
       )}
 
       {!isOpen && (
-        <button ref={launcherRef} type="button" onClick={() => setIsOpen(true)} className="assistant-launcher" aria-label="Open Benkai Assistant" aria-haspopup="dialog">
+        <button ref={launcherRef} type="button" onClick={() => { postAnalytics("chat_open"); setIsOpen(true); }} className="assistant-launcher" aria-label="Open Benkai Assistant" aria-haspopup="dialog">
           <span className="assistant-launcher-mark" aria-hidden="true">
             <Image src="/brand/benkai-mark.png" alt="" width={512} height={512} sizes="28px" />
           </span>

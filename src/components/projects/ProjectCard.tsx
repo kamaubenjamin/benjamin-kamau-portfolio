@@ -19,7 +19,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   );
 
   return (
-    <Card as="article" className="flex h-full flex-col p-6 sm:p-7">
+    <Card as="article" className="flex h-full flex-col border-t-[color:rgba(99,242,159,.2)] p-6 sm:p-7">
       <Link href={`/projects/${project.slug}`} className="group flex flex-1 flex-col rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
         <div className="mb-4 flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-emerald)]">

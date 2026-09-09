@@ -8,10 +8,10 @@ import { MapPin, Briefcase, Eye, MessageSquare } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="hero-environment relative overflow-hidden pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-28 lg:pt-28">
+    <section className="hero-environment relative overflow-hidden pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-24">
 
       <Container className="relative">
-        <div className="hero-grid grid gap-12 xl:grid-cols-12 xl:items-center xl:gap-16">
+        <div className="hero-grid grid gap-10 xl:grid-cols-12 xl:items-center xl:gap-14">
           {/* Left column: content */}
           <div className="hero-content xl:col-span-6">
             <div className="hero-primary">
@@ -21,10 +21,10 @@ export function HeroSection() {
               <h1 className="mb-4 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.05em] text-[var(--color-text)] sm:text-6xl lg:text-7xl">
                 Benkai Systems
               </h1>
-              <p className="mb-4 max-w-xl text-lg font-medium tracking-tight text-[var(--color-text)] sm:text-2xl">
+              <p className="mb-4 max-w-[34rem] text-lg font-medium tracking-tight text-[var(--color-text)] sm:text-2xl">
                 <GradientText>{personal.tagline}</GradientText>
               </p>
-              <p className="mb-4 max-w-xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
+              <p className="mb-4 max-w-[36rem] text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">
                 Benkai Systems builds internal business systems, workflow automation, document-processing platforms and data infrastructure around how businesses actually operate.
               </p>
               <p className="mb-6 max-w-xl text-sm leading-relaxed text-[var(--color-text-subtle)] sm:mb-7">

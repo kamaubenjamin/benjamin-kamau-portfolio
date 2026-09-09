@@ -1,8 +1,9 @@
 import type { ChatMessage } from "./types";
 
 export const MAX_MESSAGE_LENGTH = 1200;
-export const MAX_CONVERSATION_MESSAGES = 10;
-export const MAX_REQUEST_BYTES = 24_000;
+export const MAX_ASSISTANT_MESSAGE_LENGTH = 8_000;
+export const MAX_CONVERSATION_MESSAGES = 24;
+export const MAX_REQUEST_BYTES = 48_000;
 
 type ValidationResult =
   | { success: true; messages: ChatMessage[] }
@@ -23,7 +24,7 @@ export function validateChatPayload(value: unknown): ValidationResult {
   }
 
   const validated: ChatMessage[] = [];
-  for (const message of messages) {
+  for (const [index, message] of messages.entries()) {
     if (!message || typeof message !== "object" || Array.isArray(message)) {
       return { success: false, error: "Each message must include a valid role and content." };
     }
@@ -33,10 +34,16 @@ export function validateChatPayload(value: unknown): ValidationResult {
       return { success: false, error: "Each message must include a valid role and text content." };
     }
 
+    const expectedRole = index % 2 === 0 ? "user" : "assistant";
+    if (role !== expectedRole) {
+      return { success: false, error: "Conversation roles must alternate between user and assistant." };
+    }
+
     const trimmed = content.trim();
     if (!trimmed) return { success: false, error: "Messages cannot be empty." };
-    if (trimmed.length > MAX_MESSAGE_LENGTH) {
-      return { success: false, error: `Messages must be ${MAX_MESSAGE_LENGTH} characters or fewer.` };
+    const messageLimit = role === "user" ? MAX_MESSAGE_LENGTH : MAX_ASSISTANT_MESSAGE_LENGTH;
+    if (trimmed.length > messageLimit) {
+      return { success: false, error: `${role === "user" ? "User" : "Assistant"} messages must be ${messageLimit} characters or fewer.` };
     }
 
     validated.push({ role, content: trimmed });

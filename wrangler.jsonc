@@ -13,6 +13,12 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "analytics_engine_datasets": [
+    {
+      "binding": "BENKAI_ANALYTICS",
+      "dataset": "benkai_assistant_events"
+    }
+  ],
   "observability": {
     "enabled": true
   }
