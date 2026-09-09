@@ -13,6 +13,7 @@ const GEMINI_TURNS_KEY = "benkai-assistant-gemini-turns";
 const LOCAL_CACHE_KEY = "benkai-assistant-local-cache";
 const MAX_GEMINI_TURNS = 4;
 const SUBMIT_COOLDOWN_MS = 900;
+const LOADING_DISPLAY_DELAY_MS = 180;
 const MAX_CONTEXT_BYTES = 46_000;
 const starterPrompts = [
   "What does Benkai build?",
@@ -122,6 +123,7 @@ export function BenkaiAssistant() {
   const [sessionReady, setSessionReady] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showLoadingState, setShowLoadingState] = useState(false);
   const [error, setError] = useState("");
   const [failedContext, setFailedContext] = useState<ChatMessage[] | null>(null);
   const [geminiTurns, setGeminiTurns] = useState<number>(readGeminiTurns);
@@ -183,7 +185,7 @@ export function BenkaiAssistant() {
 
   useEffect(() => {
     conversationRef.current?.scrollTo({ top: conversationRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, isLoading, error]);
+  }, [messages, showLoadingState, error]);
 
   const close = () => {
     setIsOpen(false);
@@ -221,6 +223,10 @@ export function BenkaiAssistant() {
       geminiTurns,
       viewport: getViewportClass(),
     };
+    const loadingDisplayTimeout = window.setTimeout(
+      () => setShowLoadingState(true),
+      LOADING_DISPLAY_DELAY_MS,
+    );
 
     try {
       const response = await fetch("/api/chat", {
@@ -253,6 +259,8 @@ export function BenkaiAssistant() {
       setError(requestError instanceof Error ? requestError.message : "Benkai Assistant could not respond just now.");
       setFailedContext(context);
     } finally {
+      window.clearTimeout(loadingDisplayTimeout);
+      setShowLoadingState(false);
       setIsLoading(false);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
@@ -316,7 +324,20 @@ export function BenkaiAssistant() {
                 {message.content}
               </div>
             ))}
-            {isLoading && <div className="assistant-message assistant-message-assistant">Reviewing verified portfolio details…</div>}
+            {showLoadingState && (
+              <div className="assistant-message assistant-message-assistant assistant-loading" role="status">
+                <div className="assistant-loading-status">
+                  <span className="assistant-loading-dot" aria-hidden="true" />
+                  <span>Preparing grounded response...</span>
+                  <span className="assistant-loading-cursor" aria-hidden="true" />
+                </div>
+                <div className="assistant-loading-lines" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+            )}
             {error && (
               <div className="assistant-error" role="alert">
                 <p>{error}</p>
