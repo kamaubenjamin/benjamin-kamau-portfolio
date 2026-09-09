@@ -19,9 +19,9 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
   );
 
   return (
-    <Card as="article" className="flex h-full flex-col p-7 sm:p-8">
+    <Card as="article" className="flex h-full flex-col p-6 sm:p-7">
       <Link href={`/projects/${project.slug}`} className="group flex flex-1 flex-col rounded-[var(--radius-card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]">
-        <div className="mb-5 flex flex-wrap items-center gap-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-emerald)]">
             {project.category}
           </span>
@@ -35,7 +35,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
         <h3 className="mb-3 text-xl font-semibold tracking-tight text-[var(--color-text)] transition-colors group-hover:text-[var(--color-emerald-light)]">
           {project.title}
         </h3>
-        <p className="mb-6 flex-1 text-sm leading-6 text-[var(--color-text-muted)]">
+        <p className="mb-5 flex-1 text-sm leading-6 text-[var(--color-text-muted)]">
           {featured && project.featuredDescription
             ? project.featuredDescription
             : project.cardDescription ?? project.shortDescription}
@@ -48,7 +48,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
             <Badge>+{technologies.length - visibleTechnologyCount}</Badge>
           )}
         </div>
-        <span className="mt-6 inline-flex items-center text-sm font-semibold text-[var(--color-emerald)]">View case study →</span>
+        <span className="mt-5 inline-flex items-center text-sm font-semibold text-[var(--color-emerald)]">View case study →</span>
       </Link>
       {liveDemo && (
         <a

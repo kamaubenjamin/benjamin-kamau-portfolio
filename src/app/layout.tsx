@@ -4,6 +4,7 @@ import "./globals.css";
 import { SkipLink } from "@/components/navigation/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AssistantMount } from "@/components/assistant/AssistantMount";
 import { absoluteUrl, siteUrl } from "@/lib/json-ld";
 
 const geistSans = Geist({
@@ -75,6 +76,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <AssistantMount />
       </body>
     </html>
   );

@@ -32,7 +32,7 @@ export function ProcessSteps() {
     <div className="grid gap-6 md:grid-cols-2">
       {steps.map((step) => (
         <Card key={step.number} as="article" className="relative">
-          <span className="mb-3 block text-3xl font-bold text-[var(--color-emerald)]/30">
+          <span className="mb-3 block font-mono text-sm font-semibold text-[var(--color-mint-muted)]">
             {step.number}
           </span>
           <h3 className="mb-2 text-lg font-semibold text-[var(--color-text)]">

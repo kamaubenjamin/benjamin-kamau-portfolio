@@ -25,17 +25,17 @@ export function Button({
   type = "button",
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center gap-2 font-semibold transition-[transform,color,background-color,border-color,box-shadow] duration-200 rounded-[var(--radius-button)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] active:translate-y-px";
+    "inline-flex items-center justify-center gap-1.5 font-semibold transition-[transform,color,background-color,border-color,box-shadow] duration-200 rounded-[var(--radius-button)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] active:translate-y-px";
 
   const sizeStyles = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-7 py-3 text-base",
+    sm: "min-h-9 px-3 text-sm",
+    md: "min-h-10 px-4 text-sm",
+    lg: "min-h-11 px-5 text-sm sm:px-6",
   };
 
   const variantStyles = {
     primary:
-      "border border-[var(--color-emerald)] bg-[var(--color-emerald)] text-[#06100b] hover:bg-[var(--color-emerald-light)] shadow-[var(--shadow-glow)]",
+      "border border-[var(--color-emerald)] bg-[var(--color-emerald)] text-[#06100b] hover:border-[var(--color-emerald-light)] hover:bg-[var(--color-emerald-light)] shadow-[var(--shadow-glow)]",
     outline:
       "border border-[var(--color-border)] text-[var(--color-emerald)] hover:border-[var(--color-emerald)] hover:bg-[var(--color-bg-elevated)]",
     ghost:

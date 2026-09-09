@@ -38,9 +38,9 @@ function TechnologyStrip() {
   ];
 
   return (
-    <div className="rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-bg-card)] px-5 py-5 sm:px-7">
-      <p className="mb-5 text-center text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-text-subtle)] sm:text-left">
-        Built with modern technologies
+    <div className="border-y border-[var(--color-border)] px-1 py-5 sm:px-0">
+      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text-subtle)]">
+        Core technologies
       </p>
       <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-6">
         {items.map((item) => {
@@ -155,7 +155,7 @@ export default function HomePage() {
             ))}
           </div>
           <AnimatedWrapper delay={0.3}>
-            <div className="mt-10 text-center">
+            <div className="mt-8 text-center">
               <Button href="/services" variant="outline" size="lg">
                 View All Services <ArrowRight size={16} />
               </Button>
@@ -184,7 +184,7 @@ export default function HomePage() {
             ))}
           </div>
           <AnimatedWrapper delay={0.3}>
-            <div className="mt-10 text-center">
+            <div className="mt-8 text-center">
               <Button href="/projects" variant="outline" size="lg">
                 View Selected Projects <ArrowRight size={16} />
               </Button>
@@ -221,7 +221,7 @@ export default function HomePage() {
             <ExperiencePreview />
           </AnimatedWrapper>
           <AnimatedWrapper delay={0.2}>
-            <div className="mt-10 text-center">
+            <div className="mt-8 text-center">
               <Button href="/about" variant="outline" size="lg">
                 Full Bio & Skills <ArrowRight size={16} />
               </Button>
@@ -249,9 +249,8 @@ export default function HomePage() {
       <SectionWrapper>
         <Container>
           <AnimatedWrapper>
-            <Card hover={false} className="overflow-hidden border-[var(--color-emerald)]/20 text-center">
-              <div className="relative px-4 py-12 sm:px-12 sm:py-16">
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--color-emerald)]/5 to-transparent" />
+            <Card hover={false} className="overflow-hidden text-center">
+              <div className="relative px-4 py-9 sm:px-12 sm:py-12">
                 <h2 className="relative mb-4 text-3xl font-bold tracking-tight text-[var(--color-text)] sm:text-4xl">
                   Ready to turn your data into practical business impact?
                 </h2>

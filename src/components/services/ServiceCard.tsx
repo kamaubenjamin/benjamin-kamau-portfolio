@@ -29,14 +29,14 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const Icon = iconMap[service.icon] || Database;
 
   return (
-    <Card className="flex min-h-full flex-col p-7">
-      <IconWrapper className="mb-6" size="lg">
-        <Icon size={22} />
+    <Card className="flex min-h-full flex-col p-6">
+      <IconWrapper className="mb-4" size="md">
+        <Icon size={19} />
       </IconWrapper>
       <h3 className="mb-3 text-lg font-semibold tracking-tight text-[var(--color-text)]">
         {service.title}
       </h3>
-      <p className="mb-5 flex-1 text-sm leading-6 text-[var(--color-text-muted)]">
+      <p className="mb-4 flex-1 text-sm leading-6 text-[var(--color-text-muted)]">
         {service.description}
       </p>
       <div className="mt-auto flex flex-wrap gap-1.5">

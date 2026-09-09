@@ -14,9 +14,9 @@ export function SectionWrapper({
   divider = false,
 }: SectionWrapperProps) {
   return (
-    <section id={id} className={cn("relative py-16 sm:py-24 lg:py-28", className)}>
+    <section id={id} className={cn("relative py-14 sm:py-20 lg:py-24", className)}>
       {divider && (
-        <div className="mx-auto mb-16 h-px w-full max-w-7xl bg-gradient-to-r from-transparent via-[var(--color-border-hover)] to-transparent opacity-60 sm:mb-24" />
+        <div className="absolute inset-x-0 top-0 mx-auto h-px w-full max-w-7xl bg-[var(--color-border)]" />
       )}
       {children}
     </section>

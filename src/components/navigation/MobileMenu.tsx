@@ -48,12 +48,12 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         onClick={() => setOpenPathname(isOpen ? null : pathname)}
-        className="flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] p-2 text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
+        className="flex min-h-10 min-w-10 items-center justify-center rounded-[var(--radius-button)] p-2 text-[var(--color-text-muted)] transition-colors hover:bg-white/[0.03] hover:text-[var(--color-text)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
         aria-label={isOpen ? "Close menu" : "Open menu"}
         aria-expanded={isOpen}
         aria-controls="mobile-navigation-panel"
       >
-        <Menu size={24} aria-hidden="true" />
+        <Menu size={21} strokeWidth={1.8} aria-hidden="true" />
       </button>
 
       {typeof document !== "undefined" &&
@@ -71,7 +71,7 @@ export function MobileMenu() {
                 aria-modal="true"
                 aria-label="Mobile navigation menu"
               >
-                <div className="flex min-h-16 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-6 pt-[env(safe-area-inset-top)]">
+                <div className="flex min-h-16 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-5 pt-[env(safe-area-inset-top)]">
                   <Link
                     href="/"
                     onClick={() => closeMenu()}
@@ -92,7 +92,7 @@ export function MobileMenu() {
 
                 <nav
                   aria-label="Mobile navigation"
-                  className="flex flex-1 flex-col gap-3 px-6 pb-[max(2rem,env(safe-area-inset-bottom))] pt-8"
+                  className="flex flex-1 flex-col gap-2 px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-6"
                 >
                   {navItems.map((item) => {
                     const isActive =
@@ -103,7 +103,7 @@ export function MobileMenu() {
                         key={item.href}
                         href={item.href}
                         onClick={() => closeMenu()}
-                        className="flex min-h-12 w-full items-center rounded-[var(--radius-button)] px-4 text-lg font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                        className="flex min-h-11 w-full items-center rounded-[var(--radius-button)] border-l border-transparent px-3 text-base font-medium text-[var(--color-text)] transition-colors hover:border-[var(--color-border-hover)] hover:bg-white/[0.025] hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] aria-[current=page]:border-[var(--color-emerald)] aria-[current=page]:text-[var(--color-emerald)]"
                         aria-current={isActive ? "page" : undefined}
                       >
                         {item.label}

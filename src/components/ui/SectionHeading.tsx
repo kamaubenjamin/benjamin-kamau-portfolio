@@ -20,7 +20,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-12 max-w-3xl sm:mb-14",
+        "mb-9 max-w-3xl sm:mb-11",
         align === "center" && "mx-auto text-center",
         className
       )}
@@ -29,7 +29,7 @@ export function SectionHeading({
         {title}
       </Heading>
       {subtitle && (
-        <p className="mt-4 text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">{subtitle}</p>
+        <p className="mt-3 text-base leading-7 text-[var(--color-text-muted)] sm:text-lg">{subtitle}</p>
       )}
     </div>
   );

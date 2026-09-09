@@ -25,23 +25,23 @@ export function Footer() {
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
       <Container>
-        <div className="flex flex-col items-center gap-8 py-14 sm:flex-row sm:justify-between">
-          <div className="flex flex-col items-center gap-2 sm:items-start">
+        <div className="flex flex-col items-center gap-5 py-8 sm:flex-row sm:justify-between sm:py-9">
+          <div className="flex flex-col items-center gap-1.5 sm:items-start">
             <Link
               href="/"
               className="rounded-[var(--radius-button)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
             >
-              <BrandLockup />
+              <BrandLockup compact />
             </Link>
-            <p className="mt-2 text-xs font-medium uppercase tracking-[0.24em] text-[var(--color-mint-muted)]">
+            <p className="mt-1 text-[0.68rem] font-medium uppercase tracking-[0.2em] text-[var(--color-mint-muted)]">
               Systems. Automation. Data.
             </p>
-            <p className="text-sm text-[var(--color-text-muted)]">
+            <p className="max-w-full text-center text-sm text-[var(--color-text-muted)] sm:text-left">
               Benjamin Kamau · Founder &amp; Technical Builder
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {social.github && (
               <a
                 href={social.github}
@@ -79,8 +79,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[var(--color-border)] py-6 text-center text-sm text-[var(--color-text-muted)]">
-          <p>&copy; {currentYear} Benkai Systems. Benjamin Kamau — Founder &amp; Technical Builder.</p>
+        <div className="border-t border-[var(--color-border)] py-4 text-center text-xs text-[var(--color-text-muted)] sm:text-sm">
+          <p>&copy; {currentYear} Benkai Systems.</p>
         </div>
       </Container>
     </footer>
