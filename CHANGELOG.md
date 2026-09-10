@@ -2,6 +2,12 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-09-10 — Benkai Assistant Response Completion Fix
+
+- Increased Gemini response headroom while retaining a hard output ceiling and instructing the Assistant to prefer complete, focused answers over exhaustive responses.
+- Added safe Gemini finish-state handling so token-limited responses are identified rather than silently presented as complete, with a visitor-triggered Continue action and no automatic follow-up request.
+- Reinforced plain-text response formatting without changing hybrid local routing, project facts, session limits, analytics privacy, Worker configuration or contact delivery.
+
 ## 2026-09-08 — Benkai Systems Visual Identity Integration
 
 - Integrated the approved Benkai Systems mark across the header, footer, favicon, application icon and manifest without using the cinematic brand reference as a visible UI asset.

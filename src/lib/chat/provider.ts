@@ -1,11 +1,11 @@
 import "server-only";
 
-import type { ChatMessage } from "./types";
+import type { ChatGenerationResult, ChatMessage } from "./types";
+import { parseGeminiResponse } from "./provider-response";
 
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-3.5-flash";
-const OUTPUT_TOKEN_LIMIT = 1200;
-const OUTPUT_CHARACTER_LIMIT = 8_000;
+const OUTPUT_TOKEN_LIMIT = 1800;
 
 export class ChatProviderNotConfiguredError extends Error {}
 export class ChatProviderQuotaError extends Error {}
@@ -16,6 +16,8 @@ type ChatProviderErrorCategory =
   | "model_or_endpoint"
   | "timeout"
   | "provider_unavailable"
+  | "blocked_output"
+  | "abnormal_finish"
   | "provider_failure";
 
 export class ChatProviderError extends Error {
@@ -32,17 +34,10 @@ function classifyProviderStatus(status: number): ChatProviderErrorCategory {
   return "provider_failure";
 }
 
-function isMalformedProviderOutput(content: string): boolean {
-  const normalized = content.trim().toLowerCase();
-  if (!normalized) return true;
-  if (/^(?:prev|next|null|undefined|n\/a|-)\.?$/.test(normalized)) return true;
-  return normalized.length < 4 && !/[.!?]/.test(normalized);
-}
-
 export async function generateChatResponse(
   messages: ChatMessage[],
   systemPrompt: string,
-): Promise<string> {
+): Promise<ChatGenerationResult> {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
   if (!apiKey) throw new ChatProviderNotConfiguredError("Chat provider is not configured.");
 
@@ -93,17 +88,13 @@ export async function generateChatResponse(
     throw new ChatProviderError(category);
   }
 
-  const payload: unknown = await response.json();
-  const parts = (payload as { candidates?: Array<{ content?: { parts?: Array<{ text?: unknown }> } }> })
-    .candidates?.[0]?.content?.parts;
-  const content = parts
-    ?.map((part) => part.text)
-    .filter((text): text is string => typeof text === "string")
-    .join("");
-
-  if (typeof content !== "string" || isMalformedProviderOutput(content)) {
-    throw new Error("Provider returned an invalid response.");
+  const result = parseGeminiResponse(await response.json());
+  if (!result.success) {
+    if (result.category === "invalid_output") {
+      throw new Error("Provider returned an invalid response.");
+    }
+    console.warn("Benkai Assistant provider failure", { provider: "gemini", model, category: result.category });
+    throw new ChatProviderError(result.category);
   }
-
-  return content.trim().slice(0, OUTPUT_CHARACTER_LIMIT);
+  return result;
 }

@@ -126,6 +126,7 @@ export function BenkaiAssistant() {
   const [showLoadingState, setShowLoadingState] = useState(false);
   const [error, setError] = useState("");
   const [failedContext, setFailedContext] = useState<ChatMessage[] | null>(null);
+  const [canContinue, setCanContinue] = useState(false);
   const [geminiTurns, setGeminiTurns] = useState<number>(readGeminiTurns);
   const [localCache, setLocalCache] = useState<Record<string, { text: string }>>(readLocalCache);
   const launcherRef = useRef<HTMLButtonElement>(null);
@@ -202,6 +203,7 @@ export function BenkaiAssistant() {
     }, SUBMIT_COOLDOWN_MS);
     setError("");
     setFailedContext(null);
+    setCanContinue(false);
     setInput("");
     setIsLoading(true);
 
@@ -246,6 +248,7 @@ export function BenkaiAssistant() {
       }
       const assistantMessage: ChatMessage = { role: "assistant", content: payload.message };
       setMessages((current) => boundConversation([...current, assistantMessage]));
+      setCanContinue(payload.source === "gemini" && payload.incomplete === true);
       if (payload.source === "local_grounded") {
         const next = { ...localCache, [content]: { text: payload.message } };
         setLocalCache(next);
@@ -324,6 +327,14 @@ export function BenkaiAssistant() {
                 {message.content}
               </div>
             ))}
+            {canContinue && !isLoading && (
+              <div className="assistant-continuation" role="status">
+                <span>Response reached its length limit.</span>
+                <button type="button" onClick={() => void submitMessage("Continue")}>
+                  Continue
+                </button>
+              </div>
+            )}
             {showLoadingState && (
               <div className="assistant-message assistant-message-assistant assistant-loading" role="status">
                 <div className="assistant-loading-status">

@@ -91,9 +91,9 @@ export async function POST(request: Request) {
 
   try {
     if (metadata.sessionId) writeChatAnalytics({ event: "chat_gemini_request", sessionId: metadata.sessionId, source: "gemini", viewport: metadata.viewport });
-    const message = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt());
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_gemini_answer", sessionId: metadata.sessionId, source: "gemini", outcome: "success", viewport: metadata.viewport });
-    return NextResponse.json<ChatSuccessResponse>({ message, source: "gemini" }, { headers: responseHeaders });
+    const result = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt());
+    if (metadata.sessionId) writeChatAnalytics({ event: "chat_gemini_answer", sessionId: metadata.sessionId, source: "gemini", outcome: result.incomplete ? "incomplete" : "success", viewport: metadata.viewport });
+    return NextResponse.json<ChatSuccessResponse>({ message: result.message, source: "gemini", incomplete: result.incomplete || undefined }, { headers: responseHeaders });
   } catch (error) {
     if (error instanceof ChatProviderNotConfiguredError) {
       return errorResponse(

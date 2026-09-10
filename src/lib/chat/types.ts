@@ -9,6 +9,12 @@ export interface ChatSuccessResponse {
   message: string;
   source: "local_grounded" | "gemini";
   projectSlug?: string;
+  incomplete?: boolean;
+}
+
+export interface ChatGenerationResult {
+  message: string;
+  incomplete: boolean;
 }
 
 export interface ChatErrorResponse {
