@@ -19,9 +19,7 @@ export const personal: PersonalInfo = {
 
 Benjamin Kamau designs and builds the systems behind Benkai Systems, working across business discovery, architecture, data modelling, implementation, deployment and iteration.
 
-With over two years of technical experience spanning workflow automation, data engineering, and technical support, I help organisations turn repetitive processes, fragmented data and disconnected systems into streamlined, automated, data-driven operations.
-
-I combine strong analytical thinking with hands-on engineering to deliver practical outcomes: reducing repetitive manual work, improving data consistency, making exceptions easier to identify, and creating clearer operational visibility without expensive platform licenses.`,
+Benkai helps organisations turn repetitive processes, fragmented data and disconnected systems into streamlined operations with clearer information, better data consistency and less repeated manual work.`,
   location: "Nairobi, Kenya",
   remoteAvailable: true,
   availability: "Selected projects and contract opportunities",

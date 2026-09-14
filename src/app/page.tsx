@@ -11,8 +11,7 @@ import { ServiceCard } from "@/components/services/ServiceCard";
 import { ProcessSteps } from "@/components/process/ProcessSteps";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
-import { experiences } from "@/data/experience";
-import { skillCategories } from "@/data/skills";
+import { workingTechnologyGroups } from "@/data/technologies";
 import { personJsonLd, serializeJsonLd } from "@/lib/json-ld";
 import {
   ArrowRight,
@@ -21,7 +20,6 @@ import {
   Layers,
   Terminal,
   Globe,
-  Blocks,
   Cloud,
   Braces,
   ServerCog,
@@ -52,39 +50,18 @@ function TechnologyStrip() {
   );
 }
 
-function ExperiencePreview() {
-  return (
-    <div className="space-y-6">
-      {experiences.map((exp) => (
-        <Card key={`${exp.company}-${exp.role}`} as="article">
-          <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h3 className="font-semibold text-[var(--color-text)]">{exp.company}</h3>
-              <p className="text-sm text-[var(--color-emerald)]">{exp.role}</p>
-            </div>
-            <span className="text-sm text-[var(--color-text-muted)]">{exp.period}</span>
-          </div>
-          <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
-            {exp.description}
-          </p>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
 function TechnologyGroups() {
   const categoryIcons: Record<string, React.ReactNode> = {
-    "Data Engineering and Automation": <Database size={16} />,
-    "Platforms and Databases": <Layers size={16} />,
-    "Data Collection": <Globe size={16} />,
-    "Web and Interfaces": <Code2 size={16} />,
-    "Expanding Capabilities": <Blocks size={16} />,
+    "Data & Automation": <Database size={16} />,
+    Applications: <Code2 size={16} />,
+    "Data Platforms": <Layers size={16} />,
+    "Integration & Version Control": <Terminal size={16} />,
+    "Testing & Data Collection": <Globe size={16} />,
   };
 
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {skillCategories.map((category) => (
+      {workingTechnologyGroups.map((category) => (
         <Card key={category.category} as="section">
           <div className="mb-3 flex items-center gap-2">
             <span className="text-[var(--color-emerald)]">
@@ -95,18 +72,9 @@ function TechnologyGroups() {
             </h3>
           </div>
           <div className="flex flex-wrap gap-1.5">
-            {category.skills.map((skill) => (
-              <Badge
-                key={skill.name}
-                variant={
-                  skill.level === "expanding"
-                    ? "expanding"
-                    : skill.level === "expert"
-                      ? "lime"
-                      : "emerald"
-                }
-              >
-                {skill.name}
+            {category.technologies.map((technology) => (
+              <Badge key={technology} variant="emerald">
+                {technology}
               </Badge>
             ))}
           </div>
@@ -208,35 +176,13 @@ export default function HomePage() {
         </Container>
       </SectionWrapper>
 
-      {/* 7. Experience preview */}
-      <SectionWrapper id="experience" divider>
+      {/* 7. Working technology groups */}
+      <SectionWrapper id="technologies" divider>
         <Container>
           <AnimatedWrapper>
             <SectionHeading
-              title="Experience"
-              subtitle="Hands-on roles in technical support, workflow automation and IT operations."
-            />
-          </AnimatedWrapper>
-          <AnimatedWrapper delay={0.1}>
-            <ExperiencePreview />
-          </AnimatedWrapper>
-          <AnimatedWrapper delay={0.2}>
-            <div className="mt-8 text-center">
-              <Button href="/about" variant="outline" size="lg">
-                Full Bio & Skills <ArrowRight size={16} />
-              </Button>
-            </div>
-          </AnimatedWrapper>
-        </Container>
-      </SectionWrapper>
-
-      {/* 8. Technology groups */}
-      <SectionWrapper id="skills" divider>
-        <Container>
-          <AnimatedWrapper>
-            <SectionHeading
-              title="Technologies We Work With"
-              subtitle="Core tools and expanding capabilities across data engineering, automation and web platforms."
+              title="Working Technologies"
+              subtitle="A focused stack demonstrated across current Benkai projects and implementations."
             />
           </AnimatedWrapper>
           <AnimatedWrapper delay={0.1}>
@@ -245,7 +191,7 @@ export default function HomePage() {
         </Container>
       </SectionWrapper>
 
-      {/* 9. Final CTA */}
+      {/* 8. Final CTA */}
       <SectionWrapper>
         <Container>
           <AnimatedWrapper>
