@@ -504,7 +504,7 @@ export const projects: Project[] = ([
     ],
     links: [
       {
-        url: "https://travelling-vacation-0zxt.bolt.host/",
+        url: "https://exploreafrica-public-staging.pages.dev/",
         label: "View Public Showcase",
         kind: "website",
         primary: true,
