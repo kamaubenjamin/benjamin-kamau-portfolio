@@ -87,6 +87,7 @@ const projectDisplayOrder = new Map([
   ["competitor-price-intelligence-platform", 6],
   ["pair-and-place-website-operations", 7],
   ["essiedo-catalogue-pilot", 8],
+  ["house-of-original", 9],
 ]);
 
 export const projects: Project[] = ([
@@ -1053,6 +1054,151 @@ export const projects: Project[] = ([
     roadmap:
       "Future work may improve the Engine and its governed FlowSync integration without merging competitor-price business logic, APIs, entities or workflows into Document Intelligence.",
     repositoryStatus: "Private Repository",
+    featured: false,
+  },
+  {
+    slug: "house-of-original",
+    title: "House of Original",
+    category: "Commerce & Retail Operations Platform",
+    status: "Production Deployed",
+    statusVariant: "lime",
+    shortDescription:
+      "Mobile-first commerce and operations platform for a skincare, cosmetics and wellness retailer, combining customer self-service ordering with stock-aware fulfilment, delivery configuration and secure owner administration.",
+    positioning:
+      "A lightweight commerce and operations platform built by Benkai Systems to reduce repetitive retail workflows and centralize catalogue, stock, ordering and delivery operations.",
+    valueProposition:
+      "Built around the retailer’s real workflow so customers can browse and place orders directly while the owner manages products, stock, delivery areas and orders from one mobile-friendly system.",
+    overview:
+      "House of Original is a mobile-first commerce and operations platform built for a skincare, cosmetics and wellness retailer. It replaces several repetitive retail steps previously handled through social-media messaging with a self-service catalogue and ordering experience backed by stock-aware fulfilment, delivery configuration and authenticated owner administration.",
+    problem:
+      "The owner relied heavily on TikTok and Facebook messaging to answer repeated customer questions, manually check remaining stock and manually track customer orders. The business needed a direct customer ordering experience and one operational place to manage catalogue, stock, delivery and orders.",
+    solution:
+      "Benkai Systems built a mobile-first commerce and operations platform that lets customers browse and search products, see stock availability, add items to a cart and place pickup or delivery orders, while the owner manages products, stock, delivery zones and order operations through a secure private admin interface.",
+    caseStudySections: [
+      {
+        title: "Customer Ordering",
+        details: [
+          "Mobile-first public storefront with responsive desktop support",
+          "Product catalogue and search",
+          "Skincare, Cosmetics and Wellness categories",
+          "Product detail pages",
+          "ETB/Birr pricing",
+          "Real stock availability with low-stock and sold-out states",
+          "Sold-out purchase protection",
+          "Cart and customer details collection",
+          "Pickup or destination-based delivery ordering",
+          "Real order creation with unique order numbers",
+        ],
+      },
+      {
+        title: "Stock & Order Operations",
+        details: [
+          "Product CRUD and stock management",
+          "Automatic stock deduction when an order is created",
+          "Safe stock restoration when an order is cancelled",
+          "Overselling protection",
+          "Admin order management and order-status workflow",
+          "Remaining-stock visibility",
+        ],
+      },
+      {
+        title: "Delivery Operations",
+        details: [
+          "Pickup and delivery options",
+          "Destination-based delivery zones",
+          "Admin-managed delivery fees",
+          "Delivery-zone fee snapshots retained on historical orders",
+        ],
+      },
+      {
+        title: "Private Administration",
+        description:
+          "The authenticated private owner/admin portal separates full super-admin control from day-to-day admin operations. Super admins have full operational access and can manage, reset or disable admin accounts. Admins can manage products, stock, orders and delivery operations and access the operational dashboard.",
+        details: [
+          "Secure admin authentication",
+          "Protected admin routes and APIs",
+          "super_admin and admin role separation",
+          "Mobile-friendly owner/admin interface",
+          "Super-admin user-management capability",
+        ],
+      },
+      {
+        title: "Localization & UX",
+        details: [
+          "Ethiopia-oriented localization",
+          "ETB/Birr monetary display",
+          "Africa/Addis_Ababa user-facing time handling",
+          "Clean loading, empty and error states",
+          "Premium beauty/lifestyle direction using warm ivory/cream, soft gold and subtle nude/blush tones",
+        ],
+      },
+    ],
+    capabilities: [
+      "Customer self-service catalogue, search, cart and ordering",
+      "Stock-aware product availability and overselling protection",
+      "Product, stock, order and delivery operations",
+      "Pickup and destination-based delivery workflows",
+      "Authenticated private owner/admin portal",
+      "Role-separated super-admin and admin access",
+    ],
+    architecture:
+      "The public React storefront is deployed through Cloudflare Pages, with Cloudflare Pages Functions handling application operations against Cloudflare D1. The private admin experience uses secure authentication and role-protected admin APIs against the same operational database, keeping customer-facing and owner-facing workflows separated.",
+    architectureDetails: [
+      "Public storefront → Cloudflare Pages → Pages Functions → Cloudflare D1",
+      "Private admin → secure authentication → role-protected admin APIs → Cloudflare D1",
+      "Lightweight Cloudflare-native architecture",
+      "Public/customer and private/admin workflow separation",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Cloudflare Pages",
+      "Cloudflare Pages Functions",
+      "Cloudflare D1",
+      "Wrangler",
+    ],
+    cardTechnologies: [
+      "React",
+      "TypeScript",
+      "Cloudflare Pages",
+      "Cloudflare D1",
+      "Pages Functions",
+    ],
+    verifiedOutcomes: [
+      "Built a mobile-first commerce and operations platform",
+      "Digitized product, stock and order workflows",
+      "Created a self-service customer ordering experience",
+      "Implemented secure owner administration and stock-aware ordering",
+      "Centralized several previously manual retail workflow steps",
+    ],
+    responsibilities: "Built and designed by Benkai Systems.",
+    role:
+      "Benkai Systems handled workflow discovery, product design, implementation, operational data modelling, deployment and validation.",
+    currentStatus: "Authenticated private owner/admin portal.",
+    repositoryStatus: "Private proprietary repository.",
+    claimsNotToMake: [
+      "No increased-revenue claim",
+      "No increased-conversion claim",
+      "No measured support-volume reduction claim",
+      "No increased-sales claim",
+      "No customer-adoption metric claim",
+      "No payment-processing claim",
+      "No automated WhatsApp support claim",
+      "No AI/chatbot claim",
+      "No Germany/import-management claim",
+      "No customer-account claim",
+      "No analytics-performance-gain claim",
+      "Private proprietary repository",
+    ],
+    links: [
+      {
+        url: "https://house-of-original.pages.dev",
+        label: "View Live Storefront",
+        kind: "website",
+        primary: true,
+      },
+    ],
     featured: false,
   },
 ] satisfies Project[]).sort(
