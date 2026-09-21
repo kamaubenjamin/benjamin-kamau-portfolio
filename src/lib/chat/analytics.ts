@@ -1,7 +1,3 @@
-import "server-only";
-
-import { getCloudflareContext } from "@opennextjs/cloudflare";
-
 export const CHAT_EVENT_NAMES = [
   "chat_open",
   "starter_prompt_click",
@@ -30,9 +26,17 @@ export interface ChatAnalyticsEvent {
 
 export const ANONYMOUS_SESSION_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-export function writeChatAnalytics(event: ChatAnalyticsEvent): void {
+/** Minimal binding surface required to record Assistant analytics. */
+export interface ChatAnalyticsEnv {
+  BENKAI_ANALYTICS?: AnalyticsEngineDataset;
+}
+
+/**
+ * Records an anonymised Assistant event against the Analytics Engine dataset.
+ * Best effort only: analytics must never affect an Assistant response.
+ */
+export function writeChatAnalytics(env: ChatAnalyticsEnv, event: ChatAnalyticsEvent): void {
   try {
-    const { env } = getCloudflareContext();
     env.BENKAI_ANALYTICS?.writeDataPoint({
       indexes: [event.sessionId],
       blobs: [event.event, event.source ?? "", event.projectSlug ?? "", event.outcome ?? "", event.viewport ?? ""],

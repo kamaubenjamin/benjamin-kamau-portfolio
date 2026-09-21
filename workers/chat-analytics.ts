@@ -1,12 +1,10 @@
-import { NextResponse } from "next/server";
 import {
   ANONYMOUS_SESSION_ID_PATTERN,
   CHAT_EVENT_NAMES,
   type ChatAnalyticsEvent,
   writeChatAnalytics,
 } from "@/lib/chat/analytics";
-
-export const runtime = "nodejs";
+import type { BenkaiEnv } from "./env";
 
 const MAX_ANALYTICS_REQUEST_BYTES = 1_024;
 const UI_EVENTS = new Set<ChatAnalyticsEvent["event"]>([
@@ -16,35 +14,48 @@ const UI_EVENTS = new Set<ChatAnalyticsEvent["event"]>([
   "chat_contact_click",
 ]);
 
-export async function POST(request: Request) {
+function jsonResponse(body: unknown, status: number): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Cache-Control": "no-store", "Content-Type": "application/json" },
+  });
+}
+
+/**
+ * `POST /api/chat/analytics` — UI-level Assistant events only.
+ *
+ * Event name, anonymous session id and viewport class are accepted; no chat
+ * message content, prompt text or personal data is ever stored.
+ */
+export async function handleChatAnalyticsRequest(request: Request, env: BenkaiEnv): Promise<Response> {
   const origin = request.headers.get("origin");
   if (origin && origin !== new URL(request.url).origin) {
-    return NextResponse.json({ error: "Cross-origin requests are not accepted." }, { status: 403 });
+    return jsonResponse({ error: "Cross-origin requests are not accepted." }, 403);
   }
 
   if (!(request.headers.get("content-type") ?? "").toLowerCase().startsWith("application/json")) {
-    return NextResponse.json({ error: "Content-Type must be application/json." }, { status: 415 });
+    return jsonResponse({ error: "Content-Type must be application/json." }, 415);
   }
 
   const rawBody = await request.text();
   if (new TextEncoder().encode(rawBody).byteLength > MAX_ANALYTICS_REQUEST_BYTES) {
-    return NextResponse.json({ error: "Request is too large." }, { status: 413 });
+    return jsonResponse({ error: "Request is too large." }, 413);
   }
 
   let body: unknown;
   try {
     body = JSON.parse(rawBody);
   } catch {
-    return NextResponse.json({ error: "The request body must be valid JSON." }, { status: 400 });
+    return jsonResponse({ error: "The request body must be valid JSON." }, 400);
   }
 
   if (!body || typeof body !== "object" || Array.isArray(body)) {
-    return NextResponse.json({ error: "Invalid analytics event." }, { status: 400 });
+    return jsonResponse({ error: "Invalid analytics event." }, 400);
   }
 
   const allowedKeys = new Set(["event", "sessionId", "viewport"]);
   if (Object.keys(body).some((key) => !allowedKeys.has(key))) {
-    return NextResponse.json({ error: "Invalid analytics event." }, { status: 400 });
+    return jsonResponse({ error: "Invalid analytics event." }, 400);
   }
 
   const { event, sessionId, viewport } = body as { event?: unknown; sessionId?: unknown; viewport?: unknown };
@@ -57,9 +68,13 @@ export async function POST(request: Request) {
     !ANONYMOUS_SESSION_ID_PATTERN.test(sessionId) ||
     !validViewport
   ) {
-    return NextResponse.json({ error: "Invalid analytics event." }, { status: 400 });
+    return jsonResponse({ error: "Invalid analytics event." }, 400);
   }
 
-  writeChatAnalytics({ event: event as ChatAnalyticsEvent["event"], sessionId, viewport: viewport as "mobile" | "tablet" | "desktop" });
-  return new NextResponse(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  writeChatAnalytics(env, {
+    event: event as ChatAnalyticsEvent["event"],
+    sessionId,
+    viewport: viewport as "mobile" | "tablet" | "desktop",
+  });
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 }

@@ -79,15 +79,14 @@ export interface Project {
 
 const projectDisplayOrder = new Map([
   ["gymbolt-gym-management-system", 0],
-  ["spice-harvest-ops", 1],
-  ["intelligent-document-processing-platform", 2],
-  ["home-health-operations-demo", 3],
-  ["exploreafrica-travel-platform", 4],
-  ["flow-sync", 5],
-  ["competitor-price-intelligence-platform", 6],
+  ["house-of-original", 1],
+  ["exploreafrica-travel-platform", 2],
+  ["intelligent-document-processing-platform", 3],
+  ["spice-harvest-ops", 4],
+  ["essiedo-catalogue-pilot", 5],
+  ["home-health-operations-demo", 6],
   ["pair-and-place-website-operations", 7],
-  ["essiedo-catalogue-pilot", 8],
-  ["house-of-original", 9],
+  ["flow-sync", 8],
 ]);
 
 export const projects: Project[] = ([
@@ -1039,52 +1038,6 @@ export const projects: Project[] = ([
         primary: true,
       },
     ],
-    featured: false,
-  },
-  {
-    slug: "competitor-price-intelligence-platform",
-    title: "Competitor Price Intelligence Platform",
-    category: "Data Collection & Intelligence",
-    status: "Paused - separate product",
-    statusVariant: "default",
-    shortDescription:
-      "A Playwright-first Python execution and data plane for deterministic Jumia Electronics extraction, normalization, product matching, price comparison and local runtime history.",
-    overview:
-      "A private, proprietary execution and data plane for competitor-price monitoring. Its verified current foundation is a focused Jumia Electronics MVP that extracts public listings, normalizes product and price observations, stabilizes product matching and comparisons, and records local runtime state for later operational use.",
-    problem:
-      "Product information from different websites and sources varies in structure and naming, making reliable comparison and price-change tracking difficult without validation, normalization and matching.",
-    solution:
-      "Built separated extraction, transformation and comparison concerns with Playwright-first collection, canonical previous_price/current_price handling, compatibility support for older price fields, deterministic matching, stage-count telemetry and local runtime-state boundaries.",
-    architecture:
-      "The Engine owns extraction and processing. Playwright is the primary browser path for the focused Jumia MVP; matching and comparison operate on normalized observations, while price history, scheduler state and the canonical registry remain ignored local runtime files initialized from tracked defaults where applicable. FlowSync is a separate control-plane frontend, and live end-to-end integration is not fully verified.",
-    capabilities: [
-      "Playwright-first Jumia Electronics extraction",
-      "Separated extraction, transformation and loading concerns",
-      "Product-data cleaning, normalization and validation",
-      "Stabilized comparison and product matching",
-      "Canonical previous_price/current_price contract with compatibility support",
-      "Stage-count telemetry and execution logging",
-      "Optional canonical product-specification handling",
-      "Scheduler bootstrap from tracked defaults",
-      "Local-only price history, scheduler state and canonical registry",
-    ],
-    technologies: [
-      "Python",
-      "Pandas",
-      "NumPy",
-      "Playwright",
-      "Selenium",
-      "BeautifulSoup",
-      "RapidFuzz",
-      "SQLite",
-      "Requests",
-      "Streamlit",
-    ],
-    currentStatus:
-      "The focused Engine foundation is validated by a deterministic MVP suite with 29 passed and 1 skipped. Comparison matching, stage telemetry, optional product specifications and runtime-state hygiene are implemented. Source is private and proprietary. The Engine is not production-ready; multi-source production operation, Kafka/Airflow and fully verified FlowSync integration remain unimplemented or unverified.",
-    roadmap:
-      "Future work may improve the Engine and its governed FlowSync integration without merging competitor-price business logic, APIs, entities or workflows into Document Intelligence.",
-    repositoryStatus: "Private Repository",
     featured: false,
   },
   {

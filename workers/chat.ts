@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { buildBenkaiSystemPrompt } from "@/lib/chat/knowledge";
 import {
   ChatProviderNotConfiguredError,
@@ -9,8 +8,7 @@ import { MAX_REQUEST_BYTES, validateChatPayload } from "@/lib/chat/validation";
 import type { ChatErrorResponse, ChatRequestMetadata, ChatSuccessResponse } from "@/lib/chat/types";
 import { ANONYMOUS_SESSION_ID_PATTERN, writeChatAnalytics } from "@/lib/chat/analytics";
 import { getLocalChatAnswer } from "@/lib/chat/local-answers";
-
-export const runtime = "nodejs";
+import type { BenkaiEnv } from "./env";
 
 const responseHeaders = {
   "Cache-Control": "no-store",
@@ -19,23 +17,43 @@ const responseHeaders = {
 };
 const MAX_GEMINI_TURNS_PER_SESSION = 4;
 
+function jsonResponse(body: unknown, status: number): Response {
+  return new Response(JSON.stringify(body), { status, headers: responseHeaders });
+}
+
+function errorResponse(error: string, code: ChatErrorResponse["code"], status: number): Response {
+  return jsonResponse({ error, code } satisfies ChatErrorResponse, status);
+}
+
 function validateMetadata(value: unknown): ChatRequestMetadata {
   if (!value || typeof value !== "object" || Array.isArray(value)) return {};
   const metadata = value as ChatRequestMetadata;
   return {
-    sessionId: typeof metadata.sessionId === "string" && ANONYMOUS_SESSION_ID_PATTERN.test(metadata.sessionId) ? metadata.sessionId : undefined,
-    geminiTurns: Number.isInteger(metadata.geminiTurns) && Number(metadata.geminiTurns) >= 0 && Number(metadata.geminiTurns) <= MAX_GEMINI_TURNS_PER_SESSION
-      ? Number(metadata.geminiTurns)
-      : undefined,
-    viewport: metadata.viewport === "mobile" || metadata.viewport === "tablet" || metadata.viewport === "desktop" ? metadata.viewport : undefined,
+    sessionId:
+      typeof metadata.sessionId === "string" && ANONYMOUS_SESSION_ID_PATTERN.test(metadata.sessionId)
+        ? metadata.sessionId
+        : undefined,
+    geminiTurns:
+      Number.isInteger(metadata.geminiTurns) &&
+      Number(metadata.geminiTurns) >= 0 &&
+      Number(metadata.geminiTurns) <= MAX_GEMINI_TURNS_PER_SESSION
+        ? Number(metadata.geminiTurns)
+        : undefined,
+    viewport:
+      metadata.viewport === "mobile" || metadata.viewport === "tablet" || metadata.viewport === "desktop"
+        ? metadata.viewport
+        : undefined,
   };
 }
 
-function errorResponse(error: string, code: ChatErrorResponse["code"], status: number) {
-  return NextResponse.json<ChatErrorResponse>({ error, code }, { status, headers: responseHeaders });
-}
-
-export async function POST(request: Request) {
+/**
+ * `POST /api/chat` — hybrid Benkai Assistant endpoint.
+ *
+ * Local grounded answers resolve first and return without calling the provider.
+ * Only unresolved questions reach Gemini, subject to the per-session budget.
+ * Chat content is never written to analytics.
+ */
+export async function handleChatRequest(request: Request, env: BenkaiEnv): Promise<Response> {
   const contentType = request.headers.get("content-type") ?? "";
   if (!contentType.toLowerCase().startsWith("application/json")) {
     return errorResponse("Content-Type must be application/json.", "INVALID_REQUEST", 415);
@@ -76,12 +94,35 @@ export async function POST(request: Request) {
   const latestMessage = validated.messages.at(-1)?.content ?? "";
   const localAnswer = getLocalChatAnswer(latestMessage);
   if (localAnswer) {
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_local_answer", sessionId: metadata.sessionId, source: "local_grounded", projectSlug: localAnswer.projectSlug, viewport: metadata.viewport });
-    return NextResponse.json<ChatSuccessResponse>({ message: localAnswer.message, source: "local_grounded", projectSlug: localAnswer.projectSlug }, { headers: responseHeaders });
+    if (metadata.sessionId) {
+      writeChatAnalytics(env, {
+        event: "chat_local_answer",
+        sessionId: metadata.sessionId,
+        source: "local_grounded",
+        projectSlug: localAnswer.projectSlug,
+        viewport: metadata.viewport,
+      });
+    }
+    return jsonResponse(
+      {
+        message: localAnswer.message,
+        source: "local_grounded",
+        projectSlug: localAnswer.projectSlug,
+      } satisfies ChatSuccessResponse,
+      200,
+    );
   }
 
+
   if ((metadata.geminiTurns ?? 0) >= MAX_GEMINI_TURNS_PER_SESSION) {
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_session_limit", sessionId: metadata.sessionId, outcome: "session_budget", viewport: metadata.viewport });
+    if (metadata.sessionId) {
+      writeChatAnalytics(env, {
+        event: "chat_session_limit",
+        sessionId: metadata.sessionId,
+        outcome: "session_budget",
+        viewport: metadata.viewport,
+      });
+    }
     return errorResponse(
       "You've reached this session's AI conversation limit. You can still ask about Benkai's projects and services, or contact us to continue the discussion.",
       "SESSION_LIMIT",
@@ -90,10 +131,35 @@ export async function POST(request: Request) {
   }
 
   try {
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_gemini_request", sessionId: metadata.sessionId, source: "gemini", viewport: metadata.viewport });
-    const result = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt());
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_gemini_answer", sessionId: metadata.sessionId, source: "gemini", outcome: result.incomplete ? "incomplete" : "success", viewport: metadata.viewport });
-    return NextResponse.json<ChatSuccessResponse>({ message: result.message, source: "gemini", incomplete: result.incomplete || undefined }, { headers: responseHeaders });
+    if (metadata.sessionId) {
+      writeChatAnalytics(env, {
+        event: "chat_gemini_request",
+        sessionId: metadata.sessionId,
+        source: "gemini",
+        viewport: metadata.viewport,
+      });
+    }
+    const result = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt(), {
+      apiKey: env.GEMINI_API_KEY,
+      model: env.GEMINI_MODEL,
+    });
+    if (metadata.sessionId) {
+      writeChatAnalytics(env, {
+        event: "chat_gemini_answer",
+        sessionId: metadata.sessionId,
+        source: "gemini",
+        outcome: result.incomplete ? "incomplete" : "success",
+        viewport: metadata.viewport,
+      });
+    }
+    return jsonResponse(
+      {
+        message: result.message,
+        source: "gemini",
+        incomplete: result.incomplete || undefined,
+      } satisfies ChatSuccessResponse,
+      200,
+    );
   } catch (error) {
     if (error instanceof ChatProviderNotConfiguredError) {
       return errorResponse(
@@ -104,7 +170,15 @@ export async function POST(request: Request) {
     }
 
     if (error instanceof ChatProviderQuotaError) {
-      if (metadata.sessionId) writeChatAnalytics({ event: "chat_quota_limit", sessionId: metadata.sessionId, source: "gemini", outcome: "quota", viewport: metadata.viewport });
+      if (metadata.sessionId) {
+        writeChatAnalytics(env, {
+          event: "chat_quota_limit",
+          sessionId: metadata.sessionId,
+          source: "gemini",
+          outcome: "quota",
+          viewport: metadata.viewport,
+        });
+      }
       return errorResponse(
         "The Benkai Assistant has reached its current AI usage limit. You can still explore our work or contact Benkai Systems directly.",
         "PROVIDER_LIMIT",
@@ -112,7 +186,15 @@ export async function POST(request: Request) {
       );
     }
 
-    if (metadata.sessionId) writeChatAnalytics({ event: "chat_error", sessionId: metadata.sessionId, source: "gemini", outcome: "provider_failure", viewport: metadata.viewport });
+    if (metadata.sessionId) {
+      writeChatAnalytics(env, {
+        event: "chat_error",
+        sessionId: metadata.sessionId,
+        source: "gemini",
+        outcome: "provider_failure",
+        viewport: metadata.viewport,
+      });
+    }
 
     return errorResponse(
       "Benkai Assistant could not respond just now. Please try again shortly or use the contact page.",

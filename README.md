@@ -15,7 +15,7 @@ Built with Next.js 16, TypeScript, Tailwind CSS v4, Lucide React icons, and Fram
 - **Styling:** Tailwind CSS v4
 - **Icons:** Lucide React
 - **Animation:** Framer Motion (minimal, restrained)
-- **Deployment:** Cloudflare Workers via `@opennextjs/cloudflare`
+- **Deployment:** Cloudflare Workers — pre-rendered static assets plus one narrow Worker for the Assistant API routes
 
 ---
 
@@ -36,15 +36,15 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 |---|---|
 | `npm run dev` | Start development server |
 | `npm run build` | Production build |
-| `npm run start` | Start production server (local preview) |
+| `npm run start` | Serve the built static export and the API Worker locally (`wrangler dev`) |
 | `npm run lint` | Run ESLint |
-| `npm run cf:build` | Build the OpenNext Worker bundle |
+| `npm run cf:build` | Pre-render every public route into `out/` using the production origin |
 | `npm run cf:preview` | Rebuild and preview with the local Workers runtime |
-| `npm run cf:deploy` | Rebuild and deploy to Cloudflare Workers |
+| `npm run cf:deploy` | Rebuild and deploy the static assets and API Worker to Cloudflare |
 | `npm run cf:upload` | Rebuild and upload a new Worker version without deploying it |
 | `npm run cf:typegen` | Regenerate Cloudflare binding/runtime types |
 
-The Cloudflare commands use the checked-in `open-next.config.ts` and `wrangler.jsonc` configuration.
+The Cloudflare commands use the checked-in `wrangler.jsonc` (`out/` static assets, `workers/index.ts` API entry).
 
 ---
 
@@ -81,6 +81,8 @@ src/
 └── styles/                 # Theme tokens (theme.ts)
 public/
 └── images/                 # Reference image, project screenshots
+workers/                    # Narrow API Worker (Assistant endpoints only; renders no pages)
+out/                        # Static export output deployed as Cloudflare static assets
 docs/                       # Architecture, content checklist, deployment checklist
 ```
 
@@ -165,11 +167,11 @@ Do not commit `.env.local`. Production builds must receive this variable before 
 
 ## Deployment
 
-This site is deployed on **Cloudflare Workers** using the `@opennextjs/cloudflare` adapter.
+This site is deployed on **Cloudflare Workers** as pre-rendered static assets in `out/`, with one narrow Worker (`workers/index.ts`) that serves only `/api/chat` and `/api/chat/analytics`. Normal page requests are answered by the Cloudflare static asset layer and never invoke the Worker script or a Next.js server runtime.
 
-**Intended Benkai Systems URL (requires deployment):** [benkai-systems.benjamin-kamau.workers.dev](https://benkai-systems.benjamin-kamau.workers.dev)
+**Production URL:** [benkai-systems.benjamin-kamau.workers.dev](https://benkai-systems.benjamin-kamau.workers.dev)
 
-The existing `benjamin-kamau-portfolio` Worker remains deployed until the new Worker is built, deployed and verified; this preparation does not make the intended URL live.
+The legacy `benjamin-kamau-portfolio` Worker hostname redirect remains in place and points at the production URL.
 
 See `docs/DEPLOYMENT_CHECKLIST.md` for the full deployment procedure.
 
@@ -189,11 +191,11 @@ npm install
 npm run dev
 ```
 
-### Production Build
+### Production Build (Static Export)
 
 ```bash
-npm run build
-npm run start
+npm run cf:build   # pre-render every public route into out/ using the production origin
+npm run start      # serve out/ and the API Worker locally with wrangler dev
 ```
 
 ### Cloudflare Preview and Deploy

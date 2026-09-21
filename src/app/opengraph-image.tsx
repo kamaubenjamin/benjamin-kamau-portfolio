@@ -1,5 +1,9 @@
 import { ImageResponse } from "next/og";
 
+// The public site is a static export, so the Open Graph image is generated once
+// at build time instead of on request.
+export const dynamic = "force-static";
+
 export const alt = "Benkai Systems — Business Systems, Workflow Automation and Data Engineering";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

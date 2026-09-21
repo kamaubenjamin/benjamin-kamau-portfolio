@@ -5,16 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "wrangler dev",
     "lint": "eslint",
-    "cf:build": "cross-env NEXT_PUBLIC_SITE_URL=https://benkai-systems.benjamin-kamau.workers.dev opennextjs-cloudflare build",
-    "cf:preview": "npm run cf:build && opennextjs-cloudflare preview",
-    "cf:deploy": "npm run cf:build && opennextjs-cloudflare deploy",
-    "cf:upload": "npm run cf:build && opennextjs-cloudflare upload",
+    "cf:build": "cross-env NEXT_PUBLIC_SITE_URL=https://benkai-systems.benjamin-kamau.workers.dev next build",
+    "cf:preview": "npm run cf:build && wrangler dev",
+    "cf:deploy": "npm run cf:build && wrangler deploy",
+    "cf:upload": "npm run cf:build && wrangler versions upload",
     "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "^1.20.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.25.0",

@@ -98,12 +98,12 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Item | Status |
 |---|---|
-| Production URL | Benkai Systems URL prepared; deployment and verification still required |
+| Production URL | Live at `https://benkai-systems.benjamin-kamau.workers.dev` |
 | `NEXT_PUBLIC_SITE_URL` | Prepared as `https://benkai-systems.benjamin-kamau.workers.dev` in `wrangler.jsonc` and the Cloudflare build script |
 | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Required at local and production build time; public identifier is stored only in ignored `.env.local`, never in documentation |
 | Contact delivery | Web3Forms browser-side HTTPS submission; portfolio stores no submissions in its own database |
 | Cloudflare Worker name | Prepared as `benkai-systems`; do not delete the existing Worker before migration verification |
-| `@opennextjs/cloudflare` | Installed |
+| Delivery architecture | Next.js static export in `out/` served by Cloudflare Workers static assets; only `/api/*` runs Worker code |
 | `wrangler` | Installed |
 | Custom domain | Not yet connected |
 

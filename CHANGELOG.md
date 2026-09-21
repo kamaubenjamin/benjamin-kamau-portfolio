@@ -2,6 +2,14 @@
 
 Portfolio documentation milestones are recorded here without implying product releases.
 
+## 2026-09-21 — Static-First Free-Tier Delivery Stabilization
+
+- Replaced the OpenNext SSR Worker request path with a Next.js static export (`out/`) served by Cloudflare Workers static assets, so normal page, asset and metadata requests never invoke Worker code or a request-time Next.js server runtime.
+- Kept only `/api/chat` and `/api/chat/analytics` on a narrow Worker (`workers/index.ts`) with unchanged hybrid local-grounded routing, `gemini-3.5-flash`, session budget, MAX_TOKENS/Continue handling, analytics events and a server-side-only `GEMINI_API_KEY`.
+- Removed `src/middleware.ts` request-time slug validation in favour of pre-rendered slugs plus the pre-built custom 404 page, and dropped the `@opennextjs/cloudflare` dependency and `open-next.config.ts`.
+- Applied the final public project order (GymBolt, House of Original, ExploreAfrica, Intelligent Document Processing Platform, Spice Harvest Ops, Essiedo Catalogue Pilot, Home Health Operations Demo, Pair and Place Website Operations, FlowSync) and archived Competitor Price Intelligence Platform from the public dataset and display order.
+- Repaired `package-lock.json` integrity so `npm ci` succeeds from a clean install state.
+
 ## 2026-09-10 — Benkai Assistant Response Completion Fix
 
 - Increased Gemini response headroom while retaining a hard output ceiling and instructing the Assistant to prefer complete, focused answers over exhaustive responses.

@@ -1,5 +1,3 @@
-import "server-only";
-
 import { personal } from "@/data/personal";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";

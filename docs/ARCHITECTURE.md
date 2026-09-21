@@ -2,19 +2,24 @@
 
 ## Route Architecture
 
-All routes are server-rendered static pages (SSG):
+All routes are pre-rendered at build time (`next build` with `output: "export"`) and served as static assets:
 
 | Route | Type | Purpose |
 |---|---|---|
-| `/` | Static | Homepage with 9 sections |
-| `/projects` | Static | Project listing (9 published case studies) |
-| `/projects/[slug]` | SSG (`generateStaticParams`) | Dynamic case studies |
-| `/services` | Static | All 6 services |
-| `/about` | Static | Bio, experience, education, certifications, skills |
-| `/contact` | Static | Accessible client-side inquiry form delivered through Web3Forms |
-| `/*` | Static | Custom 404 |
+| `/` | Static export | Homepage with 9 sections |
+| `/projects` | Static export | Project listing (9 published case studies, canonical order) |
+| `/projects/[slug]` | Static export (`generateStaticParams`) | One pre-rendered case-study page per slug |
+| `/services` | Static export | All 6 services |
+| `/about` | Static export | Bio, experience, education, certifications, skills |
+| `/contact` | Static export | Accessible client-side inquiry form delivered through Web3Forms |
+| `/robots.txt`, `/sitemap.xml`, `/manifest.webmanifest`, `/opengraph-image` | Static export | Build-time generated metadata files |
+| `/*` | Static export | Custom 404 served from `out/404.html` |
+| `/api/chat` | Worker (`workers/index.ts`) | Benkai Assistant (local-grounded first, then Gemini) |
+| `/api/chat/analytics` | Worker (`workers/index.ts`) | Anonymous Assistant UI events |
 
-Static pages export route metadata, while dynamic project pages use `generateMetadata`. Canonicals resolve through the shared `NEXT_PUBLIC_SITE_URL` base.
+Static pages export route metadata, while project pages use `generateStaticParams` plus `generateMetadata`. Canonicals resolve through the shared `NEXT_PUBLIC_SITE_URL` base.
+
+Only `/api/*` reaches executing Worker code: `wrangler.jsonc` declares `run_worker_first: ["/api/*"]` alongside `not_found_handling: "404-page"`, so page, asset and metadata requests are answered by the static asset layer, and unknown paths are served from the pre-built 404 page. No middleware runs, and no request-time slug validation is required because every published slug is pre-rendered.
 
 ---
 
@@ -62,9 +67,9 @@ All portfolio content lives in typed TypeScript data files under `src/data/`:
 - `certifications.ts` — training and certification entries (optional credential URLs)
 - `skills.ts` — categorised skills with proficiency level (expert, proficient, expanding)
 
-No database, no API routes, no CMS. Content changes are made by editing these TypeScript files.
+No database and no CMS. The only request-time code is the narrow Assistant API Worker in `workers/`; every published page is pre-rendered. Content changes are made by editing these TypeScript files.
 
-`src/data/projects.ts` controls the canonical project data and display order: 3 Featured projects followed by 6 Additional Work projects.
+`src/data/projects.ts` controls the canonical project data and public display order: nine published case studies ordered GymBolt, House of Original, ExploreAfrica, Intelligent Document Processing Platform, Spice Harvest Ops, Essiedo Catalogue Pilot, Home Health Operations Demo, Pair and Place Website Operations, FlowSync. The Competitor Price Intelligence Platform is archived out of the public dataset and order.
 
 ---
 
@@ -98,15 +103,14 @@ Repository and live-demo buttons are only rendered when their respective URL fie
 
 ## Deployment Architecture
 
-- **Platform:** Cloudflare Workers through `@opennextjs/cloudflare`
-- **Intended URL after deployment:** `https://benkai-systems.benjamin-kamau.workers.dev`
-- **Build process:** Standard Next.js build (`npm run build`), then transformed by OpenNext into a Worker-compatible bundle
-- **Runtime:** The OpenNext adapter runs within a Cloudflare Worker, handling request routing, headers, and any future dynamic behaviour
-- **Tooling:** OpenNext CLI handles preview and deployment; Wrangler provides the underlying Cloudflare configuration and tooling
-- **Configuration:** `open-next.config.ts` defines the adapter build and `wrangler.jsonc` defines the Worker entry, compatibility settings, static asset binding, observability, and canonical site URL
-- **Migration boundary:** `wrangler.jsonc` prepares the `benkai-systems` Worker; the existing `benjamin-kamau-portfolio` Worker must remain until the new URL is deployed and verified
-- **Current state:** Fully static (all pages prerendered at build time). Any future dynamic features would run within the Worker runtime
-- **No database, no backend** — all content is static TypeScript data compiled at build time
+- **Platform:** Cloudflare Workers with static assets
+- **Production URL:** `https://benkai-systems.benjamin-kamau.workers.dev`
+- **Build process:** `next build` with `output: "export"` pre-renders every public route into `out/`
+- **Runtime:** Normal page, asset and metadata requests are served by the Cloudflare static asset layer and never invoke Worker code. Only `/api/*` executes the narrow Worker in `workers/index.ts`
+- **Tooling:** Wrangler bundles `workers/index.ts`, uploads `out/` as the asset set, and handles preview and deployment
+- **Configuration:** `wrangler.jsonc` defines the Worker entry, the `out/` asset directory with `run_worker_first: ["/api/*"]`, `not_found_handling: "404-page"`, compatibility settings, observability, bindings and the canonical site URL
+- **No request-time route validation:** middleware is not used. Every published project slug is pre-rendered, and unknown paths are served from the pre-built custom 404 page
+- **No database, no backend rendering** — all content is static TypeScript data compiled at build time
 
 **Why version one has no database or backend:**
 - All content is static and changes infrequently

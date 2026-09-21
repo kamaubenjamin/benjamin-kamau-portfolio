@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 import { absoluteUrl } from "@/lib/json-ld";
 
+// Static export: emitted as a build-time file instead of a request-time route.
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["/", "/projects", "/services", "/about", "/contact"];
   const projectRoutes = projects.map((project) => `/projects/${project.slug}`);

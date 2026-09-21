@@ -30,21 +30,25 @@
 
 ### Route Verification
 - [x] `/` — Homepage renders
-- [x] `/projects` — All 9 projects listed
+- [x] `/projects` — All 9 projects listed in the canonical order (GymBolt, House of Original, ExploreAfrica, Intelligent Document Processing Platform, Spice Harvest Ops, Essiedo Catalogue Pilot, Home Health Operations Demo, Pair and Place Website Operations, FlowSync)
 - [x] `/projects/gymbolt-gym-management-system` — Case study loads
-- [x] `/projects/spice-harvest-ops` — Case study loads
-- [x] `/projects/intelligent-document-processing-platform` — Case study loads
-- [x] `/projects/home-health-operations-demo` — Case study loads
+- [x] `/projects/house-of-original` — Case study loads
 - [x] `/projects/exploreafrica-travel-platform` — Case study loads
-- [x] `/projects/flow-sync` — Case study loads
-- [x] `/projects/competitor-price-intelligence-platform` — Case study loads
-- [x] `/projects/pair-and-place-website-operations` — Case study loads
+- [x] `/projects/intelligent-document-processing-platform` — Case study loads
+- [x] `/projects/spice-harvest-ops` — Case study loads
 - [x] `/projects/essiedo-catalogue-pilot` — Case study loads
-- [x] Removed project slugs return the custom 404 with status 404
+- [x] `/projects/home-health-operations-demo` — Case study loads
+- [x] `/projects/pair-and-place-website-operations` — Case study loads
+- [x] `/projects/flow-sync` — Case study loads
+- [x] Archived slug `/projects/competitor-price-intelligence-platform` is absent from the public dataset and returns the custom 404
+- [x] Unknown project slugs return the custom 404 with status 404
 - [x] `/services` — All 6 services displayed
 - [x] `/about` — Route loads with one `h1`
 - [x] `/contact` — Route loads with one `h1`
 - [x] `/nonexistent` — Custom 404 page returns status 404
+- [x] `/robots.txt`, `/sitemap.xml`, `/manifest.webmanifest`, `/opengraph-image` — emitted as static files
+- [x] `/api/chat` — local-grounded question returns 200 (no Gemini call)
+- [x] `/api/chat/analytics` — valid UI event returns 204
 
 ### Asset Verification
 - [x] Public CV links and public PDF asset are absent
@@ -69,54 +73,58 @@
 - [ ] Custom domain purchased (optional — current production URL uses Workers.dev)
 
 ### Install Adapter
-- [x] `@opennextjs/cloudflare` installed as an application dependency
 - [x] Wrangler 4 installed as a development dependency
-- [x] `open-next.config.ts` created with the adapter's supported configuration helper
+- [x] `@opennextjs/cloudflare` and `open-next.config.ts` removed: the public site is a static export and no longer uses an SSR Worker adapter
 
 ### Configuration
 - [x] `wrangler.jsonc` targets Cloudflare Workers (not Pages)
-- [x] `main` points to `.open-next/worker.js`
+- [x] `main` points to `workers/index.ts` (Assistant API routes only)
 - [x] Compatibility date set to `2026-07-22`
 - [x] `nodejs_compat` included in `compatibility_flags`
-- [x] Static-assets binding targets `.open-next/assets`
+- [x] Static-assets binding targets the `out/` static export directory
+- [x] `run_worker_first: ["/api/*"]` so page, asset and metadata requests never invoke the Worker script
+- [x] `html_handling: "drop-trailing-slash"` so pre-rendered `*.html` files serve the extension-less routes
+- [x] `not_found_handling: "404-page"` so unknown paths serve the pre-built custom 404 without Worker execution
 - [x] `NEXT_PUBLIC_SITE_URL` set to the exact production Workers.dev origin
+- [x] `GEMINI_MODEL` committed as a non-secret Worker variable (`gemini-3.5-flash`)
+- [x] `GEMINI_API_KEY` stored as a Worker secret (never in the repository or client bundle)
 - [ ] `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` present in the build environment (public form identifier; not a Worker secret)
-- [x] `.dev.vars`, `.open-next/`, `.wrangler/`, and TypeScript build info excluded from version control
+- [x] `.dev.vars`, `.open-next/`, `.next/`, `out/`, `.wrangler/`, and TypeScript build info excluded from version control
 - [x] `package.json` includes `cf:build`, `cf:preview`, `cf:deploy`, `cf:upload`, and `cf:typegen`
 - [x] `cf:build` injects the public production origin cross-platform before Next.js prerenders metadata routes
 - [x] `cloudflare-env.d.ts` generated from `wrangler.jsonc`
 
 ### Build and Deploy
-- [x] `npm run build` — standard Next.js build succeeds
-- [x] `npm run cf:build` — OpenNext Worker bundle succeeds
-- [x] Local Workers-runtime preview returns expected routes and assets
-- [x] `npm run cf:deploy` — deployment to Cloudflare Workers succeeds
+- [x] `npm ci` — clean install succeeds from the committed lockfile
+- [x] `npm run cf:build` — static export into `out/` succeeds (20 pre-rendered routes)
+- [x] `out/` contains HTML for every public route plus `404.html`, `robots.txt`, `sitemap.xml`, `manifest.webmanifest` and `opengraph-image`
+- [x] Local Workers-runtime preview returns expected routes, assets and API responses
+- [x] `npm run cf:deploy` — deployment of static assets and the narrow API Worker succeeds
+- [x] `wrangler tail` during a page-route sweep shows no Worker invocation for page requests
 
 ### Post-Deployment Verification
 - [x] All public routes and all nine project slugs return 200 on the live URL
+- [x] The archived Competitor Price Intelligence slug returns the custom 404
 - [x] Unknown routes return the custom 404 with status 404
 - [x] No CV link is exposed through navigation, homepage, About page, footer, metadata or structured data
 - [x] Metadata renders with route-correct production canonicals and Open Graph URLs
 - [x] Manifest, robots, sitemap, favicon, Apple icon, and Open Graph image return expected content types
 - [x] Person JSON-LD on `/` and ProfessionalService JSON-LD on `/services` verified
+- [x] No `1102` or `exceededCpu` errors on page routes
 - [ ] Responsive layout verified at 375px, 768px, 1280px on live URL
 - [ ] No console errors
 - [ ] Controlled Web3Forms submission is accepted and received at `benjaminkamauu@gmail.com`
 - [ ] Web3Forms domain restriction reviewed for the production Workers.dev origin (allow localhost only when deliberately testing)
 - [ ] Custom domain connected (not applicable to the current Workers.dev launch)
-- [ ] Deploy and verify `NEXT_PUBLIC_SITE_URL` at `https://benkai-systems.benjamin-kamau.workers.dev`
 
-### Prepared Benkai Systems Migration
+### Benkai Systems Worker
 
-- **Existing Worker (do not delete yet):** `benjamin-kamau-portfolio`
-- **Prepared Worker name:** `benkai-systems`
-- **Intended URL (not live until deployed and verified):** <https://benkai-systems.benjamin-kamau.workers.dev>
-- **Adapter:** `@opennextjs/cloudflare` 1.20.2
-- **Wrangler:** 4.113.0
+- **Production Worker:** `benkai-systems` — <https://benkai-systems.benjamin-kamau.workers.dev>
+- **Legacy Worker hostname:** `benjamin-kamau-portfolio` redirects to the production Worker and is retained
+- **Architecture:** Next.js static export in `out/` + narrow API Worker in `workers/index.ts`
+- **Wrangler:** 4.x
 - **Observability:** enabled in `wrangler.jsonc`
 - **Custom domain:** not configured
-
-Deploy the new Worker, verify HTTP 200, homepage, project listing and routes, contact form, assets, navigation and runtime, then separately decide whether the old Worker may be retired. Do not delete or disable it automatically.
 
 ---
 

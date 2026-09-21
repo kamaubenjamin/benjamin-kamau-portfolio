@@ -1,5 +1,3 @@
-import "server-only";
-
 import type { ChatGenerationResult, ChatMessage } from "./types";
 import { parseGeminiResponse } from "./provider-response";
 
@@ -34,14 +32,21 @@ function classifyProviderStatus(status: number): ChatProviderErrorCategory {
   return "provider_failure";
 }
 
+/** Server-side provider configuration. Credentials are supplied by the Worker binding. */
+export interface ChatProviderConfig {
+  apiKey?: string;
+  model?: string;
+}
+
 export async function generateChatResponse(
   messages: ChatMessage[],
   systemPrompt: string,
+  config: ChatProviderConfig,
 ): Promise<ChatGenerationResult> {
-  const apiKey = process.env.GEMINI_API_KEY?.trim();
+  const apiKey = config.apiKey?.trim();
   if (!apiKey) throw new ChatProviderNotConfiguredError("Chat provider is not configured.");
 
-  const model = process.env.GEMINI_MODEL?.trim() || DEFAULT_MODEL;
+  const model = config.model?.trim() || DEFAULT_MODEL;
   let response: Response;
   try {
     response = await fetch(`${GEMINI_API_BASE}/${encodeURIComponent(model)}:generateContent`, {

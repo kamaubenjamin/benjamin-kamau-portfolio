@@ -4,22 +4,21 @@ Primary public identity: **Benkai Systems — Founded and engineered by Benjamin
 
 ## Authoritative Project Order
 
-### Featured Projects
+Exactly nine public project case studies are published, in this order:
 
 1. GymBolt Management System
-2. Spice Harvest Ops
-3. Intelligent Document Processing Platform
-
-### Additional Work
-
-1. Home Health Operations Demo
-2. ExploreAfrica
-3. FlowSync — Competitor & Workflow Intelligence
-4. Competitor Price Intelligence Platform
-5. Pair and Place Website Operations
+2. House of Original
+3. ExploreAfrica
+4. Intelligent Document Processing Platform
+5. Spice Harvest Ops
 6. Essiedo Catalogue Pilot
+7. Home Health Operations Demo
+8. Pair and Place Website Operations
+9. FlowSync
 
-Exactly nine public project case studies are published. This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
+Competitor Price Intelligence Platform is archived from the public portfolio dataset and display order. Its repository, Git history and internal documentation are retained; it is no longer published as a public case study.
+
+This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
 
 ## Home Health Operations Demo
 
@@ -66,7 +65,7 @@ FlowSync is the operator/control-plane frontend for Competitor Price Intelligenc
 
 Technical Preview: <https://flow-sync-beta.vercel.app/dashboard>
 
-## Competitor Price Intelligence Platform
+## Competitor Price Intelligence Platform (Archived from the public portfolio)
 
 ### Current Status
 
@@ -153,4 +152,4 @@ Public CV navigation, calls to action, source references and the public PDF asse
 
 ## Last Updated
 
-2026-09-08
+2026-09-21

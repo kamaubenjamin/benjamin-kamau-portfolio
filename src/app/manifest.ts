@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+// Static export: emitted as a build-time file instead of a request-time route.
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
