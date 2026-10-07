@@ -546,7 +546,7 @@ export const projects: Project[] = ([
         primary: true,
       },
       {
-        url: "https://exploreafrica-admin.vercel.app",
+        url: "https://exploreafrica-admin-staging.vercel.app",
         label: "Admin Platform",
         kind: "website",
       },
