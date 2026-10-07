@@ -1,5 +1,6 @@
 export type ProjectStatus =
   | "Active development"
+  | "Late-stage validation"
   | "Public demo verified"
   | "Hosted sandbox verified"
   | "Early prototype"
@@ -457,41 +458,59 @@ export const projects: Project[] = ([
     slug: "exploreafrica-travel-platform",
     title: "ExploreAfrica",
     category: "Travel Operations Platform",
-    status: "Active development",
+    status: "Late-stage validation",
     statusVariant: "emerald",
     shortDescription:
-      "Automation-first travel operations platform for African travel agencies and tour operators, connecting inquiries, CRM, bookings, travellers, payments, documents and trip-readiness workflows in one tenant-isolated system.",
-    positioning: "Active development / hosted staging / pilot preparation.",
+      "Multi-tenant travel operations platform connecting the customer journey with the internal work required to deliver a trip — from enquiry and CRM through itineraries, bookings, travellers, payments, documents, reservations and Trip Ready review.",
+    positioning: "Production web platform / late-stage validation / final hardening.",
     valueProposition:
-      "ExploreAfrica connects the agency journey from inquiry to trip readiness in one tenant-isolated platform, reducing fragmented operational work across CRM, bookings, travellers, payments, documents and customer communication.",
+      "From enquiry to Trip Ready — one operational flow for travel agencies, connecting customer intake, CRM, itinerary planning, bookings, travellers, payments, documents, supplier reservations and readiness decisions inside tenant-isolated workspaces.",
     overview:
-      "ExploreAfrica is an automation-first Travel Operations Platform for African travel agencies and tour operators. It connects the operational journey from inquiry and lead management through customers, bookings, travellers, payments, documents and trip readiness within tenant-isolated agency workspaces. The current hosted staging system includes CRM workflows, customer and booking operations, traveller management, payment and reconciliation foundations, documents, trip-readiness workflows, a secure customer trip portal, tenant administration, staff invitations and multiple inquiry-integration paths.",
+      "ExploreAfrica has evolved from a travel marketing website into an automation-first Travel Operations Platform for African travel agencies and tour operators. The current web platform connects enquiry capture, CRM, opportunities, package and itinerary planning, customers, bookings, travellers, payments, documents, supplier and reservation operations and Trip Ready review within tenant-isolated agency workspaces. The production web release is live and healthy, while industry-oriented validation and final hardening continue before the current web phase is frozen.",
     problem:
       "Travel agencies often manage inquiries, customer information, bookings, traveller details, payments and documents across disconnected tools, spreadsheets, messaging channels and manual follow-up. That fragmentation makes it harder to maintain one reliable operational view from first inquiry through trip readiness.",
     solution:
-      "ExploreAfrica brings the agency workflow into one tenant-isolated operations platform, connecting Inquiry → Lead → Opportunity → Customer → Booking → Travellers → Payments → Documents → Trip Ready while supporting staff access, customer self-service and external inquiry capture.",
+      "ExploreAfrica brings the agency workflow into one tenant-isolated operations platform, not merely a travel website: Enquiry → Lead / CRM → Opportunity → Package / Itinerary → Customer → Booking → Travellers → Payments → Documents → Suppliers / Reservations → Trip Ready. Customer intake and internal delivery work stay connected throughout the operational journey.",
     architecture:
-      "The platform uses a multi-tenant application model with Supabase authentication, PostgreSQL Row Level Security, tenant-scoped roles and permissions, and protected agency and customer workflows. Public inquiry sources can connect through hosted forms, API or webhook integrations, while admin/staff and customer experiences remain separated by role and tenant boundaries.",
+      "The multi-tenant SaaS platform uses Supabase authentication, PostgreSQL Row Level Security and tenant-scoped data, roles and permissions to isolate agency workspaces. Tenant-owned Website and Hosted Form connections use connection keys and server-side tenant resolution to route each public enquiry into the correct CRM workspace, without broadcasting it across tenants. Platform Admin, tenant staff and customer workflows remain separated by role and tenant boundaries.",
     capabilities: [
-      "Multi-tenant agency workspaces",
-      "Tenant-isolated PostgreSQL RLS",
-      "Role and permission model",
-      "Inquiry → Lead → Opportunity CRM flow",
-      "Customers",
-      "Bookings",
-      "Travellers",
-      "Payments and reconciliation foundation",
-      "Documents",
-      "Trip Ready readiness workflow",
+      "Multi-tenant SaaS: isolated agency/workspace tenants, tenant-scoped data and RLS-enforced isolation",
+      "Platform Admin and tenant roles, team invitations and role-based access",
+      "Customer intake: public website enquiry capture, Hosted Forms and tenant-scoped website connections",
+      "Source/provenance tracking for website, referral and returning-customer enquiries; WhatsApp/Instagram sources are manually attributed/source-labelled, not live provider ingestion",
+      "CRM: enquiry capture, lead qualification, follow-up, opportunities, customer conversion and source tracking",
+      "Packages / itineraries: reusable package templates, itinerary building and customer-facing travel context linked to operational workflows",
+      "Bookings: tenant-scoped records, customer relationships, traveller allocation, amount/balance visibility and operational status",
+      "Travellers: records, booking association and traveller readiness information",
+      "Payments: payment records, booking reconciliation, paid/outstanding balances and Finance User workflow; currency-safe display with KES cases validated",
+      "Documents: metadata and review workflow with Trip Ready document dependencies",
+      "Suppliers / reservations: supplier records, reservation/preparation records, confirmed/pending states and follow-up handling",
+      "Trip Ready: travellers, payments, documents and reservations/preparation combined into Ready / Needs Review operational decision support",
+      "Reporting / profitability: operational reporting, currency-aware profitability controls and received/outstanding financial visibility where supported; not full accounting software",
+      "Connections: tenant-owned Website / Hosted Form connections, server-side tenant resolution and validated cross-tenant routing/isolation without enquiry broadcast",
       "Secure customer trip portal",
-      "Tenant Admin",
-      "Staff invitations",
-      "Password recovery",
-      "Brevo SMTP",
-      "Lead Notifications",
-      "Hosted Form inquiry integration",
-      "API inquiry integration",
-      "Webhook inquiry integration",
+    ],
+    caseStudySections: [
+      {
+        title: "Industry-oriented workflow validation",
+        description:
+          "Industry-oriented workflow validation has been performed using realistic dummy/test data across enquiry, CRM, package, customer, booking, traveller, payment, reservation, document and Trip Ready scenarios.",
+        details: [
+          "Cross-tenant routing and isolation were validated using controlled test workspaces and dummy data.",
+          "This validation does not establish paying customers, real customer adoption, live customer transactions or commercial success.",
+        ],
+      },
+      {
+        title: "Recent quality and hardening work",
+        details: [
+          "Admin UX: refined premium visual system, stronger action hierarchy, clearer empty states, improved dense operational tables, responsive/mobile improvements and accessibility improvements.",
+          "Interaction safety: consistent View/Edit/Review loading states and duplicate-click protection.",
+          "Routing: fixed cross-domain Admin detail-route 404s and restored booking, traveller, payment and document detail navigation.",
+          "Currency: corrected Trip Ready KES display while retaining mixed/unknown-currency safety.",
+          "Staff onboarding: fixed first-time invitations so invitees can receive an invite → establish a verified Auth session → set a password → activate membership → enter the assigned workspace. Password persistence occurs before membership activation, with tenant isolation preserved.",
+          "Production: accepted staging improvements promoted to production; the production environment remained separate from validation/test data, with no staging secrets or keys exposed.",
+        ],
+      },
     ],
     technologies: [
       "Next.js",
@@ -503,42 +522,38 @@ export const projects: Project[] = ([
       "RLS",
       "Tailwind CSS",
     ],
-    currentStatusHeading: "Current status: Active development / hosted staging / pilot preparation",
+    currentStatusHeading: "Current status: Production web platform / late-stage validation",
     currentStatus:
-      "Core agency, CRM, booking, traveller, payment-foundation, document and trip-readiness workflows are implemented across hosted staging environments. Onboarding and go-live preparation are still being finalized. ExploreAfrica is actively developed and pilot-stage; it should not be described as production-ready.",
+      "The core ExploreAfrica web platform is essentially complete for the current phase and accepted staging improvements have been promoted to a healthy production release. Industry-oriented workflow validation is active using controlled dummy/test data. Remaining work focuses on evidence-backed feedback, performance and scale readiness, final regression and acceptance, and web freeze. Flutter/mobile V1 follows after web sign-off.",
     roadmap:
-      "The next major payments milestone is Payments V2, including M-Pesa integration and further payment/reconciliation automation.",
+      "Remaining work focuses on evidence-backed validation feedback, performance and scale readiness, final regression and acceptance, and freezing the current web release. Flutter/mobile V1 follows after web sign-off.",
+    repositoryStatus: "Private Repository",
     claimsNotToMake: [
-      "Not production-ready",
-      "No full commercial rollout claim",
-      "No paying-agency claim",
-      "No customer-adoption metric claim",
-      "No revenue-impact claim",
-      "M-Pesa is planned, not implemented",
-      "Payments V2 is planned, not complete",
-      "Not every planned feature is complete",
+      "No fake customer count, customer-adoption metrics or paying-agency claim from internal validation",
+      "No fake revenue/result claim, commercial-success claim or invented testimonial",
+      "No universally production-proven-at-scale claim",
+      "No claim that every possible production workflow has been exercised at scale",
+      "No live WhatsApp/Instagram ingestion claim unless provider integration is verified",
+      "No live M-Pesa/Safaricom transaction claim unless independently verified",
+      "No Flutter/mobile implementation claim; mobile V1 follows web sign-off",
+      "No full accounting-software claim",
     ],
     links: [
       {
-        url: "https://exploreafrica-public-staging.pages.dev",
+        url: "https://exploreafrica-public.vercel.app",
         label: "Public Website",
         kind: "website",
         primary: true,
       },
       {
-        url: "https://exploreafrica-admin-staging-preview.vercel.app",
-        label: "Admin Portal",
+        url: "https://exploreafrica-admin.vercel.app",
+        label: "Admin Platform",
         kind: "website",
       },
       {
-        url: "https://exploreafrica-customer-staging.benjamin-kamau.workers.dev",
-        label: "Customer Trip Portal",
+        url: "https://exploreafrica-customer.vercel.app",
+        label: "Customer Portal",
         kind: "website",
-      },
-      {
-        url: "https://github.com/kamaubenjamin/TravellingVacationPackagesWebsite",
-        label: "GitHub",
-        kind: "repository",
       },
     ],
     featured: false,

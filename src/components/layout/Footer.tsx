@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { social } from "@/data/social";
 import { BrandLockup } from "@/components/brand/BrandLockup";
+import { Phone } from "lucide-react";
 
 function GithubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -62,6 +63,15 @@ export function Footer() {
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon />
+              </a>
+            )}
+            {social.phone && (
+              <a
+                href={`tel:${social.phone}`}
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                aria-label={`Phone: ${social.phone}`}
+              >
+                <Phone size={20} aria-hidden="true" />
               </a>
             )}
             {social.email && (

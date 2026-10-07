@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { personal } from "@/data/personal";
 import { social } from "@/data/social";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -44,6 +44,25 @@ export default function ContactPage() {
                 </div>
               </div>
             </Card>
+
+            {social.phone && (
+              <Card hover={false}>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] text-[var(--color-emerald)]">
+                    <Phone size={18} aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[var(--color-text)]">Phone</h3>
+                    <a
+                      href={`tel:${social.phone}`}
+                      className="rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                    >
+                      {social.phone}
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            )}
 
             {social.email && (
               <Card hover={false}>
