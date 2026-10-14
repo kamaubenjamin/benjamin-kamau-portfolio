@@ -126,8 +126,8 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
     const isEmailContact = emailPattern.test(trimmed.contactMethod);
     const payload: Record<string, string> = {
       access_key: WEB3FORMS_ACCESS_KEY,
-      subject: `Portfolio enquiry — ${trimmed.serviceNeeded} — ${trimmed.name}`,
-      from_name: "Benjamin Kamau Portfolio",
+      subject: `BenKai Systems Enquiry — ${trimmed.serviceNeeded} — ${trimmed.name}`,
+      from_name: "BenKai Systems",
       name: trimmed.name,
       contact: trimmed.contactMethod,
       company: trimmed.company || "Not provided",
@@ -136,7 +136,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
       tools_used: trimmed.toolsUsed || "Not provided",
       desired_outcome: trimmed.desiredOutcome || "Not provided",
       timeline: trimmed.timeline || "Not provided",
-      source: "Benjamin Kamau Portfolio",
+      source: "BenKai Systems",
       botcheck: "",
     };
 
