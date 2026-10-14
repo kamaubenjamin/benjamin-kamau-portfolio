@@ -19,6 +19,7 @@ export interface ChatGenerationResult {
 
 export interface ChatErrorResponse {
   error: string;
+  requestId?: string;
   code: "INVALID_REQUEST" | "PROVIDER_REQUIRED" | "PROVIDER_LIMIT" | "SESSION_LIMIT" | "SERVICE_UNAVAILABLE";
 }
 

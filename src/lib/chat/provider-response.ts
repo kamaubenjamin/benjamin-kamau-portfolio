@@ -27,6 +27,12 @@ function trimObviouslyUnfinishedTail(content: string): string {
 }
 
 export function parseGeminiResponse(payload: unknown): GeminiResponseResult {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return { success: false, category: "invalid_output" };
+  }
+  if (!Array.isArray((payload as { candidates?: unknown }).candidates)) {
+    return { success: false, category: "invalid_output" };
+  }
   const candidate = (payload as {
     candidates?: Array<{
       content?: { parts?: Array<{ text?: unknown }> };
@@ -39,8 +45,9 @@ export function parseGeminiResponse(payload: unknown): GeminiResponseResult {
     return { success: false, category: "abnormal_finish" };
   }
 
-  const content = candidate?.content?.parts
-    ?.map((part) => part.text)
+  const parts = candidate?.content?.parts;
+  const content = (Array.isArray(parts) ? parts : [])
+    .map((part) => part && typeof part === "object" ? part.text : undefined)
     .filter((text): text is string => typeof text === "string")
     .join("");
 

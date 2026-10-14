@@ -2,6 +2,7 @@ import { buildBenkaiSystemPrompt } from "@/lib/chat/knowledge";
 import {
   ChatProviderNotConfiguredError,
   ChatProviderQuotaError,
+  ChatProviderError,
   generateChatResponse,
 } from "@/lib/chat/provider";
 import { MAX_REQUEST_BYTES, validateChatPayload } from "@/lib/chat/validation";
@@ -19,10 +20,6 @@ const MAX_GEMINI_TURNS_PER_SESSION = 4;
 
 function jsonResponse(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), { status, headers: responseHeaders });
-}
-
-function errorResponse(error: string, code: ChatErrorResponse["code"], status: number): Response {
-  return jsonResponse({ error, code } satisfies ChatErrorResponse, status);
 }
 
 function validateMetadata(value: unknown): ChatRequestMetadata {
@@ -54,6 +51,15 @@ function validateMetadata(value: unknown): ChatRequestMetadata {
  * Chat content is never written to analytics.
  */
 export async function handleChatRequest(request: Request, env: BenkaiEnv): Promise<Response> {
+  const requestId = crypto.randomUUID();
+  const started = Date.now();
+  const respond = (body: unknown, status: number): Response => {
+    const response = jsonResponse(body, status);
+    response.headers.set("X-Request-ID", requestId);
+    return response;
+  };
+  const errorResponse = (error: string, code: ChatErrorResponse["code"], status: number): Response =>
+    respond({ error, code, requestId } satisfies ChatErrorResponse, status);
   const contentType = request.headers.get("content-type") ?? "";
   if (!contentType.toLowerCase().startsWith("application/json")) {
     return errorResponse("Content-Type must be application/json.", "INVALID_REQUEST", 415);
@@ -103,7 +109,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
         viewport: metadata.viewport,
       });
     }
-    return jsonResponse(
+    return respond(
       {
         message: localAnswer.message,
         source: "local_grounded",
@@ -142,6 +148,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
     const result = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt(), {
       apiKey: env.GEMINI_API_KEY,
       model: env.GEMINI_MODEL,
+      requestId,
     });
     if (metadata.sessionId) {
       writeChatAnalytics(env, {
@@ -152,7 +159,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
         viewport: metadata.viewport,
       });
     }
-    return jsonResponse(
+    return respond(
       {
         message: result.message,
         source: "gemini",
@@ -161,6 +168,13 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
       200,
     );
   } catch (error) {
+    console.warn("Benkai Assistant request failure", {
+      requestId,
+      category: error instanceof ChatProviderNotConfiguredError ? "not_configured"
+        : error instanceof ChatProviderQuotaError ? "usage_limit"
+        : error instanceof ChatProviderError ? error.category : "application_failure",
+      durationMs: Date.now() - started,
+    });
     if (error instanceof ChatProviderNotConfiguredError) {
       return errorResponse(
         "Benkai Assistant is not available yet. You can still discuss your workflow through our contact page.",

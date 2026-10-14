@@ -60,7 +60,7 @@ function technologyAnswer(): LocalChatAnswer {
 export function getLocalChatAnswer(message: string): LocalChatAnswer | null {
   const question = normalizeQuestion(message);
 
-  if (matches(question, ["what does benkai build", "what does benkai systems build", "what is benkai", "what is benkai systems"])) {
+  if (matches(question, ["who is benkai", "who is benkai systems", "what does benkai build", "what does benkai systems build", "what is benkai", "what is benkai systems"])) {
     return { message: `${personal.shortBio}\n\nIn simple terms, Benkai builds practical software that reduces repeated manual work, keeps business information more consistent, and makes everyday operations easier to see and manage.` };
   }
 
@@ -72,7 +72,7 @@ export function getLocalChatAnswer(message: string): LocalChatAnswer | null {
     return { message: `Benkai Systems is based in ${personal.location}. Remote opportunities are also considered.` };
   }
 
-  if (matches(question, ["what services do you offer", "what services does benkai offer", "what are your services"])) {
+  if (matches(question, ["what services do you offer", "what services does benkai offer", "what services does benkai systems offer", "what are your services"])) {
     return { message: `Benkai offers six focused services:\n${services.map((service) => `- ${service.title}: ${service.description}`).join("\n")}\n\nThe starting point is the business workflow, not a predetermined software product.` };
   }
 

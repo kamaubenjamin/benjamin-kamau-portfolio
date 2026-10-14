@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, KeyboardEvent as ReactKeyboardEvent, useEffect, useRef, useState } from "react";
 import { ArrowUp, X } from "lucide-react";
-import type { ChatErrorResponse, ChatMessage, ChatSuccessResponse } from "@/lib/chat/types";
+import type { ChatMessage } from "@/lib/chat/types";
+import { ChatClientError, requestChat } from "@/lib/chat/client";
 import { MAX_CONVERSATION_MESSAGES, MAX_MESSAGE_LENGTH } from "@/lib/chat/validation";
 
 const STORAGE_KEY = "benkai-assistant-conversation";
@@ -135,6 +136,7 @@ export function BenkaiAssistant() {
   const conversationRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const cooldownRef = useRef(false);
+  const submittingRef = useRef(false);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -195,7 +197,9 @@ export function BenkaiAssistant() {
 
   const submitMessage = async (messageText: string, retryContext?: ChatMessage[]) => {
     const content = messageText.trim();
-    if (!content || isLoading || (!retryContext && cooldownRef.current)) return;
+    if (!content || submittingRef.current || (!retryContext && cooldownRef.current)) return;
+    submittingRef.current = true;
+    if (retryContext) postAnalytics("chat_retry");
 
     cooldownRef.current = true;
     window.setTimeout(() => {
@@ -210,8 +214,9 @@ export function BenkaiAssistant() {
     // Reuse a previously answered local factual question within this session (0 Gemini calls).
     if (!retryContext && localCache[content]) {
       const assistantMessage: ChatMessage = { role: "assistant", content: localCache[content].text };
-      setMessages((current) => boundConversation([...current, assistantMessage]));
+      setMessages((current) => boundConversation([...current, { role: "user", content }, assistantMessage]));
       setIsLoading(false);
+      submittingRef.current = false;
       requestAnimationFrame(() => inputRef.current?.focus());
       return;
     }
@@ -231,21 +236,7 @@ export function BenkaiAssistant() {
     );
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: context, metadata }),
-      });
-      const payload: ChatSuccessResponse | ChatErrorResponse = await response.json();
-      if (!response.ok || "error" in payload) {
-        const code = "error" in payload ? payload.code : undefined;
-        if (code === "SESSION_LIMIT") {
-          setError("error" in payload ? payload.error : "You've reached this session's AI conversation limit.");
-          setFailedContext(null);
-          return;
-        }
-        throw new Error("error" in payload ? payload.error : "Benkai Assistant could not respond.");
-      }
+      const payload = await requestChat(context, { ...metadata, sessionId: metadata.sessionId ?? undefined });
       const assistantMessage: ChatMessage = { role: "assistant", content: payload.message };
       setMessages((current) => boundConversation([...current, assistantMessage]));
       setCanContinue(payload.source === "gemini" && payload.incomplete === true);
@@ -260,11 +251,12 @@ export function BenkaiAssistant() {
       }
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : "Benkai Assistant could not respond just now.");
-      setFailedContext(context);
+      setFailedContext(requestError instanceof ChatClientError && requestError.code === "SESSION_LIMIT" ? null : context);
     } finally {
       window.clearTimeout(loadingDisplayTimeout);
       setShowLoadingState(false);
       setIsLoading(false);
+      submittingRef.current = false;
       requestAnimationFrame(() => inputRef.current?.focus());
     }
   };
@@ -354,7 +346,7 @@ export function BenkaiAssistant() {
                 <p>{error}</p>
                 <div className="assistant-error-actions">
                   {failedContext && (
-                    <button type="button" onClick={() => { postAnalytics("chat_retry"); void submitMessage(failedContext.at(-1)?.content ?? "", failedContext); }} disabled={isLoading}>
+                    <button type="button" onClick={() => { void submitMessage(failedContext.at(-1)?.content ?? "", failedContext); }} disabled={isLoading}>
                       Try again
                     </button>
                   )}
