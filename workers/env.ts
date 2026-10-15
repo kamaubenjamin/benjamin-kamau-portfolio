@@ -10,4 +10,7 @@
 export type BenkaiEnv = CloudflareEnv & {
   /** Server-side only. Never exposed to the browser. */
   GEMINI_API_KEY?: string;
+  GROQ_API_KEY?: string;
+  GROQ_MODEL?: string;
+  CHAT_PROVIDER?: "gemini" | "groq";
 };

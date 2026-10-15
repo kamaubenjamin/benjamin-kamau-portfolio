@@ -130,3 +130,72 @@ test("client errors, timeout and explicit retry preserve request history", async
     await assert.rejects(requestChat(messages, {}), /too long/);
   } finally { globalThis.setTimeout = original; }
 });
+
+const groqSuccess = () => Response.json({ choices: [{ finish_reason: "stop", message: {
+  role: "assistant", content: "A grounded workflow response.", reasoning: "private reasoning",
+} }] });
+const generateGroq = history => provider.generateChatResponse(history ?? messages, "private-system-context", {
+  provider: "groq", apiKey: "secret-test-key", model: "openai/gpt-oss-120b", requestId: "safe-id",
+});
+test("Groq request format preserves history and excludes reasoning from public output", async () => {
+  const history = [messages[0], { role: "assistant", content: "Prior answer." }, { role: "user", content: "Tell me more." }];
+  globalThis.fetch = async (url, options) => {
+    assert.equal(url, "https://api.groq.com/openai/v1/chat/completions");
+    assert.equal(options.headers.Authorization, "Bearer secret-test-key");
+    const body = JSON.parse(options.body);
+    assert.match(body.messages[0].content, /^private-system-context/);
+    assert.deepEqual(body.messages.slice(1), history);
+    assert.equal(body.max_completion_tokens, 1200);
+    assert.equal(body.include_reasoning, false);
+    return groqSuccess();
+  };
+  assert.deepEqual(await generateGroq(history), { success: true, message: "A grounded workflow response.", incomplete: false });
+});
+test("Groq bounds old complete turns without mutating history", async () => {
+  const history = [messages[0], { role: "assistant", content: "x".repeat(5000) }, { role: "user", content: "Latest question." }];
+  globalThis.fetch = async (_url, options) => {
+    assert.deepEqual(JSON.parse(options.body).messages.slice(1), [history[2]]);
+    return groqSuccess();
+  };
+  await generateGroq(history);
+  assert.equal(history.length, 3);
+});
+test("Groq 429 is not retried; provider failure retries once", async () => {
+  for (const status of [429, 503]) {
+    let calls = 0;
+    globalThis.fetch = async () => { calls++; return new Response(null, { status }); };
+    await assert.rejects(generateGroq(), e => status === 429
+      ? e instanceof provider.ChatProviderQuotaError : e.category === "provider_unavailable");
+    assert.equal(calls, status === 429 ? 1 : 2);
+  }
+});
+test("Groq malformed response, filtering and timeout remain sanitized", async () => {
+  for (const payload of [null, {}, { choices: [null] }, { choices: [{ finish_reason: "stop", message: { role: "assistant", content: null } }] }]) {
+    globalThis.fetch = async () => Response.json(payload);
+    await assert.rejects(generateGroq(), e => e.category === "invalid_output");
+  }
+  globalThis.fetch = async () => Response.json({ choices: [{ finish_reason: "content_filter" }] });
+  await assert.rejects(generateGroq(), e => e.category === "blocked_output");
+  const original = globalThis.setTimeout;
+  globalThis.setTimeout = (fn, ms, ...args) => original(fn, ms === 20000 ? 10 : ms, ...args);
+  try {
+    globalThis.fetch = async () => new Promise(() => {});
+    await assert.rejects(generateGroq(), e => e.category === "timeout");
+  } finally { globalThis.setTimeout = original; }
+});
+test("Groq worker source, analytics, client compatibility and legacy session limit", async () => {
+  globalThis.fetch = async () => groqSuccess();
+  const events = [];
+  const env = { CHAT_PROVIDER: "groq", GROQ_API_KEY: "secret-test-key", BENKAI_ANALYTICS: { writeDataPoint: e => events.push(e) } };
+  const request = turns => new Request("https://example.test/api/chat", { method: "POST",
+    headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages,
+      metadata: { geminiTurns: turns, sessionId: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa" } }),
+  });
+  const response = await handleChatRequest(request(0), env);
+  const payload = await response.json();
+  assert.equal(payload.source, "groq");
+  assert.deepEqual(events.map(e => e.blobs.slice(0, 2)), [["chat_groq_request", "groq"], ["chat_groq_answer", "groq"]]);
+  globalThis.fetch = async () => Response.json(payload);
+  assert.equal((await requestChat(messages, {})).source, "groq");
+  assert.equal((await handleChatRequest(request(4), env)).status, 429);
+});

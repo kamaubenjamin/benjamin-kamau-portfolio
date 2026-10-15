@@ -1,10 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseGeminiResponse } from "./provider-response.ts";
+import { parseGeminiResponse, parseGroqResponse } from "./provider-response.ts";
 
 function payload(text, finishReason) {
   return { candidates: [{ content: { parts: [{ text }] }, finishReason }] };
 }
+
+test("Groq length finish preserves incomplete handling and removes presentation markers", () => {
+  assert.deepEqual(parseGroqResponse({ choices: [{ finish_reason: "length", message: {
+    role: "assistant", content: "## Next step\n**Map the workflow** before choosing software.",
+  } }] }), { success: true, message: "Next step\nMap the workflow before choosing software.", incomplete: true });
+});
 
 test("accepts a complete plain-text GymBolt overview", () => {
   const message = "GymBolt brings memberships, billing, attendance, services, lockers, and member access into one operational workflow. Reception staff can register members and manage day-to-day activity, while role-based access limits what each person can see. It is a live controlled pilot at Lock & Load Gym, not a production-scale SaaS rollout.\n\nYou can ask me specifically about billing, attendance, memberships, mobile use, or member access.";

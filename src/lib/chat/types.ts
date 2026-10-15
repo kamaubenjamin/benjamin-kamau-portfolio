@@ -7,7 +7,7 @@ export interface ChatMessage {
 
 export interface ChatSuccessResponse {
   message: string;
-  source: "local_grounded" | "gemini";
+  source: "local_grounded" | "gemini" | "groq";
   projectSlug?: string;
   incomplete?: boolean;
 }

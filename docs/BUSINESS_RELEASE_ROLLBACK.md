@@ -42,6 +42,47 @@ They are not the business deployment path. Do not run them for the business site
 
 ## Business rollback
 
+### Assistant provider (2026-10-15)
+
+Business configuration pins `CHAT_PROVIDER=groq` and `GROQ_MODEL=openai/gpt-oss-120b`.
+Install `GROQ_API_KEY` only as an encrypted business Worker secret. Keep
+`GEMINI_API_KEY` and `GEMINI_MODEL` for rollback. No subscription or new service
+is introduced; free-tier capacity is limited and uptime is not guaranteed.
+
+Console-confirmed organization/project: BenKai Systems. Organization Free limits:
+30 RPM, 1,000 RPD, 8,000 TPM, 200,000 TPD. Authenticated response headers confirm
+1,000 requests/day and 8,000 tokens/minute. Project overrides and billing status
+are not independently accessible with the inference key. Context capacity is not
+daily allowance. Each Groq request allows 1,200 completion tokens, keeps the full
+company system prompt, and drops oldest complete history turns above 2,000 UTF-8
+bytes. Rate-limit responses are sanitized and never automatically retried.
+
+The legacy `geminiTurns` request/storage field continues counting all provider
+answers to preserve the existing four-answer session budget and stored sessions.
+Groq analytics use `chat_groq_request` / `chat_groq_answer` with source `groq`;
+existing Gemini events remain valid. Include both event pairs in historical queries.
+
+For immediate pre-migration rollback, first run `npm run cf:business:check`, then:
+
+```powershell
+npx wrangler rollback d3ea5fc1-088b-48f4-a838-6b5b1f5602f4 --config wrangler.business.jsonc --message "Rollback Groq migration"
+```
+
+Also revert the migration commit before the next guarded deployment; otherwise
+the pinned business configuration will re-enable Groq. Do not delete either secret.
+
+Acceptance: Worker version `2d6c9984-bc7a-44d4-ab7d-c57a5d364564` returned a
+genuine `source: groq` production answer in 1,081 ms. Chrome automation submitted
+an open-ended question through the existing UI, observed HTTP 200 / `source: groq`,
+confirmed the answer in the rendered DOM, two stored conversation messages and
+the legacy session counter incremented to one, with no browser exceptions.
+Main pages returned 200; local founder answer, 400 validation, 429 session budget
+and 204 analytics checks passed. A 15-second Worker tail observed two `ok`
+invocations and no exceptions. Focused tests: 20/20; TypeScript, ESLint and guarded
+production build passed. Contact form source is unchanged; built form, endpoint
+and public business identifier are preserved. No live enquiry was sent, and
+Analytics Engine persisted rows were not independently queried.
+
 Only operate on account `a9968e365a6bee7bb86a380662067095` and Worker
 `benkai-systems-business`. Confirm `wrangler whoami` before execution.
 

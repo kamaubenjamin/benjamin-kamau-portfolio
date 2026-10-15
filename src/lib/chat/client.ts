@@ -27,7 +27,7 @@ export async function requestChat(messages: ChatMessage[], metadata: ChatRequest
         typeof data.code === "string" && safeCodes.includes(data.code) ? data.code : undefined);
     }
     if (typeof data.message !== "string" || !data.message.trim()
-      || (data.source !== "gemini" && data.source !== "local_grounded")) throw new Error(FAILURE);
+      || (data.source !== "gemini" && data.source !== "groq" && data.source !== "local_grounded")) throw new Error(FAILURE);
     return data as unknown as ChatSuccessResponse;
   } catch (error) {
     if (controller.signal.aborted) throw new Error("Benkai Assistant took too long to respond. Please try again or use the contact page.");

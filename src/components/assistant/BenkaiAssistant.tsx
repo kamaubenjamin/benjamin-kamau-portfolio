@@ -239,12 +239,12 @@ export function BenkaiAssistant() {
       const payload = await requestChat(context, { ...metadata, sessionId: metadata.sessionId ?? undefined });
       const assistantMessage: ChatMessage = { role: "assistant", content: payload.message };
       setMessages((current) => boundConversation([...current, assistantMessage]));
-      setCanContinue(payload.source === "gemini" && payload.incomplete === true);
+      setCanContinue(payload.source !== "local_grounded" && payload.incomplete === true);
       if (payload.source === "local_grounded") {
         const next = { ...localCache, [content]: { text: payload.message } };
         setLocalCache(next);
         writeLocalCache(next);
-      } else if (payload.source === "gemini") {
+      } else {
         const next = Math.min(geminiTurns + 1, MAX_GEMINI_TURNS);
         setGeminiTurns(next);
         writeGeminiTurns(next);

@@ -66,3 +66,29 @@ export function parseGeminiResponse(payload: unknown): GeminiResponseResult {
     incomplete,
   };
 }
+
+/** Translate only public assistant content, never reasoning or provider metadata. */
+export function parseGroqResponse(payload: unknown): GeminiResponseResult {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return { success: false, category: "invalid_output" };
+  }
+  const choices = (payload as { choices?: unknown }).choices;
+  if (!Array.isArray(choices) || !choices[0] || typeof choices[0] !== "object") {
+    return { success: false, category: "invalid_output" };
+  }
+  const choice = choices[0] as { finish_reason?: unknown; message?: { role?: unknown; content?: unknown } };
+  if (choice.finish_reason === "content_filter") return { success: false, category: "blocked_output" };
+  if (choice.finish_reason !== "stop" && choice.finish_reason !== "length") {
+    return { success: false, category: "abnormal_finish" };
+  }
+  if (choice.message?.role !== "assistant" || typeof choice.message.content !== "string") {
+    return { success: false, category: "invalid_output" };
+  }
+  // The UI deliberately renders plain text. Remove simple presentation markers.
+  const text = choice.message.content.replace(/^\s{0,3}#{1,6}\s+/gm, "")
+    .replace(/\*\*([^*\n]+)\*\*/g, "$1");
+  return parseGeminiResponse({ candidates: [{
+    finishReason: choice.finish_reason === "length" ? "MAX_TOKENS" : "STOP",
+    content: { parts: [{ text }] },
+  }] });
+}

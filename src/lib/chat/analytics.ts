@@ -4,6 +4,8 @@ export const CHAT_EVENT_NAMES = [
   "chat_local_answer",
   "chat_gemini_request",
   "chat_gemini_answer",
+  "chat_groq_request",
+  "chat_groq_answer",
   "chat_retry",
   "chat_error",
   "chat_quota_limit",
@@ -12,7 +14,7 @@ export const CHAT_EVENT_NAMES = [
 ] as const;
 
 export type ChatEventName = (typeof CHAT_EVENT_NAMES)[number];
-export type ChatAnswerSource = "local_grounded" | "gemini";
+export type ChatAnswerSource = "local_grounded" | "gemini" | "groq";
 export type ViewportClass = "mobile" | "tablet" | "desktop";
 
 export interface ChatAnalyticsEvent {

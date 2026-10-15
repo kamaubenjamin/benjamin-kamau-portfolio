@@ -1,5 +1,5 @@
 ﻿import type { ChatGenerationResult, ChatMessage } from "./types";
-import { parseGeminiResponse } from "./provider-response";
+import { parseGeminiResponse, parseGroqResponse } from "./provider-response";
 
 const GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_MODEL = "gemini-3.5-flash";
@@ -28,6 +28,7 @@ function classifyProviderStatus(status: number): ChatProviderErrorCategory {
 }
 
 export interface ChatProviderConfig {
+  provider?: "gemini" | "groq";
   apiKey?: string;
   model?: string;
   requestId?: string;
@@ -39,6 +40,13 @@ export async function generateChatResponse(
   const apiKey = config.apiKey?.trim();
   if (!apiKey) throw new ChatProviderNotConfiguredError("Chat provider is not configured.");
   const model = config.model?.trim() || DEFAULT_MODEL;
+  const groq = config.provider === "groq";
+  const provider = groq ? "groq" : "gemini";
+  // Keep recent complete turns within a small input budget; never truncate company facts.
+  const history = [...messages];
+  while (groq && history.length > 1 && new TextEncoder().encode(JSON.stringify(history)).length > 2_000) {
+    history.splice(0, 2);
+  }
   const started = Date.now();
   const controller = new AbortController();
   let attempts = 0;
@@ -54,10 +62,19 @@ export async function generateChatResponse(
     for (let attempt = 0; attempt < 2; attempt++) {
       if (controller.signal.aborted) throw new ChatProviderError("timeout");
       attempts++;
-      const response = await fetch(`${GEMINI_API_BASE}/${encodeURIComponent(model)}:generateContent`, {
+      const response = await fetch(groq ? "https://api.groq.com/openai/v1/chat/completions"
+        : `${GEMINI_API_BASE}/${encodeURIComponent(model)}:generateContent`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-        body: JSON.stringify({
+        headers: groq ? { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` }
+          : { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+        body: JSON.stringify(groq ? {
+          model: config.model?.trim() || "openai/gpt-oss-120b",
+          messages: [{ role: "system", content: systemPrompt + "\nFor this plain-text interface, use short natural paragraphs and hyphen bullets only. For a business scenario, first clarify the current workflow with one question before proposing implementation. Do not promise WhatsApp integrations or unverified capabilities." }, ...history],
+          max_completion_tokens: 1200,
+          temperature: 0.2,
+          reasoning_effort: "low",
+          include_reasoning: false,
+        } : {
           system_instruction: { parts: [{ text: systemPrompt }] },
           contents: messages.map(message => ({
             role: message.role === "assistant" ? "model" : "user",
@@ -82,7 +99,7 @@ export async function generateChatResponse(
             Number.isFinite(requestedDelay) ? requestedDelay : 0);
           if (delay + 1000 < PROVIDER_DEADLINE_MS - (Date.now() - started)) {
             console.warn("Benkai Assistant provider retry", {
-              requestId: config.requestId, provider: "gemini", category,
+              requestId: config.requestId, provider, category,
               upstreamStatus, attempt: attempts, durationMs: Date.now() - started,
             });
             await new Promise<void>(resolve => setTimeout(resolve, delay));
@@ -94,7 +111,7 @@ export async function generateChatResponse(
       let payload: unknown;
       try { payload = await response.json(); }
       catch { throw new ChatProviderError(controller.signal.aborted ? "timeout" : "invalid_output"); }
-      const result = parseGeminiResponse(payload);
+      const result = groq ? parseGroqResponse(payload) : parseGeminiResponse(payload);
       if (!result.success) throw new ChatProviderError(result.category);
       return result;
     }
@@ -106,7 +123,7 @@ export async function generateChatResponse(
     const category = controller.signal.aborted ? "timeout" : error instanceof ChatProviderQuotaError
       ? "usage_limit" : error instanceof ChatProviderError ? error.category : "provider_failure";
     console.warn("Benkai Assistant provider failure", {
-      requestId: config.requestId, provider: "gemini", category, upstreamStatus,
+      requestId: config.requestId, provider, category, upstreamStatus,
       attempts, durationMs: Date.now() - started,
     });
     if (error instanceof ChatProviderQuotaError) throw error;

@@ -47,12 +47,13 @@ function validateMetadata(value: unknown): ChatRequestMetadata {
  * `POST /api/chat` — hybrid Benkai Assistant endpoint.
  *
  * Local grounded answers resolve first and return without calling the provider.
- * Only unresolved questions reach Gemini, subject to the per-session budget.
+ * Only unresolved questions reach the configured provider, subject to the session budget.
  * Chat content is never written to analytics.
  */
 export async function handleChatRequest(request: Request, env: BenkaiEnv): Promise<Response> {
   const requestId = crypto.randomUUID();
   const started = Date.now();
+  const provider = env.CHAT_PROVIDER === "groq" ? "groq" : "gemini";
   const respond = (body: unknown, status: number): Response => {
     const response = jsonResponse(body, status);
     response.headers.set("X-Request-ID", requestId);
@@ -139,22 +140,23 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
   try {
     if (metadata.sessionId) {
       writeChatAnalytics(env, {
-        event: "chat_gemini_request",
+        event: provider === "groq" ? "chat_groq_request" : "chat_gemini_request",
         sessionId: metadata.sessionId,
-        source: "gemini",
+        source: provider,
         viewport: metadata.viewport,
       });
     }
     const result = await generateChatResponse(validated.messages, buildBenkaiSystemPrompt(), {
-      apiKey: env.GEMINI_API_KEY,
-      model: env.GEMINI_MODEL,
+      provider,
+      apiKey: provider === "groq" ? env.GROQ_API_KEY : env.GEMINI_API_KEY,
+      model: provider === "groq" ? env.GROQ_MODEL : env.GEMINI_MODEL,
       requestId,
     });
     if (metadata.sessionId) {
       writeChatAnalytics(env, {
-        event: "chat_gemini_answer",
+        event: provider === "groq" ? "chat_groq_answer" : "chat_gemini_answer",
         sessionId: metadata.sessionId,
-        source: "gemini",
+        source: provider,
         outcome: result.incomplete ? "incomplete" : "success",
         viewport: metadata.viewport,
       });
@@ -162,7 +164,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
     return respond(
       {
         message: result.message,
-        source: "gemini",
+        source: provider,
         incomplete: result.incomplete || undefined,
       } satisfies ChatSuccessResponse,
       200,
@@ -188,7 +190,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
         writeChatAnalytics(env, {
           event: "chat_quota_limit",
           sessionId: metadata.sessionId,
-          source: "gemini",
+          source: provider,
           outcome: "quota",
           viewport: metadata.viewport,
         });
@@ -204,7 +206,7 @@ export async function handleChatRequest(request: Request, env: BenkaiEnv): Promi
       writeChatAnalytics(env, {
         event: "chat_error",
         sessionId: metadata.sessionId,
-        source: "gemini",
+        source: provider,
         outcome: "provider_failure",
         viewport: metadata.viewport,
       });
