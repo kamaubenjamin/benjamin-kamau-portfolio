@@ -141,9 +141,6 @@ export default function HomePage() {
               subtitle="Systems and case studies demonstrating practical operations, automation, document processing and data engineering."
             />
           </AnimatedWrapper>
-          <p className="mb-6 text-sm text-[var(--color-text-muted)]">
-            Current focus: real purchase-order accuracy baseline following the completed v0.22 UAT demonstration.
-          </p>
           <div className="grid gap-6 sm:grid-cols-2">
             {featuredProjects.map((project, i) => (
               <AnimatedWrapper key={project.slug} delay={i * 0.1}>

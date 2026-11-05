@@ -49,6 +49,7 @@ export interface Project {
     details?: string[];
   }>;
   capabilities?: string[];
+  publicCapabilities?: string[];
   technologies: string[];
   cardTechnologies?: string[];
   challenges?: string;
@@ -80,14 +81,16 @@ export interface Project {
 
 const projectDisplayOrder = new Map([
   ["gymbolt-gym-management-system", 0],
-  ["house-of-original", 1],
-  ["exploreafrica-travel-platform", 2],
-  ["intelligent-document-processing-platform", 3],
-  ["spice-harvest-ops", 4],
-  ["essiedo-catalogue-pilot", 5],
-  ["home-health-operations-demo", 6],
-  ["pair-and-place-website-operations", 7],
-  ["flow-sync", 8],
+  ["benkai-collect", 1],
+  ["house-of-original", 2],
+  ["exploreafrica-travel-platform", 3],
+  ["intelligent-document-processing-platform", 4],
+  ["spice-harvest-ops", 5],
+  ["quoteflows", 6],
+  ["essiedo-catalogue-pilot", 7],
+  ["home-health-operations-demo", 8],
+  ["pair-and-place-website-operations", 9],
+  ["flow-sync", 10],
 ]);
 
 export const projects: Project[] = ([
@@ -98,7 +101,14 @@ export const projects: Project[] = ([
     status: "Active development",
     statusVariant: "lime",
     shortDescription:
-      "A governed document-processing platform with deterministic ingestion, structural parsing, workflow orchestration, tenant-scoped APIs and a six-layout purchase-order accuracy corpus.",
+      "Processes business documents through structured extraction, validation and automated workflows, with a tested purchase-order foundation.",
+    publicCapabilities: [
+      "PDF, spreadsheet, CSV and email document ingestion",
+      "Structured parsing and field validation",
+      "Purchase-order totals and line-item checks",
+      "Configurable document-processing workflows",
+      "Tenant-scoped technical preview",
+    ],
     overview:
       "Benjamin’s flagship project is a governed document-processing platform combining deterministic ingestion, structural parsing, configurable workflow execution, tenant-scoped FastAPI endpoints and a separate authenticated Document Intelligence frontend. The current v0.23 milestone adds a governed six-layout fictional purchase-order corpus with strict field and line-item accuracy evaluation, exact metrics and repeatable state-isolated execution. The v0.22 read-only, tenant-isolated UAT technical preview remains the hosted demonstration foundation.",
     problem:
@@ -203,7 +213,14 @@ export const projects: Project[] = ([
     status: "Client Validation Prototype",
     statusVariant: "lime",
     shortDescription:
-      "A responsive home-health operations prototype built from real client discovery, bringing patient records, caregiver updates, vital signs, care tasks, operational alerts and invoicing into one simple workflow.",
+      "Interactive home-health prototype for patient records, caregiver notes, vital signs, tasks, alerts and invoices, using fictional sample data.",
+    publicCapabilities: [
+      "Patient and caregiver workflow prototype",
+      "Vital-sign entries and care notes",
+      "Care tasks, follow-ups and alerts",
+      "Invoice status and draft creation",
+      "Responsive fictional-data demonstration",
+    ],
     cardDescription:
       "Responsive home-health operations prototype built from real client discovery, combining patient records, caregiver updates, vital signs, care tasks, operational alerts and invoicing in one workflow.",
     positioning:
@@ -376,7 +393,14 @@ export const projects: Project[] = ([
     status: "Existing platform foundation",
     statusVariant: "emerald",
     shortDescription:
-      "A hosted operator and control-plane frontend for competitor monitoring, workflow visibility and analytics, with execution and scraping owned by an external Engine.",
+      "Technical preview for competitor monitoring and workflow dashboards, with records, alerts and integration foundations still under validation.",
+    publicCapabilities: [
+      "Competitor records and CSV imports",
+      "Monitoring and dashboard views",
+      "Authentication interface foundations",
+      "External workflow and telemetry API clients",
+      "Full live Engine integration remains unverified",
+    ],
     overview:
       "FlowSync is a Next.js operator and control-plane frontend for Competitor Price Intelligence, with Clerk authentication UI, Supabase-backed competitor records, dashboard views and an API-first boundary to a separately hosted execution and data plane. Its source repository is private and proprietary.",
     problem:
@@ -424,7 +448,14 @@ export const projects: Project[] = ([
     status: "Maintenance milestone completed",
     statusVariant: "emerald",
     shortDescription:
-      "A live WordPress maintenance engagement improving recoverability, booking reliability, email delivery, security hygiene and analytics readiness without disrupting the existing brand.",
+      "Maintenance of a live WordPress website, covering recoverability, booking checks, email delivery and safer day-to-day site operations.",
+    publicCapabilities: [
+      "Website recovery backups",
+      "Booking form and notification testing",
+      "Email delivery verification",
+      "Plugin and theme cleanup",
+      "Kenya timezone correction",
+    ],
     overview:
       "Pair and Place is a live travel and accommodation website that required careful maintenance without redesigning the public experience. Benjamin completed a structured technical review, created verified recovery backups, removed unnecessary plugins and themes, corrected local-time configuration, tested booking submissions and outbound email delivery, improved internal booking notifications and documented remaining usability, hosting and analytics work. The site remained live and operational throughout the engagement.",
     solution:
@@ -461,7 +492,15 @@ export const projects: Project[] = ([
     status: "Late-stage validation",
     statusVariant: "emerald",
     shortDescription:
-      "Multi-tenant travel operations platform connecting the customer journey with the internal work required to deliver a trip — from enquiry and CRM through itineraries, bookings, travellers, payments, documents, reservations and Trip Ready review.",
+      "Multi-tenant travel operations platform connecting enquiries, CRM, itineraries, bookings, travellers, payments, reservations and Trip Ready review.",
+    publicCapabilities: [
+      "Agency workspaces with tenant-isolated access",
+      "Enquiries, leads, customers and CRM follow-up",
+      "Packages, itineraries, bookings and travellers",
+      "Payments, documents and supplier reservations",
+      "Trip Ready reviews and profitability reporting",
+      "Production web platform under final validation",
+    ],
     positioning: "Production web platform / late-stage validation / final hardening.",
     valueProposition:
       "From enquiry to Trip Ready — one operational flow for travel agencies, connecting customer intake, CRM, itinerary planning, bookings, travellers, payments, documents, supplier reservations and readiness decisions inside tenant-isolated workspaces.",
@@ -565,7 +604,14 @@ export const projects: Project[] = ([
     status: "Live Pilot",
     statusVariant: "lime",
     shortDescription:
-      "A configurable gym operations platform shaped through live receptionist feedback, with governed membership, billing, attendance, sessions, lockers, services, cashbook and member-portal workflows.",
+      "Gym management system for memberships, billing, attendance, sessions, lockers and member access, currently in controlled pilot testing.",
+    publicCapabilities: [
+      "Member records and billing history",
+      "Attendance and session tracking",
+      "Locker assignment and release",
+      "Cashbook and operational records",
+      "Staff permissions and member self-service",
+    ],
     cardDescription:
       "A configurable operations platform shaped through live receptionist feedback, currently in controlled operational testing at Lock & Load Gym.",
     featuredDescription:
@@ -767,7 +813,14 @@ export const projects: Project[] = ([
     status: "Production Deployed",
     statusVariant: "lime",
     shortDescription:
-      "A production-deployed mobile-first business operations system built for a real small-business workflow, covering owner authentication, order management, payment and fulfilment tracking, secure API architecture, PostgreSQL data modelling and cloud deployment.",
+      "Production-deployed operations workspace for small-business orders, payment status, fulfilment and sales tracking.",
+    publicCapabilities: [
+      "Authenticated owner workspace",
+      "Orders and catalogue-controlled totals",
+      "Payment and fulfilment status tracking",
+      "Sales history and dashboard views",
+      "Secure operations API and database",
+    ],
     cardDescription:
       "Production-deployed mobile-first operations system for a real small business, built around an existing WhatsApp Business workflow to manage orders, payments, fulfilment and daily sales through a secure Neon/PostgreSQL backend.",
     featuredDescription:
@@ -963,7 +1016,14 @@ export const projects: Project[] = ([
     status: "Live Pilot",
     statusVariant: "lime",
     shortDescription:
-      "Live SME commerce pilot connecting social-media product discovery with structured catalogue browsing and product-specific WhatsApp enquiries.",
+      "Live catalogue pilot connecting social-media product discovery with structured browsing and product-specific WhatsApp enquiries.",
+    publicCapabilities: [
+      "Browse and filter available items",
+      "Product detail and selection",
+      "Product-specific WhatsApp enquiry handoff",
+      "Responsive mobile-first catalogue",
+      "Live pilot; commercial outcomes not claimed",
+    ],
     positioning:
       "A client pilot exploring whether a structured web catalogue can improve the handoff between Instagram/WhatsApp product discovery and product-specific WhatsApp enquiries without replacing the seller's existing social-selling workflow.",
     overview:
@@ -1062,7 +1122,14 @@ export const projects: Project[] = ([
     status: "Production Deployed",
     statusVariant: "lime",
     shortDescription:
-      "Mobile-first commerce and operations platform for a skincare, cosmetics and wellness retailer, combining customer self-service ordering with stock-aware fulfilment, delivery configuration and secure owner administration.",
+      "Mobile-first beauty retail storefront with stock-aware ordering, pickup and delivery options, and secure owner administration.",
+    publicCapabilities: [
+      "Product catalogue and search",
+      "Stock visibility and overselling protection",
+      "Cart and customer order creation",
+      "Pickup, delivery zones and fees",
+      "Secure admin for products, stock and orders",
+    ],
     positioning:
       "A lightweight commerce and operations platform built by Benkai Systems to reduce repetitive retail workflows and centralize catalogue, stock, ordering and delivery operations.",
     valueProposition:
@@ -1197,6 +1264,106 @@ export const projects: Project[] = ([
         kind: "website",
         primary: true,
       },
+    ],
+    featured: false,
+  },
+  {
+    slug: "benkai-collect",
+    title: "Benkai Collect",
+    category: "Waste Collection Operations & Billing Platform",
+    status: "Production Deployed",
+    statusVariant: "emerald",
+    shortDescription:
+      "Waste collection management platform for households, monthly billing, payment records and scheduled pickups.",
+    publicCapabilities: [
+      "Household and service-area management",
+      "Calendar-month billing and first-month proration",
+      "Cash and manually recorded M-Pesa payments",
+      "Invoices, balances, allocations and credits",
+      "Saturday collection scheduling and outcomes",
+      "Role-based access and tenant-isolated records",
+    ],
+    positioning:
+      "Production deployed; final operational acceptance pending. Enquiries only.",
+    overview:
+      "Benkai Collect is a multi-tenant operations and billing platform for private waste collection businesses in Kenya. It brings household records, monthly bills, payments and collection operations into one workspace.",
+    problem:
+      "Customer records, payment messages and collection logs can become scattered across notebooks and spreadsheets, making balances and collection outcomes difficult to track.",
+    solution:
+      "A central workspace for household and area management, monthly billing, manual payment recording, collection outcomes and controlled staff access.",
+    capabilities: [
+      "Household registration and collection-area management",
+      "Idempotent calendar-month billing and eligible first-month proration",
+      "Cash and manual M-Pesa recording, not verified merchant transactions",
+      "Invoice/payment history, allocations and credits",
+      "Saturday collection scheduling and completed/missed outcomes",
+      "Business administrator and staff roles with tenant-scoped access",
+      "Platform administration and business account controls",
+    ],
+    technologies: ["TypeScript", "Cloudflare Workers", "Neon PostgreSQL", "Brevo"],
+    currentStatusHeading: "Production deployed; final acceptance pending",
+    currentStatus:
+      "The official production domain and platform administrator sign-in are verified. Final browser-session security checks and operational collection-outcome acceptance remain pending. Customer onboarding and general commercial availability are not yet authorized.",
+    roadmap:
+      "Complete remaining security and operational acceptance before authorizing customer onboarding. Live merchant M-Pesa integration and messaging automation are not advertised as available.",
+    callToAction:
+      "Interested in structured collection operations? Contact Benkai Systems to discuss your workflow; public onboarding is not open yet.",
+    repositoryStatus: "Private Repository",
+    claimsNotToMake: [
+      "No general commercial launch or public self-service signup claim",
+      "No paying-customer, customer-count, revenue, testimonial or measured-savings claim",
+      "No automatic Safaricom-verified M-Pesa claim",
+      "No active messaging automation claim",
+      "No completed final operational/security acceptance claim",
+      "Do not reveal internal production identifiers, accounts or credentials",
+    ],
+    links: [
+      {
+        url: "https://collect.benkaisystems.co.ke",
+        label: "Visit Product Website",
+        kind: "website",
+        primary: true,
+      },
+    ],
+    featured: true,
+  },
+  {
+    slug: "quoteflows",
+    title: "QuoteFlows",
+    category: "Quotation & Client Workflow Software",
+    status: "Active development",
+    statusVariant: "emerald",
+    shortDescription:
+      "Quotation workflow product for preparing customizable quotes using reusable templates and PDF exports.",
+    publicCapabilities: [
+      "Reusable quotation templates",
+      "Editable quote content and presentation",
+      "PDF quotation export verified locally",
+      "Quotation administration foundations",
+    ],
+    positioning: "Development-stage product; local validation completed.",
+    overview:
+      "QuoteFlows is a quotation workflow product in active development. Its locally verified foundation includes reusable templates, quotation editing and PDF exports. Public hosting and paid subscriptions have not been verified.",
+    problem:
+      "Repeated manual quotation preparation can make pricing, layouts and customer records harder to manage consistently.",
+    solution:
+      "A reusable quotation workflow with editable templates and PDF output, intended to simplify repeated quote preparation.",
+    capabilities: [
+      "Six quotation templates verified in the local v0.5 foundation",
+      "Quotation customization and PDF export",
+      "Administration and invitation foundations under development",
+    ],
+    technologies: ["TypeScript", "Cloudflare Workers", "Cloudflare D1"],
+    currentStatusHeading: "Active development",
+    currentStatus:
+      "Local v0.5 functionality and PDF/browser checks were reported as passing. Public hosted release, live subscription processing and customer adoption are not verified; no live demo is advertised.",
+    roadmap:
+      "Validate hosted workflows, subscription handling and controlled release readiness before offering general access.",
+    repositoryStatus: "Private Repository",
+    claimsNotToMake: [
+      "No production SaaS or live paid-subscription claim",
+      "No customer adoption, revenue or conversion claim",
+      "No public deployment or live invitation-delivery claim without verification",
     ],
     featured: false,
   },
