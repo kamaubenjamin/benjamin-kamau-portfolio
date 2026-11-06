@@ -14,6 +14,7 @@ export type ProjectStatus =
   | "Pilot-oriented release candidate"
   | "Production Deployed"
   | "Live Pilot"
+  | "Demo Available"
   | "Paused - separate product";
 
 export type ProjectStatusVariant = "default" | "emerald" | "lime";
@@ -502,11 +503,11 @@ export const projects: Project[] = ([
       "Web platform undergoing final validation",
     ],
     positioning:
-      "Travel operations platform in late-stage validation.",
+      "Production web release validated · Environments temporarily paused.",
     valueProposition:
       "From enquiry to Trip Ready — one operational flow for travel agencies, connecting customer intake, CRM, itinerary planning, bookings, travellers, payments, documents, supplier reservations and readiness decisions inside tenant-isolated workspaces.",
     overview:
-      "ExploreAfrica brings travel enquiries, customer follow-up, itineraries, bookings, travellers, payments and trip preparation into one agency workspace. Its web workflows have been developed and tested with controlled sample data.",
+      "ExploreAfrica brings travel enquiries, customer follow-up, itineraries, bookings, travellers, payments and trip preparation into one agency workspace. Its production web release previously passed deployment and health checks; the associated Supabase environment has since been intentionally paused.",
     problem:
       "Travel agencies can lose track of customer details, payments and trip preparations when records are spread across messages, spreadsheets and separate tools.",
     solution:
@@ -565,7 +566,7 @@ export const projects: Project[] = ([
     currentStatusHeading:
       "Current Status",
     currentStatus:
-      "Core web workflows have undergone controlled testing, but production admin and customer operations are not currently available. The Admin Platform link leads to staging; final acceptance and commercial rollout are not confirmed.",
+      "The ExploreAfrica production web release was deployed and verified healthy before its Supabase-backed environments were intentionally paused to manage free-tier resource limits. Production Admin and staging Admin links remain listed, but authenticated workflows may not be usable until their databases are reactivated. Final acceptance and commercial launch are not claimed.",
     roadmap:
       "Remaining work focuses on evidence-backed validation feedback, performance and scale readiness, final regression and acceptance, and freezing the current web release. Flutter/mobile V1 follows after web sign-off.",
     repositoryStatus: "Private Repository",
@@ -588,7 +589,12 @@ export const projects: Project[] = ([
       },
       {
         url: "https://exploreafrica-admin-staging.vercel.app",
-        label: "Admin Platform",
+        label: "Admin Staging (Paused)",
+        kind: "website",
+      },
+      {
+        url: "https://exploreafrica-admin.vercel.app",
+        label: "Admin Production (Paused)",
         kind: "website",
       },
     ],
@@ -598,10 +604,10 @@ export const projects: Project[] = ([
     slug: "gymbolt-gym-management-system",
     title: "GymBolt Management System",
     category: "Gym Operations & Member Management Platform",
-    status: "Live Pilot",
+    status: "Demo Available",
     statusVariant: "lime",
     shortDescription:
-      "Gym management system for memberships, billing, attendance, sessions, lockers and member access, currently in controlled pilot testing.",
+      "Gym operations platform for membership, payments, attendance, sessions and lockers, with a public demo available while its operational pilot environment is paused.",
     publicCapabilities: [
       "Member records and billing history",
       "Attendance and session tracking",
@@ -610,11 +616,11 @@ export const projects: Project[] = ([
       "Staff permissions and member self-service",
     ],
     cardDescription:
-      "A configurable operations platform shaped through live receptionist feedback, currently in controlled operational testing at Lock & Load Gym.",
+      "Gym operations platform shaped by receptionist feedback. Public demo available; operational pilot environment temporarily paused.",
     featuredDescription:
-      "Live controlled receptionist pilot at Lock & Load Gym, combining governed membership, billing, attendance, services, lockers and secure member self-service.",
+      "Membership, billing, attendance and locker workflows demonstrated in an isolated public GymBolt environment.",
     positioning:
-      "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym.",
+      "Public demo available · Operational pilot environment temporarily paused.",
     valueProposition:
       "Role-based Admin, Staff and Member experiences backed by Supabase Auth, PostgreSQL/RLS and a responsive SaaS interface for real gym workflow validation.",
     overview:
@@ -710,9 +716,9 @@ export const projects: Project[] = ([
       {
         title: "Deployment & Access Model",
         description:
-          "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym. It is not presented as full adoption, a commercial rollout or production-scale SaaS.",
+          "A controlled live pilot was previously validated at Lock & Load Gym. The operational environment is currently paused; the separate public demo is available. This is not a commercial rollout or production-scale SaaS.",
         details: [
-          "Active hosted pilot URL: https://gymbolt-lock-load-gym.pages.dev",
+          "Previously deployed pilot environment (currently paused): https://gymbolt-lock-load-gym.pages.dev",
           "Source repository remains private and no public repository CTA is exposed",
           "No multiple-gym adoption, revenue, impact metrics or commercial-scale claims are made",
         ],
@@ -759,13 +765,13 @@ export const projects: Project[] = ([
     ],
     cardTechnologies: ["React", "TypeScript", "Supabase", "PostgreSQL", "RLS", "Cloudflare Pages"],
     verifiedOutcomes: [
-      "Functional live pilot currently being validated with Lock & Load Gym",
+      "Previously validated operational pilot; isolated demo currently available",
       "Hosted Admin, Staff and Member experiences backed by Supabase Auth and PostgreSQL/RLS",
       "Pilot-safe iteration supported by backups, migration validation, integrity checks and isolated QA records",
     ],
     currentStatusHeading: "Current Status & Limitations",
     currentStatus:
-      "Live controlled pilot — currently being tested in real reception workflows at Lock & Load Gym.",
+      "The isolated public GymBolt demo is enabled for evaluation. Its separate production/pilot environment is intentionally paused while free-tier Supabase resources are allocated across projects. Pilot workflows were previously validated; a live pilot requires reactivation.",
     currentStatusDetails: [
       "Production M-Pesa is not active",
       "Receipt-email delivery is intentionally disabled",
@@ -773,9 +779,10 @@ export const projects: Project[] = ([
       "Member self-service QR attendance and access-control hardware integration are not claimed",
       "No multiple paying gyms, broad rollout, customer revenue, adoption metrics or measured business impact is claimed",
       "Not presented as a completed commercial product or production-scale SaaS",
+      "Production/pilot backend currently paused; isolated public demo available",
     ],
     roadmap:
-      "Current priority is active pilot validation and production-safe iteration with Lock & Load Gym.",
+      "Resume operational pilot validation when its production environment is reactivated, then continue receptionist-led improvements and release checks.",
     roadmapDetails: [
       "Continue validating real membership, attendance, billing, locker and member-portal workflows",
       "Maintain backup, migration replay/validation and data-integrity discipline during hosted changes",
@@ -799,6 +806,11 @@ export const projects: Project[] = ([
         label: "View Live Demo",
         kind: "preview",
         primary: true,
+      },
+      {
+        url: "https://gymbolt-lock-load-gym.pages.dev",
+        label: "Production / Pilot (Paused)",
+        kind: "website",
       },
     ],
     featured: true,
