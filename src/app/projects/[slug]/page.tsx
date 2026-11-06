@@ -66,13 +66,8 @@ export default async function ProjectPage({ params }: Props) {
           <h1 className="mb-4 text-3xl font-bold tracking-tight text-[var(--color-text)] sm:text-4xl">
             {project.title}
           </h1>
-          {project.positioning && (
-            <p className="mb-3 max-w-3xl text-xl font-medium text-[var(--color-text)]">
-              {project.positioning}
-            </p>
-          )}
           <p className="max-w-2xl text-lg text-[var(--color-text-muted)]">
-            {project.valueProposition ?? project.shortDescription}
+            {project.shortDescription}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -102,7 +97,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.problem && (
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
-                  {project.slug === "gymbolt-gym-management-system" ? "Business Problem" : "Problem"}
+                  The Problem
                 </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.problem}</p>
               </section>
@@ -118,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.currentStatus && (
               <section>
                 <h2 className="mb-3 text-xl font-semibold text-[var(--color-text)]">
-                  {project.currentStatusHeading ?? "Current Status"}
+                  Current Status
                 </h2>
                 <p className="leading-relaxed text-[var(--color-text-muted)]">{project.currentStatus}</p>
               </section>
@@ -151,34 +146,6 @@ export default async function ProjectPage({ params }: Props) {
                 ))}
               </div>
             </Card>
-
-            {(project.liveDemoStatus || project.repositoryStatus) && (
-              <Card hover={false}>
-                <h3 className="mb-3 font-semibold text-[var(--color-text)]">Project Access</h3>
-                <dl className="space-y-3 text-sm">
-                  {project.liveDemoStatus && (
-                    <div>
-                      <dt className="font-medium text-[var(--color-text)]">
-                        {project.slug === "gymbolt-gym-management-system"
-                          ? "Live Demo"
-                          : project.slug === "essiedo-catalogue-pilot"
-                            ? "Live Pilot"
-                            : "Live demo"}
-                      </dt>
-                      <dd className="text-[var(--color-text-muted)]">{project.liveDemoStatus}</dd>
-                    </div>
-                  )}
-                  {project.repositoryStatus && (
-                    <div>
-                      <dt className="font-medium text-[var(--color-text)]">
-                        {project.repositoryStatus === "Private Repository" ? "Source Code" : "Repository"}
-                      </dt>
-                      <dd className="text-[var(--color-text-muted)]">{project.repositoryStatus}</dd>
-                    </div>
-                  )}
-                </dl>
-              </Card>
-            )}
 
             {(project.publicCapabilities ?? project.capabilities)?.length && (
               <Card hover={false}>

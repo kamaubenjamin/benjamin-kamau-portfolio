@@ -110,11 +110,11 @@ export const projects: Project[] = ([
       "Tenant-scoped technical preview",
     ],
     overview:
-      "Benjamin’s flagship project is a governed document-processing platform combining deterministic ingestion, structural parsing, configurable workflow execution, tenant-scoped FastAPI endpoints and a separate authenticated Document Intelligence frontend. The current v0.23 milestone adds a governed six-layout fictional purchase-order corpus with strict field and line-item accuracy evaluation, exact metrics and repeatable state-isolated execution. The v0.22 read-only, tenant-isolated UAT technical preview remains the hosted demonstration foundation.",
+      "A document-processing system for turning varied files into structured, validated information. It combines document intake, field and table parsing, workflow steps and a read-only technical preview.",
     problem:
-      "Business documents arrive in varied formats and structures, requiring consistent ingestion, normalization, parsing, validation and human review before downstream workflows can use them safely.",
+      "Invoices, purchase orders and other business documents arrive in different layouts, making accurate data entry and validation difficult.",
     solution:
-      "Benjamin has built a deterministic processing foundation that moves documents from ingestion and canonical normalization through structural parsing, validated workflow execution and read-only result delivery.",
+      "Documents are parsed and checked through repeatable workflows so teams can identify inconsistent fields, totals and records before using the results.",
     solutionDetails: [
       "Ingestion supports PDF, CSV, XLSX, email and TXT inputs, canonical document normalization and a document-classification skeleton.",
       "Structural processing includes document models, block parsing, section parsing, table parsing, structural validation and document quality scoring.",
@@ -228,11 +228,11 @@ export const projects: Project[] = ([
     valueProposition:
       "I gathered real operational requirements and translated them into a working interactive prototype so the workflow could be validated before investing in backend, authentication and production security infrastructure.",
     overview:
-      "After gathering requirements from a prospective home-health client, Benjamin translated the operator’s current needs into a working responsive client-validation prototype. The application demonstrates patient and caregiver management, vital-sign recording, timestamped care notes, task tracking, operational alerts and KES invoicing across mobile and desktop interfaces. The current version intentionally uses fictional sample data and local React application state while the workflow is validated before any backend or production security implementation.",
+      "An interactive home-health operations prototype demonstrating patient records, caregiver notes, vital signs, tasks, alerts and invoicing. It uses fictional sample data and does not store real patient records.",
     problem:
-      "The prospective operator needed a simple operational system rather than a complex hospital ERP. At the discovery stage, the workflow covered two patients and three caregivers, with patient notes, vital-sign recording, caregiver tasks, completed and pending care work, operational alerts, invoicing and an accessible interface requiring clearer coordination in one place.",
+      "A small home-health operation needs a clear way to coordinate caregivers, patient observations, follow-ups and invoicing without navigating a complex hospital system.",
     solution:
-      "Built an interactive frontend application that models the requested day-to-day workflow and allows the prospective client to review how patient information, caregiver updates, tasks, alerts and invoices fit together before production infrastructure is selected or implemented.",
+      "The responsive prototype brings those activities into one interface so the proposed workflow can be evaluated before building a production system.",
     solutionDetails: [
       "Dashboard views for active patients, caregiver count, today’s tasks, active alerts, outstanding invoices and recent activity",
       "Patient records with assigned caregivers, care status, latest activity and detailed vital-sign, note, task and activity views",
@@ -499,17 +499,18 @@ export const projects: Project[] = ([
       "Packages, itineraries, bookings and travellers",
       "Payments, documents and supplier reservations",
       "Trip Ready reviews and profitability reporting",
-      "Production web platform under final validation",
+      "Web platform undergoing final validation",
     ],
-    positioning: "Production web platform / late-stage validation / final hardening.",
+    positioning:
+      "Travel operations platform in late-stage validation.",
     valueProposition:
       "From enquiry to Trip Ready — one operational flow for travel agencies, connecting customer intake, CRM, itinerary planning, bookings, travellers, payments, documents, supplier reservations and readiness decisions inside tenant-isolated workspaces.",
     overview:
-      "ExploreAfrica has evolved from a travel marketing website into an automation-first Travel Operations Platform for African travel agencies and tour operators. The current web platform connects enquiry capture, CRM, opportunities, package and itinerary planning, customers, bookings, travellers, payments, documents, supplier and reservation operations and Trip Ready review within tenant-isolated agency workspaces. The production web release is live and healthy, while industry-oriented validation and final hardening continue before the current web phase is frozen.",
+      "ExploreAfrica brings travel enquiries, customer follow-up, itineraries, bookings, travellers, payments and trip preparation into one agency workspace. Its web workflows have been developed and tested with controlled sample data.",
     problem:
-      "Travel agencies often manage inquiries, customer information, bookings, traveller details, payments and documents across disconnected tools, spreadsheets, messaging channels and manual follow-up. That fragmentation makes it harder to maintain one reliable operational view from first inquiry through trip readiness.",
+      "Travel agencies can lose track of customer details, payments and trip preparations when records are spread across messages, spreadsheets and separate tools.",
     solution:
-      "ExploreAfrica brings the agency workflow into one tenant-isolated operations platform, not merely a travel website: Enquiry → Lead / CRM → Opportunity → Package / Itinerary → Customer → Booking → Travellers → Payments → Documents → Suppliers / Reservations → Trip Ready. Customer intake and internal delivery work stay connected throughout the operational journey.",
+      "Connected agency workflows help staff manage an enquiry through booking, traveller records, documents and Trip Ready review, with separate access for each agency.",
     architecture:
       "The multi-tenant SaaS platform uses Supabase authentication, PostgreSQL Row Level Security and tenant-scoped data, roles and permissions to isolate agency workspaces. Tenant-owned Website and Hosted Form connections use connection keys and server-side tenant resolution to route each public enquiry into the correct CRM workspace, without broadcasting it across tenants. Platform Admin, tenant staff and customer workflows remain separated by role and tenant boundaries.",
     capabilities: [
@@ -561,9 +562,10 @@ export const projects: Project[] = ([
       "RLS",
       "Tailwind CSS",
     ],
-    currentStatusHeading: "Current status: Production web platform / late-stage validation",
+    currentStatusHeading:
+      "Current Status",
     currentStatus:
-      "The core ExploreAfrica web platform is essentially complete for the current phase and accepted staging improvements have been promoted to a healthy production release. Industry-oriented workflow validation is active using controlled dummy/test data. Remaining work focuses on evidence-backed feedback, performance and scale readiness, final regression and acceptance, and web freeze. Flutter/mobile V1 follows after web sign-off.",
+      "Core web workflows have undergone controlled testing, but production admin and customer operations are not currently available. The Admin Platform link leads to staging; final acceptance and commercial rollout are not confirmed.",
     roadmap:
       "Remaining work focuses on evidence-backed validation feedback, performance and scale readiness, final regression and acceptance, and freezing the current web release. Flutter/mobile V1 follows after web sign-off.",
     repositoryStatus: "Private Repository",
@@ -587,11 +589,6 @@ export const projects: Project[] = ([
       {
         url: "https://exploreafrica-admin-staging.vercel.app",
         label: "Admin Platform",
-        kind: "website",
-      },
-      {
-        url: "https://exploreafrica-customer.vercel.app",
-        label: "Customer Portal",
         kind: "website",
       },
     ],
@@ -794,12 +791,12 @@ export const projects: Project[] = ([
     ],
     callToAction:
       "Need a role-based operations platform with governed billing, secure member self-service and pilot-safe delivery? Let's discuss a similar project.",
-    liveDemoStatus: "https://gymbolt-lock-load-gym.pages.dev",
+    liveDemoStatus: "Isolated public demo: https://gymbolt-demo.pages.dev. Separate from operational pilot data.",
     repositoryStatus: "Private Repository",
     links: [
       {
-        url: "https://gymbolt-lock-load-gym.pages.dev",
-        label: "View Live Pilot",
+        url: "https://gymbolt-demo.pages.dev",
+        label: "View Live Demo",
         kind: "preview",
         primary: true,
       },
