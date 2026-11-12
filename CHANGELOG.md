@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-12 — Founder Name Consistency
+
+- Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.
+
 Portfolio documentation milestones are recorded here without implying product releases.
 
 ## 2026-09-21 — Static-First Free-Tier Delivery Stabilization

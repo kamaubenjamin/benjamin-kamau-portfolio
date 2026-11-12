@@ -12,7 +12,7 @@ import { workingTechnologyGroups } from "@/data/technologies";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Benkai Systems and Benjamin Kamau, Founder & Technical Builder.",
+  description: "About Benkai Systems and Benjamin W. Kamau, Founder & Technical Builder.",
   alternates: { canonical: "/about" },
 };
 
@@ -54,9 +54,9 @@ export default function AboutPage() {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.75fr)]">
             <Card hover={false} className="border-[var(--color-border-hover)] bg-[var(--color-mint-surface)]">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--color-mint-muted)]">Founder &amp; Technical Builder</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[var(--color-text)]">Benjamin Kamau</h2>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[var(--color-text)]">Benjamin W. Kamau</h2>
               <p className="mt-4 max-w-2xl leading-7 text-[var(--color-text-muted)]">
-                I&apos;m Benjamin Kamau, the founder and technical builder behind Benkai Systems. I design and build
+                I&apos;m Benjamin W. Kamau, the founder and technical builder behind Benkai Systems. I design and build
                 practical systems around real business workflows, with a focus on automation, data, document
                 processing and internal operations.
               </p>

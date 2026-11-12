@@ -1,6 +1,6 @@
 # Benkai Systems Portfolio Project Status
 
-Primary public identity: **Benkai Systems — Founded and engineered by Benjamin Kamau.** Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
+Primary public identity: **Benkai Systems — Founded and engineered by Benjamin W. Kamau.** Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
 
 ## Authoritative Project Order
 

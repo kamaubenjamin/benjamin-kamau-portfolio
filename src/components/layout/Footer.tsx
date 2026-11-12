@@ -38,7 +38,7 @@ export function Footer() {
               Systems. Automation. Data.
             </p>
             <p className="max-w-full text-center text-sm text-[var(--color-text-muted)] sm:text-left">
-              Benjamin Kamau · Founder &amp; Technical Builder
+              Benjamin W. Kamau · Founder &amp; Technical Builder
             </p>
           </div>
 

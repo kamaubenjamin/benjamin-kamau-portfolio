@@ -1,6 +1,6 @@
 # Benkai Systems — Portfolio
 
-Portfolio and services website for **Benkai Systems**, an independent software and data systems studio founded and engineered by **Benjamin Kamau**. Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
+Portfolio and services website for **Benkai Systems**, an independent software and data systems studio founded and engineered by **Benjamin W. Kamau**. Benkai Systems designs and builds practical business systems, workflow automation and data infrastructure around real operational needs.
 
 This portfolio is the primary public presentation layer for selected work. Serious product source repositories are intentionally private and proprietary; public case studies focus on purpose, implemented capabilities, safe architecture summaries, verified maturity, live previews and honest limitations rather than source access.
 

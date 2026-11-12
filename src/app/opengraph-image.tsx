@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
           Benkai Systems
         </div>
         <div style={{ color: "#a3e635", display: "flex", fontSize: 38, marginTop: 20 }}>
-          Founded and engineered by Benjamin Kamau
+          Founded and engineered by Benjamin W. Kamau
         </div>
         <div style={{ background: "#10b981", display: "flex", height: 8, marginTop: 48, width: 260 }} />
       </div>

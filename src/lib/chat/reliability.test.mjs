@@ -37,7 +37,9 @@ const generate = () => provider.generateChatResponse(messages, "private-system-c
 
 test("explicit company intents use canonical facts, not broad keywords", () => {
   assert.match(getLocalChatAnswer("Who is BenKai?").message, /independent software and data systems studio/);
-  assert.match(getLocalChatAnswer("Who founded BenKai Systems?").message, /Benjamin Kamau/);
+  assert.match(getLocalChatAnswer("Who founded BenKai Systems?").message, /Benjamin W\. Kamau/);
+  assert.match(getLocalChatAnswer("Who is Benjamin W. Kamau?").message, /Benjamin W\. Kamau/);
+  assert.match(getLocalChatAnswer("Who is Benjamin Kamau?").message, /Benjamin W\. Kamau/);
   assert.match(getLocalChatAnswer("What services does BenKai Systems offer?").message, /Data Engineering/);
   assert.equal(getLocalChatAnswer("Who is Benkai and how should I reconcile my workflow?"), null);
 });

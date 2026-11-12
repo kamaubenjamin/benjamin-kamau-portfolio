@@ -64,7 +64,7 @@ export function getLocalChatAnswer(message: string): LocalChatAnswer | null {
     return { message: `${personal.shortBio}\n\nIn simple terms, Benkai builds practical software that reduces repeated manual work, keeps business information more consistent, and makes everyday operations easier to see and manage.` };
   }
 
-  if (matches(question, ["who founded benkai", "who founded benkai systems", "who is benjamin kamau"])) {
+  if (matches(question, ["who founded benkai", "who founded benkai systems", "who is benjamin kamau", "who is benjamin w kamau"])) {
     return { message: `${personal.name} founded and builds Benkai Systems. He works across business discovery, system design, data modelling, implementation, deployment, and practical iteration.` };
   }
 

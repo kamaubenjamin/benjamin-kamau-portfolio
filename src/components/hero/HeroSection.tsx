@@ -28,7 +28,7 @@ export function HeroSection() {
                 Benkai Systems builds internal business systems, workflow automation, document-processing platforms and data infrastructure around how businesses actually operate.
               </p>
               <p className="mb-6 max-w-xl text-sm leading-relaxed text-[var(--color-text-subtle)] sm:mb-7">
-                Founded and engineered by Benjamin Kamau.
+                Founded and engineered by Benjamin W. Kamau.
               </p>
 
               <div className="hero-actions mb-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">

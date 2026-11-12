@@ -41,7 +41,7 @@ export function professionalServiceJsonLd() {
     telephone: social.phone,
     url: absoluteUrl("/services"),
     description:
-      "Practical business systems, workflow automation, internal tools, document intelligence and data engineering services, founded and engineered by Benjamin Kamau.",
+      "Practical business systems, workflow automation, internal tools, document intelligence and data engineering services, founded and engineered by Benjamin W. Kamau.",
     areaServed: {
       "@type": "City",
       name: "Nairobi",

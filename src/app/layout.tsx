@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Benkai Systems",
   },
   description:
-    "Benkai Systems builds practical business systems, workflow automation, internal tools and data engineering solutions, founded and engineered by Benjamin Kamau.",
+    "Benkai Systems builds practical business systems, workflow automation, internal tools and data engineering solutions, founded and engineered by Benjamin W. Kamau.",
   icons: {
     icon: [
       { url: "/brand/benkai-mark-16.png", sizes: "16x16", type: "image/png" },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
     description:
-      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin Kamau.",
+      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin W. Kamau.",
     type: "website",
     locale: "en_KE",
     siteName: "Benkai Systems",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Benkai Systems | Business Systems, Workflow Automation & Data Engineering",
     description:
-      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin Kamau.",
+      "Practical business systems, workflow automation and data infrastructure, founded and engineered by Benjamin W. Kamau.",
     images: [absoluteUrl("/opengraph-image")],
   },
   robots: {
