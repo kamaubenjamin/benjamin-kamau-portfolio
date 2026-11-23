@@ -180,7 +180,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
   const isSending = submissionStatus === "sending";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5" aria-busy={isSending}>
+    <form onSubmit={handleSubmit} noValidate className="contact-form space-y-5" aria-busy={isSending}>
       {/* Honeypot */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="form-hp">Do not fill this</label>

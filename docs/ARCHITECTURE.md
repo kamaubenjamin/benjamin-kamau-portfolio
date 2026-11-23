@@ -91,6 +91,9 @@ mobile navigation share an accessible theme switch. The explicit choice persists
 in `localStorage` and is applied by an inline early theme initializer before
 the body renders, without changing the static export or Worker routing.
 No OS/browser preference is automatically applied; dark remains the default.
+If browser storage is unavailable, the switch still changes the current
+document, but a full reload falls back to dark. Contact-form feedback uses
+light-specific foreground colors without changing its validation or transport.
 
 ---
 

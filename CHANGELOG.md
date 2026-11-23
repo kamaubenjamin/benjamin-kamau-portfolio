@@ -9,8 +9,13 @@
 - Stores the explicit user choice in browser storage and restores it before
   page content renders; no analytics, Worker, secrets, Cloudflare configuration,
   project content, or deployment changes.
-- Changes isolated to `feat/benkai-theme-toggle-20261123`; local typecheck,
-  lint, production build, and light/dark accessibility review remain pending.
+- Corrected light-mode contact button and error-text contrast without changing
+  the dark palette or form behavior. Local typecheck, lint, and the business
+  static build passed. Chrome desktop/mobile checks confirmed theme persistence
+  and recovered gracefully when theme storage was denied.
+- Full console acceptance remains open: the homepage reports a React hydration
+  error with reduced motion enabled, also reproduced on the unchanged `main`
+  baseline. No deployment was performed.
 
 ## 2026-11-12 — Founder Name Consistency
 

@@ -331,3 +331,5 @@ textarea {
 :root[data-theme="light"] .assistant-error { color: #974b2f; border-left-color: #974b2f; }
 :root[data-theme="light"] .assistant-disclosure { color: var(--color-text-subtle); }
 :root[data-theme="light"] .nav-link::after { box-shadow: none; }
+:root[data-theme="light"] .contact-form button[type="submit"] { color: #fff; }
+:root[data-theme="light"] .contact-form :is(.text-red-500, .text-red-400) { color: #a12626; }
