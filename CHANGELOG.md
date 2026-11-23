@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-23 — GA4 Tracking Integration (pending deployment)
+
+- Added GA4 measurement `G-QFVSKC0BD3` through Next.js `next/script` in the shared root layout with `afterInteractive` loading so it applies across pre-rendered site pages.
+- Change is committed on a review branch, **not yet merged, deployed or live-verified**. No other site features, Cloudflare configuration, DNS, or analytics settings changed.
+- Verification gate: run local lint/build, follow the existing `npm run cf:business:deploy` guarded release procedure after review, verify the live Google tag and `/g/collect` requests, then confirm GA4 Realtime/page_view. Update release status only after hosted proof.
+
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.
