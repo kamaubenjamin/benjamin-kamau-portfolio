@@ -84,7 +84,13 @@ Design tokens are centralised in `src/styles/theme.ts` as a typed constant objec
 
 Corresponding CSS variables are defined in `src/app/globals.css` for use in pure CSS contexts. Tailwind v4 is configured via `@theme inline` in `globals.css`.
 
-No theme toggle. One dark green FlowSync-inspired theme.
+The original dark charcoal/emerald theme remains the default. The optional light theme
+uses `:root[data-theme="light"]` CSS token overrides and targeted styles for the
+workflow diagram, Benkai Assistant, and light-background wordmark. Desktop and
+mobile navigation share an accessible theme switch. The explicit choice persists
+in `localStorage` and is applied by an inline early theme initializer before
+the body renders, without changing the static export or Worker routing.
+No OS/browser preference is automatically applied; dark remains the default.
 
 ---
 

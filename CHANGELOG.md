@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-23 — Optional light mode (review branch; not deployed)
+
+- Preserved dark as the default Benkai Systems theme and added a user-selectable
+  light mode switch to desktop and mobile navigation.
+- Added a companion dark-ink wordmark for light surfaces, shared color tokens,
+  and targeted light treatments for the pipeline and Assistant panels.
+- Stores the explicit user choice in browser storage and restores it before
+  page content renders; no analytics, Worker, secrets, Cloudflare configuration,
+  project content, or deployment changes.
+- Changes isolated to `feat/benkai-theme-toggle-20261123`; local typecheck,
+  lint, production build, and light/dark accessibility review remain pending.
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.

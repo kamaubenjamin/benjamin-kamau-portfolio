@@ -67,8 +67,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          id="benkai-theme-init"
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('benkai-site-theme')==='light')document.documentElement.dataset.theme='light'}catch(_e){}",
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
         <SkipLink />
         <Header />
