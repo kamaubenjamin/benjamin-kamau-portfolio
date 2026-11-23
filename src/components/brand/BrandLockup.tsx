@@ -6,25 +6,19 @@ interface BrandLockupProps {
   compact?: boolean;
 }
 
+// The brand artwork is shared by the global navigation and footer.
 export function BrandLockup({ className, compact = false }: BrandLockupProps) {
   return (
     <span className={cn("brand-lockup inline-flex items-center", className)}>
-      <span className="brand-mark relative shrink-0" aria-hidden="true">
-        <Image
-          src="/brand/benkai-mark.png"
-          alt=""
-          width={512}
-          height={512}
-          sizes={compact ? "36px" : "42px"}
-          priority
-        />
-      </span>
-      <span className="brand-wordmark ml-2 flex flex-col font-semibold uppercase leading-none text-[var(--color-text)]">
-        <span className="text-[0.82rem] tracking-[0.2em] sm:text-sm">Benkai</span>
-        <span className="mt-1 text-[0.57rem] font-medium tracking-[0.36em] text-[var(--color-mint-muted)] sm:text-[0.62rem]">
-          Systems
-        </span>
-      </span>
+      <Image
+        src="/brand/benkai-wordmark-v2.svg"
+        alt="Benkai Systems"
+        width={690}
+        height={170}
+        sizes={compact ? "(max-width: 639px) 150px, 172px" : "(max-width: 639px) 166px, 188px"}
+        className={compact ? "h-auto w-[150px] sm:w-[172px]" : "h-auto w-[166px] sm:w-[188px]"}
+        priority={compact}
+      />
     </span>
   );
 }

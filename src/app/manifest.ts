@@ -13,21 +13,8 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#070a09",
     theme_color: "#8df5bd",
     icons: [
-      {
-        src: "/brand/benkai-mark-32.png",
-        sizes: "32x32",
-        type: "image/png",
-      },
-      {
-        src: "/brand/benkai-mark.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-      {
-        src: "/brand/benkai-mark-64.png",
-        sizes: "64x64",
-        type: "image/png",
-      },
+      { src: "/brand/benkai-app-192-v2.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/brand/benkai-app-512-v2.png", sizes: "512x512", type: "image/png", purpose: "any maskable" },
     ],
   };
 }

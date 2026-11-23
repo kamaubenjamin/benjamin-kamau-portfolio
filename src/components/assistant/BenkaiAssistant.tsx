@@ -285,13 +285,16 @@ export function BenkaiAssistant() {
           aria-describedby="benkai-assistant-description"
         >
           <header className="assistant-header">
-            <div className="min-w-0">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <Image src="/brand/benkai-app-v2.svg" alt="" width={512} height={512} sizes="36px" className="h-9 w-9 shrink-0 rounded-md" />
+              <div className="min-w-0">
               <h2 id="benkai-assistant-title" className="text-sm font-semibold text-[var(--color-text)]">
                 Benkai Assistant
               </h2>
               <p id="benkai-assistant-description" className="mt-0.5 text-xs text-[var(--color-text-muted)]">
                 Ask about our systems, projects or your workflow.
               </p>
+              </div>
             </div>
             <button ref={closeRef} type="button" onClick={close} className="assistant-icon-button" aria-label="Close Benkai Assistant">
               <X size={18} aria-hidden="true" />
@@ -380,7 +383,7 @@ export function BenkaiAssistant() {
       {!isOpen && (
         <button ref={launcherRef} type="button" onClick={() => { postAnalytics("chat_open"); setIsOpen(true); }} className="assistant-launcher" aria-label="Open Benkai Assistant" aria-haspopup="dialog">
           <span className="assistant-launcher-mark" aria-hidden="true">
-            <Image src="/brand/benkai-mark.png" alt="" width={512} height={512} sizes="28px" />
+            <Image src="/brand/benkai-app-v2.svg" alt="" width={512} height={512} sizes="28px" />
           </span>
           <span>Ask Benkai</span>
         </button>
