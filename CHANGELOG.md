@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-23 — Homepage reduced-motion hydration fix (not deployed)
+
+- Keep the workflow and section markup consistent through hydration. Visitors
+  who prefer reduced motion see static content from the first render; the
+  existing workflow packet and viewport reveals remain for normal motion.
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.

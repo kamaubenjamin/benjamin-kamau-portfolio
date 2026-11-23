@@ -86,6 +86,15 @@ Corresponding CSS variables are defined in `src/app/globals.css` for use in pure
 
 No theme toggle. One dark green FlowSync-inspired theme.
 
+### Homepage motion and hydration
+
+The static export and initial React render must use the same markup regardless
+of the browser's motion preference. Keep the workflow packet in the markup and
+gate its animation with CSS. Section wrappers use viewport entry only to trigger
+the normal-motion reveal; CSS leaves the prerendered content visible and static
+for reduced-motion visitors, even before JavaScript loads. Do not use
+`useReducedMotion()` to branch on the initial markup of prerendered components.
+
 ---
 
 ## Case-Study Architecture
