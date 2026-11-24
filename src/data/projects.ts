@@ -111,7 +111,7 @@ export const projects: Project[] = ([
     positioning:
       "Staging-validated, pre-pilot hospitality software; not generally available.",
     overview:
-      "BenKai Hospitality is an installable, mobile-first business operations platform designed for independent restaurants and small hotels. It helps business owners track daily sales, manage orders and payments, record stock movements and expenses, and review reports. The platform is designed for multiple independent businesses, each with its own configurable business identity and access controls. BenKai Hotel is a development benchmark tenant, not a hard-coded product identity.",
+      "BenKai Hospitality is an installable, mobile-first business operations platform designed for independent restaurants and small hotels. It helps business owners track daily sales, manage orders and payments, record stock movements and expenses, and review reports. Each business has its own workspace, configurable branding and access controls.",
     problem:
       "Small hospitality operators often record sales, M-Pesa confirmations, supplier purchases, stock counts and expenses separately. This makes it difficult to reconcile a busy day, track credit and understand ingredient usage without repeatedly checking paper ledgers and messages.",
     solution:
@@ -123,6 +123,7 @@ export const projects: Project[] = ([
       "Stock purchases, ingredient usage and closing counts",
       "Expenses and operational reporting",
       "Role-based staff access and tenant-isolated business records",
+      "Authorized administrators can suspend and restore workspace access without deleting records",
     ],
     capabilities: [
       "Mobile-first installable progressive web app",
@@ -137,9 +138,9 @@ export const projects: Project[] = ([
       "Role-scoped permissions and tenant-isolation checks in hosted staging",
     ],
     architecture:
-      "React and TypeScript power the mobile-first application, with a Cloudflare Workers API and Neon PostgreSQL for persisted hospitality operations. Tenant-scoped authorization, staff roles and configurable branding are part of the reusable SaaS architecture. The staging environment is separate from production.",
+      "React and TypeScript power the mobile-first application. Cloudflare Workers serves the app and routes API requests to a backend that stores operational records in Neon PostgreSQL. Business-level data boundaries and staff roles control access to records and workflows.",
     architectureDetails: [
-      "Cloudflare Workers API with Neon PostgreSQL for operational records",
+      "Cloudflare Workers hosting and API routing, with Neon PostgreSQL for operational records",
       "Multi-tenant data boundaries with role-based access restrictions",
       "Installable responsive PWA with configurable tenant identity",
       "Staging validation for representative checkout, stock, credit and report flows",
@@ -161,7 +162,7 @@ export const projects: Project[] = ([
     ],
     currentStatusHeading: "Hosted staging validated; pre-pilot release",
     currentStatus:
-      "As of 24 November 2026, hosted staging acceptance has passed for representative checkout, staff-role access, tenant isolation, credit handling, stock closing counts, Growth meal-costing and CSV restrictions. The product remains in pre-pilot evaluation: physical iPhone acceptance, pilot feedback and production sign-off are still outstanding. A staging workspace is not a public commercial launch.",
+      "As of 24 November 2026, hosted staging checks passed for representative checkout, staff-role access, tenant isolation, credit handling, stock closing counts, Growth meal-costing, CSV restrictions, and workspace suspension and reactivation. These were controlled staging checks, not evidence of customer use. Physical iPhone acceptance, pilot evaluation and production sign-off remain outstanding.",
     roadmap:
       "Complete physical-device acceptance and pilot evaluation, review remaining administration and security lifecycle changes, then make a separate decision on production readiness and controlled onboarding. Automated Safaricom Till/M-Pesa verification and broad commercial availability are not claimed.",
     role:

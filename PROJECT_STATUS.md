@@ -25,9 +25,9 @@ This portfolio is the public presentation layer; serious product source reposito
 
 ## BenKai Hospitality — 24 November 2026
 
-**Status: Late-stage validation / staging-validated pre-pilot release.**
+**Status: Staging validated / pre-pilot.**
 
-BenKai Hospitality is a reusable multi-tenant, phone-first PWA for restaurant and small-hotel daily operations. Hosted staging acceptance covers checkout, tenant isolation, role restrictions, credit, closing stock counts, Growth meal costing and CSV restrictions. Restaurant operations include orders, cash and manually verified Buy Goods Till payments, stock/purchases, expenses and reports. The product's platform identity is separate from each business's configurable name and logo.
+BenKai Hospitality is a reusable multi-tenant, phone-first PWA for restaurant and small-hotel daily operations. Hosted staging acceptance covers checkout, tenant isolation, role restrictions, credit, closing stock counts, Growth meal costing, CSV restrictions, and authorized workspace suspension and reactivation. Restaurant operations include orders, cash and manually verified Buy Goods Till payments, stock/purchases, expenses and reports. The product's platform identity is separate from each business's configurable name and logo.
 
 **Publication boundaries:** No publicly advertised staging login, no automatic verified M-Pesa claim, no completed physical-iPhone acceptance, no production/commercial availability, no paying-customer/adoption metrics. Pilot review and explicit production sign-off remain outstanding. Internal owner/admin lifecycle changes must not be reported as hosted until deployed and verified. Source remains private.
 
