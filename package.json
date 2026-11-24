@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/normalize-rsc-export.mjs",
     "start": "wrangler dev",
     "lint": "eslint",
     "cf:build": "cross-env NEXT_PUBLIC_SITE_URL=https://benkai-systems.benjamin-kamau.workers.dev next build",
     "cf:preview": "npm run cf:build && wrangler dev",
+    "postcf:build": "node scripts/normalize-rsc-export.mjs",
+    "postcf:business:build": "node scripts/normalize-rsc-export.mjs",
     "cf:deploy": "npm run cf:build && wrangler deploy",
     "cf:upload": "npm run cf:build && wrangler versions upload",
     "cf:business:build": "cross-env NEXT_PUBLIC_SITE_URL=https://benkaisystems.co.ke NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=811a6e61-2dc4-4835-a7fa-402b660a1349 next build",
