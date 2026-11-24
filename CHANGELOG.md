@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-24 — GA4 Conversion Tracking Candidate (not released)
+
+- Added privacy-safe custom event instrumentation for successful contact-form acceptance (`generate_lead`), phone/email/WhatsApp click intent (`contact_click`) and marked project-demo launches (`project_demo_click`).
+- Reuses the existing GA4 tag; does not add a second tracker or manually emit `page_view`. Custom events never transmit visitor names, emails, phone numbers, messages, or full external URLs.
+- Release remains gated on PR integration, lint/TypeScript/build, browser validation, GA4 event receipt and key-event registration. No production change is implied.
+
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.
