@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Send } from "lucide-react";
+import { trackBenkaiEvent } from "@/lib/analytics-events";
 
 interface ContactFormProps {
   recipientEmail?: string;
@@ -162,6 +163,10 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
 
       if (!wasAccepted) throw new Error("Provider rejected submission");
 
+      trackBenkaiEvent("generate_lead", {
+        lead_source: "contact_form",
+        service_category: trimmed.serviceNeeded,
+      });
       setFormData(initialFormData);
       setErrors({});
       setSubmissionStatus("accepted");
