@@ -14,5 +14,9 @@ export function trackBenkaiEvent(
   if (typeof window === "undefined") return;
   const gtag = (window as Window & { gtag?: GtagFunction }).gtag;
   if (typeof gtag !== "function") return; // Do not load a second tag or queue PII.
-  gtag("event", event, parameters);
+  try {
+    gtag("event", event, parameters);
+  } catch {
+    // Analytics must never break an accepted enquiry or link navigation.
+  }
 }
