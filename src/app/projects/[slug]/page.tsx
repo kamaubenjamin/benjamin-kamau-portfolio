@@ -77,6 +77,7 @@ export default async function ProjectPage({ params }: Props) {
                 href={link.url}
                 variant={link.primary ? "primary" : "outline"}
                 external
+                analyticsProjectSlug={link.kind === "preview" || link.kind === "website" ? project.slug : undefined}
               >
                 {link.kind === "repository" ? <GitBranch size={16} /> : <ExternalLink size={16} />}
                 {link.label}
