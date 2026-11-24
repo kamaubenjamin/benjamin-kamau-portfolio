@@ -9,6 +9,7 @@ interface ButtonProps {
   className?: string;
   download?: boolean;
   external?: boolean;
+  analyticsProjectSlug?: string;
   onClick?: () => void;
   type?: "button" | "submit";
 }
@@ -21,6 +22,7 @@ export function Button({
   className,
   download,
   external,
+  analyticsProjectSlug,
   onClick,
   type = "button",
 }: ButtonProps) {
@@ -51,6 +53,7 @@ export function Button({
         <a
           href={href}
           className={classes}
+          data-benkai-project-demo={analyticsProjectSlug}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
           download={download}
