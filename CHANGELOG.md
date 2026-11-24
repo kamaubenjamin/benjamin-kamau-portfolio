@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-24 — BenKai Hospitality case study (review only)
+
+- Added BenKai Hospitality as the twelfth selected project in the portfolio dataset and a featured homepage case study.
+- Documented staging-verified restaurant checkout, stock, credit, role-scoped permissions, tenant separation and reporting while explicitly retaining pre-pilot/production-pending boundaries.
+- Updated project order, project-status notes and relevant route/content checklist entries; no private staging link, customer claim or payment-automation claim was introduced.
+- No website deployment, dependency change, Worker routing change or existing PR modification. New route and integrated browser checks require validation before release.
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.

@@ -4,21 +4,32 @@ Primary public identity: **Benkai Systems — Founded and engineered by Benjamin
 
 ## Authoritative Project Order
 
-Exactly nine public project case studies are published, in this order:
+The current portfolio dataset contains 12 project case studies, in this order:
 
 1. GymBolt Management System
-2. House of Original
-3. ExploreAfrica
-4. Intelligent Document Processing Platform
-5. Spice Harvest Ops
-6. Essiedo Catalogue Pilot
-7. Home Health Operations Demo
-8. Pair and Place Website Operations
-9. FlowSync
+2. Benkai Collect
+3. BenKai Hospitality
+4. House of Original
+5. ExploreAfrica
+6. Intelligent Document Processing Platform
+7. Spice Harvest Ops
+8. QuoteFlows
+9. Essiedo Catalogue Pilot
+10. Home Health Operations Demo
+11. Pair and Place Website Operations
+12. FlowSync
 
 Competitor Price Intelligence Platform is archived from the public portfolio dataset and display order. Its repository, Git history and internal documentation are retained; it is no longer published as a public case study.
 
 This portfolio is the public presentation layer; serious product source repositories are intentionally private and are not exposed as public project CTAs. Archived learning and practice repositories are excluded.
+
+## BenKai Hospitality — 24 November 2026
+
+**Status: Late-stage validation / staging-validated pre-pilot release.**
+
+BenKai Hospitality is a reusable multi-tenant, phone-first PWA for restaurant and small-hotel daily operations. Hosted staging acceptance covers checkout, tenant isolation, role restrictions, credit, closing stock counts, Growth meal costing and CSV restrictions. Restaurant operations include orders, cash and manually verified Buy Goods Till payments, stock/purchases, expenses and reports. The product's platform identity is separate from each business's configurable name and logo.
+
+**Publication boundaries:** No publicly advertised staging login, no automatic verified M-Pesa claim, no completed physical-iPhone acceptance, no production/commercial availability, no paying-customer/adoption metrics. Pilot review and explicit production sign-off remain outstanding. Internal owner/admin lifecycle changes must not be reported as hosted until deployed and verified. Source remains private.
 
 ## Home Health Operations Demo
 
