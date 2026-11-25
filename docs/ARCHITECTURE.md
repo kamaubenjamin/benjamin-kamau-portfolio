@@ -95,6 +95,15 @@ If browser storage is unavailable, the switch still changes the current
 document, but a full reload falls back to dark. Contact-form feedback uses
 light-specific foreground colors without changing its validation or transport.
 
+### Homepage motion and hydration
+
+The static export and initial React render must use the same markup regardless
+of the browser's motion preference. Keep the workflow packet in the markup and
+gate its animation with CSS. Section wrappers use viewport entry only to trigger
+the normal-motion reveal; CSS leaves the prerendered content visible and static
+for reduced-motion visitors, even before JavaScript loads. Do not use
+`useReducedMotion()` to branch on the initial markup of prerendered components.
+
 ---
 
 ## Case-Study Architecture

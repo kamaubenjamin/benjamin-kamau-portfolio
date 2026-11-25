@@ -13,9 +13,20 @@
   the dark palette or form behavior. Local typecheck, lint, and the business
   static build passed. Chrome desktop/mobile checks confirmed theme persistence
   and recovered gracefully when theme storage was denied.
-- Full console acceptance remains open: the homepage reports a React hydration
-  error with reduced motion enabled, also reproduced on the unchanged `main`
-  baseline. No deployment was performed.
+- The pre-existing reduced-motion hydration issue is addressed by PR #3 and is covered by the validated integrated browser acceptance. No production deployment was performed.
+
+## 2026-11-23 — Homepage reduced-motion hydration fix (not deployed)
+
+- Keep the workflow and section markup consistent through hydration. Visitors
+  who prefer reduced motion see static content from the first render; the
+  existing workflow packet and viewport reveals remain for normal motion.
+
+## 2026-11-23 — GA4 Tracking Integration (pending deployment)
+
+- Added GA4 measurement `G-QFVSKC0BD3` through Next.js `next/script` in the shared root layout with `afterInteractive` loading so it applies across pre-rendered site pages.
+- Change is committed on a review branch, **not yet merged, deployed or live-verified**. No other site features, Cloudflare configuration, DNS, or analytics settings changed.
+- Verification gate: run local lint/build, follow the existing `npm run cf:business:deploy` guarded release procedure after review, verify the live Google tag and `/g/collect` requests, then confirm GA4 Realtime/page_view. Update release status only after hosted proof.
+
 
 ## 2026-11-12 — Founder Name Consistency
 

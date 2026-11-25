@@ -99,6 +99,31 @@ body::before {
 .architecture-route-turn { top: 3.5rem; right: 16%; bottom: 3.5rem; width: 50%; border-right: 1px solid rgba(99,242,159,.3); border-bottom: 1px solid rgba(99,242,159,.3); }
 .architecture-route-operate { bottom: 3.5rem; left: 48.1%; width: 5.2%; border-top: 1px solid rgba(99,242,159,.3); }
 .architecture-packet { position: absolute; z-index: 3; width: 4px; height: 4px; border-radius: 50%; background: var(--color-lime-bright); box-shadow: 0 0 6px rgba(99,242,159,.58); offset-path: path("M 0 56 H 420 V 176 H 214"); }
+
+/* Keep the prerendered markup identical for both motion preferences. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-scroll-reveal] {
+    transition-property: opacity, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+  }
+
+  [data-scroll-reveal="pending"]:not(:focus-within) {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  [data-scroll-reveal]:focus-within { transition: none; }
+}
+
+@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .architecture-packet { animation: architecture-packet-flow 5.5s linear infinite; }
+}
+
+@keyframes architecture-packet-flow {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
 .architecture-routing { position: absolute; right: 1.25rem; bottom: 1rem; left: 1.25rem; display: flex; gap: .5rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
 .architecture-routing div { display: flex; flex: 1; align-items: center; gap: .4rem; color: var(--color-text-subtle); font-size: .65rem; }
 .architecture-routing svg { color: var(--color-mint-muted); }
@@ -195,6 +220,8 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .architecture-packet { display: none; }
+
   html {
     scroll-behavior: auto !important;
   }
