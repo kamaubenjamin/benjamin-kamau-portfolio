@@ -1,0 +1,9 @@
+# RSC static export compatibility
+
+The portfolio uses Next.js static export with Workers Static Assets. In Next.js 16.2.11 and 16.4.6, Windows can emit `out/services/__next.services/__PAGE__.txt` while the browser requests `/services/__next.services.__PAGE__.txt`. Next.js issues #85374 and #92339 track the backslash handling in its export pipeline. Linux's already-flat filenames do not need adjustment.
+
+Use `npm run build`, `npm run cf:build`, or `npm run cf:business:build` rather than invoking `next build` directly when preparing assets. Each npm command runs the postbuild normalizer before preview or packaging. It changes only nested `__next.*` segment payload paths within their original route directory. For example, `out/projects/example/__next.projects/$d$slug/__PAGE__.txt` becomes `out/projects/example/__next.projects.$d$slug.__PAGE__.txt`. It preserves the bytes and rejects unexpected segment layouts or collisions. A second run on normalized output makes no changes.
+
+Release checks: run `node --test scripts/normalize-rsc-export.test.mjs`, finish a clean business build, and run the full HTTP and Chrome gates against the unchanged local Workers preview. Confirm actual RSC prefetches return 200 with the expected payload, not just that document navigation works. If a future Next.js update changes the export shape, stop packaging and inspect its export before adjusting or retiring this hook.
+
+Rollback: revert this change and rebuild from a clean checkout for local recovery. That restores the previous export behavior, including the Windows bug on affected Next.js versions. For an authorized hosted rollback, restore the previously verified complete Worker-and-assets version per `BUSINESS_RELEASE_ROLLBACK.md`; do not mix a prior Worker with newly generated assets.
