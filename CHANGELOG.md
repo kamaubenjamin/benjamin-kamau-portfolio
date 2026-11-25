@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-23 — Optional light mode (review branch; not deployed)
+
+- Preserved dark as the default Benkai Systems theme and added a user-selectable
+  light mode switch to desktop and mobile navigation.
+- Added a companion dark-ink wordmark for light surfaces, shared color tokens,
+  and targeted light treatments for the pipeline and Assistant panels.
+- Stores the explicit user choice in browser storage and restores it before
+  page content renders; no analytics, Worker, secrets, Cloudflare configuration,
+  project content, or deployment changes.
+- Corrected light-mode contact button and error-text contrast without changing
+  the dark palette or form behavior. Local typecheck, lint, and the business
+  static build passed. Chrome desktop/mobile checks confirmed theme persistence
+  and recovered gracefully when theme storage was denied.
+- The pre-existing reduced-motion hydration issue is addressed by PR #3 and is covered by the validated integrated browser acceptance. No production deployment was performed.
+
 ## 2026-11-23 — Homepage reduced-motion hydration fix (not deployed)
 
 - Keep the workflow and section markup consistent through hydration. Visitors
