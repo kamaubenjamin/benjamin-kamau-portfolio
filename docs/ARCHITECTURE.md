@@ -7,7 +7,7 @@ All routes are pre-rendered at build time (`next build` with `output: "export"`)
 | Route | Type | Purpose |
 |---|---|---|
 | `/` | Static export | Homepage with 9 sections |
-| `/projects` | Static export | Project listing (9 published case studies, canonical order) |
+| `/projects` | Static export | Project listing (12 published case studies, canonical order) |
 | `/projects/[slug]` | Static export (`generateStaticParams`) | One pre-rendered case-study page per slug |
 | `/services` | Static export | All 6 services |
 | `/about` | Static export | Bio, experience, education, certifications, skills |
