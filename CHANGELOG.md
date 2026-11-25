@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-23 — Homepage reduced-motion hydration fix (not deployed)
+
+- Keep the workflow and section markup consistent through hydration. Visitors
+  who prefer reduced motion see static content from the first render; the
+  existing workflow packet and viewport reveals remain for normal motion.
+
 ## 2026-11-23 — GA4 Tracking Integration (pending deployment)
 
 - Added GA4 measurement `G-QFVSKC0BD3` through Next.js `next/script` in the shared root layout with `afterInteractive` loading so it applies across pre-rendered site pages.
