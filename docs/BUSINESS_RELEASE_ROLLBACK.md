@@ -40,6 +40,20 @@ The legacy `wrangler.jsonc` and `cf:deploy` command are preserved for the person
 Worker `benkai-systems` in account `88282d780270d0a574ff0253667c9305`.
 They are not the business deployment path. Do not run them for the business site.
 
+### Open Graph release gate
+
+The Next.js export writes `out/opengraph-image` as an extensionless PNG.
+`public/_headers` is copied to `out/_headers` during the business build and
+sets the MIME type through Workers Static Assets, without changing the URL
+or running the API Worker. Keep the rule scoped to `/opengraph-image`.
+
+In local business preview, check GET and HEAD for `/opengraph-image` and
+the query-string URL in `og:image`. Both methods must return `200` without
+a redirect and with `Content-Type: image/png`. GET must match the exported
+PNG bytes; HEAD must have no body. Check that a branded PNG, `/services`,
+and the custom 404 still return their normal MIME types and statuses.
+Repeat these read-only checks on the business domain after an approved release.
+
 ## Business rollback
 
 ### Assistant provider (2026-10-15)
