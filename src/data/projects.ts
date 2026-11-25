@@ -83,18 +83,105 @@ export interface Project {
 const projectDisplayOrder = new Map([
   ["gymbolt-gym-management-system", 0],
   ["benkai-collect", 1],
-  ["house-of-original", 2],
-  ["exploreafrica-travel-platform", 3],
-  ["intelligent-document-processing-platform", 4],
-  ["spice-harvest-ops", 5],
-  ["quoteflows", 6],
-  ["essiedo-catalogue-pilot", 7],
-  ["home-health-operations-demo", 8],
-  ["pair-and-place-website-operations", 9],
-  ["flow-sync", 10],
+  ["benkai-hospitality", 2],
+  ["house-of-original", 3],
+  ["exploreafrica-travel-platform", 4],
+  ["intelligent-document-processing-platform", 5],
+  ["spice-harvest-ops", 6],
+  ["quoteflows", 7],
+  ["essiedo-catalogue-pilot", 8],
+  ["home-health-operations-demo", 9],
+  ["pair-and-place-website-operations", 10],
+  ["flow-sync", 11],
 ]);
 
 export const projects: Project[] = ([
+  {
+    slug: "benkai-hospitality",
+    title: "BenKai Hospitality",
+    category: "Restaurant & Small-Hotel Operations Software",
+    status: "Late-stage validation",
+    statusVariant: "lime",
+    shortDescription:
+      "Mobile-first hospitality operations platform bringing restaurant sales, checkout, stock, expenses and reporting into one workspace.",
+    cardDescription:
+      "Installable, multi-tenant restaurant and small-hotel operations software with staged checkout, inventory and staff-access workflows. Hosted staging acceptance has passed; production launch remains pending.",
+    featuredDescription:
+      "A mobile-first platform connecting restaurant sales, manual Till reconciliation, inventory, staff controls and reports. Hosted staging workflows have been validated; pilot evaluation is next.",
+    positioning:
+      "Staging-validated, pre-pilot hospitality software; not generally available.",
+    overview:
+      "BenKai Hospitality is an installable, mobile-first business operations platform designed for independent restaurants and small hotels. It helps business owners track daily sales, manage orders and payments, record stock movements and expenses, and review reports. Each business has its own workspace, configurable branding and access controls.",
+    problem:
+      "Small hospitality operators often record sales, M-Pesa confirmations, supplier purchases, stock counts and expenses separately. This makes it difficult to reconcile a busy day, track credit and understand ingredient usage without repeatedly checking paper ledgers and messages.",
+    solution:
+      "Bring the daily workflow into one phone-friendly workspace: create orders, record cash and manually verified Buy Goods Till payments, track credit and adjustments, manage menu prices and stock purchases, complete closing counts, and review operational reports. Staff permissions separate frontline tasks from sensitive financial and administrative functions.",
+    publicCapabilities: [
+      "Order entry, sales ledger and checkout workflows",
+      "Cash, manually verified Till payments and credit tracking",
+      "Menu and pricing management with owner-controlled access",
+      "Stock purchases, ingredient usage and closing counts",
+      "Expenses and operational reporting",
+      "Role-based staff access and tenant-isolated business records",
+      "Authorized administrators can suspend and restore workspace access without deleting records",
+    ],
+    capabilities: [
+      "Mobile-first installable progressive web app",
+      "Configurable business branding for separate restaurant and hotel tenants",
+      "Orders and point-of-sale flow",
+      "Cash, split/partial payments, manually verified Till receipts and credit",
+      "Credit approvals, repayments and recorded refunds or reversals",
+      "Menu pricing, archiving and restoring items",
+      "Stock purchasing, closing counts and ingredient-use reconciliation",
+      "Expenses and wage records",
+      "Sales and operational reports, with gated Growth meal-costing and CSV workflows",
+      "Role-scoped permissions and tenant-isolation checks in hosted staging",
+    ],
+    architecture:
+      "React and TypeScript power the mobile-first application. Cloudflare Workers serves the app and routes API requests to a backend that stores operational records in Neon PostgreSQL. Business-level data boundaries and staff roles control access to records and workflows.",
+    architectureDetails: [
+      "Cloudflare Workers hosting and API routing, with Neon PostgreSQL for operational records",
+      "Multi-tenant data boundaries with role-based access restrictions",
+      "Installable responsive PWA with configurable tenant identity",
+      "Staging validation for representative checkout, stock, credit and report flows",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Progressive Web App",
+      "Cloudflare Workers",
+      "Neon PostgreSQL",
+      "Role-Based Access",
+    ],
+    cardTechnologies: [
+      "React",
+      "TypeScript",
+      "PWA",
+      "Cloudflare Workers",
+      "Neon PostgreSQL",
+    ],
+    currentStatusHeading: "Hosted staging validated; pre-pilot release",
+    currentStatus:
+      "As of 24 November 2026, hosted staging checks passed for representative checkout, staff-role access, tenant isolation, credit handling, stock closing counts, Growth meal-costing, CSV restrictions, and workspace suspension and reactivation. These were controlled staging checks, not evidence of customer use. Physical iPhone acceptance, pilot evaluation and production sign-off remain outstanding.",
+    roadmap:
+      "Complete physical-device acceptance and pilot evaluation, review remaining administration and security lifecycle changes, then make a separate decision on production readiness and controlled onboarding. Automated Safaricom Till/M-Pesa verification and broad commercial availability are not claimed.",
+    role:
+      "BenKai Systems is responsible for product discovery, workflow design, mobile-first implementation, multi-tenant architecture, staging deployment and validation.",
+    callToAction:
+      "Run a restaurant or small hotel and want clearer control of orders, stock and daily sales? Talk to BenKai Systems about your current workflow. Public self-service onboarding is not open yet.",
+    repositoryStatus: "Private proprietary source repository",
+    liveDemoStatus: "No unrestricted public demo is advertised.",
+    claimsNotToMake: [
+      "No production launch or general customer onboarding claim",
+      "No paying-customer, adoption, revenue, savings or operational impact metrics",
+      "No automatic or bank-verified M-Pesa/Till integration claim",
+      "No physical iPhone/device acceptance claim",
+      "No completed pilot evaluation or disaster-recovery certification claim",
+      "No claim that all pending administrative lifecycle changes are deployed",
+      "Do not publish private staging credentials, invitation links, infrastructure identifiers or tenant data",
+    ],
+    featured: true,
+  },
   {
     slug: "intelligent-document-processing-platform",
     title: "Intelligent Document Processing Platform",

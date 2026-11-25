@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { ReactNode } from "react";
+import { useInView } from "framer-motion";
+import { useRef, type ReactNode } from "react";
 
 interface AnimatedWrapperProps {
   children: ReactNode;
@@ -14,21 +14,17 @@ export function AnimatedWrapper({
   className,
   delay = 0,
 }: AnimatedWrapperProps) {
-  const shouldReduceMotion = useReducedMotion();
-
-  if (shouldReduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    <div
+      ref={ref}
+      data-scroll-reveal={inView ? "visible" : "pending"}
+      style={{ transitionDelay: `${delay}s` }}
       className={className}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

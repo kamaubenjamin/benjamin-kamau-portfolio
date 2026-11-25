@@ -1,6 +1,3 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import { Braces, CheckCircle2, Database, FileText, Gauge, Inbox, Workflow, type LucideIcon } from "lucide-react";
 
 const stages: { label: string; detail: string; icon: LucideIcon }[] = [
@@ -12,8 +9,6 @@ const stages: { label: string; detail: string; icon: LucideIcon }[] = [
 ];
 
 export function DataFlowVisual() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="architecture-panel" role="img" aria-label="Systems orchestration interface showing input, process, validation, structure and operations stages">
       <div className="architecture-toolbar">
@@ -38,13 +33,7 @@ export function DataFlowVisual() {
           <div className="architecture-route architecture-route-process" />
           <div className="architecture-route architecture-route-turn" />
           <div className="architecture-route architecture-route-operate" />
-          {!shouldReduceMotion && (
-            <motion.span
-              className="architecture-packet"
-              animate={{ offsetDistance: ["0%", "100%"] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "linear" }}
-            />
-          )}
+          <span className="architecture-packet" />
         </div>
         <div className="architecture-routing" aria-hidden="true">
           <div><FileText size={14} /><span>Documents</span></div>

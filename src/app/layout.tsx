@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SkipLink } from "@/components/navigation/SkipLink";
@@ -67,10 +68,29 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          id="benkai-theme-init"
+          dangerouslySetInnerHTML={{
+            __html: "try{if(localStorage.getItem('benkai-site-theme')==='light')document.documentElement.dataset.theme='light'}catch(_e){}",
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-[var(--color-bg)] text-[var(--color-text)]">
         <SkipLink />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-QFVSKC0BD3"
+          strategy="afterInteractive"
+        />
+        <Script id="benkai-ga4" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-QFVSKC0BD3');`}
+        </Script>
         <Header />
         <main id="main-content" className="flex-1">
           {children}
