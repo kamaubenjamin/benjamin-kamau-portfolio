@@ -53,6 +53,7 @@ export function ProjectCard({ project, featured = false }: ProjectCardProps) {
       {liveDemo && (
         <a
           href={liveDemo.url}
+          data-benkai-project-demo={project.slug}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 w-fit rounded text-sm font-medium text-[var(--color-emerald)] hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"

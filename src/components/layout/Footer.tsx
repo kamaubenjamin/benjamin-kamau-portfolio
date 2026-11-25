@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { social } from "@/data/social";
 import { BrandLockup } from "@/components/brand/BrandLockup";
 import { Phone } from "lucide-react";
+import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
 
 function GithubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -25,6 +26,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-deep)]">
+      <AnalyticsClickTracker />
       <Container>
         <div className="flex flex-col items-center gap-4 py-6 sm:flex-row sm:justify-between sm:py-9">
           <div className="flex flex-col items-center gap-1.5 sm:items-start">
