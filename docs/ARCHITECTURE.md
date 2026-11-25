@@ -84,7 +84,25 @@ Design tokens are centralised in `src/styles/theme.ts` as a typed constant objec
 
 Corresponding CSS variables are defined in `src/app/globals.css` for use in pure CSS contexts. Tailwind v4 is configured via `@theme inline` in `globals.css`.
 
-No theme toggle. One dark green FlowSync-inspired theme.
+The original dark charcoal/emerald theme remains the default. The optional light theme
+uses `:root[data-theme="light"]` CSS token overrides and targeted styles for the
+workflow diagram, Benkai Assistant, and light-background wordmark. Desktop and
+mobile navigation share an accessible theme switch. The explicit choice persists
+in `localStorage` and is applied by an inline early theme initializer before
+the body renders, without changing the static export or Worker routing.
+No OS/browser preference is automatically applied; dark remains the default.
+If browser storage is unavailable, the switch still changes the current
+document, but a full reload falls back to dark. Contact-form feedback uses
+light-specific foreground colors without changing its validation or transport.
+
+### Homepage motion and hydration
+
+The static export and initial React render must use the same markup regardless
+of the browser's motion preference. Keep the workflow packet in the markup and
+gate its animation with CSS. Section wrappers use viewport entry only to trigger
+the normal-motion reveal; CSS leaves the prerendered content visible and static
+for reduced-motion visitors, even before JavaScript loads. Do not use
+`useReducedMotion()` to branch on the initial markup of prerendered components.
 
 ---
 

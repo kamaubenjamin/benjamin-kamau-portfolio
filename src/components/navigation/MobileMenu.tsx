@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react";
 import { navItems } from "@/data/nav";
 import { personal } from "@/data/personal";
 import { BrandLockup } from "@/components/brand/BrandLockup";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export function MobileMenu() {
   const [openPathname, setOpenPathname] = useState<string | null>(null);
@@ -44,7 +45,8 @@ export function MobileMenu() {
   }, [isOpen]);
 
   return (
-    <div className="md:hidden">
+    <div className="flex items-center gap-1 md:hidden">
+      <ThemeToggle />
       <button
         ref={triggerRef}
         onClick={() => setOpenPathname(isOpen ? null : pathname)}

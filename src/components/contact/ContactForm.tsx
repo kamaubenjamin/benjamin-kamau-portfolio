@@ -180,7 +180,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
   const isSending = submissionStatus === "sending";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5" aria-busy={isSending}>
+    <form onSubmit={handleSubmit} noValidate className="contact-form space-y-5" aria-busy={isSending}>
       {/* Honeypot */}
       <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
         <label htmlFor="form-hp">Do not fill this</label>
@@ -209,7 +209,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             maxLength={fieldLimits.name}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "form-name-error" : undefined}
-            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
               errors.name ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
             value={formData.name}
@@ -230,7 +230,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             maxLength={fieldLimits.contactMethod}
             aria-invalid={!!errors.contactMethod}
             aria-describedby={errors.contactMethod ? "form-contact-error" : undefined}
-            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
               errors.contactMethod ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
             value={formData.contactMethod}
@@ -254,7 +254,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             maxLength={fieldLimits.company}
             aria-invalid={!!errors.company}
             aria-describedby={errors.company ? "form-company-error" : undefined}
-            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
           />
@@ -271,7 +271,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             disabled={isSending}
             aria-invalid={!!errors.serviceNeeded}
             aria-describedby={errors.serviceNeeded ? "form-service-error" : undefined}
-            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+            className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] ${
               errors.serviceNeeded ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
             }`}
             value={formData.serviceNeeded}
@@ -303,7 +303,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
           aria-invalid={!!errors.currentProcess}
           aria-describedby={errors.currentProcess ? "form-process-error" : undefined}
           placeholder="Please describe the repetitive work, messy data or systems that do not communicate."
-          className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black resize-y ${
+          className={`w-full rounded-lg border bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] resize-y ${
             errors.currentProcess ? "border-red-500" : "border-[var(--color-border)] focus-visible:border-[var(--color-emerald)]"
           }`}
           value={formData.currentProcess}
@@ -327,7 +327,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             aria-invalid={!!errors.toolsUsed}
             aria-describedby={errors.toolsUsed ? "form-tools-error" : undefined}
             placeholder="e.g. Excel, PostgreSQL, manual folders"
-            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
             value={formData.toolsUsed}
             onChange={(e) => setFormData({ ...formData, toolsUsed: e.target.value })}
           />
@@ -346,7 +346,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
             aria-invalid={!!errors.timeline}
             aria-describedby={errors.timeline ? "form-timeline-error" : undefined}
             placeholder="e.g. 2-4 weeks, flexible"
-            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]"
             value={formData.timeline}
             onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
           />
@@ -366,7 +366,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
           aria-invalid={!!errors.desiredOutcome}
           aria-describedby={errors.desiredOutcome ? "form-outcome-error" : undefined}
           placeholder="Describe what success looks like (e.g. synchronized records, daily automated report, readable dashboard)."
-          className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black resize-y"
+          className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] px-4 py-2.5 text-sm text-[var(--color-text)] outline-none transition-colors focus-visible:border-[var(--color-emerald)] focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] resize-y"
           value={formData.desiredOutcome}
           onChange={(e) => setFormData({ ...formData, desiredOutcome: e.target.value })}
         />
@@ -377,7 +377,7 @@ export function ContactForm({ recipientEmail }: ContactFormProps) {
         <button
           type="submit"
           disabled={isSending}
-          className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-emerald)] px-5 py-2.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--color-emerald)] shadow-[var(--shadow-glow)]"
+          className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-emerald)] px-5 py-2.5 text-sm font-semibold text-black transition-all duration-300 hover:bg-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--color-emerald)] shadow-[var(--shadow-glow)]"
         >
           <Send className="h-4 w-4" aria-hidden="true" />
           {isSending ? "Sending…" : "Send Project Inquiry"}

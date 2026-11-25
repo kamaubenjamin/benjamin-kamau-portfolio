@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { navItems } from "@/data/nav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 interface DesktopNavProps {
   className?: string;
@@ -28,7 +29,8 @@ export function DesktopNav({ className }: DesktopNavProps) {
           </Link>
         );
       })}
-      <Button href="/contact" variant="outline" size="sm" className="ml-2 hidden lg:inline-flex">
+      <span className="ml-2"><ThemeToggle /></span>
+      <Button href="/contact" variant="outline" size="sm" className="hidden lg:inline-flex">
         Get in Touch
       </Button>
     </nav>
