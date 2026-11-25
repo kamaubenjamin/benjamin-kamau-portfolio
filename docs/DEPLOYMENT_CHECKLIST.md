@@ -30,8 +30,9 @@
 
 ### Route Verification
 - [x] `/` — Homepage renders
-- [x] `/projects` — All 9 projects listed in the canonical order (GymBolt, House of Original, ExploreAfrica, Intelligent Document Processing Platform, Spice Harvest Ops, Essiedo Catalogue Pilot, Home Health Operations Demo, Pair and Place Website Operations, FlowSync)
+- [ ] `/projects` — All 12 current projects listed in the canonical order (GymBolt, Benkai Collect, BenKai Hospitality, House of Original, ExploreAfrica, Intelligent Document Processing Platform, Spice Harvest Ops, QuoteFlows, Essiedo Catalogue Pilot, Home Health Operations Demo, Pair and Place Website Operations, FlowSync); acceptance pending
 - [x] `/projects/gymbolt-gym-management-system` — Case study loads
+- [ ] `/projects/benkai-hospitality` — New staging-validated hospitality case study loads; acceptance pending
 - [x] `/projects/house-of-original` — Case study loads
 - [x] `/projects/exploreafrica-travel-platform` — Case study loads
 - [x] `/projects/intelligent-document-processing-platform` — Case study loads

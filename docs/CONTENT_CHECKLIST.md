@@ -19,6 +19,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 
 | Project | Repository URL | Live Demo URL |
 |---|---|---|
+| BenKai Hospitality | Private proprietary repository; no public repository CTA | Hosted staging verified, pre-pilot; no unrestricted public demo link or production availability claim |
 | Intelligent Document Processing Platform | Not provided | Verified UAT frontend and API; authenticated, tenant-scoped, read-only synthetic-data technical previews, not production |
 | ExploreAfrica | Not provided | Verified earlier public showcase; newer Admin Portal capabilities remain locally validated and are not demonstrated by this link |
 | Competitor Price Intelligence Platform | Private proprietary source; no public repository CTA | No hosted Streamlit deployment verified |
@@ -73,7 +74,7 @@ This document tracks all unresolved content gaps that need to be filled before o
 - Spice Harvest Ops is Production Deployed for The Spice Harvest Market. WhatsApp Business remains the customer-facing ordering channel; the app is the private owner layer for authentication, orders, payment, fulfilment and sales history. The Supabase → Neon migration is complete, with Neon Auth, an authenticated Cloudflare Pages Functions API and Neon PostgreSQL active in production. Supabase remains only as a rollback snapshot/backup. Acceptance counts are engineering evidence, not traction or revenue; long-term adoption and measured impact are not claimed.
 - Home Health Operations Demo is a working responsive client-validation prototype based on real prospective-client discovery. It uses fictional sample data and local React state only; it has no real patient information, backend, database, authentication, server persistence, production healthcare deployment, clinical capability or compliance claim.
 - Essiedo Catalogue Pilot is live and validating whether structured browsing improves the handoff from Instagram/WhatsApp discovery to product-specific WhatsApp enquiries. Seller review and link sharing are observed activity, not evidence of sales, conversion, revenue or adoption outcomes. Proposed V2 seller-management and size-guidance features are not implemented.
-- Exactly nine selected public case studies are generated. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
+- The current project dataset contains 12 selected public case studies. BenKai Hospitality is described as staging-validated and pre-pilot; its private staging workspace is not linked as a public demo. The banks, used-car fuel, movie-scraping and standalone ETL-foundation entries are intentionally excluded from public project selection.
 - Serious product source repositories are private/proprietary; public CTAs use verified live sites and technical previews rather than inaccessible source links.
 - Public CV UI references and the public PDF asset have been removed. A current CV is shared directly on request.
 - Historical Android repositories are audited learning prototypes and are intentionally not elevated into the selected portfolio case studies.

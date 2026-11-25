@@ -7,6 +7,41 @@
 - Release remains gated on PR integration, lint/TypeScript/build, browser validation, GA4 event receipt and key-event registration. No production change is implied.
 
 
+## 2026-11-24 — BenKai Hospitality case study (review only)
+
+- Added BenKai Hospitality as the twelfth selected project in the portfolio dataset and a featured homepage case study.
+- Documented staging-verified restaurant checkout, stock, credit, role-scoped permissions, tenant separation, reporting, and workspace access management while retaining pre-pilot/production-pending boundaries.
+- Updated project order, project-status notes and relevant route/content checklist entries; no private staging link, customer claim or payment-automation claim was introduced.
+- No website deployment, dependency change, Worker routing change or existing PR modification. New route and integrated browser checks require validation before release.
+
+## 2026-11-23 — Optional light mode (review branch; not deployed)
+
+- Preserved dark as the default Benkai Systems theme and added a user-selectable
+  light mode switch to desktop and mobile navigation.
+- Added a companion dark-ink wordmark for light surfaces, shared color tokens,
+  and targeted light treatments for the pipeline and Assistant panels.
+- Stores the explicit user choice in browser storage and restores it before
+  page content renders; no analytics, Worker, secrets, Cloudflare configuration,
+  project content, or deployment changes.
+- Corrected light-mode contact button and error-text contrast without changing
+  the dark palette or form behavior. Local typecheck, lint, and the business
+  static build passed. Chrome desktop/mobile checks confirmed theme persistence
+  and recovered gracefully when theme storage was denied.
+- The pre-existing reduced-motion hydration issue is addressed by PR #3 and is covered by the validated integrated browser acceptance. No production deployment was performed.
+
+## 2026-11-23 — Homepage reduced-motion hydration fix (not deployed)
+
+- Keep the workflow and section markup consistent through hydration. Visitors
+  who prefer reduced motion see static content from the first render; the
+  existing workflow packet and viewport reveals remain for normal motion.
+
+## 2026-11-23 — GA4 Tracking Integration (pending deployment)
+
+- Added GA4 measurement `G-QFVSKC0BD3` through Next.js `next/script` in the shared root layout with `afterInteractive` loading so it applies across pre-rendered site pages.
+- Change is committed on a review branch, **not yet merged, deployed or live-verified**. No other site features, Cloudflare configuration, DNS, or analytics settings changed.
+- Verification gate: run local lint/build, follow the existing `npm run cf:business:deploy` guarded release procedure after review, verify the live Google tag and `/g/collect` requests, then confirm GA4 Realtime/page_view. Update release status only after hosted proof.
+
+
 ## 2026-11-12 — Founder Name Consistency
 
 - Updated the public-facing founder name to **Benjamin W. Kamau** across the site, metadata, sharing card, and Assistant knowledge while preserving the Benkai Systems identity and existing routes.
