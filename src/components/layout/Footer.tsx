@@ -2,8 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { social } from "@/data/social";
 import { BrandLockup } from "@/components/brand/BrandLockup";
+import { InstagramIcon, WhatsAppIcon } from "@/components/brand/SocialIcons";
 import { Phone } from "lucide-react";
 import { AnalyticsClickTracker } from "@/components/analytics/AnalyticsClickTracker";
+
+const socialLinkClassName = "inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]";
 
 function GithubIcon({ size = 20 }: { size?: number }) {
   return (
@@ -44,13 +47,13 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
             {social.github && (
               <a
                 href={social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                className={socialLinkClassName}
                 aria-label="GitHub"
               >
                 <GithubIcon />
@@ -61,7 +64,7 @@ export function Footer() {
                 href={social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                className={socialLinkClassName}
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon />
@@ -70,7 +73,7 @@ export function Footer() {
             {social.phone && (
               <a
                 href={`tel:${social.phone}`}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                className={socialLinkClassName}
                 aria-label={`Phone: ${social.phone}`}
               >
                 <Phone size={20} aria-hidden="true" />
@@ -79,13 +82,23 @@ export function Footer() {
             {social.email && (
               <a
                 href={`mailto:${social.email}`}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[var(--radius-button)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-emerald)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
+                className={socialLinkClassName}
                 aria-label="Email"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
+              </a>
+            )}
+            {social.whatsapp && (
+              <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className={socialLinkClassName} aria-label="Chat on WhatsApp (opens in a new tab)">
+                <WhatsAppIcon />
+              </a>
+            )}
+            {social.instagram && (
+              <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" className={socialLinkClassName} aria-label="Instagram (opens in a new tab)">
+                <InstagramIcon />
               </a>
             )}
           </div>

@@ -56,6 +56,43 @@ Repeat these read-only checks on the business domain after an approved release.
 
 ## Business rollback
 
+### Social integration (PR #9) — pre-release checkpoint, 2026-11-26
+
+GitHub `main` and the validated production source are at
+`eaee29ea2502c7eb602693f400993798c862792e`. Authenticated Wrangler checks confirmed
+Worker version `8c23af49-8fd1-464d-a9e7-6e3301d38a90` (version 13) at 100% and
+retrievable with its static assets configuration. This is the rollback target,
+not a version created by PR #9. Recheck the version and active deployment at the
+owner gate. A version rollback does not roll back connected resource data.
+
+After explicit owner approval and Codex clearance on the exact PR head, perform
+the following as sequential gates, stopping on any mismatch or failed command:
+
+1. Confirm a clean tree, unchanged base, and validated PR head. Use
+   `gh pr merge 9 --repo kamaubenjamin/benjamin-kamau-portfolio --merge --match-head-commit <reviewed-head>`
+   (no `--admin` or auto-merge). Fetch `origin` and verify that the final GitHub
+   commit contains the reviewed PR and that its tree matches the validated candidate.
+2. In the original repository, temporarily check out the verified merged SHA
+   (`git switch --detach <merged-sha>`). Run `npm ci`,
+   `npm run cf:business:check`, and `npm run cf:business:deploy`. Do not use the
+   personal Worker path. Record the new deployment and version identifiers.
+3. Run hosted HTTP, asset/MIME, RSC, footer, Contact, project and Assistant smoke
+   checks. Keep GA4 and Web3Forms intercepted unless the corresponding live
+   checks are separately approved. Once hosted acceptance passes, fast-forward
+   local `main` to the exact deployed SHA (`git switch main`; then
+   `git merge --ff-only <deployed-sha>`). Verify local and GitHub main and the
+   recorded deployed SHA match. Never reset or discard local changes.
+
+If a hosted regression requires an authorized rollback, confirm the account
+and target with `npm run cf:business:check`, then run:
+
+```powershell
+npx wrangler rollback 8c23af49-8fd1-464d-a9e7-6e3301d38a90 --config wrangler.business.jsonc --message "Rollback social integration"
+```
+
+Verify Worker traffic, hosted assets and runtime afterward. Reconcile Git via
+a reviewed revert before any subsequent deployment; do not rewrite main.
+
 ### Assistant provider (2026-10-15)
 
 Business configuration pins `CHAT_PROVIDER=groq` and `GROQ_MODEL=openai/gpt-oss-120b`.
