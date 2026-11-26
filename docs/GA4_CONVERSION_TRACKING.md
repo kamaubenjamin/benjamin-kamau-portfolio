@@ -15,6 +15,38 @@
 
 The event helper **does not install another GA4 tag**. If the configured `window.gtag` is absent or tracking is blocked, the event is skipped without affecting the form or link navigation.
 
+### Footer and Contact page social links
+
+Public destinations are maintained in `src/data/social.ts`. The footer and
+Contact page use ordinary external links for WhatsApp and Instagram. The one
+delegated tracker emits one `contact_click` per WhatsApp activation with
+`contact_method: whatsapp` and `click_location: footer` or `page`, respectively.
+Phone and email still use `tel:` and `mailto:`. None of these clicks counts as a
+lead. Instagram does not emit a custom event; it is eligible for the stream's
+existing Enhanced Measurement outbound `click` when enabled and the destination
+is not excluded by cross-domain settings. The custom payload exclusions above
+are distinct from GA4's automatic outbound link dimensions.
+
+For preview checks, intercept the external destinations and stub `window.gtag`.
+Verify exact custom payloads and that the links still open if tracking is absent
+or throws. Do not send WhatsApp messages, real form submissions, or test GA4
+traffic. Verify live collection only in an approved release window.
+
+The focused check requires Python Playwright and Chrome. With the normalized
+business build running locally, use:
+
+```powershell
+python scripts/social-contact.smoke.py http://127.0.0.1:8787
+```
+
+Local business preview validation against production baseline `eaee29e` plus
+the social-link changes (November 26, 2026): Chrome passed at 320, 390, and
+1440 px in light and dark themes. Contact RSC responses returned 200 and
+navigation did not reload the document. The stub recorded exactly one custom
+event for each WhatsApp click with the expected location and no custom event
+for either Instagram link. The links still opened when `gtag` was absent or
+threw. This confirms browser behavior, not receipt in the live GA4 property.
+
 ## Release and verification gates
 
 1. Preserve outstanding GA4 PR #1 and all other release PRs; integrate this branch only after reviewing any conflicts with the canonical release baseline.

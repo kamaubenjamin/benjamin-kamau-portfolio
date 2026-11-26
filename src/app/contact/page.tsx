@@ -4,9 +4,12 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { InstagramIcon, WhatsAppIcon } from "@/components/brand/SocialIcons";
 import { personal } from "@/data/personal";
 import { social } from "@/data/social";
 import { Mail, MapPin, Phone } from "lucide-react";
+
+const contactLinkClassName = "inline-flex min-h-11 min-w-11 items-center gap-2 rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -26,7 +29,7 @@ export default function ContactPage() {
         />
 
         <div className="mx-auto grid max-w-4xl gap-8 lg:grid-cols-12">
-          {/* Contact info (4 cols) */}
+          {/* Contact info (5 cols) */}
           <div className="space-y-6 lg:col-span-5">
             <Card hover={false}>
               <div className="flex items-start gap-4">
@@ -45,7 +48,7 @@ export default function ContactPage() {
               </div>
             </Card>
 
-            {social.phone && (
+            {(social.phone || social.whatsapp) && (
               <Card hover={false}>
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] text-[var(--color-emerald)]">
@@ -53,12 +56,19 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[var(--color-text)]">Phone</h3>
-                    <a
-                      href={`tel:${social.phone}`}
-                      className="rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
-                    >
-                      {social.phone}
-                    </a>
+                    <div className="flex flex-wrap gap-x-4">
+                      {social.phone && (
+                        <a href={`tel:${social.phone}`} className={contactLinkClassName}>
+                          {social.phone}
+                        </a>
+                      )}
+                      {social.whatsapp && (
+                        <a href={social.whatsapp} target="_blank" rel="noopener noreferrer" className={contactLinkClassName}>
+                          <WhatsAppIcon size={18} />
+                          Chat on WhatsApp<span className="sr-only"> (opens in a new tab)</span>
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Card>
@@ -77,6 +87,21 @@ export default function ContactPage() {
                       className="rounded text-sm text-[var(--color-emerald)] transition-colors hover:text-[var(--color-emerald-light)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald)]"
                     >
                       {social.email}
+                    </a>
+                  </div>
+                </div>
+              </Card>
+            )}
+            {social.instagram && (
+              <Card hover={false}>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)] text-[var(--color-emerald)]">
+                    <InstagramIcon size={18} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[var(--color-text)]">Instagram</h3>
+                    <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" className={contactLinkClassName}>
+                      {social.instagram.handle}<span className="sr-only"> on Instagram (opens in a new tab)</span>
                     </a>
                   </div>
                 </div>
